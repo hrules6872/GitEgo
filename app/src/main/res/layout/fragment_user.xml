@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016. Héctor de Isidro - hrules6872
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+>
+  <Space
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize"
+  />
+
+  <com.makeramen.roundedimageview.RoundedImageView
+      android:id="@+id/avatar"
+      android:layout_width="@dimen/roundedImageView_width"
+      android:layout_height="@dimen/roundedImageView_height"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="@dimen/default_margin"
+      android:scaleType="fitXY"
+      android:src="@color/roundedImageViewBackground"
+      app:riv_corner_radius="@dimen/roundedImageView_cornerRadius"
+      app:riv_oval="false"
+  />
+
+  <TextView
+      android:id="@+id/userLogin"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_horizontal"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      tools:text="userLogin"
+  />
+
+  <TextView
+      android:id="@+id/userName"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_horizontal"
+      android:text="@string/user_default"
+      android:textAppearance="?android:attr/textAppearanceLarge"
+      tools:text="userName"
+  />
+
+  <TextView
+      android:id="@+id/followers"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_horizontal"
+      android:text="@string/user_default"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:textColor="@color/textHighlighted"
+      tools:text="followers"
+  />
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_margin="@dimen/default_marginLarge"
+      android:orientation="horizontal"
+  >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+    >
+
+      <TextView
+          android:id="@+id/watchersCount"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal"
+          android:text="@string/user_default"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          android:textColor="@color/textHighlighted"
+          tools:text="-"
+      />
+
+      <TextView
+          android:id="@+id/watchers"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal"
+          android:text="@string/user_watchers"
+          android:textAllCaps="true"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          tools:text="watchers"
+      />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="@dimen/default_marginLarge"
+        android:layout_height="0dp"
+    />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+    >
+
+      <TextView
+          android:id="@+id/starsGazersCount"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal"
+          android:text="@string/user_default"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          android:textColor="@color/textHighlighted"
+          tools:text="-"
+      />
+
+      <TextView
+          android:id="@+id/starsGazers"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal"
+          android:text="@string/user_starsGazers"
+          android:textAllCaps="true"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          tools:text="watchers"
+      />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="@dimen/default_marginLarge"
+        android:layout_height="0dp"
+    />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+    >
+
+      <TextView
+          android:id="@+id/forksCount"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal"
+          android:text="@string/user_default"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          android:textColor="@color/textHighlighted"
+          tools:text="-"
+      />
+
+      <TextView
+          android:id="@+id/forks"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal"
+          android:text="@string/user_forks"
+          android:textAllCaps="true"
+          android:textAppearance="?android:attr/textAppearanceSmall"
+          tools:text="watchers"
+      />
+    </LinearLayout>
+
+  </LinearLayout>
+
+</LinearLayout>

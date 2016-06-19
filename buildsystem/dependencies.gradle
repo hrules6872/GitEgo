@@ -1,0 +1,53 @@
+ext {
+  androidBuildToolsVersion = '24.0.0'
+  androidBuildMinSDKVersion = '15'
+  androidBuildTargetSDKVersion = '23'
+  androidBuildCompileSDKVersion = 'android-23'
+
+  // internal
+  appVersionCode = 100
+  appVersionName = '1.0.0'
+
+  // support libraries
+  supportLibraryVersion = '23.4.+'
+  supportDependencies =
+      [recyclerView      : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+       appCompat         : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+       supportAnnotations: "com.android.support:support-annotations:${supportLibraryVersion}",
+       design            : "com.android.support:design:${supportLibraryVersion}",
+       cardView          : "com.android.support:cardview-v7:${supportLibraryVersion}",
+       percent           : "com.android.support:percent:${supportLibraryVersion}"]
+
+  // project dependencies
+  butterKnifeVersion = '8.+'
+  daggerVersion = '2.4'
+  daRealMVPVersion = '0.+'
+  prefsVersion = '1.+'
+  gsonVersion = '2.+'
+  okhttpVersion = '3.+'
+  roundedImageViewVersion = '2.+'
+  picassoViewVersion = '2.+'
+  leakCanaryVersion = '1.+'
+
+  projectDependencies = [butterKnife      : "com.jakewharton:butterknife:${butterKnifeVersion}",
+                         daRealMVP        : "com.hrules:darealmvp:${daRealMVPVersion}",
+                         prefs            : "me.alexrs:prefs:${prefsVersion}",
+                         gson             : "com.google.code.gson:gson:${gsonVersion}",
+                         okhttp           : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+                         roundedImageView : "com.makeramen:roundedimageview:${roundedImageViewVersion}",
+                         picasso          : "com.squareup.picasso:picasso:${picassoViewVersion}",
+                         dagger           : "com.google.dagger:dagger:${daggerVersion}",
+                         daggerProducers  : "com.google.dagger:dagger-producers:${daggerVersion}",
+                         leakCanaryDebug  : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+                         leakCanaryRelease: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+                         leakCanaryTest   : "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"]
+
+  // apt dependencies
+  aptDependencies =
+      [butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+       daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}"]
+
+  // test dependencies
+  testDependencies = [junit : "junit:junit:4.+",
+                      runner: "com.android.support.test:runner:0.+"]
+}

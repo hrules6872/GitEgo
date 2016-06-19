@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016. Héctor de Isidro - hrules6872
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hrules.gitego">
+
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+  <application
+      android:allowBackup="true"
+      android:icon="@mipmap/ic_launcher"
+      android:label="@string/app_name"
+      android:name=".App"
+      android:supportsRtl="true"
+      android:theme="@style/AppTheme">
+    <activity android:name=".presentation.views.activities.MainActivityView">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity
+        android:launchMode="singleInstance"
+        android:name=".presentation.views.activities.LoginActivityView"
+    >
+      <intent-filter
+          android:autoVerify="true"
+          tools:ignore="UnusedAttribute">
+        <action android:name="android.intent.action.VIEW"/>
+
+        <data android:scheme="@string/GITHUB_API_CALLBACKURL"/>
+
+        <category android:name="android.intent.category.DEFAULT"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+      </intent-filter>
+    </activity>
+
+    <service android:name=".services.NotificationService"/>
+
+    <receiver
+        android:enabled="true"
+        android:name=".services.BootReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+      </intent-filter>
+    </receiver>
+    <receiver
+        android:enabled="true"
+        android:name=".services.NotificationServiceReceiver">
+      <intent-filter>
+        <action android:name="com.hrules.gitego.START_NOTIFICATION_SERVICE"/>
+        <action android:name="com.hrules.gitego.STOP_NOTIFICATION_SERVICE"/>
+      </intent-filter>
+    </receiver>
+  </application>
+
+</manifest>

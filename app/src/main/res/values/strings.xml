@@ -1,0 +1,54 @@
+<!--
+  ~ Copyright (c) 2016. Héctor de Isidro - hrules6872
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+  <string name="app_name">GitEgo</string>
+  <string name="app_website">https://github.com/hrules6872/GitEgo</string>
+
+  <!--login-->
+  <string name="login_login">Login GitHub</string>
+  <string name="login_goToAppWebsite">Go to GitEgo website</string>
+  <string name="login_goToAppWebsiteInstructions">Go to %s</string>
+  <string name="login_gettingUser">Retrieving information…</string>
+
+  <!--errors-->
+  <string name="error_networkFail">Can\'t connect to Internet. Try again later</string>
+  <string name="error_loginFail">Login error</string>
+
+  <!--menu-->
+  <string name="menu_notifications">Notifications</string>
+  <string name="menu_signOut">Sign out</string>
+
+  <!--user-->
+  <string name="user_default">-</string>
+  <string name="user_watchers">Watchers</string>
+  <string name="user_starsGazers">Stars</string>
+  <string name="user_forks">Forks</string>
+  <string formatted="false" name="user_followersFormatted">%s followers %s</string>
+
+  <!--repo-->
+  <string name="repo_fork">Fork</string>
+
+  <!--action-->
+  <string name="action_login">Login GitHub</string>
+
+  <!--notifications-->
+  <string name="notification_message">Changes detected!</string>
+
+  <!--general-->
+  <string formatted="false" name="text_variationFormatted">%s %s</string>
+
+</resources>

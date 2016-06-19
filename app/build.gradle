@@ -1,0 +1,97 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+  compileSdkVersion androidBuildCompileSDKVersion
+  buildToolsVersion androidBuildToolsVersion
+
+  defaultConfig {
+    applicationId "com.hrules.gitego"
+    minSdkVersion androidBuildMinSDKVersion
+    targetSdkVersion androidBuildTargetSDKVersion
+    versionCode appVersionCode
+    versionName appVersionName
+
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    // GitHub API
+    Properties gitHubSecretProps = new Properties()
+    gitHubSecretProps.load(new FileInputStream(new File('github.secrets.properties')))
+
+    buildConfigField "String", "GITHUB_API_CLIENTID",
+        "\"" + gitHubSecretProps['GITHUB_API_CLIENTID'] + "\""
+    buildConfigField "String", "GITHUB_API_SCOPES",
+        "\"" + gitHubSecretProps['GITHUB_API_SCOPES'] + "\""
+    buildConfigField "String", "GITHUB_API_CLIENTSECRET",
+        "\"" + gitHubSecretProps['GITHUB_API_CLIENTSECRET'] + "\""
+    buildConfigField "String", "GITHUB_API_CALLBACKURL",
+        "\"" + gitHubSecretProps['GITHUB_API_CALLBACKURL'] + "\""
+    resValue "string", "GITHUB_API_CALLBACKURL",
+        "\"" + gitHubSecretProps['GITHUB_API_CALLBACKURL'] + "\""
+  }
+
+  signingConfigs {
+    release {
+      Properties appSecretProps = new Properties()
+      appSecretProps.load(new FileInputStream(new File('app.secrets.properties')))
+
+      keyAlias appSecretProps['APP_RELEASE_KEYALIAS']
+      keyPassword appSecretProps['APP_RELEASE_KEYPASSWORD']
+      storeFile file(appSecretProps['APP_RELEASE_STOREFILE'])
+      storePassword appSecretProps['APP_RELEASE_STOREPASSWORD']
+    }
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      signingConfig signingConfigs.release
+    }
+  }
+
+  testOptions {
+    unitTests {
+      returnDefaultValues = true
+    }
+  }
+}
+
+configurations.all {
+  resolutionStrategy {
+    force supportDependencies.supportAnnotations
+  }
+}
+
+dependencies {
+  // test
+  androidTestCompile testDependencies.runner
+  testCompile testDependencies.junit
+  testCompile projectDependencies.leakCanaryTest
+
+  // support
+  compile supportDependencies.appCompat
+  compile supportDependencies.recyclerView
+  compile supportDependencies.supportAnnotations
+  compile supportDependencies.design
+  compile supportDependencies.cardView
+  compile supportDependencies.percent
+
+  // project
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  compile projectDependencies.butterKnife
+  compile projectDependencies.daRealMVP
+  compile projectDependencies.prefs
+  compile projectDependencies.gson
+  compile projectDependencies.okhttp
+  compile projectDependencies.roundedImageView
+  compile projectDependencies.picasso
+  compile projectDependencies.dagger
+  compile projectDependencies.daggerProducers
+  debugCompile projectDependencies.leakCanaryDebug
+  releaseCompile projectDependencies.leakCanaryRelease
+
+
+  // apt
+  apt aptDependencies.butterKnifeCompiler
+  apt aptDependencies.daggerCompiler
+}
