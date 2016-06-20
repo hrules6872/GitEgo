@@ -49,8 +49,9 @@ public class GitHubAPI {
         .build();
 
     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    context.startActivity(intent);
+    Intent chooser = Intent.createChooser(intent, null);
+    chooser.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    context.startActivity(chooser);
   }
 
   public void setAccount(Account account) {
