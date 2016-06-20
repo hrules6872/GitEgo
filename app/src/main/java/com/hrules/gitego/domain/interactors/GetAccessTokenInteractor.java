@@ -19,6 +19,7 @@ package com.hrules.gitego.domain.interactors;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.BuildConfig;
+import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.network.RequestNetwork;
 import com.hrules.gitego.domain.api.GitHubAPI;
@@ -85,6 +86,8 @@ public class GetAccessTokenInteractor extends BaseInteractor implements GetAcces
       } catch (Exception e) {
         notifyFail(e);
       }
+    } else {
+      notifyFail(new NetworkUnauthorizedException());
     }
   }
 
