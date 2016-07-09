@@ -56,9 +56,7 @@ public class LoginActivityView
 
   public void goToAppWebsite() {
     try {
-      Intent intent = new Intent(Intent.ACTION_VIEW);
-      intent.setData(Uri.parse(getString(R.string.app_website)));
-      startActivity(intent);
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_website))));
     } catch (Exception e) {
       showBriefMessage(String.format(getString(R.string.login_goToAppWebsiteInstructions),
           getString(R.string.app_website)));

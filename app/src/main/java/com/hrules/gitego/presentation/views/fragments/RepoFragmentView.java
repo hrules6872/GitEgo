@@ -80,8 +80,7 @@ public class RepoFragmentView
 
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(
-        new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL,
-            false));
+        new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     recyclerView.addItemDecoration(new SpaceItemDecoration(
         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
             getResources().getDimension(R.dimen.itemRepoDivider_size),

@@ -30,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.hrules.darealmvp.DRFragmentV4;
+import com.hrules.gitego.App;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.commons.StringUtils;
 import com.hrules.gitego.presentation.commons.images.ImageLoader;
@@ -116,8 +117,7 @@ public class UserFragmentView
   }
 
   @Override public void setUserData(@NonNull GitHubAuthUser gitHubAuthUser) {
-    new ImageLoader(getActivity().getApplicationContext()).load(gitHubAuthUser.getAvatar_url(),
-        avatar);
+    new ImageLoader(App.getApplication()).load(gitHubAuthUser.getAvatar_url(), avatar);
 
     userName.setText(gitHubAuthUser.getName());
 
