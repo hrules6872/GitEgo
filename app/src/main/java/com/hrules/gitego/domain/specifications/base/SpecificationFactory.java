@@ -19,6 +19,7 @@ package com.hrules.gitego.domain.specifications.base;
 import com.hrules.gitego.data.repository.datasources.DataSource;
 
 public class SpecificationFactory<T> {
+  @SuppressWarnings("unchecked")
   public Specification<T> get(DataSource dataSource, Specification<T> specification) {
     try {
       Class<?> clazz = Class.forName(dataSource.getSpecificationsPath()

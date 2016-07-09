@@ -65,7 +65,8 @@ public class AuthRepoAPIDataSource extends DataSource<GitHubAuthRepoDto> {
     throw new UnsupportedOperationException();
   }
 
-  @Override public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
+  @SuppressWarnings("unchecked") @Override
+  public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
       throws Exception {
     specification = new SpecificationFactory<String>().get(this, specification);
     List<GitHubAuthRepoDto> list;

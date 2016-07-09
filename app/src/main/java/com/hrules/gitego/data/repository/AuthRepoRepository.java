@@ -22,7 +22,7 @@ import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import java.util.Arrays;
 
 public class AuthRepoRepository extends Repository<GitHubAuthRepoDto> {
-  public AuthRepoRepository(DataSource... dataSources) {
+  @SuppressWarnings("unchecked") public AuthRepoRepository(DataSource... dataSources) {
     super(Arrays.<DataSource<GitHubAuthRepoDto>>asList(dataSources));
   }
 }

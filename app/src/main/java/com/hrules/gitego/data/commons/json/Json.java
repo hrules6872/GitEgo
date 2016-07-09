@@ -31,7 +31,7 @@ public class Json implements JsonInterface {
     return gson.toJson(model);
   }
 
-  public <T> T fromJson(@NonNull String json, @NonNull T model) {
+  @SuppressWarnings("unchecked") public <T> T fromJson(@NonNull String json, @NonNull T model) {
     return gson.fromJson(json, (Class<T>) model);
   }
 

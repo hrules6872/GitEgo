@@ -91,7 +91,8 @@ public class AuthUserBddDataSource extends DataSource<GitHubAuthUserDto> {
     throw new UnsupportedOperationException();
   }
 
-  @Override public Collection<GitHubAuthUserDto> query(@NonNull Specification specification)
+  @SuppressWarnings("unchecked") @Override
+  public Collection<GitHubAuthUserDto> query(@NonNull Specification specification)
       throws Exception {
     specification = new SpecificationFactory<String>().get(this, specification);
     List<GitHubAuthUserDto> list = new ArrayList<>();

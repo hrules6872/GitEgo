@@ -36,7 +36,8 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
     this.dataSources = dataSources;
   }
 
-  @Override public void addOrUpdate(@NonNull T item) throws Exception {
+  @SuppressWarnings("unchecked") @Override public void addOrUpdate(@NonNull T item)
+      throws Exception {
     for (DataSource dataSource : dataSources) {
       if (dataSource.isWriteable()) {
         dataSource.addOrUpdate(item);
@@ -44,7 +45,8 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
     }
   }
 
-  @Override public void addOrUpdate(@NonNull Iterable<T> items) throws Exception {
+  @SuppressWarnings("unchecked") @Override public void addOrUpdate(@NonNull Iterable<T> items)
+      throws Exception {
     for (DataSource dataSource : dataSources) {
       if (dataSource.isWriteable()) {
         dataSource.addOrUpdate(items);
@@ -52,7 +54,7 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
     }
   }
 
-  @Override public void remove(@NonNull T item) throws Exception {
+  @SuppressWarnings("unchecked") @Override public void remove(@NonNull T item) throws Exception {
     for (DataSource dataSource : dataSources) {
       if (dataSource.isWriteable()) {
         dataSource.remove(item);
@@ -68,7 +70,8 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
     }
   }
 
-  @Override public void remove(@NonNull Iterable<T> items) throws Exception {
+  @SuppressWarnings("unchecked") @Override public void remove(@NonNull Iterable<T> items)
+      throws Exception {
     for (DataSource dataSource : dataSources) {
       if (dataSource.isWriteable()) {
         dataSource.remove(items);
@@ -76,7 +79,7 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
     }
   }
 
-  @Override
+  @SuppressWarnings("unchecked") @Override
   public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
     Map<Object, T> map = new HashMap<>();
 
