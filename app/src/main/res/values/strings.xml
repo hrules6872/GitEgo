@@ -42,7 +42,7 @@
   <!--repo-->
   <string name="repo_fork">Fork</string>
 
-  <!--action-->
+  <!--actions-->
   <string name="action_login">Login GitHub</string>
 
   <!--notifications-->

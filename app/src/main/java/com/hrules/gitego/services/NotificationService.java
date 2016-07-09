@@ -29,6 +29,7 @@ import com.hrules.gitego.App;
 import com.hrules.gitego.AppLifecycleManager;
 import com.hrules.gitego.R;
 import com.hrules.gitego.commons.DebugLog;
+import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.interactors.GetAuthRepoInteractor;
 import com.hrules.gitego.domain.interactors.GetAuthUserInteractor;
@@ -44,9 +45,12 @@ import com.hrules.gitego.presentation.models.utils.MergeUtils;
 import com.hrules.gitego.presentation.views.activities.MainActivityView;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 public class NotificationService extends Service {
+  public static final String PREFS_CHECKED_TODAY = "PREFS_CHECKED_TODAY";
+
   public static final int SERVICE_REQUEST_CODE = 1;
   public static final int NOTIFICATION_ID = 1;
   public static final int DEFAULT_ALARM_HOUR = 11;
@@ -56,6 +60,7 @@ public class NotificationService extends Service {
   @Inject AccountsManager accountsManager;
   @Inject GetAuthUserInteractor getAuthUserInteractor;
   @Inject GetAuthRepoInteractor getAuthRepoInteractor;
+  @Inject Preferences preferences;
 
   @Nullable @Override public IBinder onBind(Intent intent) {
     return null;
@@ -68,7 +73,7 @@ public class NotificationService extends Service {
 
   @Override public int onStartCommand(Intent intent, int flags, int startId) {
     super.onStartCommand(intent, flags, startId);
-    if (!AppLifecycleManager.isAppInForeground()) {
+    if (!AppLifecycleManager.isAppInForeground() && !isCheckedToday()) {
       init();
       checkDataChanges();
     }
@@ -86,6 +91,8 @@ public class NotificationService extends Service {
   private void checkDataChanges() {
     Account account = gitHubAPI.getAccount();
     if (account != null && (account.getToken() != null && !account.getToken().isEmpty())) {
+      setCheckedToday();
+
       getAuthUserInteractor.execute(account.getToken(), new GetAuthUser.Callback() {
         GitHubAuthUser gitHubAuthUser;
 
@@ -151,6 +158,15 @@ public class NotificationService extends Service {
         }
       });
     }
+  }
+
+  private void setCheckedToday() {
+    preferences.save(PREFS_CHECKED_TODAY, System.currentTimeMillis());
+  }
+
+  private boolean isCheckedToday() {
+    return System.currentTimeMillis() - preferences.getLong(PREFS_CHECKED_TODAY,
+        System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1)) < TimeUnit.DAYS.toMillis(1);
   }
 
   private void showNotification() {

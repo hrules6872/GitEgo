@@ -111,8 +111,7 @@ public class MainActivityView
       if (message.isState() && refreshVisibilityCounter.incrementAndGet() == 1) {
         progressBar.setIndeterminate(true);
         progressBar.setVisibility(View.VISIBLE);
-      } else if (!message.isState()
-          && refreshVisibilityCounter.decrementAndGet() == 0) {
+      } else if (!message.isState() && refreshVisibilityCounter.decrementAndGet() == 0) {
         progressBar.setIndeterminate(false);
         progressBar.setVisibility(View.GONE);
       }
