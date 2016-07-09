@@ -17,6 +17,7 @@
 package com.hrules.gitego.di.modules;
 
 import com.hrules.gitego.BuildConfig;
+import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.repository.base.Repository;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.interactors.GetAccessTokenInteractor;
@@ -43,19 +44,19 @@ import javax.inject.Named;
   }
 
   @Provides GetAccessTokenInteractor provideGetAccessTokenInteractor(
-      InteractorExecutor interactorExecutor, UIThreadExecutor uiThreadExecutor) {
-    return new GetAccessTokenInteractor(interactorExecutor, uiThreadExecutor);
+      InteractorExecutor interactorExecutor, GitHubAPI gitHubAPI, Network network) {
+    return new GetAccessTokenInteractor(interactorExecutor, gitHubAPI, network);
   }
 
   @Provides GetAuthUserInteractor provideGetAuthUserInteractor(
-      InteractorExecutor interactorExecutor, UIThreadExecutor uiThreadExecutor,
+      InteractorExecutor interactorExecutor,
       @Named("authUserRepository") Repository authUserRepository) {
-    return new GetAuthUserInteractor(interactorExecutor, uiThreadExecutor, authUserRepository);
+    return new GetAuthUserInteractor(interactorExecutor, authUserRepository);
   }
 
   @Provides GetAuthRepoInteractor provideGetAuthRepoInteractor(
-      InteractorExecutor interactorExecutor, UIThreadExecutor uiThreadExecutor,
+      InteractorExecutor interactorExecutor,
       @Named("authRepoRepository") Repository authRepoRepository) {
-    return new GetAuthRepoInteractor(interactorExecutor, uiThreadExecutor, authRepoRepository);
+    return new GetAuthRepoInteractor(interactorExecutor, authRepoRepository);
   }
 }

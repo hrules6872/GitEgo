@@ -17,25 +17,17 @@
 package com.hrules.gitego.domain.interactors.base;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.domain.threads.base.Interactor;
 import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 
 public abstract class BaseInteractor implements Interactor {
   private final InteractorExecutorInterface interactorExecutor;
-  private final UIThreadExecutor uiThreadExecutor;
 
-  protected BaseInteractor(@NonNull InteractorExecutorInterface interactorExecutor,
-      @NonNull UIThreadExecutor uiThreadExecutor) {
+  protected BaseInteractor(@NonNull InteractorExecutorInterface interactorExecutor) {
     this.interactorExecutor = interactorExecutor;
-    this.uiThreadExecutor = uiThreadExecutor;
   }
 
   protected InteractorExecutorInterface getInteractorExecutor() {
     return interactorExecutor;
-  }
-
-  protected UIThreadExecutor getUIThread() {
-    return uiThreadExecutor;
   }
 }

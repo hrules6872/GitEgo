@@ -25,7 +25,6 @@ import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.mappers.GitHubAuthUserDtoToGitHubAuthUser;
 import com.hrules.gitego.domain.models.mappers.base.ListMapper;
 import com.hrules.gitego.domain.specifications.GetAuthUserSpecification;
-import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import java.util.List;
@@ -37,8 +36,8 @@ public class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser
   private Callback callback;
 
   public GetAuthUserInteractor(@NonNull InteractorExecutorInterface interactorExecutor,
-      @NonNull UIThreadExecutor uiThread, @NonNull Repository repository) {
-    super(interactorExecutor, uiThread);
+      @NonNull Repository repository) {
+    super(interactorExecutor);
     this.repository = repository;
   }
 
@@ -72,32 +71,20 @@ public class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser
   }
 
   private void notifyFinish() {
-    getUIThread().execute(new Runnable() {
-      @Override public void run() {
-        if (callback != null) {
-          callback.onFinish();
-        }
-      }
-    });
+    if (callback != null) {
+      callback.onFinish();
+    }
   }
 
   private void notifySuccess(final List<GitHubAuthUser> gitHubAuthUsers) {
-    getUIThread().execute(new Runnable() {
-      @Override public void run() {
-        if (callback != null) {
-          callback.onSuccess(gitHubAuthUsers);
-        }
-      }
-    });
+    if (callback != null) {
+      callback.onSuccess(gitHubAuthUsers);
+    }
   }
 
   private void notifyFail(final Exception exception) {
-    getUIThread().execute(new Runnable() {
-      @Override public void run() {
-        if (callback != null) {
-          callback.onFailure(exception);
-        }
-      }
-    });
+    if (callback != null) {
+      callback.onFailure(exception);
+    }
   }
 }
