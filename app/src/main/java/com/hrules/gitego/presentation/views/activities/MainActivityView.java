@@ -19,7 +19,10 @@ package com.hrules.gitego.presentation.views.activities;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +32,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.hrules.darealmvp.DRAppCompatActivity;
 import com.hrules.gitego.R;
+import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
+import com.hrules.gitego.presentation.commons.usernotifications.BriefMessageListener;
 import com.hrules.gitego.presentation.communicator.BoolStateMessage;
 import com.hrules.gitego.presentation.communicator.CommunicatorConstants;
 import com.hrules.gitego.presentation.communicator.base.Communicator;
@@ -42,6 +47,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MainActivityView
     extends DRAppCompatActivity<MainActivityPresenter, MainActivityPresenter.MainView>
     implements MainActivityPresenter.MainView, Communicator {
+  @BindView(R.id.rootLayout) CoordinatorLayout rootLayout;
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.progressBar) ProgressBar progressBar;
 
@@ -106,6 +112,22 @@ public class MainActivityView
     notificationManager.cancel(NotificationService.NOTIFICATION_ID);
   }
 
+  @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
+    new BriefMessage().showActionIndefinite(rootLayout, getString(message), getString(action),
+        new BriefMessageListener() {
+          @Override public void onClick() {
+            getPresenter().goToPlayStore();
+          }
+        });
+  }
+
+  @Override public void goToPlayStore() {
+    try {
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_playStore))));
+    } catch (Exception ignored) {
+    }
+  }
+
   @Override public void onMessage(BoolStateMessage message) {
     if (CommunicatorConstants.ACTION_SHOW_LOADING.equals(message.getAction())) {
       if (message.isState() && refreshVisibilityCounter.incrementAndGet() == 1) {
@@ -114,6 +136,8 @@ public class MainActivityView
       } else if (!message.isState() && refreshVisibilityCounter.decrementAndGet() == 0) {
         progressBar.setIndeterminate(false);
         progressBar.setVisibility(View.GONE);
+
+        getPresenter().checkUserRating();
       }
     }
   }

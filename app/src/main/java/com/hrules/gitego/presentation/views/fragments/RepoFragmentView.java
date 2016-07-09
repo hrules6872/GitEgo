@@ -156,7 +156,7 @@ public class RepoFragmentView
   }
 
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(getActivity().findViewById(android.R.id.content),
+    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout),
         getString(message), getString(action), new BriefMessageListener() {
           @Override public void onClick() {
             getPresenter().doLogin();
@@ -165,7 +165,7 @@ public class RepoFragmentView
   }
 
   @Override public void showBriefMessage(@StringRes int message) {
-    new BriefMessage().showLong(getActivity().findViewById(android.R.id.content),
+    new BriefMessage().showLong(getActivity().findViewById(R.id.rootLayout),
         getString(message));
   }
 

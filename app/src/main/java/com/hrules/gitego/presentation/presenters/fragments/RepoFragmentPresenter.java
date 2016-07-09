@@ -94,19 +94,27 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
           }
         }
 
-        @Override public void onFailure(@NonNull Exception exception) {
-          if (exception instanceof NetworkUnauthorizedException) {
-            loginFail();
-          } else if (exception instanceof NetworkIOException) {
-            networkFail();
-          } else {
-            DebugLog.e(exception.getMessage(), exception);
-          }
+        @Override public void onFailure(@NonNull final Exception exception) {
+          new UIThreadExecutor().execute(new Runnable() {
+            @Override public void run() {
+              if (exception instanceof NetworkUnauthorizedException) {
+                loginFail();
+              } else if (exception instanceof NetworkIOException) {
+                networkFail();
+              } else {
+                DebugLog.e(exception.getMessage(), exception);
+              }
+            }
+          });
         }
 
         @Override public void onFinish() {
-          getView().hideLoading();
-          getView().updateListState();
+          new UIThreadExecutor().execute(new Runnable() {
+            @Override public void run() {
+              getView().hideLoading();
+              getView().updateListState();
+            }
+          });
         }
       });
     }

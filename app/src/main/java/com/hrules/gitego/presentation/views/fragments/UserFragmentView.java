@@ -147,7 +147,7 @@ public class UserFragmentView
   }
 
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(getActivity().findViewById(android.R.id.content),
+    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout),
         getString(message), getString(action), new BriefMessageListener() {
           @Override public void onClick() {
             getPresenter().doLogin();
@@ -156,8 +156,7 @@ public class UserFragmentView
   }
 
   @Override public void showBriefMessage(@StringRes int message) {
-    new BriefMessage().showLong(getActivity().findViewById(android.R.id.content),
-        getString(message));
+    new BriefMessage().showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
   }
 
   @Override public void onAttach(Context context) {

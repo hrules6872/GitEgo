@@ -97,18 +97,26 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
           }
         }
 
-        @Override public void onFailure(@NonNull Exception exception) {
-          if (exception instanceof NetworkUnauthorizedException) {
-            loginFail();
-          } else if (exception instanceof NetworkIOException) {
-            networkFail();
-          } else {
-            DebugLog.e(exception.getMessage(), exception);
-          }
+        @Override public void onFailure(@NonNull final Exception exception) {
+          new UIThreadExecutor().execute(new Runnable() {
+            @Override public void run() {
+              if (exception instanceof NetworkUnauthorizedException) {
+                loginFail();
+              } else if (exception instanceof NetworkIOException) {
+                networkFail();
+              } else {
+                DebugLog.e(exception.getMessage(), exception);
+              }
+            }
+          });
         }
 
         @Override public void onFinish() {
-          getView().hideLoading();
+          new UIThreadExecutor().execute(new Runnable() {
+            @Override public void run() {
+              getView().hideLoading();
+            }
+          });
         }
       });
 
@@ -127,18 +135,26 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
           }
         }
 
-        @Override public void onFailure(@NonNull Exception exception) {
-          if (exception instanceof NetworkUnauthorizedException) {
-            loginFail();
-          } else if (exception instanceof NetworkIOException) {
-            networkFail();
-          } else {
-            DebugLog.e(exception.getMessage(), exception);
-          }
+        @Override public void onFailure(@NonNull final Exception exception) {
+          new UIThreadExecutor().execute(new Runnable() {
+            @Override public void run() {
+              if (exception instanceof NetworkUnauthorizedException) {
+                loginFail();
+              } else if (exception instanceof NetworkIOException) {
+                networkFail();
+              } else {
+                DebugLog.e(exception.getMessage(), exception);
+              }
+            }
+          });
         }
 
         @Override public void onFinish() {
-          getView().hideLoading();
+          new UIThreadExecutor().execute(new Runnable() {
+            @Override public void run() {
+              getView().hideLoading();
+            }
+          });
         }
       });
     }

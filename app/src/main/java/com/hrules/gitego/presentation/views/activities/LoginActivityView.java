@@ -21,8 +21,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.percent.PercentFrameLayout;
 import android.widget.Button;
 import android.widget.TextView;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.hrules.darealmvp.DRAppCompatActivity;
@@ -34,6 +36,8 @@ import com.hrules.gitego.presentation.presenters.activities.LoginActivityPresent
 public class LoginActivityView
     extends DRAppCompatActivity<LoginActivityPresenter, LoginActivityPresenter.LoginView>
     implements LoginActivityPresenter.LoginView {
+  @BindView(R.id.rootLayout) PercentFrameLayout rootLayout;
+  
   private ProgressDialog progress;
 
   @Override public int getLayoutResource() {
@@ -64,7 +68,7 @@ public class LoginActivityView
   }
 
   private void showBriefMessage(@NonNull String message) {
-    new BriefMessage().showLong(findViewById(android.R.id.content), message);
+    new BriefMessage().showLong(rootLayout, message);
   }
 
   @Override public void hideProgressDialog() {

@@ -17,6 +17,8 @@
 <resources>
   <string name="app_name">GitEgo</string>
   <string name="app_website">https://github.com/hrules6872/GitEgo</string>
+  <string name="app_playStore">https://play.google.com/store/apps/details?id=com.hrules.gitego
+  </string>
 
   <!--login-->
   <string name="login_login">Login GitHub</string>
@@ -44,11 +46,13 @@
 
   <!--actions-->
   <string name="action_login">Login GitHub</string>
+  <string name="action_goPlayStore">Yes!</string>
 
   <!--notifications-->
   <string name="notification_message">Changes detected!</string>
 
   <!--general-->
   <string formatted="false" name="text_variationFormatted">%s %s</string>
+  <string name="text_userRating">Enjoying GitEgo?</string>
 
 </resources>
