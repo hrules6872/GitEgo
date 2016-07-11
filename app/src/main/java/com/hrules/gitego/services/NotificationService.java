@@ -43,13 +43,14 @@ import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDesce
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthUserDateDescendingComparator;
 import com.hrules.gitego.presentation.models.utils.MergeUtils;
 import com.hrules.gitego.presentation.views.activities.MainActivityView;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 public class NotificationService extends Service {
-  public static final String PREFS_CHECKED_TODAY = "PREFS_CHECKED_TODAY";
+  private static final String PREFS_CHECKED_TODAY = "PREFS_CHECKED_TODAY";
 
   public static final int SERVICE_REQUEST_CODE = 1;
   public static final int NOTIFICATION_ID = 1;
@@ -73,7 +74,7 @@ public class NotificationService extends Service {
 
   @Override public int onStartCommand(Intent intent, int flags, int startId) {
     super.onStartCommand(intent, flags, startId);
-    if (!AppLifecycleManager.isAppInForeground() && !isCheckedToday()) {
+    if (!isCheckedToday()) {
       init();
       checkDataChanges();
     }
@@ -165,8 +166,20 @@ public class NotificationService extends Service {
   }
 
   private boolean isCheckedToday() {
-    return System.currentTimeMillis() - preferences.getLong(PREFS_CHECKED_TODAY,
-        System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1)) < TimeUnit.DAYS.toMillis(1);
+    Calendar present = milliToCalendar(System.currentTimeMillis());
+    Calendar past = milliToCalendar(preferences.getLong(PREFS_CHECKED_TODAY,
+        present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
+    return TimeUnit.MILLISECONDS.toDays(present.getTimeInMillis() - past.getTimeInMillis()) <= 0;
+  }
+
+  private Calendar milliToCalendar(long millis) {
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(millis);
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
+    calendar.set(Calendar.MINUTE, 0);
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+    return calendar;
   }
 
   private void showNotification() {
@@ -175,20 +188,22 @@ public class NotificationService extends Service {
   }
 
   private void showNotification(int smallIcon, String ticker, String title, String content) {
-    Intent intent = new Intent(this, MainActivityView.class);
-    PendingIntent pendingIntent =
-        PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    if (!AppLifecycleManager.isAppInForeground()) {
+      Intent intent = new Intent(this, MainActivityView.class);
+      PendingIntent pendingIntent =
+          PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-    NotificationCompat.Builder builder =
-        new NotificationCompat.Builder(this).setWhen(System.currentTimeMillis());
-    builder.setSmallIcon(smallIcon)
-        .setTicker(ticker)
-        .setContentTitle(title)
-        .setContentText(content)
-        .setAutoCancel(true)
-        .setContentIntent(pendingIntent);
+      NotificationCompat.Builder builder =
+          new NotificationCompat.Builder(this).setWhen(System.currentTimeMillis());
+      builder.setSmallIcon(smallIcon)
+          .setTicker(ticker)
+          .setContentTitle(title)
+          .setContentText(content)
+          .setAutoCancel(true)
+          .setContentIntent(pendingIntent);
 
-    ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(NOTIFICATION_ID,
-        builder.build());
+      ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(NOTIFICATION_ID,
+          builder.build());
+    }
   }
 }
