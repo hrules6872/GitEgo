@@ -29,6 +29,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/greyBackground"
+      android:fitsSystemWindows="true"
   >
     <android.support.design.widget.CollapsingToolbarLayout
         android:layout_width="match_parent"
@@ -42,6 +43,7 @@
           android:id="@+id/fragmentUser"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:fitsSystemWindows="true"
           app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
       />
 

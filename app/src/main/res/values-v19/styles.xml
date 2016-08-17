@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (c) 2016. Héctor de Isidro - hrules6872
   ~
@@ -15,15 +16,7 @@
   -->
 
 <resources>
-
-  <style name="AppTheme" parent="AppTheme.Base"/>
-
-  <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="android:windowBackground">@color/windowBackground</item>
-    <item name="android:windowActionModeOverlay">true</item>
-
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorAccent">@color/colorAccent</item>
+  <style name="AppTheme" parent="AppTheme.Base">
+    <item name="android:windowTranslucentStatus">true</item>
   </style>
-
 </resources>
