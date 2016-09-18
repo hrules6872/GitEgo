@@ -26,9 +26,6 @@ GitEgo is not associated with GitHub in any way.
 * [LeakCanary](https://github.com/square/leakcanary)
 * [EventCounter](https://github.com/hrules6872/EventCounter)
 
-### TODO
-* Add tests
-
 Developed by
 -------
 Héctor de Isidro - hrules6872 [![Twitter](http://img.shields.io/badge/contact-@hector6872-blue.svg?style=flat)](http://twitter.com/hector6872)
