@@ -17,12 +17,14 @@
 <resources>
   <string name="app_name">GitEgo</string>
   <string name="app_website">https://github.com/hrules6872/GitEgo</string>
-  <string name="app_playStore">https://play.google.com/store/apps/details?id=com.hrules.gitego
+  <string name="app_playStoreURL">https://play.google.com/store/apps/details?id=com.hrules.gitego
   </string>
+
+  <string name="activity_aboutTitle">About</string>
 
   <!--login-->
   <string name="login_login">Login GitHub</string>
-  <string name="login_goToAppWebsite">Go to GitEgo website</string>
+  <string name="login_about">About GitEgo</string>
   <string name="login_goToAppWebsiteInstructions">Go to %s</string>
   <string name="login_gettingUser">Retrieving information…</string>
 
@@ -33,6 +35,7 @@
   <!--menu-->
   <string name="menu_notifications">Notifications</string>
   <string name="menu_signOut">Sign out</string>
+  <string name="menu_about">About</string>
 
   <!--user-->
   <string name="user_default">-</string>
@@ -53,4 +56,9 @@
   <!--general-->
   <string formatted="false" name="text_variationFormatted">%s %s</string>
 
+  <!--app utils-->
+  <string name="text_appVersionFormatted">version %1$s (%2$s)</string>
+  <string name="feedback_developerEmail">hrules.e@gmail.com</string>
+  <string name="feedback_emailSubject">Feedback about GitEgo %s</string>
+  <string name="feedback_emailChooserTitle">Send email</string>
 </resources>

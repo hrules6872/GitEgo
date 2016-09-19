@@ -53,6 +53,9 @@
       </intent-filter>
     </activity>
 
+    <activity android:name=".presentation.views.activities.AboutActivityView"
+        android:theme="@style/AppThemeAbout"/>
+
     <service android:name=".services.NotificationService"/>
 
     <receiver

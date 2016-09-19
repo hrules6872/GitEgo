@@ -15,22 +15,16 @@
   ~ limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
->
-  <item
-      android:id="@+id/menu_notifications"
-      android:checkable="true"
-      android:title="@string/menu_notifications"
-      app:actionViewClass="android.widget.CheckBox"
-      app:showAsAction="never"/>
+<resources>
+  <string name="about_information">Information</string>
+  <string name="about_rateIt">Rate this app on Google Play</string>
+  <string name="about_sendFeedback">Send feedback to developer</string>
+  <string name="about_developer">Héctor de Isidro</string>
+  <string name="about_moreApps">More apps</string>
+  <string name="about_twitter">Follow me @hector6872</string>
 
-  <item
-      android:id="@+id/menu_signOut"
-      android:title="@string/menu_signOut"
-      app:showAsAction="never"/>
+  <string name="app_developerPlayStoreURL">https://play.google.com/store/apps/developer?id=hrules6872</string>
+  <string name="app_developerTwitterURL">https://twitter.com/hector6872</string>
 
-  <item android:id="@+id/menu_about"
-      android:title="@string/menu_about"
-      app:showAsAction="never"/>
-</menu>
+  <string name="about_unknownError">Whoops!</string>
+</resources>

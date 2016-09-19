@@ -57,13 +57,13 @@
       />
 
       <com.hrules.gitego.presentation.commons.components.UnderlineTextView
-          android:id="@+id/goToAppWebsite"
+          android:id="@+id/about"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentBottom="true"
           android:layout_centerHorizontal="true"
           android:clickable="true"
-          android:text="@string/login_goToAppWebsite"
+          android:text="@string/login_about"
           android:textAppearance="?android:attr/textAppearanceSmall"
           app:layout_marginBottomPercent="15%"
       />
@@ -72,9 +72,13 @@
           android:id="@+id/login"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_above="@id/goToAppWebsite"
+          android:layout_above="@id/about"
           android:layout_marginBottom="@dimen/default_margin"
           android:text="@string/login_login"
+          android:textAllCaps="true"
+          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:textColor="@color/textHighlighted"
+          android:textStyle="bold"
           style="@style/Widget.AppCompat.Button.Borderless"
       />
 

@@ -77,6 +77,7 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
     switch (item.getItemId()) {
       case R.id.menu_notifications:
       case R.id.menu_signOut:
+      case R.id.menu_about:
         getPresenter().onMenuItemClick(item);
         return true;
 
@@ -105,9 +106,13 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
 
   @Override public void goToPlayStore() {
     try {
-      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_playStore))));
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_playStoreURL))));
     } catch (Exception ignored) {
     }
+  }
+
+  @Override public void launchAboutActivity() {
+    startActivity(new Intent(this, AboutActivityView.class));
   }
 
   @Override public void onMessage(BoolStateMessage message) {

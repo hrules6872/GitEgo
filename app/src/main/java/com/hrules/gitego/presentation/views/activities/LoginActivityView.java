@@ -18,7 +18,6 @@ package com.hrules.gitego.presentation.views.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.percent.PercentFrameLayout;
@@ -52,16 +51,12 @@ public class LoginActivityView extends DRAppCompatActivity<LoginActivityPresente
     getPresenter().onClickButton(button);
   }
 
-  @OnClick({ R.id.goToAppWebsite }) void onClickTextView(TextView textView) {
+  @OnClick({ R.id.about }) void onClickTextView(TextView textView) {
     getPresenter().onClickTextView(textView);
   }
 
-  public void goToAppWebsite() {
-    try {
-      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_website))));
-    } catch (Exception e) {
-      showBriefMessage(String.format(getString(R.string.login_goToAppWebsiteInstructions), getString(R.string.app_website)));
-    }
+  public void launchAboutActivity() {
+    startActivity(new Intent(this, AboutActivityView.class));
   }
 
   private void showBriefMessage(@NonNull String message) {

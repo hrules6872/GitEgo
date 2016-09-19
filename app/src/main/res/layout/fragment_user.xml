@@ -73,7 +73,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
-      android:layout_margin="@dimen/default_marginLarge"
+      android:layout_margin="@dimen/default_marginDouble"
       android:orientation="horizontal"
   >
 
@@ -107,7 +107,7 @@
     </LinearLayout>
 
     <Space
-        android:layout_width="@dimen/default_marginLarge"
+        android:layout_width="@dimen/default_marginDouble"
         android:layout_height="0dp"
     />
 
@@ -141,7 +141,7 @@
     </LinearLayout>
 
     <Space
-        android:layout_width="@dimen/default_marginLarge"
+        android:layout_width="@dimen/default_marginDouble"
         android:layout_height="0dp"
     />
 

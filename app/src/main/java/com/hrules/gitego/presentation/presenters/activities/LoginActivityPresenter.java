@@ -71,8 +71,8 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
 
   public void onClickTextView(TextView textView) {
     switch (textView.getId()) {
-      case R.id.goToAppWebsite:
-        getView().goToAppWebsite();
+      case R.id.about:
+        getView().launchAboutActivity();
         break;
 
       default:
@@ -147,7 +147,7 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
   }
 
   public interface LoginView extends DRView {
-    void goToAppWebsite();
+    void launchAboutActivity();
 
     void hideProgressDialog();
 

@@ -70,6 +70,10 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
         getView().finish();
         break;
 
+      case R.id.menu_about:
+        getView().launchAboutActivity();
+        break;
+
       default:
         throw new UnsupportedOperationException();
     }
@@ -100,5 +104,7 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     void removeNotification();
 
     void goToPlayStore();
+
+    void launchAboutActivity();
   }
 }

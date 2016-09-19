@@ -16,9 +16,9 @@
 
 <resources>
   <dimen name="default_padding">8dp</dimen>
-  <dimen name="default_paddingLarge">16dp</dimen>
+  <dimen name="default_paddingDouble">16dp</dimen>
   <dimen name="default_margin">8dp</dimen>
-  <dimen name="default_marginLarge">16dp</dimen>
+  <dimen name="default_marginDouble">16dp</dimen>
   <dimen name="itemRepoDivider_size">4dp</dimen>
   <dimen name="progress_marginTopHack">-6dp</dimen>
 </resources>
