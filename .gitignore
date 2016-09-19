@@ -31,3 +31,5 @@ proguard/
 
 # General
 *.jks
+/.project
+/captures
