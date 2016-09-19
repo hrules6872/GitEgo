@@ -21,11 +21,7 @@ import com.google.gson.Gson;
 import java.lang.reflect.Type;
 
 public class Json {
-  private final Gson gson;
-
-  public Json() {
-    gson = new Gson();
-  }
+  private final Gson gson = new Gson();
 
   public <T> String toJson(@NonNull T model) {
     return gson.toJson(model);

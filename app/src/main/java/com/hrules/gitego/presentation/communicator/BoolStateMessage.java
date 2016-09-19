@@ -16,16 +16,17 @@
 
 package com.hrules.gitego.presentation.communicator;
 
+import android.support.annotation.NonNull;
 import com.hrules.gitego.presentation.communicator.base.BaseMessage;
 
 public class BoolStateMessage extends BaseMessage {
   private boolean state;
 
-  public BoolStateMessage(String action) {
+  public BoolStateMessage(@NonNull String action) {
     super(action);
   }
 
-  public BoolStateMessage(String action, boolean state) {
+  public BoolStateMessage(@NonNull String action, boolean state) {
     super(action);
     this.state = state;
   }

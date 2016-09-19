@@ -16,6 +16,8 @@
 
 package com.hrules.gitego.domain.models.base;
 
+import android.support.annotation.NonNull;
+
 public abstract class ModelDto<K> {
   private K modelId;
 
@@ -23,7 +25,7 @@ public abstract class ModelDto<K> {
     return modelId;
   }
 
-  public void setModelId(K modelId) {
+  public void setModelId(@NonNull K modelId) {
     this.modelId = modelId;
   }
 

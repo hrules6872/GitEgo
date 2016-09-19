@@ -17,6 +17,7 @@
 package com.hrules.gitego.data.network;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import java.util.Map;
 
 public class RequestNetwork {
@@ -24,22 +25,21 @@ public class RequestNetwork {
   private final Map<String, String> mapHeaders;
   private final java.util.Map<String, String> mapParams;
 
-  public RequestNetwork(@NonNull String url, Map<String, String> mapHeaders,
-      Map<String, String> mapParams) {
+  public RequestNetwork(@NonNull String url, @Nullable Map<String, String> mapHeaders, Map<String, String> mapParams) {
     this.url = url;
     this.mapHeaders = mapHeaders;
     this.mapParams = mapParams;
   }
 
-  public String getUrl() {
+  String getUrl() {
     return url;
   }
 
-  public Map<String, String> getMapHeaders() {
+  Map<String, String> getMapHeaders() {
     return mapHeaders;
   }
 
-  public Map<String, String> getMapParams() {
+  Map<String, String> getMapParams() {
     return mapParams;
   }
 }

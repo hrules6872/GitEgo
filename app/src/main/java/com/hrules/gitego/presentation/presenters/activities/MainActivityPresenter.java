@@ -17,7 +17,6 @@
 package com.hrules.gitego.presentation.presenters.activities;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.hrules.darealmvp.DRPresenter;
@@ -52,7 +51,7 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     }
   }
 
-  public void onMenuItemClick(MenuItem item) {
+  public void onMenuItemClick(@NonNull MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_notifications:
         if (item.isChecked()) {
@@ -80,7 +79,7 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     getView().launchLoginActivity();
   }
 
-  public void onCreateOptionsMenu(Menu menu) {
+  public void onCreateOptionsMenu(@NonNull Menu menu) {
     menu.findItem(R.id.menu_notifications)
         .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
   }
@@ -99,8 +98,6 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     void stopNotificationServiceReceiver();
 
     void removeNotification();
-
-    void showBriefMessageAction(@StringRes int message, @StringRes int action);
 
     void goToPlayStore();
   }

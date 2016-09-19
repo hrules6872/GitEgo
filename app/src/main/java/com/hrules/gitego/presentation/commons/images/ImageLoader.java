@@ -21,7 +21,7 @@ import android.support.annotation.NonNull;
 import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
-public class ImageLoader implements ImageLoaderInterface {
+public class ImageLoader {
   private final Context context;
 
   public ImageLoader(@NonNull Context context) {

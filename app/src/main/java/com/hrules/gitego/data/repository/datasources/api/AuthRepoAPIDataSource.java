@@ -35,7 +35,7 @@ public class AuthRepoAPIDataSource extends DataSource<GitHubAuthRepoDto> {
   private final Network network;
   private final BasicCache cache;
 
-  public AuthRepoAPIDataSource(Network network, BasicCache cache) {
+  public AuthRepoAPIDataSource(@NonNull Network network, @NonNull BasicCache cache) {
     this.network = network;
     this.cache = cache;
   }
@@ -60,13 +60,11 @@ public class AuthRepoAPIDataSource extends DataSource<GitHubAuthRepoDto> {
     throw new UnsupportedOperationException();
   }
 
-  @Override
-  public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
+  @Override public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
     throw new UnsupportedOperationException();
   }
 
-  @SuppressWarnings("unchecked") @Override
-  public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
+  @SuppressWarnings("unchecked") @Override public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
       throws Exception {
     specification = new SpecificationFactory<String>().get(this, specification);
     List<GitHubAuthRepoDto> list;
@@ -77,10 +75,8 @@ public class AuthRepoAPIDataSource extends DataSource<GitHubAuthRepoDto> {
       item.setDate(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()));
       item.setModelId(item.createModelId());
 
-      Specification subscribersSpecification =
-          new AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification();
-      subscribersSpecification.setAdditionalParams(specification.getAdditionalParams()[0],
-          item.getSubscribers_url());
+      Specification subscribersSpecification = new AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification();
+      subscribersSpecification.setAdditionalParams(specification.getAdditionalParams()[0], item.getSubscribers_url());
       String subscribers = network.get((RequestNetwork) subscribersSpecification.get());
       JSONArray subscribersJSONArray = new JSONArray(subscribers);
       item.setWatchers_count(subscribersJSONArray.length());

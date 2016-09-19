@@ -26,21 +26,19 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.hrules.gitego.R;
-import com.hrules.gitego.presentation.adapters.base.AdapterInterface;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import java.util.List;
 
-public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder>
-    implements AdapterInterface<GitHubAuthRepo> {
+public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
   private List<GitHubAuthRepo> items;
   private final RepoAdapterListener listener;
 
-  public RepoAdapter(List<GitHubAuthRepo> items, RepoAdapterListener listener) {
+  public RepoAdapter(@NonNull List<GitHubAuthRepo> items, @NonNull RepoAdapterListener listener) {
     this.items = items;
     this.listener = listener;
   }
 
-  public static class ViewHolder extends RecyclerView.ViewHolder {
+  static class ViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.cardView) CardView cardView;
     @BindView(R.id.repoName) TextView repoName;
     @BindView(R.id.repoFork) TextView repoFork;
@@ -48,7 +46,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder>
     @BindView(R.id.starsGazersCount) TextView starsGazersCount;
     @BindView(R.id.forksCount) TextView forksCount;
 
-    public ViewHolder(View itemView) {
+    ViewHolder(View itemView) {
       super(itemView);
       ButterKnife.bind(this, itemView);
     }
@@ -78,22 +76,22 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder>
     return items.size();
   }
 
-  @Override public void add(int position, @NonNull GitHubAuthRepo item) {
+  public void add(int position, @NonNull GitHubAuthRepo item) {
     items.add(position, item);
     notifyItemInserted(position);
   }
 
-  @Override public void remove(int position) {
+  public void remove(int position) {
     items.remove(position);
     notifyItemRemoved(position);
   }
 
-  @Override public void update(@NonNull List<GitHubAuthRepo> list) {
+  public void update(@NonNull List<GitHubAuthRepo> list) {
     this.items = list;
     notifyDataSetChanged();
   }
 
-  @Override public GitHubAuthRepo getItem(int position) {
+  public GitHubAuthRepo getItem(int position) {
     if (position > items.size()) {
       return new GitHubAuthRepo();
     }

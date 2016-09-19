@@ -17,6 +17,7 @@
 package com.hrules.gitego.data.network;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import java.io.IOException;
@@ -31,15 +32,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.internal.Util;
 
-public class Network implements NetworkInterface {
-  private final OkHttpClient client;
+public class Network {
+  private final OkHttpClient client = new OkHttpClient();
 
-  public Network() {
-    client = new OkHttpClient();
-  }
-
-  public String post(RequestNetwork requestNetwork)
-      throws NetworkIOException, NetworkUnauthorizedException {
+  public String post(@NonNull RequestNetwork requestNetwork) throws NetworkIOException, NetworkUnauthorizedException {
     Request request = new Request.Builder().url(requestNetwork.getUrl())
         .headers(makeHeaders(requestNetwork.getMapHeaders()))
         .post(makePostParams(requestNetwork.getMapParams()))
@@ -55,10 +51,8 @@ public class Network implements NetworkInterface {
     }
   }
 
-  public String get(RequestNetwork requestNetwork)
-      throws NetworkIOException, NetworkUnauthorizedException {
-    Request request = new Request.Builder().url(
-        makeGetParams(requestNetwork.getUrl(), requestNetwork.getMapParams()))
+  public String get(@NonNull RequestNetwork requestNetwork) throws NetworkIOException, NetworkUnauthorizedException {
+    Request request = new Request.Builder().url(makeGetParams(requestNetwork.getUrl(), requestNetwork.getMapParams()))
         .headers(makeHeaders(requestNetwork.getMapHeaders()))
         .build();
 
@@ -72,14 +66,14 @@ public class Network implements NetworkInterface {
     }
   }
 
-  public Headers makeHeaders(Map<String, String> mapHeaders) {
+  private Headers makeHeaders(@Nullable Map<String, String> mapHeaders) {
     if (mapHeaders == null) {
       return Headers.of(new HashMap<String, String>());
     }
     return Headers.of(mapHeaders);
   }
 
-  public RequestBody makePostParams(Map<String, String> mapParams) {
+  private RequestBody makePostParams(@Nullable Map<String, String> mapParams) {
     MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
 
     if (mapParams == null || mapParams.isEmpty()) {
@@ -91,15 +85,13 @@ public class Network implements NetworkInterface {
       if (content.length() > 0) {
         content.append('&');
       }
-      content.append(URLEncoder.encode(entry.getKey()))
-          .append('=')
-          .append(URLEncoder.encode(entry.getValue()));
+      content.append(URLEncoder.encode(entry.getKey())).append('=').append(URLEncoder.encode(entry.getValue()));
     }
     byte[] contentBytes = content.toString().getBytes(Util.UTF_8);
     return RequestBody.create(mediaType, contentBytes);
   }
 
-  public String makeGetParams(@NonNull String url, Map<String, String> mapParams) {
+  private String makeGetParams(@NonNull String url, @Nullable Map<String, String> mapParams) {
     if (mapParams == null || mapParams.isEmpty()) {
       return url;
     }
@@ -109,9 +101,7 @@ public class Network implements NetworkInterface {
       if (params.length() > 0) {
         params.append('&');
       }
-      params.append(URLEncoder.encode(entry.getKey()))
-          .append('=')
-          .append(URLEncoder.encode(entry.getValue()));
+      params.append(URLEncoder.encode(entry.getKey())).append('=').append(URLEncoder.encode(entry.getValue()));
     }
     return url + "?" + params.toString();
   }

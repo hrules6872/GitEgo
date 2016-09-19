@@ -16,8 +16,9 @@
 
 package com.hrules.gitego.presentation.adapters;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
 public interface RepoAdapterListener {
-  void onListItemClick(int position, View view);
+  void onListItemClick(int position, @NonNull View view);
 }

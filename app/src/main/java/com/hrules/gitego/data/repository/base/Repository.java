@@ -32,12 +32,11 @@ import java.util.Map;
 public abstract class Repository<T extends ModelDto> implements RepositoryInterface<T> {
   private final Collection<DataSource<T>> dataSources;
 
-  protected Repository(Collection<DataSource<T>> dataSources) {
+  protected Repository(@NonNull Collection<DataSource<T>> dataSources) {
     this.dataSources = dataSources;
   }
 
-  @SuppressWarnings("unchecked") @Override public void addOrUpdate(@NonNull T item)
-      throws Exception {
+  @SuppressWarnings("unchecked") @Override public void addOrUpdate(@NonNull T item) throws Exception {
     for (DataSource dataSource : dataSources) {
       if (dataSource.isWriteable()) {
         dataSource.addOrUpdate(item);
@@ -45,8 +44,7 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
     }
   }
 
-  @SuppressWarnings("unchecked") @Override public void addOrUpdate(@NonNull Iterable<T> items)
-      throws Exception {
+  @SuppressWarnings("unchecked") @Override public void addOrUpdate(@NonNull Iterable<T> items) throws Exception {
     for (DataSource dataSource : dataSources) {
       if (dataSource.isWriteable()) {
         dataSource.addOrUpdate(items);
@@ -70,8 +68,7 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
     }
   }
 
-  @SuppressWarnings("unchecked") @Override public void remove(@NonNull Iterable<T> items)
-      throws Exception {
+  @SuppressWarnings("unchecked") @Override public void remove(@NonNull Iterable<T> items) throws Exception {
     for (DataSource dataSource : dataSources) {
       if (dataSource.isWriteable()) {
         dataSource.remove(items);
@@ -79,8 +76,7 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
     }
   }
 
-  @SuppressWarnings("unchecked") @Override
-  public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
+  @SuppressWarnings("unchecked") @Override public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
     Map<Object, T> map = new HashMap<>();
 
     for (DataSource dataSource : dataSources) {

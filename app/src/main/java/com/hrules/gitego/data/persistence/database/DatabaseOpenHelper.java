@@ -19,18 +19,19 @@ package com.hrules.gitego.data.persistence.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
 
 class DatabaseOpenHelper extends SQLiteOpenHelper {
-  DatabaseOpenHelper(Context context) {
+  DatabaseOpenHelper(@NonNull Context context) {
     super(context, DatabaseConstants.DATABASE_NAME, null, DatabaseConstants.DATABASE_VERSION);
   }
 
-  @Override public void onCreate(SQLiteDatabase db) {
+  @Override public void onCreate(@NonNull SQLiteDatabase db) {
     db.execSQL(DatabaseConstants.SQL_CREATE_TABLE_USER);
     db.execSQL(DatabaseConstants.SQL_CREATE_TABLE_REPO);
   }
 
-  @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+  @Override public void onUpgrade(@NonNull SQLiteDatabase db, int oldVersion, int newVersion) {
     throw new UnsupportedOperationException();
   }
 }

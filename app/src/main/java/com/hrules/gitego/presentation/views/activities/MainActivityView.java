@@ -21,7 +21,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -32,8 +31,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.hrules.darealmvp.DRAppCompatActivity;
 import com.hrules.gitego.R;
-import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
-import com.hrules.gitego.presentation.commons.usernotifications.BriefMessageListener;
 import com.hrules.gitego.presentation.communicator.BoolStateMessage;
 import com.hrules.gitego.presentation.communicator.CommunicatorConstants;
 import com.hrules.gitego.presentation.communicator.base.Communicator;
@@ -104,14 +101,6 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
   @Override public void removeNotification() {
     NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     notificationManager.cancel(NotificationService.NOTIFICATION_ID);
-  }
-
-  @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(rootLayout, getString(message), getString(action), new BriefMessageListener() {
-      @Override public void onClick() {
-        getPresenter().goToPlayStore();
-      }
-    });
   }
 
   @Override public void goToPlayStore() {

@@ -22,11 +22,7 @@ import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.threads.base.ThreadExecutorInterface;
 
 public class UIThreadExecutor implements ThreadExecutorInterface {
-  private final Handler handler;
-
-  public UIThreadExecutor() {
-    this.handler = new Handler(Looper.getMainLooper());
-  }
+  private final Handler handler = new Handler(Looper.getMainLooper());
 
   public void execute(@NonNull Runnable runnable) {
     handler.post(runnable);

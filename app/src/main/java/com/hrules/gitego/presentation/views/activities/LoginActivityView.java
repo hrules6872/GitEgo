@@ -33,11 +33,10 @@ import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
 import com.hrules.gitego.presentation.presenters.activities.LoginActivityPresenter;
 
-public class LoginActivityView
-    extends DRAppCompatActivity<LoginActivityPresenter, LoginActivityPresenter.LoginView>
+public class LoginActivityView extends DRAppCompatActivity<LoginActivityPresenter, LoginActivityPresenter.LoginView>
     implements LoginActivityPresenter.LoginView {
   @BindView(R.id.rootLayout) PercentFrameLayout rootLayout;
-  
+
   private ProgressDialog progress;
 
   @Override public int getLayoutResource() {
@@ -46,7 +45,6 @@ public class LoginActivityView
 
   @Override public void initializeViews() {
     ButterKnife.bind(this);
-
     progress = new ProgressDialog(this);
   }
 
@@ -62,8 +60,7 @@ public class LoginActivityView
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_website))));
     } catch (Exception e) {
-      showBriefMessage(String.format(getString(R.string.login_goToAppWebsiteInstructions),
-          getString(R.string.app_website)));
+      showBriefMessage(String.format(getString(R.string.login_goToAppWebsiteInstructions), getString(R.string.app_website)));
     }
   }
 
@@ -95,7 +92,7 @@ public class LoginActivityView
     progress.show();
   }
 
-  @Override public void launchOAuthLogin(GitHubAPI gitHubAPI) {
+  @Override public void launchOAuthLogin(@NonNull GitHubAPI gitHubAPI) {
     gitHubAPI.launchOAuthLogin(getApplicationContext());
   }
 

@@ -37,7 +37,7 @@ public class AuthUserBddDataSource extends DataSource<GitHubAuthUserDto> {
   private final Database database;
   private final BasicCache cache;
 
-  public AuthUserBddDataSource(Database database, BasicCache cache) {
+  public AuthUserBddDataSource(@NonNull Database database, @NonNull BasicCache cache) {
     this.database = database;
     this.cache = cache;
   }
@@ -60,9 +60,7 @@ public class AuthUserBddDataSource extends DataSource<GitHubAuthUserDto> {
   }
 
   private String convertDtoToSqlInsert(@NonNull GitHubAuthUserDto item) {
-    return new SQLQueryBuilder().insertInto(DatabaseConstants.TABLE_USER)
-        .values(new GitHubAuthUserDtoToMap().transform(item))
-        .build();
+    return new SQLQueryBuilder().insertInto(DatabaseConstants.TABLE_USER).values(new GitHubAuthUserDtoToMap().transform(item)).build();
   }
 
   private String convertDtoToSqlDelete(GitHubAuthUserDto item) {
@@ -86,13 +84,11 @@ public class AuthUserBddDataSource extends DataSource<GitHubAuthUserDto> {
     throw new UnsupportedOperationException();
   }
 
-  @Override
-  public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
+  @Override public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
     throw new UnsupportedOperationException();
   }
 
-  @SuppressWarnings("unchecked") @Override
-  public Collection<GitHubAuthUserDto> query(@NonNull Specification specification)
+  @SuppressWarnings("unchecked") @Override public Collection<GitHubAuthUserDto> query(@NonNull Specification specification)
       throws Exception {
     specification = new SpecificationFactory<String>().get(this, specification);
     List<GitHubAuthUserDto> list = new ArrayList<>();
@@ -102,8 +98,7 @@ public class AuthUserBddDataSource extends DataSource<GitHubAuthUserDto> {
       database.open();
       cursor = database.get((String) specification.get());
       while (cursor.moveToNext()) {
-        GitHubAuthUserDto gitHubAuthUserDto =
-            new GitHubAuthUserBddToGitHubAuthUserDto().transform(cursor);
+        GitHubAuthUserDto gitHubAuthUserDto = new GitHubAuthUserBddToGitHubAuthUserDto().transform(cursor);
         gitHubAuthUserDto.setModelId(gitHubAuthUserDto.createModelId());
         list.add(gitHubAuthUserDto);
       }

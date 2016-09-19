@@ -52,15 +52,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RepoFragmentView
-    extends DRFragmentV4<RepoFragmentPresenter, RepoFragmentPresenter.RepoView>
+public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFragmentPresenter.RepoView>
     implements RepoFragmentPresenter.RepoView {
   private static final String BUNDLE_RECYCLER_STATE = "BUNDLE_RECYCLER_STATE";
 
   @BindView(R.id.recyclerView) RecyclerView recyclerView;
 
-  private Parcelable recyclerViewState;
   private Unbinder unbinder;
+  private Parcelable recyclerViewState;
   private Communicator communicator;
 
   private RepoAdapter adapter;
@@ -79,15 +78,13 @@ public class RepoFragmentView
     unbinder = ButterKnife.bind(this, view);
 
     recyclerView.setHasFixedSize(true);
-    recyclerView.setLayoutManager(
-        new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     recyclerView.addItemDecoration(new SpaceItemDecoration(
-        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-            getResources().getDimension(R.dimen.itemRepoDivider_size),
+        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.itemRepoDivider_size),
             getResources().getDisplayMetrics()), false, false));
 
     adapter = new RepoAdapter(new ArrayList<GitHubAuthRepo>(), new RepoAdapterListener() {
-      @Override public void onListItemClick(int position, View view) {
+      @Override public void onListItemClick(int position, @NonNull View view) {
         getPresenter().onListItemClick(adapter.getItem(position));
       }
     });
@@ -105,20 +102,15 @@ public class RepoFragmentView
     int colorVariationNegative = ContextCompat.getColor(getActivity(), R.color.variationNegative);
 
     for (GitHubAuthRepo item : list) {
-      item.setWatchers_countSpannable(
-          StringUtils.createVariationSpannableString(textVariation, item.getWatchers_count(),
-              item.getGitHubAuthRepoOlder().getWatchers_count(), colorVariationPositive,
-              colorVariationNegative));
+      item.setWatchers_countSpannable(StringUtils.createVariationSpannableString(textVariation, item.getWatchers_count(),
+          item.getGitHubAuthRepoOlder().getWatchers_count(), colorVariationPositive, colorVariationNegative));
 
-      item.setStargazers_countSpannable(
-          StringUtils.createVariationSpannableString(textVariation, item.getStargazers_count(),
-              item.getGitHubAuthRepoOlder().getStargazers_count(), colorVariationPositive,
-              colorVariationNegative));
+      item.setStargazers_countSpannable(StringUtils.createVariationSpannableString(textVariation, item.getStargazers_count(),
+          item.getGitHubAuthRepoOlder().getStargazers_count(), colorVariationPositive, colorVariationNegative));
 
       item.setForks_countSpannable(
-          StringUtils.createVariationSpannableString(textVariation, item.getForks_count(),
-              item.getGitHubAuthRepoOlder().getForks_count(), colorVariationPositive,
-              colorVariationNegative));
+          StringUtils.createVariationSpannableString(textVariation, item.getForks_count(), item.getGitHubAuthRepoOlder().getForks_count(),
+              colorVariationPositive, colorVariationNegative));
     }
 
     Collections.sort(list, new GitHubAuthRepoImplicationsDescendingComparator());
@@ -150,14 +142,13 @@ public class RepoFragmentView
 
   @Override public void hideLoading() {
     if (communicator != null) {
-      communicator.onMessage(
-          new BoolStateMessage(CommunicatorConstants.ACTION_SHOW_LOADING, false));
+      communicator.onMessage(new BoolStateMessage(CommunicatorConstants.ACTION_SHOW_LOADING, false));
     }
   }
 
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout),
-        getString(message), getString(action), new BriefMessageListener() {
+    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message), getString(action),
+        new BriefMessageListener() {
           @Override public void onClick() {
             getPresenter().doLogin();
           }
@@ -165,8 +156,7 @@ public class RepoFragmentView
   }
 
   @Override public void showBriefMessage(@StringRes int message) {
-    new BriefMessage().showLong(getActivity().findViewById(R.id.rootLayout),
-        getString(message));
+    new BriefMessage().showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
   }
 
   @Override public void onAttach(Context context) {
@@ -188,8 +178,7 @@ public class RepoFragmentView
 
   @Override public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    outState.putParcelable(BUNDLE_RECYCLER_STATE,
-        recyclerView.getLayoutManager().onSaveInstanceState());
+    outState.putParcelable(BUNDLE_RECYCLER_STATE, recyclerView.getLayoutManager().onSaveInstanceState());
   }
 
   @Override public void onViewStateRestored(Bundle savedInstanceState) {

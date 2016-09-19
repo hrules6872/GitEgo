@@ -16,13 +16,14 @@
 
 package com.hrules.gitego.data.repository;
 
+import android.support.annotation.NonNull;
 import com.hrules.gitego.data.repository.base.Repository;
 import com.hrules.gitego.data.repository.datasources.DataSource;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import java.util.Arrays;
 
 public class AuthUserRepository extends Repository<GitHubAuthUserDto> {
-  @SuppressWarnings("unchecked") public AuthUserRepository(DataSource... dataSources) {
+  @SuppressWarnings("unchecked") public AuthUserRepository(@NonNull DataSource... dataSources) {
     super(Arrays.<DataSource<GitHubAuthUserDto>>asList(dataSources));
   }
 }

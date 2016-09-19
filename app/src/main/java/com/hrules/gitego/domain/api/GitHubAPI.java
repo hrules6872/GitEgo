@@ -23,8 +23,7 @@ import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.models.Account;
 
 public class GitHubAPI {
-  private static final String GITHUB_OAUTH_AUTHORIZE_URL =
-      "https://github.com/login/oauth/authorize";
+  private static final String GITHUB_OAUTH_AUTHORIZE_URL = "https://github.com/login/oauth/authorize";
   public static final String GITHUB_OAUTH_TOKEN_URL = "https://github.com/login/oauth/access_token";
   public static final String GITHUB_GET_AUTHUSER_URL = "https://api.github.com/user";
   public static final String GITHUB_GET_AUTHREPO_URL = "https://api.github.com/user/repos";
@@ -54,7 +53,7 @@ public class GitHubAPI {
     context.startActivity(chooser);
   }
 
-  public void setAccount(Account account) {
+  public void setAccount(@NonNull Account account) {
     this.account = account;
   }
 

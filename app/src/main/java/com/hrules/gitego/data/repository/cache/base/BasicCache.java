@@ -16,14 +16,15 @@
 
 package com.hrules.gitego.data.repository.cache.base;
 
+import android.support.annotation.NonNull;
 import java.util.WeakHashMap;
 
-public class BasicCache implements BasicCacheInterface {
+public class BasicCache {
   private static final WeakHashMap<String, Long> cacheHashMap = new WeakHashMap<>();
   private final String cacheId;
   private final long expirationTime;
 
-  protected BasicCache(String cacheId, long expirationTime) {
+  protected BasicCache(@NonNull String cacheId, long expirationTime) {
     this.cacheId = cacheId;
     this.expirationTime = expirationTime;
   }

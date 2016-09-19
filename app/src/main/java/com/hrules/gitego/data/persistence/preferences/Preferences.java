@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 public class Preferences {
   private final SharedPreferences preferences;
@@ -28,7 +29,7 @@ public class Preferences {
     preferences = PreferenceManager.getDefaultSharedPreferences(context);
   }
 
-  public String getString(@NonNull String key, String defaultValue) {
+  public String getString(@NonNull String key, @Nullable String defaultValue) {
     return preferences.getString(key, defaultValue);
   }
 
@@ -44,7 +45,7 @@ public class Preferences {
     preferences.edit().putLong(key, value).apply();
   }
 
-  public void save(@NonNull String key, String value) {
+  public void save(@NonNull String key, @Nullable String value) {
     preferences.edit().putString(key, value).apply();
   }
 

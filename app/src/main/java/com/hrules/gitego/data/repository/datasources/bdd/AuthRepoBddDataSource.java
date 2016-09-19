@@ -37,7 +37,7 @@ public class AuthRepoBddDataSource extends DataSource<GitHubAuthRepoDto> {
   private final Database database;
   private final BasicCache cache;
 
-  public AuthRepoBddDataSource(Database database, BasicCache cache) {
+  public AuthRepoBddDataSource(@NonNull Database database, @NonNull BasicCache cache) {
     this.database = database;
     this.cache = cache;
   }

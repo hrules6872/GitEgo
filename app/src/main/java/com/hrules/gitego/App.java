@@ -19,6 +19,7 @@ package com.hrules.gitego;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.di.components.AppComponent;
 import com.hrules.gitego.di.components.DaggerAppComponent;
@@ -40,9 +41,8 @@ public class App extends Application {
     registerActivityLifecycleCallbacks(new AppLifecycleManager());
     initComponents();
 
-    if (preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS,
-        AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT)) {
-      startNotificationService(getApplicationContext());
+    if (preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT)) {
+      startNotificationService(this);
     }
 
     LeakCanary.install(this);
@@ -61,8 +61,7 @@ public class App extends Application {
     return appComponent;
   }
 
-  private void startNotificationService(Context context) {
-    context.sendBroadcast(
-        new Intent(NotificationServiceReceiver.ACTION_START_NOTIFICATION_SERVICE));
+  private void startNotificationService(@NonNull Context context) {
+    context.sendBroadcast(new Intent(NotificationServiceReceiver.ACTION_START_NOTIFICATION_SERVICE));
   }
 }

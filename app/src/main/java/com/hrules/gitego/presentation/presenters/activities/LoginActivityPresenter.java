@@ -157,6 +157,6 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
 
     void showProgressDialog(@StringRes int message);
 
-    void launchOAuthLogin(GitHubAPI gitHubAPI);
+    void launchOAuthLogin(@NonNull GitHubAPI gitHubAPI);
   }
 }

@@ -16,10 +16,12 @@
 
 package com.hrules.gitego.presentation.communicator.base;
 
+import android.support.annotation.NonNull;
+
 public abstract class BaseMessage {
   private String action;
 
-  protected BaseMessage(String action) {
+  protected BaseMessage(@NonNull String action) {
     this.action = action;
   }
 
@@ -27,7 +29,7 @@ public abstract class BaseMessage {
     return action;
   }
 
-  public void setAction(String action) {
+  public void setAction(@NonNull String action) {
     this.action = action;
   }
 }

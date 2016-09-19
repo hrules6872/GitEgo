@@ -23,7 +23,7 @@ import java.util.List;
 public class ListMapper<M1, M2> implements InverseMapper<List<M1>, List<M2>> {
   private final InverseMapper<M1, M2> mapper;
 
-  public ListMapper(InverseMapper<M1, M2> mapper) {
+  public ListMapper(@NonNull InverseMapper<M1, M2> mapper) {
     this.mapper = mapper;
   }
 

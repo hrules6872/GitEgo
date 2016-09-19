@@ -16,6 +16,7 @@
 
 package com.hrules.gitego.presentation.models.utils;
 
+import android.support.annotation.NonNull;
 import com.hrules.gitego.presentation.commons.StringUtils;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
@@ -25,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MergeUtils {
-  public List<GitHubAuthRepo> mergeAuthRepoItems(List<GitHubAuthRepo> list) {
+  public List<GitHubAuthRepo> mergeAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {
     Map<String, GitHubAuthRepo> map = new HashMap<>();
     for (GitHubAuthRepo item : list) {
       if (!StringUtils.isNullOrEmpty(item.getName())) {
@@ -43,7 +44,7 @@ public class MergeUtils {
     return new ArrayList<>(map.values());
   }
 
-  public GitHubAuthUser mergeAuthUserItems(List<GitHubAuthUser> list) {
+  public GitHubAuthUser mergeAuthUserItems(@NonNull List<GitHubAuthUser> list) {
     Map<String, GitHubAuthUser> map = new HashMap<>();
     for (GitHubAuthUser item : list) {
       if (!StringUtils.isNullOrEmpty(item.getLogin())) {

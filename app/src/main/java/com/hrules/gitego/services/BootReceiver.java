@@ -23,13 +23,11 @@ import com.hrules.gitego.AppConstants;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
 
 public class BootReceiver extends BroadcastReceiver {
-
   @Override public void onReceive(Context context, Intent intent) {
     Preferences preferences = new Preferences(context);
-    if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction()) && preferences.getBoolean(
-        AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT)) {
-      context.sendBroadcast(
-          new Intent(NotificationServiceReceiver.ACTION_START_NOTIFICATION_SERVICE));
+    if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction()) && preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS,
+        AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT)) {
+      context.sendBroadcast(new Intent(NotificationServiceReceiver.ACTION_START_NOTIFICATION_SERVICE));
     }
   }
 }

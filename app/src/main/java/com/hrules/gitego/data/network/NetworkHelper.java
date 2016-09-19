@@ -20,7 +20,7 @@ import android.support.annotation.NonNull;
 import java.util.HashMap;
 
 public class NetworkHelper {
-  @NonNull public static HashMap<String, String> makeAuthorizationHeader(String token) {
+  @NonNull public static HashMap<String, String> makeAuthorizationHeader(@NonNull String token) {
     HashMap<String, String> headers = new HashMap<>();
     headers.put("Authorization", "token " + token);
     return headers;

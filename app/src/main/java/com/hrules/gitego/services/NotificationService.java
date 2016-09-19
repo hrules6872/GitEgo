@@ -110,8 +110,7 @@ public class NotificationService extends Service {
 
         @Override public void onFinish() {
           if (gitHubAuthUser != null) {
-            int difference = gitHubAuthUser.getFollowers() - gitHubAuthUser.getGitHubAuthUserOlder()
-                .getFollowers();
+            int difference = gitHubAuthUser.getFollowers() - gitHubAuthUser.getGitHubAuthUserOlder().getFollowers();
             if (difference != 0) {
               showNotification();
             }
@@ -137,13 +136,11 @@ public class NotificationService extends Service {
           if (list != null) {
             boolean showNotification = false;
             for (GitHubAuthRepo item : list) {
-              if (item.getWatchers_count() - item.getGitHubAuthRepoOlder().getWatchers_count()
-                  != 0) {
+              if (item.getWatchers_count() - item.getGitHubAuthRepoOlder().getWatchers_count() != 0) {
                 showNotification = true;
                 break;
               }
-              if (item.getStargazers_count() - item.getGitHubAuthRepoOlder().getStargazers_count()
-                  != 0) {
+              if (item.getStargazers_count() - item.getGitHubAuthRepoOlder().getStargazers_count() != 0) {
                 showNotification = true;
                 break;
               }
@@ -167,8 +164,7 @@ public class NotificationService extends Service {
 
   private boolean isCheckedToday() {
     Calendar present = milliToCalendar(System.currentTimeMillis());
-    Calendar past = milliToCalendar(preferences.getLong(PREFS_CHECKED_TODAY,
-        present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
+    Calendar past = milliToCalendar(preferences.getLong(PREFS_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
     return TimeUnit.MILLISECONDS.toDays(present.getTimeInMillis() - past.getTimeInMillis()) <= 0;
   }
 
@@ -183,18 +179,16 @@ public class NotificationService extends Service {
   }
 
   private void showNotification() {
-    showNotification(R.drawable.ic_notification, getString(R.string.notification_message),
-        getString(R.string.app_name), getString(R.string.notification_message));
+    showNotification(R.drawable.ic_notification, getString(R.string.notification_message), getString(R.string.app_name),
+        getString(R.string.notification_message));
   }
 
-  private void showNotification(int smallIcon, String ticker, String title, String content) {
+  private void showNotification(int smallIcon, @NonNull String ticker, @NonNull String title, @NonNull String content) {
     if (!AppLifecycleManager.isAppInForeground()) {
       Intent intent = new Intent(this, MainActivityView.class);
-      PendingIntent pendingIntent =
-          PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+      PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-      NotificationCompat.Builder builder =
-          new NotificationCompat.Builder(this).setWhen(System.currentTimeMillis());
+      NotificationCompat.Builder builder = new NotificationCompat.Builder(this).setWhen(System.currentTimeMillis());
       builder.setSmallIcon(smallIcon)
           .setTicker(ticker)
           .setContentTitle(title)
@@ -202,8 +196,7 @@ public class NotificationService extends Service {
           .setAutoCancel(true)
           .setContentIntent(pendingIntent);
 
-      ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(NOTIFICATION_ID,
-          builder.build());
+      ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(NOTIFICATION_ID, builder.build());
     }
   }
 }

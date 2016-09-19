@@ -20,7 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-public class BriefMessage implements BriefMessageInterface {
+public class BriefMessage {
   public void showLong(@NonNull View view, @NonNull String message) {
     Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
   }
@@ -29,14 +29,12 @@ public class BriefMessage implements BriefMessageInterface {
     Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
   }
 
-  public void showActionIndefinite(@NonNull View view, @NonNull String message,
-      @NonNull String action, @NonNull final BriefMessageListener listener) {
-    Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE)
-        .setAction(action, new View.OnClickListener() {
-          @Override public void onClick(View v) {
-            listener.onClick();
-          }
-        })
-        .show();
+  public void showActionIndefinite(@NonNull View view, @NonNull String message, @NonNull String action,
+      @NonNull final BriefMessageListener listener) {
+    Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE).setAction(action, new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        listener.onClick();
+      }
+    }).show();
   }
 }

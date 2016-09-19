@@ -25,11 +25,7 @@ import java.util.concurrent.Executors;
 public class InteractorExecutor implements InteractorExecutorInterface {
   private static final int THREADS = 3;
 
-  private final ExecutorService executorService;
-
-  public InteractorExecutor() {
-    executorService = Executors.newFixedThreadPool(THREADS);
-  }
+  private final ExecutorService executorService = Executors.newFixedThreadPool(THREADS);
 
   @Override public void execute(@NonNull Interactor interactor) {
     executorService.submit(interactor);

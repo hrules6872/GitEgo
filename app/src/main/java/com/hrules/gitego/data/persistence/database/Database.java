@@ -20,6 +20,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 import com.hrules.gitego.data.exceptions.LocalIOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -31,11 +32,11 @@ public class Database extends DatabaseConstants {
 
   private final AtomicInteger openCounter = new AtomicInteger();
 
-  private Database(Context context) {
+  private Database(@NonNull Context context) {
     helper = new DatabaseOpenHelper(context);
   }
 
-  public static synchronized Database with(Context context) {
+  public static synchronized Database with(@NonNull Context context) {
     if (instance == null) {
       instance = new Database(context);
     }
@@ -58,11 +59,11 @@ public class Database extends DatabaseConstants {
     return database;
   }
 
-  public Cursor get(String query) {
+  public Cursor get(@NonNull String query) {
     return database.rawQuery(query, null);
   }
 
-  public void exec(String sql) throws LocalIOException {
+  public void exec(@NonNull String sql) throws LocalIOException {
     try {
       open();
       database.execSQL(sql);
@@ -73,7 +74,7 @@ public class Database extends DatabaseConstants {
     }
   }
 
-  public void execList(String[] sqlList) throws Exception {
+  public void execList(@NonNull String[] sqlList) throws Exception {
     try {
       open();
       database.beginTransaction();

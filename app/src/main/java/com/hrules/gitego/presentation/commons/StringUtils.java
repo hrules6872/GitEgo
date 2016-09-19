@@ -17,44 +17,40 @@
 package com.hrules.gitego.presentation.commons;
 
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
 public class StringUtils {
-  public static boolean isNullOrEmpty(String string) {
+  public static boolean isNullOrEmpty(@Nullable String string) {
     return string == null || string.isEmpty();
   }
 
-  private static Spannable colorFormattedVariation(String formattedVariation,
-      String formattedVariationWithParenthesis, int variationValue, @ColorInt int positiveColor,
-      @ColorInt int negativeColor) {
+  private static Spannable colorFormattedVariation(@NonNull String formattedVariation, @NonNull String formattedVariationWithParenthesis,
+      int variationValue, @ColorInt int positiveColor, @ColorInt int negativeColor) {
 
     Spannable spannable = new SpannableString(formattedVariation);
     if (formattedVariation.contains(formattedVariationWithParenthesis)) {
-      int formattedVariationLastPosition =
-          formattedVariation.lastIndexOf(formattedVariationWithParenthesis);
+      int formattedVariationLastPosition = formattedVariation.lastIndexOf(formattedVariationWithParenthesis);
       if (variationValue > 0) {
         spannable.setSpan(new ForegroundColorSpan(positiveColor), formattedVariationLastPosition,
-            formattedVariationLastPosition + formattedVariationWithParenthesis.length(),
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            formattedVariationLastPosition + formattedVariationWithParenthesis.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
       } else if (variationValue < 0) {
         spannable.setSpan(new ForegroundColorSpan(negativeColor), formattedVariationLastPosition,
-            formattedVariationLastPosition + formattedVariationWithParenthesis.length(),
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            formattedVariationLastPosition + formattedVariationWithParenthesis.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
       }
     }
     return spannable;
   }
 
-  public static Spannable createVariationSpannableString(String targetString, int nowValue,
-      int oldValue, @ColorInt int colorPositive, @ColorInt int colorNegative) {
+  public static Spannable createVariationSpannableString(@NonNull String targetString, int nowValue, int oldValue,
+      @ColorInt int colorPositive, @ColorInt int colorNegative) {
     int variationValue = nowValue - oldValue;
-    String formattedVariationWithParenthesis =
-        variationValue == 0 ? "" : "(" + (variationValue > 0 ? "+" : "") + variationValue + ")";
-    String formattedVariation =
-        String.format(targetString, nowValue, formattedVariationWithParenthesis);
-    return StringUtils.colorFormattedVariation(formattedVariation,
-        formattedVariationWithParenthesis, variationValue, colorPositive, colorNegative);
+    String formattedVariationWithParenthesis = variationValue == 0 ? "" : "(" + (variationValue > 0 ? "+" : "") + variationValue + ")";
+    String formattedVariation = String.format(targetString, nowValue, formattedVariationWithParenthesis);
+    return StringUtils.colorFormattedVariation(formattedVariation, formattedVariationWithParenthesis, variationValue, colorPositive,
+        colorNegative);
   }
 }

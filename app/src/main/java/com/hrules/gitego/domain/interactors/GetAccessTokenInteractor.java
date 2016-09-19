@@ -79,8 +79,8 @@ public class GetAccessTokenInteractor extends BaseInteractor implements GetAcces
         GitHubAccessToken gitHubAccessToken =
             new GitHubAccessTokenDtoToGitHubAccessToken().map(GitHubAccessTokenDto);
         notifySuccess(gitHubAccessToken);
-      } catch (Exception e) {
-        notifyFail(e);
+      } catch (Exception exception) {
+        notifyFail(exception);
       }
     } else {
       notifyFail(new NetworkUnauthorizedException());

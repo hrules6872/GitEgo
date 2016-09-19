@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -34,30 +35,23 @@ import android.widget.TextView;
  * +info: https://gist.github.com/hrules6872/516ea7e04c8be4c55d26
  */
 public class UnderlineTextView extends TextView {
-  private Context context;
   private int textColor;
 
-  public UnderlineTextView(Context context) {
+  public UnderlineTextView(@NonNull Context context) {
     this(context, null);
   }
 
-  public UnderlineTextView(Context context, AttributeSet attrs) {
+  public UnderlineTextView(@NonNull Context context, AttributeSet attrs) {
     this(context, attrs, 0);
   }
 
-  public UnderlineTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+  public UnderlineTextView(@NonNull Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
-    init(context);
   }
 
   @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public UnderlineTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+  public UnderlineTextView(@NonNull Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
     super(context, attrs, defStyleAttr, defStyleRes);
-    init(context);
-  }
-
-  private void init(Context context) {
-    this.context = context;
   }
 
   @Override public void setText(CharSequence text, BufferType type) {
@@ -70,8 +64,7 @@ public class UnderlineTextView extends TextView {
     if (isClickable()) {
       if (event.getAction() == MotionEvent.ACTION_DOWN) {
         textColor = getCurrentTextColor();
-        setTextColor(
-            getColorFromTheme(context, android.R.attr.colorAccent, lightenColor(textColor, 0.5f)));
+        setTextColor(getColorFromTheme(android.R.attr.colorAccent, lightenColor(textColor, 0.5f)));
       } else if (event.getAction() == MotionEvent.ACTION_UP) {
         setTextColor(textColor);
       }
@@ -79,15 +72,15 @@ public class UnderlineTextView extends TextView {
     return super.onTouchEvent(event);
   }
 
-  private int getColorFromTheme(Context context, int id, int defaultValue) {
+  private int getColorFromTheme(int id, int defaultValue) {
     TypedValue value = new TypedValue();
     try {
-      Resources.Theme theme = context.getTheme();
+      Resources.Theme theme = getContext().getTheme();
       if (theme != null && theme.resolveAttribute(id, value, true)) {
         if (value.type >= TypedValue.TYPE_FIRST_INT && value.type <= TypedValue.TYPE_LAST_INT) {
           return value.data;
         } else if (value.type == TypedValue.TYPE_STRING) {
-          return ContextCompat.getColor(context, value.resourceId);
+          return ContextCompat.getColor(getContext(), value.resourceId);
         }
       }
     } catch (Exception ignored) {
