@@ -19,9 +19,6 @@
   <dimen name="default_paddingLarge">16dp</dimen>
   <dimen name="default_margin">8dp</dimen>
   <dimen name="default_marginLarge">16dp</dimen>
-  <dimen name="roundedImageView_width">60dp</dimen>
-  <dimen name="roundedImageView_height">60dp</dimen>
-  <dimen name="roundedImageView_cornerRadius">5dp</dimen>
   <dimen name="itemRepoDivider_size">4dp</dimen>
   <dimen name="progress_marginTopHack">-6dp</dimen>
 </resources>
