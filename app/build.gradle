@@ -80,7 +80,6 @@ dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
   compile projectDependencies.butterKnife
   compile projectDependencies.daRealMVP
-  compile projectDependencies.prefs
   compile projectDependencies.gson
   compile projectDependencies.okhttp
   compile projectDependencies.roundedImageView

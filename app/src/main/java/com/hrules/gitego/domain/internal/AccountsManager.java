@@ -98,7 +98,7 @@ public class AccountsManager extends BaseAccountsManager {
   }
 
   private void putAccounts(List<Account> accounts) {
-    preferences.putString(AppConstants.PREFS.ACCOUNTS,
+    preferences.save(AppConstants.PREFS.ACCOUNTS,
         new ListAccountSerializer().serialize(accounts));
   }
 }

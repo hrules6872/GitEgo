@@ -17,45 +17,42 @@
 package com.hrules.gitego.data.persistence.preferences;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import me.alexrs.prefs.lib.Prefs;
 
-public class Preferences implements PreferencesInterface {
-  private final Prefs preferences;
+public class Preferences {
+  private final SharedPreferences preferences;
 
   public Preferences(Context context) {
-    preferences = Prefs.with(context);
+    preferences = PreferenceManager.getDefaultSharedPreferences(context);
   }
 
   public String getString(@NonNull String key, String defaultValue) {
     return preferences.getString(key, defaultValue);
   }
 
-  public void putString(@NonNull String key, String value) {
-    preferences.save(key, value);
-  }
-
   public long getLong(@NonNull String key, long defaultValue) {
     return preferences.getLong(key, defaultValue);
   }
 
-  @Override public boolean getBoolean(@NonNull String key, boolean defaultValue) {
+  public boolean getBoolean(@NonNull String key, boolean defaultValue) {
     return preferences.getBoolean(key, defaultValue);
   }
 
-  @Override public void save(@NonNull String key, long value) {
-    preferences.save(key, value);
+  public void save(@NonNull String key, long value) {
+    preferences.edit().putLong(key, value).apply();
   }
 
-  @Override public void save(@NonNull String key, String value) {
-    preferences.save(key, value);
+  public void save(@NonNull String key, String value) {
+    preferences.edit().putString(key, value).apply();
   }
 
-  @Override public void save(@NonNull String key, boolean value) {
-    preferences.save(key, value);
+  public void save(@NonNull String key, boolean value) {
+    preferences.edit().putBoolean(key, value).apply();
   }
 
   public void remove(@NonNull String key) {
-    preferences.remove(key);
+    preferences.edit().remove(key).apply();
   }
 }

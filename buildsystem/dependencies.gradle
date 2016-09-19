@@ -21,7 +21,6 @@ ext {
   butterKnifeVersion = '8.+'
   daggerVersion = '2.+'
   daRealMVPVersion = '0.12.+'
-  prefsVersion = '1.+'
   gsonVersion = '2.+'
   okhttpVersion = '3.+'
   roundedImageViewVersion = '2.+'
@@ -31,7 +30,6 @@ ext {
 
   projectDependencies = [butterKnife      : "com.jakewharton:butterknife:${butterKnifeVersion}",
                          daRealMVP        : "com.hrules:darealmvp:${daRealMVPVersion}",
-                         prefs            : "me.alexrs:prefs:${prefsVersion}",
                          gson             : "com.google.code.gson:gson:${gsonVersion}",
                          okhttp           : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
                          roundedImageView : "com.makeramen:roundedimageview:${roundedImageViewVersion}",
