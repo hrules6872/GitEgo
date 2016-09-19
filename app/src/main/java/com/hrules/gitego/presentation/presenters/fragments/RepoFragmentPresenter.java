@@ -44,7 +44,7 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
   @Inject AccountsManager accountsManager;
   @Inject GetAuthRepoInteractor getAuthRepoInteractor;
 
-  @Override protected void bind(@NonNull RepoView view) {
+  @Override public void bind(@NonNull RepoView view) {
     super.bind(view);
     App.getApplication().getAppComponent().inject(this);
 

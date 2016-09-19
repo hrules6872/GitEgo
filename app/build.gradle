@@ -94,6 +94,6 @@ dependencies {
 
 
   // apt
-  apt aptDependencies.butterKnifeCompiler
-  apt aptDependencies.daggerCompiler
+  apt otherDependencies.butterKnifeCompiler
+  apt otherDependencies.daggerCompiler
 }

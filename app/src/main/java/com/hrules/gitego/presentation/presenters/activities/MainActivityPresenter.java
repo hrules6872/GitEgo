@@ -41,7 +41,7 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
   @Inject Preferences preferences;
   @Inject AccountsManager accountsManager;
 
-  @Override protected void bind(@NonNull MainView view) {
+  @Override public void bind(@NonNull MainView view) {
     super.bind(view);
     App.getApplication().getAppComponent().inject(this);
   }
@@ -87,14 +87,12 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
 
   public void onCreateOptionsMenu(Menu menu) {
     menu.findItem(R.id.menu_notifications)
-        .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS,
-            AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
+        .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
   }
 
   public void checkUserRating() {
     if (EventCounter.with(App.getApplication())
-        .increment(EV_USER_RATING)
-        .check(EV_USER_RATING, EV_USER_RATING_EXPECTED, EventCounter.GREATER_THAN_OR_EQUAL_TO)
+        .increment(EV_USER_RATING).check(EV_USER_RATING, EV_USER_RATING_EXPECTED, EventCounter.GREATER_THAN_OR_EQUAL_TO)
         && !preferences.getBoolean(USER_RATING_SHOWED, false)) {
       preferences.save(USER_RATING_SHOWED, true);
       getView().showBriefMessageAction(R.string.text_userRating, R.string.action_goPlayStore);

@@ -53,7 +53,7 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
   private boolean showLoginFail = false;
   private boolean showNetworkFail = false;
 
-  @Override protected void bind(@NonNull LoginView view) {
+  @Override public void bind(@NonNull LoginView view) {
     super.bind(view);
     App.getApplication().getAppComponent().inject(this);
   }

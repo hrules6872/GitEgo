@@ -48,7 +48,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
   @Inject GetAuthUserInteractor getAuthUserInteractor;
   @Inject GetAuthRepoInteractor getAuthRepoInteractor;
 
-  @Override protected void bind(@NonNull UserView view) {
+  @Override public void bind(@NonNull UserView view) {
     super.bind(view);
     App.getApplication().getAppComponent().inject(this);
 
