@@ -87,11 +87,9 @@ dependencies {
   compile projectDependencies.picasso
   compile projectDependencies.dagger
   compile projectDependencies.daggerProducers
-  compile projectDependencies.eventCounter
 
   debugCompile projectDependencies.leakCanaryDebug
   releaseCompile projectDependencies.leakCanaryRelease
-
 
   // apt
   apt otherDependencies.butterKnifeCompiler

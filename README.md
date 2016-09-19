@@ -24,7 +24,6 @@ GitEgo is not associated with GitHub in any way.
 * [Picasso](https://github.com/square/picasso)
 * [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
 * [LeakCanary](https://github.com/square/leakcanary)
-* [EventCounter](https://github.com/hrules6872/EventCounter)
 
 Developed by
 -------

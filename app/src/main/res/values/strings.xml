@@ -46,13 +46,11 @@
 
   <!--actions-->
   <string name="action_login">Login GitHub</string>
-  <string name="action_goPlayStore">Yes!</string>
 
   <!--notifications-->
   <string name="notification_message">Changes detected!</string>
 
   <!--general-->
   <string formatted="false" name="text_variationFormatted">%s %s</string>
-  <string name="text_userRating">Enjoying GitEgo?</string>
 
 </resources>

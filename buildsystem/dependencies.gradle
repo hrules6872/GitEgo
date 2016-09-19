@@ -40,8 +40,7 @@ ext {
                          daggerProducers  : "com.google.dagger:dagger-producers:${daggerVersion}",
                          leakCanaryDebug  : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
                          leakCanaryRelease: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
-                         leakCanaryTest   : "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
-                         eventCounter     : "com.hrules:eventcounter:${eventCounterVersion}"]
+                         leakCanaryTest   : "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"]
 
   // other dependencies
   otherDependencies = [butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",

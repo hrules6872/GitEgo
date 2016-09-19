@@ -22,7 +22,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.hrules.darealmvp.DRPresenter;
 import com.hrules.darealmvp.DRView;
-import com.hrules.eventcounter.EventCounter;
 import com.hrules.gitego.App;
 import com.hrules.gitego.AppConstants;
 import com.hrules.gitego.R;
@@ -33,10 +32,6 @@ import com.hrules.gitego.domain.models.Account;
 import javax.inject.Inject;
 
 public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.MainView> {
-  private static final String EV_USER_RATING = "EV_USER_RATING";
-  private static final int EV_USER_RATING_EXPECTED = 10;
-  private static final String USER_RATING_SHOWED = "USER_RATING_SHOWED";
-
   @Inject GitHubAPI gitHubAPI;
   @Inject Preferences preferences;
   @Inject AccountsManager accountsManager;
@@ -88,15 +83,6 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
   public void onCreateOptionsMenu(Menu menu) {
     menu.findItem(R.id.menu_notifications)
         .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
-  }
-
-  public void checkUserRating() {
-    if (EventCounter.with(App.getApplication())
-        .increment(EV_USER_RATING).check(EV_USER_RATING, EV_USER_RATING_EXPECTED, EventCounter.GREATER_THAN_OR_EQUAL_TO)
-        && !preferences.getBoolean(USER_RATING_SHOWED, false)) {
-      preferences.save(USER_RATING_SHOWED, true);
-      getView().showBriefMessageAction(R.string.text_userRating, R.string.action_goPlayStore);
-    }
   }
 
   public void goToPlayStore() {

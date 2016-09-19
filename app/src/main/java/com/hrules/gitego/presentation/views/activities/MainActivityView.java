@@ -44,8 +44,7 @@ import com.hrules.gitego.services.NotificationService;
 import com.hrules.gitego.services.NotificationServiceReceiver;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MainActivityView
-    extends DRAppCompatActivity<MainActivityPresenter, MainActivityPresenter.MainView>
+public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter, MainActivityPresenter.MainView>
     implements MainActivityPresenter.MainView, Communicator {
   @BindView(R.id.rootLayout) CoordinatorLayout rootLayout;
   @BindView(R.id.toolbar) Toolbar toolbar;
@@ -66,12 +65,8 @@ public class MainActivityView
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(R.id.fragmentUser, new UserFragmentView())
-          .commit();
-      getSupportFragmentManager().beginTransaction()
-          .replace(R.id.fragmentRepo, new RepoFragmentView())
-          .commit();
+      getSupportFragmentManager().beginTransaction().replace(R.id.fragmentUser, new UserFragmentView()).commit();
+      getSupportFragmentManager().beginTransaction().replace(R.id.fragmentRepo, new RepoFragmentView()).commit();
     }
   }
 
@@ -107,18 +102,16 @@ public class MainActivityView
   }
 
   @Override public void removeNotification() {
-    NotificationManager notificationManager =
-        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     notificationManager.cancel(NotificationService.NOTIFICATION_ID);
   }
 
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(rootLayout, getString(message), getString(action),
-        new BriefMessageListener() {
-          @Override public void onClick() {
-            getPresenter().goToPlayStore();
-          }
-        });
+    new BriefMessage().showActionIndefinite(rootLayout, getString(message), getString(action), new BriefMessageListener() {
+      @Override public void onClick() {
+        getPresenter().goToPlayStore();
+      }
+    });
   }
 
   @Override public void goToPlayStore() {
@@ -136,8 +129,6 @@ public class MainActivityView
       } else if (!message.isState() && refreshVisibilityCounter.decrementAndGet() == 0) {
         progressBar.setIndeterminate(false);
         progressBar.setVisibility(View.GONE);
-
-        getPresenter().checkUserRating();
       }
     }
   }
