@@ -18,14 +18,13 @@ package com.hrules.gitego.domain.models.serializers;
 
 import android.support.annotation.NonNull;
 import com.google.gson.reflect.TypeToken;
-import com.hrules.gitego.data.commons.json.Json;
+import com.hrules.gitego.data.commons.Json;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.serializers.base.Serializer;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
-public class GitHubAuthRepoDtoSerializer
-    implements Serializer<Collection<GitHubAuthRepoDto>, String> {
+public class GitHubAuthRepoDtoSerializer implements Serializer<Collection<GitHubAuthRepoDto>, String> {
   public Collection<GitHubAuthRepoDto> deserialize(@NonNull String from) {
     Type type = new TypeToken<Collection<GitHubAuthRepoDto>>() {
     }.getType();

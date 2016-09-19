@@ -14,15 +14,28 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.data.commons.json;
+package com.hrules.gitego.data.commons;
 
 import android.support.annotation.NonNull;
+import com.google.gson.Gson;
 import java.lang.reflect.Type;
 
-interface JsonInterface {
-  <T> String toJson(@NonNull T model);
+public class Json {
+  private final Gson gson;
 
-  <T> T fromJson(@NonNull String json, @NonNull T model);
+  public Json() {
+    gson = new Gson();
+  }
 
-  <T> T fromJson(@NonNull String json, @NonNull Type model);
+  public <T> String toJson(@NonNull T model) {
+    return gson.toJson(model);
+  }
+
+  @SuppressWarnings("unchecked") public <T> T fromJson(@NonNull String json, @NonNull T model) {
+    return gson.fromJson(json, (Class<T>) model);
+  }
+
+  public <T> T fromJson(@NonNull String json, @NonNull Type model) {
+    return gson.fromJson(json, model);
+  }
 }

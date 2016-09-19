@@ -17,7 +17,7 @@
 package com.hrules.gitego.domain.models.serializers;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.data.commons.json.Json;
+import com.hrules.gitego.data.commons.Json;
 import com.hrules.gitego.domain.models.GitHubAccessTokenDto;
 import com.hrules.gitego.domain.models.serializers.base.Serializer;
 

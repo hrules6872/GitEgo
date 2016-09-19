@@ -18,7 +18,7 @@ package com.hrules.gitego.domain.models.serializers;
 
 import android.support.annotation.NonNull;
 import com.google.gson.reflect.TypeToken;
-import com.hrules.gitego.data.commons.json.Json;
+import com.hrules.gitego.data.commons.Json;
 import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.models.serializers.base.Serializer;
 import java.lang.reflect.Type;
