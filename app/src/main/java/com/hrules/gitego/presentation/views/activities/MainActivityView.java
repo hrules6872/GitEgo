@@ -50,7 +50,7 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
   private static final AtomicInteger refreshVisibilityCounter = new AtomicInteger();
 
   @Override public int getLayoutResource() {
-    return R.layout.activity_main;
+    return R.layout.main_activity;
   }
 
   @Override public void initializeViews() {

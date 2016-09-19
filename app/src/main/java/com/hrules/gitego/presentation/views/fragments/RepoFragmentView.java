@@ -65,7 +65,7 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
   private RepoAdapter adapter;
 
   @Override public int getLayoutResource() {
-    return R.layout.fragment_repo;
+    return R.layout.repo_fragment;
   }
 
   @Override public void unbind() {

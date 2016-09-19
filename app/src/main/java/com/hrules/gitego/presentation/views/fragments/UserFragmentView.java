@@ -60,7 +60,7 @@ public class UserFragmentView
   private Communicator communicator;
 
   @Override protected int getLayoutResource() {
-    return R.layout.fragment_user;
+    return R.layout.user_fragment;
   }
 
   @Override public void unbind() {

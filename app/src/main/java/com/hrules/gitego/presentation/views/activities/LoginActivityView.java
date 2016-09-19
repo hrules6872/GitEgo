@@ -39,7 +39,7 @@ public class LoginActivityView extends DRAppCompatActivity<LoginActivityPresente
   private ProgressDialog progress;
 
   @Override public int getLayoutResource() {
-    return R.layout.activity_login;
+    return R.layout.login_activity;
   }
 
   @Override public void initializeViews() {

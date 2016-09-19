@@ -38,7 +38,7 @@ public class AboutActivityView extends DRAppCompatActivity<AboutActivityPresente
   @BindView(R.id.about_version) TextView aboutVersion;
 
   @Override protected int getLayoutResource() {
-    return R.layout.activity_about;
+    return R.layout.about_activity;
   }
 
   @Override protected void initializeViews() {
