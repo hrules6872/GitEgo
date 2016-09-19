@@ -18,7 +18,6 @@ GitEgo is not associated with GitHub in any way.
 * [Dagger](https://github.com/google/dagger)
 * [ButterKnife](https://github.com/JakeWharton/butterknife)
 * [DaRealMVP](https://github.com/hrules6872/DaRealMVP)
-* [Prefs](https://github.com/Alexrs95/Prefs)
 * [Gson](https://github.com/google/gson)
 * [OkHttp](https://github.com/square/okhttp)
 * [Picasso](https://github.com/square/picasso)
