@@ -90,7 +90,7 @@ dependencies {
   debugCompile projectDependencies.leakCanaryDebug
   releaseCompile projectDependencies.leakCanaryRelease
 
-  // apt
+  // other
   apt otherDependencies.butterKnifeCompiler
   apt otherDependencies.daggerCompiler
 }

@@ -26,8 +26,6 @@ ext {
   roundedImageViewVersion = '2.+'
   picassoViewVersion = '2.+'
   leakCanaryVersion = '1.+'
-  eventCounterVersion = '2.+'
-
   projectDependencies = [butterKnife      : "com.jakewharton:butterknife:${butterKnifeVersion}",
                          daRealMVP        : "com.hrules:darealmvp:${daRealMVPVersion}",
                          gson             : "com.google.code.gson:gson:${gsonVersion}",
