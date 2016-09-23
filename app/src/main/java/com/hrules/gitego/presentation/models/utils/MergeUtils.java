@@ -17,7 +17,7 @@
 package com.hrules.gitego.presentation.models.utils;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.presentation.commons.StringUtils;
+import android.text.TextUtils;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class MergeUtils {
   public List<GitHubAuthRepo> mergeAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {
     Map<String, GitHubAuthRepo> map = new HashMap<>();
     for (GitHubAuthRepo item : list) {
-      if (!StringUtils.isNullOrEmpty(item.getName())) {
+      if (!TextUtils.isEmpty(item.getName())) {
         GitHubAuthRepo itemInMap = map.get(item.getName());
         if (itemInMap != null) {
           if (itemInMap.getDate().equalsIgnoreCase(itemInMap.getGitHubAuthRepoOlder().getDate())) {
@@ -47,7 +47,7 @@ public class MergeUtils {
   public GitHubAuthUser mergeAuthUserItems(@NonNull List<GitHubAuthUser> list) {
     Map<String, GitHubAuthUser> map = new HashMap<>();
     for (GitHubAuthUser item : list) {
-      if (!StringUtils.isNullOrEmpty(item.getLogin())) {
+      if (!TextUtils.isEmpty(item.getLogin())) {
         GitHubAuthUser itemInMap = map.get(item.getLogin());
         if (itemInMap != null) {
           if (itemInMap.getDate().equalsIgnoreCase(itemInMap.getGitHubAuthUserOlder().getDate())) {

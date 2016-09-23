@@ -18,16 +18,11 @@ package com.hrules.gitego.presentation.commons;
 
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 
 public class StringUtils {
-  public static boolean isNullOrEmpty(@Nullable String string) {
-    return string == null || string.isEmpty();
-  }
-
   private static Spannable colorFormattedVariation(@NonNull String formattedVariation, @NonNull String formattedVariationWithParenthesis,
       int variationValue, @ColorInt int positiveColor, @ColorInt int negativeColor) {
 
