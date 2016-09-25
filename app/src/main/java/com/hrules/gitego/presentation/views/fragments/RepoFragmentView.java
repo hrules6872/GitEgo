@@ -68,12 +68,6 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
     return R.layout.repo_fragment;
   }
 
-  @Override public void unbind() {
-    if (unbinder != null) {
-      unbinder.unbind();
-    }
-  }
-
   @Override public void initializeViews(View view) {
     unbinder = ButterKnife.bind(this, view);
 
@@ -89,6 +83,29 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
       }
     });
     recyclerView.setAdapter(adapter);
+  }
+
+  @Override public void onAttach(Context context) {
+    super.onAttach(context);
+    if (context instanceof Activity) {
+      try {
+        communicator = (Communicator) context;
+      } catch (ClassCastException e) {
+        throw new ClassCastException(context.toString() + " must implement Communicator delegate");
+      }
+    }
+  }
+
+  @Override public void onViewStateRestored(Bundle savedInstanceState) {
+    if (savedInstanceState != null) {
+      recyclerViewState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_STATE);
+    }
+    super.onViewStateRestored(savedInstanceState);
+  }
+
+  @Override public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putParcelable(BUNDLE_RECYCLER_STATE, recyclerView.getLayoutManager().onSaveInstanceState());
   }
 
   public void launchLoginActivity() {
@@ -123,15 +140,17 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
     }
   }
 
+  @Override public void updateListState() {
+    if (recyclerViewState != null) {
+      recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+    }
+  }
+
   @Override public void launchBrowser(@NonNull String html_url) {
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(html_url)));
     } catch (Exception ignored) {
     }
-  }
-
-  private void setListBackgroundColor(@ColorRes int color) {
-    recyclerView.setBackgroundColor(ContextCompat.getColor(getActivity(), color));
   }
 
   @Override public void showLoading() {
@@ -146,6 +165,10 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
     }
   }
 
+  @Override public void showBriefMessage(@StringRes int message) {
+    new BriefMessage().showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
+  }
+
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
     new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message), getString(action),
         new BriefMessageListener() {
@@ -155,36 +178,13 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
         });
   }
 
-  @Override public void showBriefMessage(@StringRes int message) {
-    new BriefMessage().showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
-  }
-
-  @Override public void onAttach(Context context) {
-    super.onAttach(context);
-    if (context instanceof Activity) {
-      try {
-        communicator = (Communicator) context;
-      } catch (ClassCastException e) {
-        throw new ClassCastException(context.toString() + " must implement Communicator delegate");
-      }
+  @Override public void unbind() {
+    if (unbinder != null) {
+      unbinder.unbind();
     }
   }
 
-  @Override public void updateListState() {
-    if (recyclerViewState != null) {
-      recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
-    }
-  }
-
-  @Override public void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    outState.putParcelable(BUNDLE_RECYCLER_STATE, recyclerView.getLayoutManager().onSaveInstanceState());
-  }
-
-  @Override public void onViewStateRestored(Bundle savedInstanceState) {
-    if (savedInstanceState != null) {
-      recyclerViewState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_STATE);
-    }
-    super.onViewStateRestored(savedInstanceState);
+  private void setListBackgroundColor(@ColorRes int color) {
+    recyclerView.setBackgroundColor(ContextCompat.getColor(getActivity(), color));
   }
 }

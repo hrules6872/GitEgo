@@ -51,16 +51,24 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     }
   }
 
+  private void doLogin() {
+    getView().launchLoginActivity();
+  }
+
+  public void onCreateOptionsMenu(@NonNull Menu menu) {
+    menu.findItem(R.id.menu_notifications)
+        .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
+  }
+
   public void onMenuItemClick(@NonNull MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_notifications:
         if (item.isChecked()) {
-          item.setChecked(false);
           getView().stopNotificationServiceReceiver();
         } else {
-          item.setChecked(true);
           getView().startNotificationServiceReceiver();
         }
+        item.setChecked(!item.isChecked());
         preferences.save(AppConstants.PREFS.NOTIFICATIONS, item.isChecked());
         break;
 
@@ -79,23 +87,10 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     }
   }
 
-  private void doLogin() {
-    getView().launchLoginActivity();
-  }
-
-  public void onCreateOptionsMenu(@NonNull Menu menu) {
-    menu.findItem(R.id.menu_notifications)
-        .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
-  }
-
-  public void goToPlayStore() {
-    getView().goToPlayStore();
-  }
-
   public interface MainView extends DRView {
     void launchLoginActivity();
 
-    void finish();
+    void launchAboutActivity();
 
     void startNotificationServiceReceiver();
 
@@ -103,8 +98,6 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
 
     void removeNotification();
 
-    void goToPlayStore();
-
-    void launchAboutActivity();
+    void finish();
   }
 }

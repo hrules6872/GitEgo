@@ -58,22 +58,14 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
     }
   }
 
-  @Override public void unbind() {
-    getView().unbind();
-    super.unbind();
-  }
-
-  private void networkFail() {
-    getView().showBriefMessage(R.string.error_networkFail);
-  }
-
-  private void loginFail() {
-    getView().showBriefMessageAction(R.string.error_loginFail, R.string.action_login);
-  }
-
   @Override protected void onResume() {
     super.onResume();
     refreshData();
+  }
+
+  @Override public void unbind() {
+    getView().unbind();
+    super.unbind();
   }
 
   private void refreshData() {
@@ -86,8 +78,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
         @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
           if (response.size() > 0) {
             Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
-            final GitHubAuthUser finalGitHubAuthUser =
-                new MergeUtils().mergeAuthUserItems(response);
+            final GitHubAuthUser finalGitHubAuthUser = new MergeUtils().mergeAuthUserItems(response);
 
             new UIThreadExecutor().execute(new Runnable() {
               @Override public void run() {
@@ -160,27 +151,35 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
     }
   }
 
+  private void networkFail() {
+    getView().showBriefMessage(R.string.error_networkFail);
+  }
+
+  private void loginFail() {
+    getView().showBriefMessageAction(R.string.error_loginFail, R.string.action_login);
+  }
+
   public void doLogin() {
     getView().launchLoginActivity();
   }
 
   public interface UserView extends DRView {
-    void unbind();
+    void launchLoginActivity();
 
     void setUserLogin(@NonNull String userLogin);
 
-    void launchLoginActivity();
+    void setUserData(@NonNull GitHubAuthUser gitHubAuthUser);
 
     void setRepoCounters(@NonNull List<GitHubAuthRepo> list);
-
-    void setUserData(@NonNull GitHubAuthUser gitHubAuthUser);
 
     void showLoading();
 
     void hideLoading();
 
+    void showBriefMessage(@StringRes int message);
+
     void showBriefMessageAction(@StringRes int message, @StringRes int action);
 
-    void showBriefMessage(@StringRes int message);
+    void unbind();
   }
 }

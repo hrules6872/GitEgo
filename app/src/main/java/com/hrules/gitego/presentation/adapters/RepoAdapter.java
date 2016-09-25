@@ -76,16 +76,6 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
     return items.size();
   }
 
-  public void add(int position, @NonNull GitHubAuthRepo item) {
-    items.add(position, item);
-    notifyItemInserted(position);
-  }
-
-  public void remove(int position) {
-    items.remove(position);
-    notifyItemRemoved(position);
-  }
-
   public void update(@NonNull List<GitHubAuthRepo> list) {
     this.items = list;
     notifyDataSetChanged();
@@ -96,9 +86,5 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
       return new GitHubAuthRepo();
     }
     return items.get(position);
-  }
-
-  public List<GitHubAuthRepo> getItems() {
-    return items;
   }
 }

@@ -36,14 +36,6 @@ public class NotificationServiceReceiver extends BroadcastReceiver {
     }
   }
 
-  private void stopNotificationRepeatingAlarm(@NonNull Context context) {
-    Intent intent = new Intent(context, NotificationService.class);
-    PendingIntent pendingIntent =
-        PendingIntent.getService(context, NotificationService.SERVICE_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-    alarmManager.cancel(pendingIntent);
-  }
-
   private void startNotificationRepeatingAlarm(@NonNull Context context) {
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.HOUR_OF_DAY, NotificationService.DEFAULT_ALARM_HOUR);
@@ -55,5 +47,13 @@ public class NotificationServiceReceiver extends BroadcastReceiver {
 
     AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     alarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+  }
+
+  private void stopNotificationRepeatingAlarm(@NonNull Context context) {
+    Intent intent = new Intent(context, NotificationService.class);
+    PendingIntent pendingIntent =
+        PendingIntent.getService(context, NotificationService.SERVICE_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    alarmManager.cancel(pendingIntent);
   }
 }

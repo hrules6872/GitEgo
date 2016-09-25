@@ -54,26 +54,18 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
     }
   }
 
-  @Override public void unbind() {
-    getView().unbind();
-    super.unbind();
-  }
-
   @Override protected void onViewReady() {
     getView().updateList(new ArrayList<GitHubAuthRepo>());
-  }
-
-  private void networkFail() {
-    getView().showBriefMessage(R.string.error_networkFail);
-  }
-
-  private void loginFail() {
-    getView().showBriefMessageAction(R.string.error_loginFail, R.string.action_login);
   }
 
   @Override protected void onResume() {
     super.onResume();
     refreshData();
+  }
+
+  @Override public void unbind() {
+    getView().unbind();
+    super.unbind();
   }
 
   private void refreshData() {
@@ -120,6 +112,14 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
     }
   }
 
+  private void networkFail() {
+    getView().showBriefMessage(R.string.error_networkFail);
+  }
+
+  private void loginFail() {
+    getView().showBriefMessageAction(R.string.error_loginFail, R.string.action_login);
+  }
+
   public void doLogin() {
     getView().launchLoginActivity();
   }
@@ -129,11 +129,11 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
   }
 
   public interface RepoView extends DRView {
-    void unbind();
-
     void launchLoginActivity();
 
     void updateList(@NonNull List<GitHubAuthRepo> list);
+
+    void updateListState();
 
     void launchBrowser(@NonNull String html_url);
 
@@ -141,10 +141,10 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
 
     void hideLoading();
 
-    void showBriefMessageAction(@StringRes int message, @StringRes int action);
-
     void showBriefMessage(@StringRes int message);
 
-    void updateListState();
+    void showBriefMessageAction(@StringRes int message, @StringRes int action);
+
+    void unbind();
   }
 }

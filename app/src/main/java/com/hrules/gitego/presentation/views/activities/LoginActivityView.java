@@ -47,36 +47,20 @@ public class LoginActivityView extends DRAppCompatActivity<LoginActivityPresente
     progress = new ProgressDialog(this);
   }
 
-  @OnClick({ R.id.login }) void onClickButton(Button button) {
-    getPresenter().onClickButton(button);
+  public void startMainActivity() {
+    startActivity(new Intent(getApplicationContext(), MainActivityView.class));
+    finish();
   }
 
-  @OnClick({ R.id.about }) void onClickTextView(TextView textView) {
-    getPresenter().onClickTextView(textView);
+  public void launchOAuthLogin(@NonNull GitHubAPI gitHubAPI) {
+    gitHubAPI.launchOAuthLogin(getApplicationContext());
   }
 
   public void launchAboutActivity() {
     startActivity(new Intent(this, AboutActivityView.class));
   }
 
-  private void showBriefMessage(@NonNull String message) {
-    new BriefMessage().showLong(rootLayout, message);
-  }
-
-  @Override public void hideProgressDialog() {
-    progress.cancel();
-  }
-
-  public void startMainActivity() {
-    startActivity(new Intent(getApplicationContext(), MainActivityView.class));
-    finish();
-  }
-
-  @Override public void showBriefMessage(@StringRes int message) {
-    showBriefMessage(getString(message));
-  }
-
-  @Override public void showProgressDialog(@StringRes int message) {
+  public void showProgressDialog(@StringRes int message) {
     if (progress.isShowing()) {
       progress.cancel();
     }
@@ -87,8 +71,20 @@ public class LoginActivityView extends DRAppCompatActivity<LoginActivityPresente
     progress.show();
   }
 
-  @Override public void launchOAuthLogin(@NonNull GitHubAPI gitHubAPI) {
-    gitHubAPI.launchOAuthLogin(getApplicationContext());
+  public void hideProgressDialog() {
+    progress.cancel();
+  }
+
+  public void showBriefMessage(@StringRes int message) {
+    new BriefMessage().showLong(rootLayout, getString(message));
+  }
+
+  @OnClick({ R.id.login }) void onClickButton(Button button) {
+    getPresenter().onClickButton(button);
+  }
+
+  @OnClick({ R.id.about }) void onClickTextView(TextView textView) {
+    getPresenter().onClickTextView(textView);
   }
 
   public void onNewIntent(Intent intent) {

@@ -45,8 +45,7 @@ import com.hrules.gitego.presentation.presenters.fragments.UserFragmentPresenter
 import com.hrules.gitego.presentation.views.activities.LoginActivityView;
 import java.util.List;
 
-public class UserFragmentView
-    extends DRFragmentV4<UserFragmentPresenter, UserFragmentPresenter.UserView>
+public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFragmentPresenter.UserView>
     implements UserFragmentPresenter.UserView {
   @BindView(R.id.userLogin) TextView userLogin;
   @BindView(R.id.userName) TextView userName;
@@ -63,19 +62,40 @@ public class UserFragmentView
     return R.layout.user_fragment;
   }
 
-  @Override public void unbind() {
-    if (unbinder != null) {
-      unbinder.unbind();
-    }
-  }
-
   @Override public void initializeViews(View view) {
     unbinder = ButterKnife.bind(this, view);
+  }
+
+  @Override public void onAttach(Context context) {
+    super.onAttach(context);
+    if (context instanceof Activity) {
+      try {
+        communicator = (Communicator) context;
+      } catch (ClassCastException e) {
+        throw new ClassCastException(context.toString() + " must implement Communicator delegate");
+      }
+    }
   }
 
   public void launchLoginActivity() {
     startActivity(new Intent(getActivity(), LoginActivityView.class));
     getActivity().finish();
+  }
+
+  public void setUserLogin(@NonNull String userLogin) {
+    this.userLogin.setText(userLogin);
+  }
+
+  @Override public void setUserData(@NonNull GitHubAuthUser gitHubAuthUser) {
+    new ImageLoader(App.getApplication()).load(gitHubAuthUser.getAvatar_url(), avatar);
+
+    userName.setText(gitHubAuthUser.getName());
+
+    Spannable spannableUserFollowers =
+        StringUtils.createVariationSpannableString(getString(R.string.user_followersFormatted), gitHubAuthUser.getFollowers(),
+            gitHubAuthUser.getGitHubAuthUserOlder().getFollowers(), ContextCompat.getColor(getActivity(), R.color.variationPositive),
+            ContextCompat.getColor(getActivity(), R.color.variationNegative));
+    followers.setText(spannableUserFollowers, TextView.BufferType.SPANNABLE);
   }
 
   @Override public void setRepoCounters(@NonNull List<GitHubAuthRepo> list) {
@@ -100,37 +120,18 @@ public class UserFragmentView
     int colorVariationNegative = ContextCompat.getColor(getActivity(), R.color.variationNegative);
 
     final Spannable spannableWatchersCount =
-        StringUtils.createVariationSpannableString(textVariation, watchers, watchersOlder,
-            colorVariationPositive, colorVariationNegative);
+        StringUtils.createVariationSpannableString(textVariation, watchers, watchersOlder, colorVariationPositive, colorVariationNegative);
 
     final Spannable spannableStargazersCount =
-        StringUtils.createVariationSpannableString(textVariation, stargazers, stargazersOlder,
-            colorVariationPositive, colorVariationNegative);
+        StringUtils.createVariationSpannableString(textVariation, stargazers, stargazersOlder, colorVariationPositive,
+            colorVariationNegative);
 
     final Spannable spannableForksCount =
-        StringUtils.createVariationSpannableString(textVariation, forks, forksOlder,
-            colorVariationPositive, colorVariationNegative);
+        StringUtils.createVariationSpannableString(textVariation, forks, forksOlder, colorVariationPositive, colorVariationNegative);
 
     watchersCount.setText(spannableWatchersCount, TextView.BufferType.SPANNABLE);
     starsCount.setText(spannableStargazersCount, TextView.BufferType.SPANNABLE);
     forksCount.setText(spannableForksCount, TextView.BufferType.SPANNABLE);
-  }
-
-  @Override public void setUserData(@NonNull GitHubAuthUser gitHubAuthUser) {
-    new ImageLoader(App.getApplication()).load(gitHubAuthUser.getAvatar_url(), avatar);
-
-    userName.setText(gitHubAuthUser.getName());
-
-    Spannable spannableUserFollowers =
-        StringUtils.createVariationSpannableString(getString(R.string.user_followersFormatted),
-            gitHubAuthUser.getFollowers(), gitHubAuthUser.getGitHubAuthUserOlder().getFollowers(),
-            ContextCompat.getColor(getActivity(), R.color.variationPositive),
-            ContextCompat.getColor(getActivity(), R.color.variationNegative));
-    followers.setText(spannableUserFollowers, TextView.BufferType.SPANNABLE);
-  }
-
-  public void setUserLogin(@NonNull String userLogin) {
-    this.userLogin.setText(userLogin);
   }
 
   @Override public void showLoading() {
@@ -141,32 +142,26 @@ public class UserFragmentView
 
   @Override public void hideLoading() {
     if (communicator != null) {
-      communicator.onMessage(
-          new BoolStateMessage(CommunicatorConstants.ACTION_SHOW_LOADING, false));
+      communicator.onMessage(new BoolStateMessage(CommunicatorConstants.ACTION_SHOW_LOADING, false));
     }
-  }
-
-  @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout),
-        getString(message), getString(action), new BriefMessageListener() {
-          @Override public void onClick() {
-            getPresenter().doLogin();
-          }
-        });
   }
 
   @Override public void showBriefMessage(@StringRes int message) {
     new BriefMessage().showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
   }
 
-  @Override public void onAttach(Context context) {
-    super.onAttach(context);
-    if (context instanceof Activity) {
-      try {
-        communicator = (Communicator) context;
-      } catch (ClassCastException e) {
-        throw new ClassCastException(context.toString() + " must implement Communicator delegate");
-      }
+  @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
+    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message), getString(action),
+        new BriefMessageListener() {
+          @Override public void onClick() {
+            getPresenter().doLogin();
+          }
+        });
+  }
+
+  @Override public void unbind() {
+    if (unbinder != null) {
+      unbinder.unbind();
     }
   }
 }

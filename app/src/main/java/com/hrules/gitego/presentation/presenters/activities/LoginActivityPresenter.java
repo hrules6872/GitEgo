@@ -58,6 +58,69 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
     App.getApplication().getAppComponent().inject(this);
   }
 
+  public void onNewIntent(Intent intent) {
+    getView().showProgressDialog(R.string.login_gettingUser);
+
+    showLoginFail = false;
+    showNetworkFail = false;
+
+    getAccessTokenInteractor.execute(intent, BuildConfig.GITHUB_API_CALLBACKURL, new GetAccessToken.Callback() {
+      @Override public void onSuccess(@NonNull final GitHubAccessToken gitHubAccessToken) {
+        getAuthUserInteractor.execute(gitHubAccessToken.getAccess_token(), new GetAuthUser.Callback() {
+          @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
+            if (response.size() > 0) {
+              Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
+              GitHubAuthUser gitHubAuthUser = response.get(0);
+
+              String login = gitHubAuthUser.getLogin();
+              String type = gitHubAuthUser.getType();
+              String token = gitHubAccessToken.getAccess_token();
+              boolean defaultAccount = true;
+              Account account = new Account(login, type, token, defaultAccount);
+
+              if (!TextUtils.isEmpty(account.getUser()) && !TextUtils.isEmpty(account.getToken())) {
+                gitHubAPI.setAccount(account);
+                accountsManager.get().addAccount(account);
+                getView().startMainActivity();
+              }
+            }
+          }
+
+          @Override public void onFailure(@NonNull Exception exception) {
+            if (exception instanceof NetworkUnauthorizedException) {
+              showLoginFail = true;
+            } else if (exception instanceof NetworkIOException) {
+              showNetworkFail = true;
+            }
+          }
+
+          @Override public void onFinish() {
+            getView().hideProgressDialog();
+
+            if (showNetworkFail) {
+              networkFail();
+            } else if (showLoginFail) {
+              loginFail();
+            }
+          }
+        });
+      }
+
+      @Override public void onFailure(@NonNull Exception exception) {
+        getView().hideProgressDialog();
+        loginFail();
+      }
+    });
+  }
+
+  private void loginFail() {
+    getView().showBriefMessage(R.string.error_loginFail);
+  }
+
+  private void networkFail() {
+    getView().showBriefMessage(R.string.error_networkFail);
+  }
+
   public void onClickButton(Button button) {
     switch (button.getId()) {
       case R.id.login:
@@ -80,82 +143,17 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
     }
   }
 
-  private void loginFail() {
-    getView().showBriefMessage(R.string.error_loginFail);
-  }
-
-  private void networkFail() {
-    getView().showBriefMessage(R.string.error_networkFail);
-  }
-
-  public void onNewIntent(Intent intent) {
-    getView().showProgressDialog(R.string.login_gettingUser);
-
-    showLoginFail = false;
-    showNetworkFail = false;
-
-    getAccessTokenInteractor.execute(intent, BuildConfig.GITHUB_API_CALLBACKURL,
-        new GetAccessToken.Callback() {
-          @Override public void onSuccess(@NonNull final GitHubAccessToken gitHubAccessToken) {
-            getAuthUserInteractor.execute(gitHubAccessToken.getAccess_token(),
-                new GetAuthUser.Callback() {
-                  @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
-                    if (response.size() > 0) {
-                      Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
-                      GitHubAuthUser gitHubAuthUser = response.get(0);
-
-                      String login = gitHubAuthUser.getLogin();
-                      String type = gitHubAuthUser.getType();
-                      String token = gitHubAccessToken.getAccess_token();
-                      boolean defaultAccount = true;
-                      Account account = new Account(login, type, token, defaultAccount);
-
-                      if (!TextUtils.isEmpty(account.getUser()) && !TextUtils.isEmpty(account.getToken())) {
-                        gitHubAPI.setAccount(account);
-                        accountsManager.get().addAccount(account);
-                        getView().startMainActivity();
-                      }
-                    }
-                  }
-
-                  @Override public void onFailure(@NonNull Exception exception) {
-                    if (exception instanceof NetworkUnauthorizedException) {
-                      showLoginFail = true;
-                    } else if (exception instanceof NetworkIOException) {
-                      showNetworkFail = true;
-                    }
-                  }
-
-                  @Override public void onFinish() {
-                    getView().hideProgressDialog();
-
-                    if (showNetworkFail) {
-                      networkFail();
-                    } else if (showLoginFail) {
-                      loginFail();
-                    }
-                  }
-                });
-          }
-
-          @Override public void onFailure(@NonNull Exception exception) {
-            getView().hideProgressDialog();
-            loginFail();
-          }
-        });
-  }
-
   public interface LoginView extends DRView {
-    void launchAboutActivity();
-
-    void hideProgressDialog();
-
     void startMainActivity();
 
-    void showBriefMessage(@StringRes int message);
+    void launchOAuthLogin(@NonNull GitHubAPI gitHubAPI);
+
+    void launchAboutActivity();
 
     void showProgressDialog(@StringRes int message);
 
-    void launchOAuthLogin(@NonNull GitHubAPI gitHubAPI);
+    void hideProgressDialog();
+
+    void showBriefMessage(@StringRes int message);
   }
 }

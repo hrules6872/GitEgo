@@ -19,7 +19,6 @@ package com.hrules.gitego.presentation.views.activities;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
@@ -91,6 +90,10 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
     finish();
   }
 
+  @Override public void launchAboutActivity() {
+    startActivity(new Intent(this, AboutActivityView.class));
+  }
+
   @Override public void startNotificationServiceReceiver() {
     sendBroadcast(new Intent(NotificationServiceReceiver.ACTION_START_NOTIFICATION_SERVICE));
   }
@@ -102,17 +105,6 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
   @Override public void removeNotification() {
     NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     notificationManager.cancel(NotificationService.NOTIFICATION_ID);
-  }
-
-  @Override public void goToPlayStore() {
-    try {
-      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_playStoreURL))));
-    } catch (Exception ignored) {
-    }
-  }
-
-  @Override public void launchAboutActivity() {
-    startActivity(new Intent(this, AboutActivityView.class));
   }
 
   @Override public void onMessage(BoolStateMessage message) {

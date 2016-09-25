@@ -89,6 +89,26 @@ public class NotificationService extends Service {
     }
   }
 
+  private void setCheckedToday() {
+    preferences.save(PREFS_CHECKED_TODAY, System.currentTimeMillis());
+  }
+
+  private boolean isCheckedToday() {
+    Calendar present = milliToCalendar(System.currentTimeMillis());
+    Calendar past = milliToCalendar(preferences.getLong(PREFS_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
+    return TimeUnit.MILLISECONDS.toDays(present.getTimeInMillis() - past.getTimeInMillis()) <= 0;
+  }
+
+  private Calendar milliToCalendar(long millis) {
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(millis);
+    calendar.set(Calendar.HOUR_OF_DAY, 0);
+    calendar.set(Calendar.MINUTE, 0);
+    calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
+    return calendar;
+  }
+
   private void checkDataChanges() {
     Account account = gitHubAPI.getAccount();
     if (account != null && (account.getToken() != null && !account.getToken().isEmpty())) {
@@ -156,26 +176,6 @@ public class NotificationService extends Service {
         }
       });
     }
-  }
-
-  private void setCheckedToday() {
-    preferences.save(PREFS_CHECKED_TODAY, System.currentTimeMillis());
-  }
-
-  private boolean isCheckedToday() {
-    Calendar present = milliToCalendar(System.currentTimeMillis());
-    Calendar past = milliToCalendar(preferences.getLong(PREFS_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
-    return TimeUnit.MILLISECONDS.toDays(present.getTimeInMillis() - past.getTimeInMillis()) <= 0;
-  }
-
-  private Calendar milliToCalendar(long millis) {
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTimeInMillis(millis);
-    calendar.set(Calendar.HOUR_OF_DAY, 0);
-    calendar.set(Calendar.MINUTE, 0);
-    calendar.set(Calendar.SECOND, 0);
-    calendar.set(Calendar.MILLISECOND, 0);
-    return calendar;
   }
 
   private void showNotification() {
