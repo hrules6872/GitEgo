@@ -16,6 +16,7 @@
 
 package com.hrules.gitego.domain.models;
 
+import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 public class Account {
@@ -27,22 +28,28 @@ public class Account {
 
   @SerializedName("defaultUser") private boolean defaultUser;
 
-  public Account(String user, String type, String token, boolean defaultUser) {
+  public Account() {
+    this.user = "";
+    this.type = "";
+    this.token = "";
+  }
+
+  public Account(@NonNull String user, @NonNull String type, @NonNull String token, boolean defaultUser) {
     this.user = user;
     this.type = type;
     this.token = token;
     this.defaultUser = defaultUser;
   }
 
-  public String getUser() {
+  public @NonNull String getUser() {
     return user;
   }
 
-  public String getType() {
+  public @NonNull String getType() {
     return type;
   }
 
-  public String getToken() {
+  public @NonNull String getToken() {
     return token;
   }
 

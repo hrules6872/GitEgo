@@ -18,6 +18,7 @@ package com.hrules.gitego.presentation.presenters.fragments;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.text.TextUtils;
 import com.hrules.darealmvp.DRPresenter;
 import com.hrules.darealmvp.DRView;
 import com.hrules.gitego.App;
@@ -53,7 +54,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
     App.getApplication().getAppComponent().inject(this);
 
     Account account = accountsManager.getDefaultAccount();
-    if (account != null && account.getToken() != null) {
+    if (!TextUtils.isEmpty(account.getToken())) {
       gitHubAPI.setAccount(account);
     }
   }

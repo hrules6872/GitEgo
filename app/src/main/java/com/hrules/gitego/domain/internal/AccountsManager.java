@@ -38,24 +38,24 @@ public class AccountsManager extends BaseAccountsManager {
         preferences.getString(AppConstants.PREFS.ACCOUNTS, ""));
   }
 
-  @Override public Account getAccount(@NonNull Account whatAccount) {
+  @NonNull @Override public Account getAccount(@NonNull Account whatAccount) {
     List<Account> accounts = (List<Account>) getAccounts();
     for (Account account : accounts) {
       if (account.getUser().equals(whatAccount.getUser())) {
         return account;
       }
     }
-    return null;
+    return new Account();
   }
 
-  @Override public Account getDefaultAccount() {
+  @NonNull @Override public Account getDefaultAccount() {
     List<Account> accounts = (List<Account>) getAccounts();
     for (Account account : accounts) {
       if (account.isDefaultUser()) {
         return account;
       }
     }
-    return null;
+    return new Account();
   }
 
   @Override public void setDefaultAccount(@NonNull Account whatAccount) {

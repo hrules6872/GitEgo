@@ -17,7 +17,6 @@
 package com.hrules.gitego.domain.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.domain.models.base.ModelDto;
 
 public class GitHubAuthRepoDto extends ModelDto<String> {
@@ -46,7 +45,7 @@ public class GitHubAuthRepoDto extends ModelDto<String> {
   @SerializedName("subscribers_url") private String subscribers_url;
 
   @Override public String createModelId() {
-    return getDate() + DatabaseConstants.SEPARATOR + getId();
+    return getDate() + SEPARATOR + getId();
   }
 
   public String getDate() {

@@ -39,9 +39,9 @@ abstract class BaseAccountsManager {
 
   public abstract Collection<Account> getAccounts();
 
-  public abstract Account getAccount(@NonNull Account whatAccount);
+  public abstract @NonNull Account getAccount(@NonNull Account whatAccount);
 
-  public abstract Account getDefaultAccount();
+  public abstract @NonNull Account getDefaultAccount();
 
   public abstract void setDefaultAccount(@NonNull Account whatAccount);
 

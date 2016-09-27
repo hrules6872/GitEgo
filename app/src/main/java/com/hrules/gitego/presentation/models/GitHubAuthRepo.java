@@ -17,7 +17,6 @@
 package com.hrules.gitego.presentation.models;
 
 import android.text.Spannable;
-import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.presentation.models.base.Model;
 
 public class GitHubAuthRepo extends Model<String> {
@@ -38,7 +37,7 @@ public class GitHubAuthRepo extends Model<String> {
   private GitHubAuthRepo gitHubAuthRepoOlder;
 
   @Override public String createModelId() {
-    return getDate() + DatabaseConstants.SEPARATOR + getId();
+    return getDate() + SEPARATOR + getId();
   }
 
   public String getDate() {

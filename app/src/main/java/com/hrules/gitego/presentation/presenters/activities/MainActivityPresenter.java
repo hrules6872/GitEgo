@@ -17,6 +17,7 @@
 package com.hrules.gitego.presentation.presenters.activities;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.hrules.darealmvp.DRPresenter;
@@ -44,7 +45,7 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     getView().removeNotification();
 
     Account account = accountsManager.getDefaultAccount();
-    if (account == null || (account.getToken() == null || account.getToken().isEmpty())) {
+    if (TextUtils.isEmpty(account.getToken())) {
       doLogin();
     } else {
       gitHubAPI.setAccount(account);
@@ -57,7 +58,8 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
 
   public void onCreateOptionsMenu(@NonNull Menu menu) {
     menu.findItem(R.id.menu_notifications)
-        .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
+        .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS,
+            AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
   }
 
   public void onMenuItemClick(@NonNull MenuItem item) {

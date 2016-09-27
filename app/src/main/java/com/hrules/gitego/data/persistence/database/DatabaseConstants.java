@@ -25,8 +25,6 @@ public class DatabaseConstants {
     public static final int TRUE = 1;
   }
 
-  public static final String SEPARATOR = " ";
-
   public static final String KEY_USER_DATE = "date";
   public static final String KEY_USER_LOGIN = "login";
   public static final String KEY_USER_AVATAR_URL = "avatar_url";

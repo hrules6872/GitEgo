@@ -19,6 +19,8 @@ package com.hrules.gitego.domain.models.base;
 import android.support.annotation.NonNull;
 
 public abstract class ModelDto<K> {
+  public static final String SEPARATOR = " ";
+
   private K modelId;
 
   public K getModelId() {

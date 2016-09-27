@@ -25,6 +25,7 @@ import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 import com.hrules.gitego.App;
 import com.hrules.gitego.AppLifecycleManager;
 import com.hrules.gitego.R;
@@ -84,7 +85,7 @@ public class NotificationService extends Service {
 
   private void init() {
     Account account = accountsManager.getDefaultAccount();
-    if (account != null && account.getToken() != null) {
+    if (!TextUtils.isEmpty(account.getToken())) {
       gitHubAPI.setAccount(account);
     }
   }
@@ -95,7 +96,8 @@ public class NotificationService extends Service {
 
   private boolean isCheckedToday() {
     Calendar present = milliToCalendar(System.currentTimeMillis());
-    Calendar past = milliToCalendar(preferences.getLong(PREFS_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
+    Calendar past = milliToCalendar(
+        preferences.getLong(PREFS_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
     return TimeUnit.MILLISECONDS.toDays(present.getTimeInMillis() - past.getTimeInMillis()) <= 0;
   }
 
