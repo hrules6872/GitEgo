@@ -20,7 +20,8 @@ import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.persistence.database.Database;
 import com.hrules.gitego.data.repository.base.Repository;
 import com.hrules.gitego.data.repository.cache.base.BasicCache;
-import com.hrules.gitego.data.repository.datasources.DataSource;
+import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
+import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
 import com.hrules.gitego.di.modules.DataModule;
 import dagger.Component;
 import javax.inject.Named;
@@ -28,15 +29,19 @@ import javax.inject.Named;
 @Component(dependencies = AppComponent.class, modules = DataModule.class) interface DataComponent {
   @Named("authUserRepository") Repository authUserRepository();
 
-  @Named("authUserBddDataSource") DataSource authUserBddDataSource();
+  @Named("authUserBddDataSourceReadable") DataSourceReadable authUserBddDataSourceReadable();
 
-  @Named("authUserAPIDataSource") DataSource authUserAPIDataSource();
+  @Named("authUserBddDataSourceWriteable") DataSourceWriteable authUserBddDataSourceWriteable();
+
+  @Named("authUserAPIDataSourceReadable") DataSourceReadable authUserAPIDataSourceReadable();
 
   @Named("authRepoRepository") Repository authRepoRepository();
 
-  @Named("authRepoBddDataSource") DataSource authRepoBddDataSource();
+  @Named("authRepoBddDataSourceReadable") DataSourceReadable authRepoBddDataSourceReadable();
 
-  @Named("authRepoAPIDataSource") DataSource authRepoAPIDataSource();
+  @Named("authRepoBddDataSourceWriteable") DataSourceWriteable authRepoBddDataSourceWriteable();
+
+  @Named("authRepoAPIDataSourceReadable") DataSourceReadable authRepoAPIDataSourceReadable();
 
   Network network();
 

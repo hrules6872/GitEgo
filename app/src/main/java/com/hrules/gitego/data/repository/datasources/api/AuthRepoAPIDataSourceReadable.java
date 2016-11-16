@@ -21,9 +21,9 @@ import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.network.RequestNetwork;
 import com.hrules.gitego.data.persistence.database.utils.DatabaseDateUtils;
 import com.hrules.gitego.data.repository.cache.base.BasicCache;
-import com.hrules.gitego.data.repository.datasources.DataSource;
 import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoAPIGetAuthRepoSpecification;
 import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification;
+import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.serializers.GitHubAuthRepoDtoSerializer;
 import com.hrules.gitego.domain.specifications.base.Specification;
@@ -34,37 +34,13 @@ import java.util.Collection;
 import java.util.List;
 import org.json.JSONArray;
 
-public class AuthRepoAPIDataSource extends DataSource<GitHubAuthRepoDto> {
+public class AuthRepoAPIDataSourceReadable extends DataSourceReadable<GitHubAuthRepoDto> {
   private final Network network;
   private final BasicCache cache;
 
-  public AuthRepoAPIDataSource(@NonNull Network network, @NonNull BasicCache cache) {
+  public AuthRepoAPIDataSourceReadable(@NonNull Network network, @NonNull BasicCache cache) {
     this.network = network;
     this.cache = cache;
-  }
-
-  @Override public void addOrUpdate(@NonNull GitHubAuthRepoDto item) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void addOrUpdate(@NonNull Iterable<GitHubAuthRepoDto> items) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void remove(@NonNull GitHubAuthRepoDto item) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void remove(@NonNull Iterable<GitHubAuthRepoDto> items) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void remove(@NonNull Specification specification) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
-    throw new UnsupportedOperationException();
   }
 
   @SuppressWarnings("unchecked") @Override
@@ -93,14 +69,6 @@ public class AuthRepoAPIDataSource extends DataSource<GitHubAuthRepoDto> {
     }
     cache.persist();
     return list;
-  }
-
-  @Override public boolean isReadable() {
-    return true;
-  }
-
-  @Override public boolean isWriteable() {
-    return false;
   }
 
   @Override public boolean isCacheExpired() {

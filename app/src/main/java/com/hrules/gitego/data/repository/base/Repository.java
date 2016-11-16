@@ -20,7 +20,8 @@ import android.support.annotation.NonNull;
 import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
 import com.hrules.gitego.data.exceptions.NotCacheExpiredException;
-import com.hrules.gitego.data.repository.datasources.DataSource;
+import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
+import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
 import com.hrules.gitego.domain.models.base.ModelDto;
 import com.hrules.gitego.domain.specifications.base.Specification;
 import java.util.ArrayList;
@@ -30,74 +31,72 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Repository<T extends ModelDto> implements RepositoryInterface<T> {
-  private final Collection<DataSource<T>> dataSources;
+  private final Collection<DataSourceReadable<T>> dataSourceReadables;
+  private final Collection<DataSourceWriteable<T>> dataSourceWriteables;
 
-  protected Repository(@NonNull Collection<DataSource<T>> dataSources) {
-    this.dataSources = dataSources;
+  protected Repository(@NonNull Collection<DataSourceReadable<T>> dataSourceReadables,
+      @NonNull Collection<DataSourceWriteable<T>> dataSourceWriteables) {
+    this.dataSourceReadables = dataSourceReadables;
+    this.dataSourceWriteables = dataSourceWriteables;
   }
 
   @SuppressWarnings("unchecked") @Override public void addOrUpdate(@NonNull T item) throws Exception {
-    for (DataSource dataSource : dataSources) {
-      if (dataSource.isWriteable()) {
-        dataSource.addOrUpdate(item);
-      }
+    for (DataSourceWriteable dataSourceWriteable : dataSourceWriteables) {
+      dataSourceWriteable.addOrUpdate(item);
     }
   }
 
   @SuppressWarnings("unchecked") @Override public void addOrUpdate(@NonNull Iterable<T> items) throws Exception {
-    for (DataSource dataSource : dataSources) {
-      if (dataSource.isWriteable()) {
-        dataSource.addOrUpdate(items);
-      }
+    for (DataSourceWriteable dataSourceWriteable : dataSourceWriteables) {
+      dataSourceWriteable.addOrUpdate(items);
+    }
+  }
+
+  @Override public void addOrUpdate(@NonNull Specification specification) throws Exception {
+    for (DataSourceWriteable dataSourceWriteable : dataSourceWriteables) {
+      dataSourceWriteable.addOrUpdate(specification);
     }
   }
 
   @SuppressWarnings("unchecked") @Override public void remove(@NonNull T item) throws Exception {
-    for (DataSource dataSource : dataSources) {
-      if (dataSource.isWriteable()) {
-        dataSource.remove(item);
-      }
-    }
-  }
-
-  @Override public void remove(@NonNull Specification specification) throws Exception {
-    for (DataSource dataSource : dataSources) {
-      if (dataSource.isWriteable()) {
-        dataSource.remove(specification);
-      }
+    for (DataSourceWriteable dataSourceWriteable : dataSourceWriteables) {
+      dataSourceWriteable.remove(item);
     }
   }
 
   @SuppressWarnings("unchecked") @Override public void remove(@NonNull Iterable<T> items) throws Exception {
-    for (DataSource dataSource : dataSources) {
-      if (dataSource.isWriteable()) {
-        dataSource.remove(items);
-      }
+    for (DataSourceWriteable dataSourceWriteable : dataSourceWriteables) {
+      dataSourceWriteable.remove(items);
+    }
+  }
+
+  @Override public void remove(@NonNull Specification specification) throws Exception {
+    for (DataSourceWriteable dataSourceWriteable : dataSourceWriteables) {
+      dataSourceWriteable.remove(specification);
     }
   }
 
   @SuppressWarnings("unchecked") @Override public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
     Map<Object, T> map = new HashMap<>();
 
-    for (DataSource dataSource : dataSources) {
-      if (dataSource.isReadable()) {
-        try {
-          List<T> list;
-          if (dataSource.isCacheExpired()) {
-            list = (List<T>) dataSource.query(specification);
-          } else {
-            throw new NotCacheExpiredException(dataSource.toString());
-          }
-
-          for (ModelDto item : list) {
-            map.put(item.getModelId(), (T) item);
-          }
-          callback.onSuccess(new ArrayList<>(map.values()));
-        } catch (Exception e) {
-          callback.onFailure(e);
+    for (DataSourceReadable dataSourceReadable : dataSourceReadables) {
+      try {
+        List<T> list;
+        if (dataSourceReadable.isCacheExpired()) {
+          list = (List<T>) dataSourceReadable.query(specification);
+        } else {
+          throw new NotCacheExpiredException(dataSourceReadable.toString());
         }
+
+        for (ModelDto item : list) {
+          map.put(item.getModelId(), (T) item);
+        }
+        callback.onSuccess(new ArrayList<>(map.values()));
+      } catch (Exception e) {
+        callback.onFailure(e);
       }
     }
+
     try {
       addOrUpdate(new ArrayList<>(map.values()));
     } catch (NetworkIOException e) {

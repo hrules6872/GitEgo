@@ -17,7 +17,7 @@
 package com.hrules.gitego.domain.specifications.base;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.data.repository.datasources.DataSource;
+import com.hrules.gitego.data.repository.datasources.base.DataSource;
 
 public class SpecificationFactory<T> {
   @SuppressWarnings("unchecked")

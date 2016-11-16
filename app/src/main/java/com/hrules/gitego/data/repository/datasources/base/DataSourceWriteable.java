@@ -14,29 +14,22 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.data.repository.datasources;
+package com.hrules.gitego.data.repository.datasources.base;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.data.repository.base.RepositoryInterface;
 import com.hrules.gitego.domain.models.base.ModelDto;
 import com.hrules.gitego.domain.specifications.base.Specification;
-import java.util.Collection;
 
-public abstract class DataSource<T extends ModelDto> implements RepositoryInterface<T> {
-  public abstract Collection<T> query(@NonNull Specification specification) throws Exception;
+public abstract class DataSourceWriteable<T extends ModelDto> extends DataSource<T> {
+  public abstract void addOrUpdate(@NonNull T item) throws Exception;
 
-  public String getSpecificationsPath() {
-    return getClass().getPackage().getName() + ".specifications";
-  }
+  public abstract void addOrUpdate(@NonNull Iterable<T> items) throws Exception;
 
-  public String getSpecificationsPrefix() {
-    return getClass().getSimpleName().replace("DataSource", "");
-  }
+  public abstract void addOrUpdate(@NonNull Specification specification) throws Exception;
 
-  public abstract boolean isReadable();
+  public abstract void remove(@NonNull T item) throws Exception;
 
-  public abstract boolean isWriteable();
+  public abstract void remove(@NonNull Iterable<T> items) throws Exception;
 
-  public abstract boolean isCacheExpired();
+  public abstract void remove(@NonNull Specification specification) throws Exception;
 }
-

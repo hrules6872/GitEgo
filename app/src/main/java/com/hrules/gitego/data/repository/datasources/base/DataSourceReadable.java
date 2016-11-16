@@ -14,32 +14,15 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.data.repository.base;
+package com.hrules.gitego.data.repository.datasources.base;
 
 import android.support.annotation.NonNull;
+import com.hrules.gitego.domain.models.base.ModelDto;
 import com.hrules.gitego.domain.specifications.base.Specification;
-import java.util.List;
+import java.util.Collection;
 
-public interface RepositoryInterface<T> {
-  interface QueryCallback<T> {
-    void onSuccess(@NonNull List<T> response);
+public abstract class DataSourceReadable<T extends ModelDto> extends DataSource<T> {
+  public abstract Collection<T> query(@NonNull Specification specification) throws Exception;
 
-    void onFailure(@NonNull Exception exception);
-
-    void onFinish();
-  }
-
-  void addOrUpdate(@NonNull T item) throws Exception;
-
-  void addOrUpdate(@NonNull Iterable<T> items) throws Exception;
-
-  void addOrUpdate(@NonNull Specification specification) throws Exception;
-
-  void remove(@NonNull T item) throws Exception;
-
-  void remove(@NonNull Iterable<T> items) throws Exception;
-
-  void remove(@NonNull Specification specification) throws Exception;
-
-  void query(@NonNull Specification specification, @NonNull QueryCallback callback);
+  public abstract boolean isCacheExpired();
 }

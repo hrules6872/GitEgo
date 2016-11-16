@@ -16,30 +16,22 @@
 
 package com.hrules.gitego.data.repository.datasources.bdd;
 
-import android.database.Cursor;
 import android.support.annotation.NonNull;
-import com.hrules.gitego.data.exceptions.LocalIOException;
 import com.hrules.gitego.data.persistence.database.Database;
 import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.data.persistence.database.utils.SQLQueryBuilder;
-import com.hrules.gitego.data.repository.cache.base.BasicCache;
-import com.hrules.gitego.data.repository.datasources.DataSource;
+import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
-import com.hrules.gitego.domain.models.transformers.GitHubAuthRepoBddToGitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.transformers.GitHubAuthRepoDtoToMap;
 import com.hrules.gitego.domain.specifications.base.Specification;
-import com.hrules.gitego.domain.specifications.base.SpecificationFactory;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class AuthRepoBddDataSource extends DataSource<GitHubAuthRepoDto> {
+public class AuthRepoBddDataSourceWriteable extends DataSourceWriteable<GitHubAuthRepoDto> {
   private final Database database;
-  private final BasicCache cache;
 
-  public AuthRepoBddDataSource(@NonNull Database database, @NonNull BasicCache cache) {
+  public AuthRepoBddDataSourceWriteable(@NonNull Database database) {
     this.database = database;
-    this.cache = cache;
   }
 
   @Override public void addOrUpdate(@NonNull GitHubAuthRepoDto item) throws Exception {
@@ -57,6 +49,10 @@ public class AuthRepoBddDataSource extends DataSource<GitHubAuthRepoDto> {
     }
 
     database.execList(sqlList.toArray(new String[sqlList.size()]));
+  }
+
+  @Override public void addOrUpdate(@NonNull Specification specification) throws Exception {
+    throw new UnsupportedOperationException();
   }
 
   private String convertDtoToSqlInsert(@NonNull GitHubAuthRepoDto item) {
@@ -84,50 +80,5 @@ public class AuthRepoBddDataSource extends DataSource<GitHubAuthRepoDto> {
 
   @Override public void remove(@NonNull Specification specification) throws Exception {
     throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
-    throw new UnsupportedOperationException();
-  }
-
-  @SuppressWarnings("unchecked") @Override
-  public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
-      throws Exception {
-    specification = new SpecificationFactory<String>().get(this, specification);
-    List<GitHubAuthRepoDto> list = new ArrayList<>();
-
-    Cursor cursor = null;
-    try {
-      database.open();
-      cursor = database.get((String) specification.get());
-      while (cursor.moveToNext()) {
-        GitHubAuthRepoDto gitHubAuthRepoDto =
-            new GitHubAuthRepoBddToGitHubAuthRepoDto().transform(cursor);
-        gitHubAuthRepoDto.setModelId(gitHubAuthRepoDto.createModelId());
-        list.add(gitHubAuthRepoDto);
-      }
-    } catch (Exception e) {
-      throw new LocalIOException(e.getMessage());
-    } finally {
-      if (cursor != null) {
-        cursor.close();
-      }
-      database.close();
-    }
-    cache.persist();
-    return list;
-  }
-
-  @Override public boolean isReadable() {
-    return true;
-  }
-
-  @Override public boolean isWriteable() {
-    return true;
-  }
-
-  @Override public boolean isCacheExpired() {
-    return cache.isExpired();
   }
 }

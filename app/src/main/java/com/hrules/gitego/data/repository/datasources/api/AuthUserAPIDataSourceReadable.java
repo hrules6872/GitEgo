@@ -21,7 +21,7 @@ import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.network.RequestNetwork;
 import com.hrules.gitego.data.persistence.database.utils.DatabaseDateUtils;
 import com.hrules.gitego.data.repository.cache.base.BasicCache;
-import com.hrules.gitego.data.repository.datasources.DataSource;
+import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.serializers.GitHubAuthUserDtoSerializer;
 import com.hrules.gitego.domain.specifications.base.Specification;
@@ -30,41 +30,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class AuthUserAPIDataSource extends DataSource<GitHubAuthUserDto> {
+public class AuthUserAPIDataSourceReadable extends DataSourceReadable<GitHubAuthUserDto> {
   private final Network network;
   private final BasicCache cache;
 
-  public AuthUserAPIDataSource(@NonNull Network network, @NonNull BasicCache cache) {
+  public AuthUserAPIDataSourceReadable(@NonNull Network network, @NonNull BasicCache cache) {
     this.network = network;
     this.cache = cache;
   }
 
-  @Override public void addOrUpdate(@NonNull GitHubAuthUserDto item) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void addOrUpdate(@NonNull Iterable<GitHubAuthUserDto> items) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void remove(@NonNull GitHubAuthUserDto item) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void remove(@NonNull Iterable<GitHubAuthUserDto> items) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void remove(@NonNull Specification specification) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
-    throw new UnsupportedOperationException();
-  }
-
-  @SuppressWarnings("unchecked") @Override public Collection<GitHubAuthUserDto> query(@NonNull Specification specification)
-      throws Exception {
+  @SuppressWarnings("unchecked") @Override
+  public Collection<GitHubAuthUserDto> query(@NonNull Specification specification) throws Exception {
     specification = new SpecificationFactory<String>().get(this, specification);
     List<GitHubAuthUserDto> list = new ArrayList<>();
 
@@ -75,14 +51,6 @@ public class AuthUserAPIDataSource extends DataSource<GitHubAuthUserDto> {
     list.add(gitHubAuthUserDto);
     cache.persist();
     return list;
-  }
-
-  @Override public boolean isReadable() {
-    return true;
-  }
-
-  @Override public boolean isWriteable() {
-    return false;
   }
 
   @Override public boolean isCacheExpired() {
