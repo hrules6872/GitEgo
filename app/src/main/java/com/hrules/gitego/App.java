@@ -25,7 +25,6 @@ import com.hrules.gitego.di.components.AppComponent;
 import com.hrules.gitego.di.components.DaggerAppComponent;
 import com.hrules.gitego.di.modules.AppModule;
 import com.hrules.gitego.services.NotificationServiceReceiver;
-import com.squareup.leakcanary.LeakCanary;
 import javax.inject.Inject;
 
 public class App extends Application {
@@ -44,8 +43,6 @@ public class App extends Application {
     if (preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT)) {
       startNotificationService(this);
     }
-
-    LeakCanary.install(this);
   }
 
   public static App getApplication() {

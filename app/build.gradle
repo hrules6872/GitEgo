@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
   compileSdkVersion androidBuildCompileSDKVersion
@@ -43,7 +42,16 @@ android {
   }
 
   buildTypes {
+    debug {
+      resValue 'string', 'app_name', '"GitEgo-debug"'
+      debuggable true
+      minifyEnabled false
+      zipAlignEnabled false
+      applicationIdSuffix ".debug"
+    }
+
     release {
+      resValue 'string', 'app_name', '"GitEgo"'
       minifyEnabled false
       signingConfig signingConfigs.release
     }
@@ -63,34 +71,24 @@ configurations.all {
 }
 
 dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+
   // test
   androidTestCompile testDependencies.runner
   testCompile testDependencies.junit
-  testCompile projectDependencies.leakCanaryTest
 
   // support
-  compile supportDependencies.appCompat
-  compile supportDependencies.recyclerView
-  compile supportDependencies.supportAnnotations
-  compile supportDependencies.design
-  compile supportDependencies.cardView
-  compile supportDependencies.percent
+  supportDependencies.each {
+    add("compile", it.value)
+  }
 
   // project
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  compile projectDependencies.butterKnife
-  compile projectDependencies.daRealMVP
-  compile projectDependencies.gson
-  compile projectDependencies.okhttp
-  compile projectDependencies.roundedImageView
-  compile projectDependencies.picasso
-  compile projectDependencies.dagger
-  compile projectDependencies.daggerProducers
-
-  debugCompile projectDependencies.leakCanaryDebug
-  releaseCompile projectDependencies.leakCanaryRelease
+  projectDependencies.each {
+    add("compile", it.value)
+  }
 
   // other
-  apt otherDependencies.butterKnifeCompiler
-  apt otherDependencies.daggerCompiler
+  otherDependencies.each {
+    add("annotationProcessor", it.value)
+  }
 }

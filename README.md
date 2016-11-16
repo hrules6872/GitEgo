@@ -22,7 +22,6 @@ GitEgo is not associated with GitHub in any way.
 * [OkHttp](https://github.com/square/okhttp)
 * [Picasso](https://github.com/square/picasso)
 * [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
-* [LeakCanary](https://github.com/square/leakcanary)
 
 Developed by
 -------
