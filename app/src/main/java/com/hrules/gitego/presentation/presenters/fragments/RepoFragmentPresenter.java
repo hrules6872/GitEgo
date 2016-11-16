@@ -45,6 +45,7 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
   @Inject GetAuthRepo getAuthRepo;
+  @Inject UIThreadExecutor uiThreadExecutor;
 
   @Override public void bind(@NonNull RepoView view) {
     super.bind(view);
@@ -79,7 +80,7 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
             final List<GitHubAuthRepo> finalList = new MergeUtils().mergeAuthRepoItems(response);
 
-            new UIThreadExecutor().execute(new Runnable() {
+            uiThreadExecutor.execute(new Runnable() {
               @Override public void run() {
                 getView().updateList(finalList);
               }
@@ -88,7 +89,7 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
         }
 
         @Override public void onFailure(@NonNull final Exception exception) {
-          new UIThreadExecutor().execute(new Runnable() {
+          uiThreadExecutor.execute(new Runnable() {
             @Override public void run() {
               if (exception instanceof NetworkUnauthorizedException) {
                 loginFail();
@@ -102,7 +103,7 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
         }
 
         @Override public void onFinish() {
-          new UIThreadExecutor().execute(new Runnable() {
+          uiThreadExecutor.execute(new Runnable() {
             @Override public void run() {
               getView().hideLoading();
               getView().updateListState();

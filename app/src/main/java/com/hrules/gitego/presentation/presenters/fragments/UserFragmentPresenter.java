@@ -46,6 +46,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
   @Inject AccountsManager accountsManager;
   @Inject GetAuthUser getAuthUser;
   @Inject GetAuthRepo getAuthRepo;
+  @Inject UIThreadExecutor uiThreadExecutor;
 
   @Override public void bind(@NonNull UserView view) {
     super.bind(view);
@@ -78,7 +79,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
             Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
             final GitHubAuthUser finalGitHubAuthUser = new MergeUtils().mergeAuthUserItems(response);
 
-            new UIThreadExecutor().execute(new Runnable() {
+            uiThreadExecutor.execute(new Runnable() {
               @Override public void run() {
                 getView().setUserData(finalGitHubAuthUser);
               }
@@ -87,7 +88,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
         }
 
         @Override public void onFailure(@NonNull final Exception exception) {
-          new UIThreadExecutor().execute(new Runnable() {
+          uiThreadExecutor.execute(new Runnable() {
             @Override public void run() {
               if (exception instanceof NetworkUnauthorizedException) {
                 loginFail();
@@ -101,7 +102,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
         }
 
         @Override public void onFinish() {
-          new UIThreadExecutor().execute(new Runnable() {
+          uiThreadExecutor.execute(new Runnable() {
             @Override public void run() {
               getView().hideLoading();
             }
@@ -116,7 +117,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
             final List<GitHubAuthRepo> finalList = new MergeUtils().mergeAuthRepoItems(response);
 
-            new UIThreadExecutor().execute(new Runnable() {
+            uiThreadExecutor.execute(new Runnable() {
               @Override public void run() {
                 getView().setRepoCounters(finalList);
               }
@@ -125,7 +126,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
         }
 
         @Override public void onFailure(@NonNull final Exception exception) {
-          new UIThreadExecutor().execute(new Runnable() {
+          uiThreadExecutor.execute(new Runnable() {
             @Override public void run() {
               if (exception instanceof NetworkUnauthorizedException) {
                 loginFail();
@@ -139,7 +140,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
         }
 
         @Override public void onFinish() {
-          new UIThreadExecutor().execute(new Runnable() {
+          uiThreadExecutor.execute(new Runnable() {
             @Override public void run() {
               getView().hideLoading();
             }
