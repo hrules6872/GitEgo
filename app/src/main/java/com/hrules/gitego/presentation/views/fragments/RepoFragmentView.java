@@ -67,7 +67,7 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
     return R.layout.repo_fragment;
   }
 
-  @Override public void initializeViews(View view) {
+  @Override public void initializeViews(@NonNull View view) {
     unbinder = ButterKnife.bind(this, view);
 
     recyclerView.setHasFixedSize(true);
@@ -105,6 +105,11 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
   @Override public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putParcelable(BUNDLE_RECYCLER_STATE, recyclerView.getLayoutManager().onSaveInstanceState());
+  }
+
+  @Override public void onResume() {
+    super.onResume();
+    getPresenter().onResume();
   }
 
   public void launchLoginActivity() {

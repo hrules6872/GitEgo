@@ -62,7 +62,7 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
     return R.layout.user_fragment;
   }
 
-  @Override public void initializeViews(View view) {
+  @Override public void initializeViews(@NonNull View view) {
     unbinder = ButterKnife.bind(this, view);
   }
 
@@ -75,6 +75,11 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
         throw new ClassCastException(context.toString() + " must implement Communicator delegate");
       }
     }
+  }
+
+  @Override public void onResume() {
+    super.onResume();
+    getPresenter().onResume();
   }
 
   public void launchLoginActivity() {
@@ -92,8 +97,9 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
     userName.setText(gitHubAuthUser.getName());
 
     Spannable spannableUserFollowers =
-        StringUtils.createVariationSpannableString(getString(R.string.user_followersFormatted), gitHubAuthUser.getFollowers(),
-            gitHubAuthUser.getGitHubAuthUserOlder().getFollowers(), ContextCompat.getColor(getActivity(), R.color.variationPositive),
+        StringUtils.createVariationSpannableString(getString(R.string.user_followersFormatted),
+            gitHubAuthUser.getFollowers(), gitHubAuthUser.getGitHubAuthUserOlder().getFollowers(),
+            ContextCompat.getColor(getActivity(), R.color.variationPositive),
             ContextCompat.getColor(getActivity(), R.color.variationNegative));
     followers.setText(spannableUserFollowers, TextView.BufferType.SPANNABLE);
   }
@@ -120,14 +126,16 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
     int colorVariationNegative = ContextCompat.getColor(getActivity(), R.color.variationNegative);
 
     final Spannable spannableWatchersCount =
-        StringUtils.createVariationSpannableString(textVariation, watchers, watchersOlder, colorVariationPositive, colorVariationNegative);
+        StringUtils.createVariationSpannableString(textVariation, watchers, watchersOlder, colorVariationPositive,
+            colorVariationNegative);
 
     final Spannable spannableStargazersCount =
         StringUtils.createVariationSpannableString(textVariation, stargazers, stargazersOlder, colorVariationPositive,
             colorVariationNegative);
 
     final Spannable spannableForksCount =
-        StringUtils.createVariationSpannableString(textVariation, forks, forksOlder, colorVariationPositive, colorVariationNegative);
+        StringUtils.createVariationSpannableString(textVariation, forks, forksOlder, colorVariationPositive,
+            colorVariationNegative);
 
     watchersCount.setText(spannableWatchersCount, TextView.BufferType.SPANNABLE);
     starsCount.setText(spannableStargazersCount, TextView.BufferType.SPANNABLE);
@@ -151,8 +159,8 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
   }
 
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message), getString(action),
-        new BriefMessageListener() {
+    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message),
+        getString(action), new BriefMessageListener() {
           @Override public void onClick() {
             getPresenter().doLogin();
           }

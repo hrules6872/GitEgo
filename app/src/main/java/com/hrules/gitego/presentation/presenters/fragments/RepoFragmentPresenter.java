@@ -16,7 +16,9 @@
 
 package com.hrules.gitego.presentation.presenters.fragments;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import com.hrules.darealmvp.DRPresenter;
@@ -54,18 +56,17 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
     }
   }
 
-  @Override protected void onViewReady() {
+  @Override public void onViewReady(@Nullable Bundle savedInstanceState) {
     getView().updateList(new ArrayList<GitHubAuthRepo>());
-  }
-
-  @Override protected void onResume() {
-    super.onResume();
-    refreshData();
   }
 
   @Override public void unbind() {
     getView().unbind();
     super.unbind();
+  }
+
+  public void onResume() {
+    refreshData();
   }
 
   private void refreshData() {

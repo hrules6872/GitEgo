@@ -16,7 +16,9 @@
 
 package com.hrules.gitego.presentation.presenters.activities;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +43,7 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     App.getApplication().getAppComponent().inject(this);
   }
 
-  @Override public void onViewReady() {
+  @Override public void onViewReady(@Nullable Bundle savedInstanceState) {
     getView().removeNotification();
 
     Account account = accountsManager.getDefaultAccount();

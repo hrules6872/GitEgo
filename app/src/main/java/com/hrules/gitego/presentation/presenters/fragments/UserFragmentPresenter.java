@@ -57,14 +57,13 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
     }
   }
 
-  @Override protected void onResume() {
-    super.onResume();
-    refreshData();
-  }
-
   @Override public void unbind() {
     getView().unbind();
     super.unbind();
+  }
+
+  public void onResume() {
+    refreshData();
   }
 
   private void refreshData() {
