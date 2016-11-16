@@ -39,15 +39,14 @@ public class GetAccessTokenInteractor extends BaseInteractor implements GetAcces
   private String redirectUri;
   private Callback callback;
 
-  public GetAccessTokenInteractor(@NonNull InteractorExecutorInterface interactorExecutor,
-      @NonNull GitHubAPI gitHubAPI, @NonNull Network network) {
+  public GetAccessTokenInteractor(@NonNull InteractorExecutorInterface interactorExecutor, @NonNull GitHubAPI gitHubAPI,
+      @NonNull Network network) {
     super(interactorExecutor);
     this.gitHubAPI = gitHubAPI;
     this.network = network;
   }
 
-  @Override public void execute(@NonNull Intent intent, @NonNull String redirectUri,
-      @NonNull Callback callback) {
+  @Override public void execute(@NonNull Intent intent, @NonNull String redirectUri, @NonNull Callback callback) {
     this.intent = intent;
     this.redirectUri = redirectUri;
     this.callback = callback;
@@ -56,8 +55,7 @@ public class GetAccessTokenInteractor extends BaseInteractor implements GetAcces
   }
 
   @Override public void run() {
-    if (intent != null && intent.getData() != null && intent.getData().getScheme() != null && intent
-        .getData()
+    if (intent != null && intent.getData() != null && intent.getData().getScheme() != null && intent.getData()
         .getScheme()
         .equals(redirectUri)) {
 
@@ -72,12 +70,9 @@ public class GetAccessTokenInteractor extends BaseInteractor implements GetAcces
       params.put("code", code);
 
       try {
-        String response =
-            network.post(new RequestNetwork(GitHubAPI.GITHUB_OAUTH_TOKEN_URL, headers, params));
-        GitHubAccessTokenDto GitHubAccessTokenDto =
-            new GitHubAccessTokenDtoSerializer().deserialize(response);
-        GitHubAccessToken gitHubAccessToken =
-            new GitHubAccessTokenDtoToGitHubAccessToken().map(GitHubAccessTokenDto);
+        String response = network.post(new RequestNetwork(GitHubAPI.GITHUB_OAUTH_TOKEN_URL, headers, params));
+        GitHubAccessTokenDto GitHubAccessTokenDto = new GitHubAccessTokenDtoSerializer().deserialize(response);
+        GitHubAccessToken gitHubAccessToken = new GitHubAccessTokenDtoToGitHubAccessToken().map(GitHubAccessTokenDto);
         notifySuccess(gitHubAccessToken);
       } catch (Exception exception) {
         notifyFail(exception);
@@ -87,13 +82,13 @@ public class GetAccessTokenInteractor extends BaseInteractor implements GetAcces
     }
   }
 
-  private void notifySuccess(final GitHubAccessToken gitHubAccessToken) {
+  private void notifySuccess(@NonNull GitHubAccessToken gitHubAccessToken) {
     if (callback != null) {
       callback.onSuccess(gitHubAccessToken);
     }
   }
 
-  private void notifyFail(final Exception exception) {
+  private void notifyFail(@NonNull Exception exception) {
     if (callback != null) {
       callback.onFailure(exception);
     }

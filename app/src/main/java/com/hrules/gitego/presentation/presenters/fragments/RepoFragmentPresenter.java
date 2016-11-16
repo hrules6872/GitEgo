@@ -27,7 +27,6 @@ import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.domain.api.GitHubAPI;
-import com.hrules.gitego.domain.interactors.GetAuthRepoInteractor;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
@@ -43,7 +42,7 @@ import javax.inject.Inject;
 public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.RepoView> {
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
-  @Inject GetAuthRepoInteractor getAuthRepoInteractor;
+  @Inject GetAuthRepo getAuthRepo;
 
   @Override public void bind(@NonNull RepoView view) {
     super.bind(view);
@@ -71,9 +70,9 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
 
   private void refreshData() {
     Account account = gitHubAPI.getAccount();
-    if (account != null && (account.getToken() != null && !account.getToken().isEmpty())) {
+    if (account != null && !TextUtils.isEmpty(account.getToken())) {
       getView().showLoading();
-      getAuthRepoInteractor.execute(account.getToken(), new GetAuthRepo.Callback() {
+      getAuthRepo.execute(account.getToken(), new GetAuthRepo.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (response.size() > 0) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());

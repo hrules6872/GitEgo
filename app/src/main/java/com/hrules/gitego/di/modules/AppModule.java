@@ -28,7 +28,7 @@ import javax.inject.Singleton;
     this.application = application;
   }
 
-  @Provides public App provideApplication() {
+  @Provides public App providesApplication() {
     return application;
   }
 }

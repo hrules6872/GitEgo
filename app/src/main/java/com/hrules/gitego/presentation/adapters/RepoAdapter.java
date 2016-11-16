@@ -27,14 +27,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
-  private List<GitHubAuthRepo> items;
+  private final List<GitHubAuthRepo> items;
   private final RepoAdapterListener listener;
 
-  public RepoAdapter(@NonNull List<GitHubAuthRepo> items, @NonNull RepoAdapterListener listener) {
-    this.items = items;
+  public RepoAdapter(@NonNull RepoAdapterListener listener) {
+    this.items = new ArrayList<>();
     this.listener = listener;
   }
 
@@ -77,7 +78,8 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
   }
 
   public void update(@NonNull List<GitHubAuthRepo> list) {
-    this.items = list;
+    this.items.clear();
+    this.items.addAll(list);
     notifyDataSetChanged();
   }
 

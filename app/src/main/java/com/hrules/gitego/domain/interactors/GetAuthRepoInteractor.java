@@ -35,8 +35,7 @@ public class GetAuthRepoInteractor extends BaseInteractor implements GetAuthRepo
   private String access_token;
   private Callback callback;
 
-  public GetAuthRepoInteractor(@NonNull InteractorExecutorInterface interactorExecutor,
-      @NonNull Repository repository) {
+  public GetAuthRepoInteractor(@NonNull InteractorExecutorInterface interactorExecutor, @NonNull Repository repository) {
     super(interactorExecutor);
     this.repository = repository;
   }
@@ -52,22 +51,20 @@ public class GetAuthRepoInteractor extends BaseInteractor implements GetAuthRepo
     GetAuthRepoSpecification getAuthRepoSpecification = new GetAuthRepoSpecification();
     getAuthRepoSpecification.setAdditionalParams(access_token);
 
-    repository.query(getAuthRepoSpecification,
-        new RepositoryInterface.QueryCallback<GitHubAuthRepoDto>() {
-          @Override public void onSuccess(@NonNull List<GitHubAuthRepoDto> response) {
-            List<GitHubAuthRepo> list =
-                new ListMapper<>(new GitHubAuthRepoDtoToGitHubAuthRepo()).map(response);
-            notifySuccess(list);
-          }
+    repository.query(getAuthRepoSpecification, new RepositoryInterface.QueryCallback<GitHubAuthRepoDto>() {
+      @Override public void onSuccess(@NonNull List<GitHubAuthRepoDto> response) {
+        List<GitHubAuthRepo> list = new ListMapper<>(new GitHubAuthRepoDtoToGitHubAuthRepo()).map(response);
+        notifySuccess(list);
+      }
 
-          @Override public void onFailure(@NonNull Exception exception) {
-            notifyFail(exception);
-          }
+      @Override public void onFailure(@NonNull Exception exception) {
+        notifyFail(exception);
+      }
 
-          @Override public void onFinish() {
-            notifyFinish();
-          }
-        });
+      @Override public void onFinish() {
+        notifyFinish();
+      }
+    });
   }
 
   private void notifyFinish() {
@@ -76,13 +73,13 @@ public class GetAuthRepoInteractor extends BaseInteractor implements GetAuthRepo
     }
   }
 
-  private void notifySuccess(final List<GitHubAuthRepo> list) {
+  private void notifySuccess(@NonNull List<GitHubAuthRepo> list) {
     if (callback != null) {
       callback.onSuccess(list);
     }
   }
 
-  private void notifyFail(final Exception exception) {
+  private void notifyFail(@NonNull Exception exception) {
     if (callback != null) {
       callback.onFailure(exception);
     }

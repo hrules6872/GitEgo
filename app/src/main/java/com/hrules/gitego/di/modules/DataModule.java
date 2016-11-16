@@ -36,59 +36,57 @@ import dagger.Provides;
 import javax.inject.Named;
 
 @Module public class DataModule {
-  @Provides @Named("authUserRepository") Repository provideAuthUserRepository(
-      @Named("authUserBddDataSource") DataSource authUserBddDataSource,
-      @Named("authUserAPIDataSource") DataSource authUserAPIDataSource) {
+  @Provides @Named("authUserRepository") Repository providesAuthUserRepository(
+      @Named("authUserBddDataSource") DataSource authUserBddDataSource, @Named("authUserAPIDataSource") DataSource authUserAPIDataSource) {
     return new AuthUserRepository(authUserBddDataSource, authUserAPIDataSource);
   }
 
-  @Provides @Named("authUserBddDataSource") DataSource provideAuthUserBddDataSource(
-      Database database, @Named("authUserBddBasicCache") BasicCache cache) {
+  @Provides @Named("authUserBddDataSource") DataSource providesAuthUserBddDataSource(Database database,
+      @Named("authUserBddBasicCache") BasicCache cache) {
     return new AuthUserBddDataSource(database, cache);
   }
 
-  @Provides @Named("authUserAPIDataSource") DataSource provideAuthUserAPIDataSource(Network network,
+  @Provides @Named("authUserAPIDataSource") DataSource providesAuthUserAPIDataSource(Network network,
       @Named("authUserAPIBasicCache") BasicCache cache) {
     return new AuthUserAPIDataSource(network, cache);
   }
 
-  @Provides @Named("authRepoRepository") Repository provideAuthRepoRepository(
-      @Named("authRepoBddDataSource") DataSource authRepoBddDataSource,
-      @Named("authRepoAPIDataSource") DataSource authRepoAPIDataSource) {
+  @Provides @Named("authRepoRepository") Repository providesAuthRepoRepository(
+      @Named("authRepoBddDataSource") DataSource authRepoBddDataSource, @Named("authRepoAPIDataSource") DataSource authRepoAPIDataSource) {
     return new AuthUserRepository(authRepoBddDataSource, authRepoAPIDataSource);
   }
 
-  @Provides @Named("authRepoBddDataSource") DataSource provideAuthRepoBddDataSource(
-      Database database, @Named("authRepoBddBasicCache") BasicCache cache) {
+  @Provides @Named("authRepoBddDataSource") DataSource providesAuthRepoBddDataSource(Database database,
+      @Named("authRepoBddBasicCache") BasicCache cache) {
     return new AuthRepoBddDataSource(database, cache);
   }
 
-  @Provides @Named("authRepoAPIDataSource") DataSource provideAuthRepoAPIDataSource(Network network,
+  @Provides @Named("authRepoAPIDataSource") DataSource providesAuthRepoAPIDataSource(Network network,
       @Named("authRepoAPIBasicCache") BasicCache cache) {
     return new AuthRepoAPIDataSource(network, cache);
   }
 
-  @Provides Network provideNetwork() {
+  @Provides Network providesNetwork() {
     return new Network();
   }
 
-  @Provides Database provideDatabase(App application) {
+  @Provides Database providesDatabase(App application) {
     return Database.with(application);
   }
 
-  @Provides @Named("authUserBddBasicCache") BasicCache provideAuthUserBddBasicCache() {
+  @Provides @Named("authUserBddBasicCache") BasicCache providesAuthUserBddBasicCache() {
     return new AuthUserBddBasicCache();
   }
 
-  @Provides @Named("authUserAPIBasicCache") BasicCache provideAuthUserAPIBasicCache() {
+  @Provides @Named("authUserAPIBasicCache") BasicCache providesAuthUserAPIBasicCache() {
     return new AuthUserAPIBasicCache();
   }
 
-  @Provides @Named("authRepoBddBasicCache") BasicCache provideAuthRepoBddBasicCache() {
+  @Provides @Named("authRepoBddBasicCache") BasicCache providesAuthRepoBddBasicCache() {
     return new AuthRepoBddBasicCache();
   }
 
-  @Provides @Named("authRepoAPIBasicCache") BasicCache provideAuthRepoAPIBasicCache() {
+  @Provides @Named("authRepoAPIBasicCache") BasicCache providesAuthRepoAPIBasicCache() {
     return new AuthRepoAPIBasicCache();
   }
 }

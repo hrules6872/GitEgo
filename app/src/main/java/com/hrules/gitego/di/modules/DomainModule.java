@@ -23,6 +23,9 @@ import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.interactors.GetAccessTokenInteractor;
 import com.hrules.gitego.domain.interactors.GetAuthRepoInteractor;
 import com.hrules.gitego.domain.interactors.GetAuthUserInteractor;
+import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
+import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
+import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.threads.InteractorExecutor;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import dagger.Module;
@@ -30,32 +33,28 @@ import dagger.Provides;
 import javax.inject.Named;
 
 @Module public class DomainModule {
-  @Provides GitHubAPI provideGitHubAPI() {
-    return new GitHubAPI(BuildConfig.GITHUB_API_CLIENTID, BuildConfig.GITHUB_API_CLIENTSECRET,
-        BuildConfig.GITHUB_API_SCOPES);
+  @Provides GitHubAPI providesGitHubAPI() {
+    return new GitHubAPI(BuildConfig.GITHUB_API_CLIENTID, BuildConfig.GITHUB_API_CLIENTSECRET, BuildConfig.GITHUB_API_SCOPES);
   }
 
-  @Provides InteractorExecutor provideInteractorExecutor() {
+  @Provides InteractorExecutor providesInteractorExecutor() {
     return new InteractorExecutor();
   }
 
-  @Provides UIThreadExecutor provideUIThreadExecutor() {
+  @Provides UIThreadExecutor providesUIThreadExecutor() {
     return new UIThreadExecutor();
   }
 
-  @Provides GetAccessTokenInteractor provideGetAccessTokenInteractor(
-      InteractorExecutor interactorExecutor, GitHubAPI gitHubAPI, Network network) {
+  @Provides GetAccessToken providesGetAccessToken(InteractorExecutor interactorExecutor, GitHubAPI gitHubAPI, Network network) {
     return new GetAccessTokenInteractor(interactorExecutor, gitHubAPI, network);
   }
 
-  @Provides GetAuthUserInteractor provideGetAuthUserInteractor(
-      InteractorExecutor interactorExecutor,
+  @Provides GetAuthUser providesGetAuthUser(InteractorExecutor interactorExecutor,
       @Named("authUserRepository") Repository authUserRepository) {
     return new GetAuthUserInteractor(interactorExecutor, authUserRepository);
   }
 
-  @Provides GetAuthRepoInteractor provideGetAuthRepoInteractor(
-      InteractorExecutor interactorExecutor,
+  @Provides GetAuthRepo providesGetAuthRepo(InteractorExecutor interactorExecutor,
       @Named("authRepoRepository") Repository authRepoRepository) {
     return new GetAuthRepoInteractor(interactorExecutor, authRepoRepository);
   }

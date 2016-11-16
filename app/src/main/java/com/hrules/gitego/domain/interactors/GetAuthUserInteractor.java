@@ -35,8 +35,7 @@ public class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser
   private String access_token;
   private Callback callback;
 
-  public GetAuthUserInteractor(@NonNull InteractorExecutorInterface interactorExecutor,
-      @NonNull Repository repository) {
+  public GetAuthUserInteractor(@NonNull InteractorExecutorInterface interactorExecutor, @NonNull Repository repository) {
     super(interactorExecutor);
     this.repository = repository;
   }
@@ -52,22 +51,20 @@ public class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser
     GetAuthUserSpecification getAuthUserSpecification = new GetAuthUserSpecification();
     getAuthUserSpecification.setAdditionalParams(access_token);
 
-    repository.query(getAuthUserSpecification,
-        new RepositoryInterface.QueryCallback<GitHubAuthUserDto>() {
-          @Override public void onSuccess(@NonNull List<GitHubAuthUserDto> response) {
-            List<GitHubAuthUser> gitHubAuthUsers =
-                new ListMapper<>(new GitHubAuthUserDtoToGitHubAuthUser()).map(response);
-            notifySuccess(gitHubAuthUsers);
-          }
+    repository.query(getAuthUserSpecification, new RepositoryInterface.QueryCallback<GitHubAuthUserDto>() {
+      @Override public void onSuccess(@NonNull List<GitHubAuthUserDto> response) {
+        List<GitHubAuthUser> gitHubAuthUsers = new ListMapper<>(new GitHubAuthUserDtoToGitHubAuthUser()).map(response);
+        notifySuccess(gitHubAuthUsers);
+      }
 
-          @Override public void onFailure(@NonNull Exception exception) {
-            notifyFail(exception);
-          }
+      @Override public void onFailure(@NonNull Exception exception) {
+        notifyFail(exception);
+      }
 
-          @Override public void onFinish() {
-            notifyFinish();
-          }
-        });
+      @Override public void onFinish() {
+        notifyFinish();
+      }
+    });
   }
 
   private void notifyFinish() {
@@ -76,13 +73,13 @@ public class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser
     }
   }
 
-  private void notifySuccess(final List<GitHubAuthUser> gitHubAuthUsers) {
+  private void notifySuccess(@NonNull List<GitHubAuthUser> gitHubAuthUsers) {
     if (callback != null) {
       callback.onSuccess(gitHubAuthUsers);
     }
   }
 
-  private void notifyFail(final Exception exception) {
+  private void notifyFail(@NonNull Exception exception) {
     if (callback != null) {
       callback.onFailure(exception);
     }

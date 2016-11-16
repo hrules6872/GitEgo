@@ -48,7 +48,6 @@ import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoImplicationsDescendingComparator;
 import com.hrules.gitego.presentation.presenters.fragments.RepoFragmentPresenter;
 import com.hrules.gitego.presentation.views.activities.LoginActivityView;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -77,7 +76,7 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
         (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.itemRepoDivider_size),
             getResources().getDisplayMetrics()), false, false));
 
-    adapter = new RepoAdapter(new ArrayList<GitHubAuthRepo>(), new RepoAdapterListener() {
+    adapter = new RepoAdapter(new RepoAdapterListener() {
       @Override public void onListItemClick(int position, @NonNull View view) {
         getPresenter().onListItemClick(adapter.getItem(position));
       }

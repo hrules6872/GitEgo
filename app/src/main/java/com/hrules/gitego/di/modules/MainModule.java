@@ -23,11 +23,11 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module public class MainModule {
-  @Provides Preferences providePreferences(App application) {
+  @Provides Preferences providesPreferences(App application) {
     return new Preferences(application);
   }
 
-  @Provides AccountsManager provideAccountManager(App application) {
+  @Provides AccountsManager providesAccountManager(App application) {
     return new AccountsManager(application);
   }
 }

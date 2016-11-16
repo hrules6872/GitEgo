@@ -32,8 +32,6 @@ import com.hrules.gitego.R;
 import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.domain.api.GitHubAPI;
-import com.hrules.gitego.domain.interactors.GetAuthRepoInteractor;
-import com.hrules.gitego.domain.interactors.GetAuthUserInteractor;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
@@ -60,8 +58,8 @@ public class NotificationService extends Service {
 
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
-  @Inject GetAuthUserInteractor getAuthUserInteractor;
-  @Inject GetAuthRepoInteractor getAuthRepoInteractor;
+  @Inject GetAuthUser getAuthUser;
+  @Inject GetAuthRepo getAuthRepo;
   @Inject Preferences preferences;
 
   @Nullable @Override public IBinder onBind(Intent intent) {
@@ -96,8 +94,7 @@ public class NotificationService extends Service {
 
   private boolean isCheckedToday() {
     Calendar present = milliToCalendar(System.currentTimeMillis());
-    Calendar past = milliToCalendar(
-        preferences.getLong(PREFS_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
+    Calendar past = milliToCalendar(preferences.getLong(PREFS_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
     return TimeUnit.MILLISECONDS.toDays(present.getTimeInMillis() - past.getTimeInMillis()) <= 0;
   }
 
@@ -113,10 +110,10 @@ public class NotificationService extends Service {
 
   private void checkDataChanges() {
     Account account = gitHubAPI.getAccount();
-    if (account != null && (account.getToken() != null && !account.getToken().isEmpty())) {
+    if (account != null && !TextUtils.isEmpty(account.getToken())) {
       setCheckedToday();
 
-      getAuthUserInteractor.execute(account.getToken(), new GetAuthUser.Callback() {
+      getAuthUser.execute(account.getToken(), new GetAuthUser.Callback() {
         GitHubAuthUser gitHubAuthUser;
 
         @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
@@ -140,7 +137,7 @@ public class NotificationService extends Service {
         }
       });
 
-      getAuthRepoInteractor.execute(account.getToken(), new GetAuthRepo.Callback() {
+      getAuthRepo.execute(account.getToken(), new GetAuthRepo.Callback() {
         List<GitHubAuthRepo> list;
 
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {

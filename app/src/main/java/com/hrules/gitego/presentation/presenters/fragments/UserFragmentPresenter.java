@@ -27,8 +27,6 @@ import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.domain.api.GitHubAPI;
-import com.hrules.gitego.domain.interactors.GetAuthRepoInteractor;
-import com.hrules.gitego.domain.interactors.GetAuthUserInteractor;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
@@ -46,8 +44,8 @@ import javax.inject.Inject;
 public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.UserView> {
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
-  @Inject GetAuthUserInteractor getAuthUserInteractor;
-  @Inject GetAuthRepoInteractor getAuthRepoInteractor;
+  @Inject GetAuthUser getAuthUser;
+  @Inject GetAuthRepo getAuthRepo;
 
   @Override public void bind(@NonNull UserView view) {
     super.bind(view);
@@ -71,11 +69,11 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
 
   private void refreshData() {
     Account account = gitHubAPI.getAccount();
-    if (account != null && (account.getToken() != null && !account.getToken().isEmpty())) {
+    if (account != null && !TextUtils.isEmpty(account.getToken())) {
       getView().setUserLogin(account.getUser());
 
       getView().showLoading();
-      getAuthUserInteractor.execute(account.getToken(), new GetAuthUser.Callback() {
+      getAuthUser.execute(account.getToken(), new GetAuthUser.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
           if (response.size() > 0) {
             Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
@@ -113,7 +111,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
       });
 
       getView().showLoading();
-      getAuthRepoInteractor.execute(account.getToken(), new GetAuthRepo.Callback() {
+      getAuthRepo.execute(account.getToken(), new GetAuthRepo.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (response.size() > 0) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());

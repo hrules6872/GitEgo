@@ -30,8 +30,6 @@ import com.hrules.gitego.R;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.domain.api.GitHubAPI;
-import com.hrules.gitego.domain.interactors.GetAccessTokenInteractor;
-import com.hrules.gitego.domain.interactors.GetAuthUserInteractor;
 import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
@@ -46,8 +44,8 @@ import javax.inject.Inject;
 
 public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.LoginView> {
   @Inject GitHubAPI gitHubAPI;
-  @Inject GetAccessTokenInteractor getAccessTokenInteractor;
-  @Inject GetAuthUserInteractor getAuthUserInteractor;
+  @Inject GetAccessToken getAccessToken;
+  @Inject GetAuthUser getAuthUser;
   @Inject Lazy<AccountsManager> accountsManager;
 
   private boolean showLoginFail = false;
@@ -64,9 +62,9 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
     showLoginFail = false;
     showNetworkFail = false;
 
-    getAccessTokenInteractor.execute(intent, BuildConfig.GITHUB_API_CALLBACKURL, new GetAccessToken.Callback() {
+    getAccessToken.execute(intent, BuildConfig.GITHUB_API_CALLBACKURL, new GetAccessToken.Callback() {
       @Override public void onSuccess(@NonNull final GitHubAccessToken gitHubAccessToken) {
-        getAuthUserInteractor.execute(gitHubAccessToken.getAccess_token(), new GetAuthUser.Callback() {
+        getAuthUser.execute(gitHubAccessToken.getAccess_token(), new GetAuthUser.Callback() {
           @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
             if (response.size() > 0) {
               Collections.sort(response, new GitHubAuthUserDateDescendingComparator());

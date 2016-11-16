@@ -18,21 +18,20 @@ package com.hrules.gitego.di.components;
 
 import com.hrules.gitego.di.modules.DomainModule;
 import com.hrules.gitego.domain.api.GitHubAPI;
-import com.hrules.gitego.domain.interactors.GetAccessTokenInteractor;
-import com.hrules.gitego.domain.interactors.GetAuthUserInteractor;
+import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
+import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.threads.InteractorExecutor;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import dagger.Component;
 
-@Component(dependencies = DataComponent.class, modules = DomainModule.class)
-interface DomainComponent {
+@Component(dependencies = DataComponent.class, modules = DomainModule.class) interface DomainComponent {
   GitHubAPI gitHubAPI();
-
-  GetAccessTokenInteractor getAccessTokenInteractor();
 
   InteractorExecutor interactorExecutor();
 
   UIThreadExecutor uiThreadExecutor();
 
-  GetAuthUserInteractor getAuthUserInteractor();
+  GetAccessToken getAccessToken();
+
+  GetAuthUser getAuthUser();
 }
