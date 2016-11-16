@@ -16,18 +16,5 @@
 
 package com.hrules.gitego.domain.specifications.base;
 
-import android.support.annotation.NonNull;
-
-public abstract class Specification<T> {
-  private SpecificationParams params;
-
-  public abstract T get();
-
-  public SpecificationParams getParams() {
-    return params;
-  }
-
-  public void setParams(@NonNull SpecificationParams params) {
-    this.params = params;
-  }
+public class SpecificationParams {
 }

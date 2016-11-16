@@ -25,6 +25,7 @@ import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.mappers.GitHubAuthUserDtoToGitHubAuthUser;
 import com.hrules.gitego.domain.models.mappers.base.ListMapper;
 import com.hrules.gitego.domain.specifications.GetAuthUserSpecification;
+import com.hrules.gitego.domain.specifications.params.GetAuthUserSpecificationParams;
 import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import java.util.List;
@@ -35,7 +36,8 @@ public class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser
   private String access_token;
   private Callback callback;
 
-  public GetAuthUserInteractor(@NonNull InteractorExecutorInterface interactorExecutor, @NonNull Repository repository) {
+  public GetAuthUserInteractor(@NonNull InteractorExecutorInterface interactorExecutor,
+      @NonNull Repository repository) {
     super(interactorExecutor);
     this.repository = repository;
   }
@@ -49,7 +51,7 @@ public class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser
 
   @Override public void run() {
     GetAuthUserSpecification getAuthUserSpecification = new GetAuthUserSpecification();
-    getAuthUserSpecification.setAdditionalParams(access_token);
+    getAuthUserSpecification.setParams(new GetAuthUserSpecificationParams(access_token));
 
     repository.query(getAuthUserSpecification, new RepositoryInterface.QueryCallback<GitHubAuthUserDto>() {
       @Override public void onSuccess(@NonNull List<GitHubAuthUserDto> response) {

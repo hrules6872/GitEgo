@@ -19,13 +19,15 @@ package com.hrules.gitego.data.repository.datasources.api.specifications;
 import com.hrules.gitego.data.network.NetworkHelper;
 import com.hrules.gitego.data.network.RequestNetwork;
 import com.hrules.gitego.domain.specifications.GetAuthRepoSubscribersSpecification;
+import com.hrules.gitego.domain.specifications.params.GetAuthRepoSubscribersSpecificationParams;
 
 public class AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification
     extends GetAuthRepoSubscribersSpecification<RequestNetwork> {
   @Override public RequestNetwork get() {
-    String access_token = (String) getAdditionalParams()[0];
-    String subscribers_url = (String) getAdditionalParams()[1];
-    return new RequestNetwork(subscribers_url, NetworkHelper.makeAuthorizationHeader(access_token),
-        null);
+    GetAuthRepoSubscribersSpecificationParams params = (GetAuthRepoSubscribersSpecificationParams) getParams();
+
+    String access_token = params.getAccess_token();
+    String subscribers_url = params.getSubscribers_url();
+    return new RequestNetwork(subscribers_url, NetworkHelper.makeAuthorizationHeader(access_token), null);
   }
 }

@@ -14,20 +14,26 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.specifications.base;
+package com.hrules.gitego.domain.specifications.params;
 
 import android.support.annotation.NonNull;
+import com.hrules.gitego.domain.specifications.base.SpecificationParams;
 
-public abstract class Specification<T> {
-  private SpecificationParams params;
+public class GetAuthRepoSubscribersSpecificationParams extends SpecificationParams {
+  private final String access_token;
+  private final String subscribers_url;
 
-  public abstract T get();
-
-  public SpecificationParams getParams() {
-    return params;
+  public GetAuthRepoSubscribersSpecificationParams(@NonNull String access_token, @NonNull String subscribers_url) {
+    this.access_token = access_token;
+    this.subscribers_url = subscribers_url;
   }
 
-  public void setParams(@NonNull SpecificationParams params) {
-    this.params = params;
+  public String getAccess_token() {
+    return access_token;
+  }
+
+  public String getSubscribers_url() {
+    return subscribers_url;
   }
 }
+
