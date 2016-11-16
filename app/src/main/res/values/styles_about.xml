@@ -19,38 +19,41 @@
 
   <style name="AppThemeAbout" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="android:windowBackground">@color/greyBackground</item>
+
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
-  <style name="AboutCardView">
+  <style name="CardViewAbout">
     <item name="android:layout_marginLeft">@dimen/default_margin</item>
     <item name="android:layout_marginRight">@dimen/default_margin</item>
     <item name="android:layout_marginBottom">@dimen/default_margin</item>
     <item name="android:padding">@dimen/default_margin</item>
+    <item name="cardBackgroundColor">@color/about_cardViewBackground</item>
   </style>
 
-  <style name="AboutAppTitle">
+  <style name="AppTitleAbout">
     <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
     <item name="android:textStyle">bold</item>
-    <item name="android:textColor">@color/title_textColor</item>
+    <item name="android:textColor">@color/about_titleTextColor</item>
     <item name="android:gravity">center</item>
   </style>
 
-  <style name="AboutAppVersion">
+  <style name="AppVersionAbout">
     <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     <item name="android:gravity">center</item>
   </style>
 
-  <style name="AboutTitle">
-    <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
-    <item name="android:textColor">@color/title_textColor</item>
+  <style name="CardViewTitleAbout">
+    <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    <item name="android:textColor">@color/about_titleTextColor</item>
     <item name="android:layout_margin">@dimen/default_margin</item>
+    <item name="android:textStyle">bold</item>
   </style>
 
-  <style name="AboutButton" parent="@style/Widget.AppCompat.Button.Borderless">
+  <style name="CardViewButtonAbout" parent="@style/Widget.AppCompat.Button.Borderless">
     <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     <item name="android:gravity">left|center_vertical</item>
-    <item name="android:layout_margin">0dp</item>
+    <item name="android:layout_marginLeft">@dimen/about_buttonMarginLeftHack</item>
   </style>
 </resources>

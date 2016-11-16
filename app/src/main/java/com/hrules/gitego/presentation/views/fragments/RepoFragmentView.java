@@ -72,9 +72,8 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
 
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-    recyclerView.addItemDecoration(new SpaceItemDecoration(
-        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.itemRepoDivider_size),
-            getResources().getDisplayMetrics()), false, false));
+    recyclerView.addItemDecoration(new SpaceItemDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+        getResources().getDimension(R.dimen.itemRepoDivider_size), getResources().getDisplayMetrics()), false, false));
 
     adapter = new RepoAdapter(new RepoAdapterListener() {
       @Override public void onListItemClick(int position, @NonNull View view) {
@@ -123,15 +122,16 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
     int colorVariationNegative = ContextCompat.getColor(getActivity(), R.color.variationNegative);
 
     for (GitHubAuthRepo item : list) {
-      item.setWatchers_countSpannable(StringUtils.createVariationSpannableString(textVariation, item.getWatchers_count(),
-          item.getGitHubAuthRepoOlder().getWatchers_count(), colorVariationPositive, colorVariationNegative));
+      item.setWatchers_countSpannable(
+          StringUtils.createVariationSpannableString(textVariation, item.getWatchers_count(),
+              item.getGitHubAuthRepoOlder().getWatchers_count(), colorVariationPositive, colorVariationNegative));
 
-      item.setStargazers_countSpannable(StringUtils.createVariationSpannableString(textVariation, item.getStargazers_count(),
-          item.getGitHubAuthRepoOlder().getStargazers_count(), colorVariationPositive, colorVariationNegative));
+      item.setStargazers_countSpannable(
+          StringUtils.createVariationSpannableString(textVariation, item.getStargazers_count(),
+              item.getGitHubAuthRepoOlder().getStargazers_count(), colorVariationPositive, colorVariationNegative));
 
-      item.setForks_countSpannable(
-          StringUtils.createVariationSpannableString(textVariation, item.getForks_count(), item.getGitHubAuthRepoOlder().getForks_count(),
-              colorVariationPositive, colorVariationNegative));
+      item.setForks_countSpannable(StringUtils.createVariationSpannableString(textVariation, item.getForks_count(),
+          item.getGitHubAuthRepoOlder().getForks_count(), colorVariationPositive, colorVariationNegative));
     }
 
     Collections.sort(list, new GitHubAuthRepoImplicationsDescendingComparator());
@@ -174,8 +174,8 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
   }
 
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message), getString(action),
-        new BriefMessageListener() {
+    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message),
+        getString(action), new BriefMessageListener() {
           @Override public void onClick() {
             getPresenter().doLogin();
           }

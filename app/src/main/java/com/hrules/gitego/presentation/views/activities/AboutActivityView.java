@@ -43,6 +43,7 @@ public class AboutActivityView extends DRAppCompatActivity<AboutActivityPresente
 
   @Override protected void initializeViews() {
     ButterKnife.bind(this);
+
     setSupportActionBar(toolbar);
     ActionBar actionBar = getSupportActionBar();
     if (actionBar != null) {
@@ -64,15 +65,16 @@ public class AboutActivityView extends DRAppCompatActivity<AboutActivityPresente
     return super.onOptionsItemSelected(item);
   }
 
-  @OnClick({ R.id.about_rateIt, R.id.about_sendFeedback, R.id.about_moreApps, R.id.about_twitter }) void onClickButton(Button button) {
+  @OnClick({ R.id.about_rateIt, R.id.about_sendFeedback, R.id.about_moreApps, R.id.about_twitter }) void onClickButton(
+      Button button) {
     getPresenter().onClickButton(button);
   }
 
   @Override public void goToPlayStore() {
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_playStoreURL))));
-    } catch (Exception ignored) {
-      showUnknownErrorToast();
+    } catch (Exception e) {
+      showUnknownError();
     }
   }
 
@@ -83,20 +85,20 @@ public class AboutActivityView extends DRAppCompatActivity<AboutActivityPresente
   @Override public void goToPlayStoreDeveloper() {
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_developerPlayStoreURL))));
-    } catch (Exception ignored) {
-      showUnknownErrorToast();
+    } catch (Exception e) {
+      showUnknownError();
     }
   }
 
   @Override public void goToTwitterDeveloper() {
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_developerTwitterURL))));
-    } catch (Exception ignored) {
-      showUnknownErrorToast();
+    } catch (Exception e) {
+      showUnknownError();
     }
   }
 
-  private void showUnknownErrorToast() {
+  private void showUnknownError() {
     Toast.makeText(this, getString(R.string.about_unknownError), Toast.LENGTH_SHORT).show();
   }
 }

@@ -17,4 +17,5 @@
 
 <resources>
   <dimen name="about_appIconSize">64dp</dimen>
+  <dimen name="about_buttonMarginLeftHack">-4dp</dimen>
 </resources>
