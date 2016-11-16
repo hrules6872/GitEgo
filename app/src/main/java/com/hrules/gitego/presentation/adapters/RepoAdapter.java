@@ -16,7 +16,11 @@
 
 package com.hrules.gitego.presentation.adapters;
 
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -68,9 +72,29 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
     GitHubAuthRepo item = items.get(position);
     holder.repoName.setText(item.getName());
     holder.repoFork.setVisibility(item.isFork() ? View.VISIBLE : View.GONE);
+
     holder.watchersCount.setText(item.getWatchers_countSpannable());
+    holder.watchersCount.setEnabled(item.getWatchers_count() != 0);
+    setDrawableEnabled(holder.watchersCount, 0, item.getWatchers_count() != 0);
+
     holder.starsGazersCount.setText(item.getStargazers_countSpannable());
+    holder.starsGazersCount.setEnabled(item.getStargazers_count() != 0);
+    setDrawableEnabled(holder.starsGazersCount, 0, item.getStargazers_count() != 0);
+
     holder.forksCount.setText(item.getForks_countSpannable());
+    holder.forksCount.setEnabled(item.getForks_count() != 0);
+    setDrawableEnabled(holder.forksCount, 0, item.getForks_count() != 0);
+  }
+
+  private void setDrawableEnabled(@NonNull TextView textView, int drawablePosition, boolean enabled) {
+    Drawable[] drawables = textView.getCompoundDrawables();
+    if (drawables.length >= drawablePosition && drawables[drawablePosition] != null) {
+      Drawable drawable = drawables[drawablePosition];
+      drawable = DrawableCompat.wrap(drawable);
+      DrawableCompat.setTint(drawable, ContextCompat.getColor(textView.getContext(), R.color.repoItemDrawableDisabled));
+      DrawableCompat.setTintMode(drawable, enabled ? PorterDuff.Mode.DST : PorterDuff.Mode.SRC_ATOP);
+      textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+    }
   }
 
   @Override public int getItemCount() {

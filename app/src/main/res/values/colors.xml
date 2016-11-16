@@ -24,4 +24,5 @@
   <color name="variationNegative">#d32f2f</color>
   <color name="variationPositive">#388E3C</color>
   <color name="repoItemSeparator">#cccccc</color>
+  <color name="repoItemDrawableDisabled">#cccccc</color>
 </resources>
