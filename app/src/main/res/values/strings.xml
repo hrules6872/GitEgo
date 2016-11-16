@@ -41,7 +41,7 @@
   <string name="user_watchers">Watchers</string>
   <string name="user_starsGazers">Stars</string>
   <string name="user_forks">Forks</string>
-  <string formatted="false" name="user_followersFormatted">%s followers %s</string>
+  <string name="user_followersFormatted">%1$s followers %2$s</string>
 
   <!--repo-->
   <string name="repo_fork">Fork</string>
@@ -53,7 +53,7 @@
   <string name="notification_message">Changes detected!</string>
 
   <!--general-->
-  <string formatted="false" name="text_variationFormatted">%s %s</string>
+  <string name="text_variationFormatted">%1$s %2$s</string>
 
   <!--app utils-->
   <string name="text_appVersionFormatted">version %1$s (%2$s)</string>
