@@ -91,4 +91,9 @@ dependencies {
   otherDependencies.each {
     add("annotationProcessor", it.value)
   }
+
+  // debug build
+  debugDependencies.each {
+    add("debugCompile", it.value)
+  }
 }

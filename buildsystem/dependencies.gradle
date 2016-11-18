@@ -41,4 +41,8 @@ ext {
   // test dependencies
   testDependencies = [junit : "junit:junit:4.+",
                       runner: "com.android.support.test:runner:0.+"]
+
+  // debug build dependencies
+  debugDBVersion = '0.2.+'
+  debugDependencies = [debugDB: "com.amitshekhar.android:debug-db:${debugDBVersion}"]
 }
