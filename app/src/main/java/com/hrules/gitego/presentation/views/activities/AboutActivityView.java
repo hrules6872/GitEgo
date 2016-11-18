@@ -65,8 +65,9 @@ public class AboutActivityView extends DRAppCompatActivity<AboutActivityPresente
     return super.onOptionsItemSelected(item);
   }
 
-  @OnClick({ R.id.about_rateIt, R.id.about_sendFeedback, R.id.about_moreApps, R.id.about_twitter }) void onClickButton(
-      Button button) {
+  @OnClick({
+      R.id.about_rateIt, R.id.about_sendFeedback, R.id.about_twitter, R.id.about_moreApps, R.id.about_sourceCode
+  }) void onClickButton(Button button) {
     getPresenter().onClickButton(button);
   }
 
@@ -93,6 +94,14 @@ public class AboutActivityView extends DRAppCompatActivity<AboutActivityPresente
   @Override public void goToTwitterDeveloper() {
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_developerTwitterURL))));
+    } catch (Exception e) {
+      showUnknownError();
+    }
+  }
+
+  @Override public void goToSourceCode() {
+    try {
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_sourceCodeURL))));
     } catch (Exception e) {
       showUnknownError();
     }

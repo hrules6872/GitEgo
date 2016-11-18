@@ -158,6 +158,14 @@
               android:text="@string/about_moreApps"
               style="@style/CardViewButtonAbout"
               />
+
+          <Button
+              android:id="@+id/about_sourceCode"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/about_sourceCode"
+              style="@style/CardViewButtonAbout"
+              />
         </LinearLayout>
       </android.support.v7.widget.CardView>
 

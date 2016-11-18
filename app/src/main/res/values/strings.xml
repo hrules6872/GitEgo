@@ -15,10 +15,6 @@
   -->
 
 <resources>
-  <string name="app_website">https://github.com/hrules6872/GitEgo</string>
-  <string name="app_playStoreURL">https://play.google.com/store/apps/details?id=com.hrules.gitego
-  </string>
-
   <string name="activity_aboutTitle">About</string>
 
   <!--login-->

@@ -41,6 +41,10 @@ public class AboutActivityPresenter extends DRPresenter<AboutActivityPresenter.A
         getView().goToTwitterDeveloper();
         break;
 
+      case R.id.about_sourceCode:
+        getView().goToSourceCode();
+        break;
+
       default:
         throw new UnsupportedOperationException();
     }
@@ -54,5 +58,7 @@ public class AboutActivityPresenter extends DRPresenter<AboutActivityPresenter.A
     void goToPlayStoreDeveloper();
 
     void goToTwitterDeveloper();
+
+    void goToSourceCode();
   }
 }
