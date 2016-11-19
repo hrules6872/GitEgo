@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.hrules.darealmvp.DRAppCompatActivity;
+import com.hrules.gitego.App;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.communicator.BoolStateMessage;
 import com.hrules.gitego.presentation.communicator.CommunicatorConstants;
@@ -37,7 +38,7 @@ import com.hrules.gitego.presentation.presenters.activities.MainActivityPresente
 import com.hrules.gitego.presentation.views.fragments.RepoFragmentView;
 import com.hrules.gitego.presentation.views.fragments.UserFragmentView;
 import com.hrules.gitego.services.NotificationService;
-import com.hrules.gitego.services.NotificationServiceReceiver;
+import com.hrules.gitego.services.NotificationUtils;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter, MainActivityPresenter.MainView>
@@ -95,11 +96,11 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
   }
 
   @Override public void startNotificationServiceReceiver() {
-    sendBroadcast(new Intent(NotificationServiceReceiver.ACTION_START_NOTIFICATION_SERVICE));
+    NotificationUtils.startNotificationService(App.getApplication());
   }
 
   @Override public void stopNotificationServiceReceiver() {
-    sendBroadcast(new Intent(NotificationServiceReceiver.ACTION_STOP_NOTIFICATION_SERVICE));
+    NotificationUtils.stopNotificationService(App.getApplication());
   }
 
   @Override public void removeNotification() {

@@ -71,8 +71,8 @@
         android:enabled="true"
         android:name=".services.NotificationServiceReceiver">
       <intent-filter>
-        <action android:name="com.hrules.gitego.START_NOTIFICATION_SERVICE"/>
-        <action android:name="com.hrules.gitego.STOP_NOTIFICATION_SERVICE"/>
+        <action android:name="com.hrules.gitego.NOTIFICATION_SERVICE_START"/>
+        <action android:name="com.hrules.gitego.NOTIFICATION_SERVICE_STOP"/>
       </intent-filter>
     </receiver>
   </application>

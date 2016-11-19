@@ -16,11 +16,13 @@
 
 package com.hrules.gitego.services;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -49,12 +51,13 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 public class NotificationService extends Service {
-  private static final String PREFS_CHECKED_TODAY = "PREFS_CHECKED_TODAY";
+  private static final String PREFS_NOTIFICATION_CHECKED_TODAY = "PREFS_NOTIFICATION_CHECKED_TODAY";
 
   public static final int SERVICE_REQUEST_CODE = 1;
   public static final int NOTIFICATION_ID = 1;
   public static final int DEFAULT_ALARM_HOUR = 11;
   public static final int DEFAULT_ALARM_MINUTE = 0;
+  public static final int DEFAULT_ALARM_SECONDS = 0;
 
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
@@ -77,6 +80,7 @@ public class NotificationService extends Service {
       init();
       checkDataChanges();
     }
+    startAgainNotificationAlarmOnlyForAPI23OrAbove();
     stopSelf(startId);
     return Service.START_NOT_STICKY;
   }
@@ -89,12 +93,13 @@ public class NotificationService extends Service {
   }
 
   private void setCheckedToday() {
-    preferences.save(PREFS_CHECKED_TODAY, System.currentTimeMillis());
+    preferences.save(PREFS_NOTIFICATION_CHECKED_TODAY, System.currentTimeMillis());
   }
 
   private boolean isCheckedToday() {
     Calendar present = milliToCalendar(System.currentTimeMillis());
-    Calendar past = milliToCalendar(preferences.getLong(PREFS_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
+    Calendar past = milliToCalendar(
+        preferences.getLong(PREFS_NOTIFICATION_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
     return TimeUnit.MILLISECONDS.toDays(present.getTimeInMillis() - past.getTimeInMillis()) <= 0;
   }
 
@@ -196,6 +201,15 @@ public class NotificationService extends Service {
           .setContentIntent(pendingIntent);
 
       ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(NOTIFICATION_ID, builder.build());
+    }
+  }
+
+  private void startAgainNotificationAlarmOnlyForAPI23OrAbove() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      long triggerAtMillis = NotificationUtils.getNextNotificationTriggerAtMillis();
+      PendingIntent pendingIntent = NotificationUtils.getNotificationPendingIntent(App.getApplication());
+      AlarmManager alarmManager = (AlarmManager) App.getApplication().getSystemService(Context.ALARM_SERVICE);
+      alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
     }
   }
 }

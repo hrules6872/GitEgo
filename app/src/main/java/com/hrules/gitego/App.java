@@ -17,14 +17,11 @@
 package com.hrules.gitego;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.di.components.AppComponent;
 import com.hrules.gitego.di.components.DaggerAppComponent;
 import com.hrules.gitego.di.modules.AppModule;
-import com.hrules.gitego.services.NotificationServiceReceiver;
+import com.hrules.gitego.services.NotificationUtils;
 import javax.inject.Inject;
 
 public class App extends Application {
@@ -41,7 +38,7 @@ public class App extends Application {
     initComponents();
 
     if (preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT)) {
-      startNotificationService(this);
+      NotificationUtils.startNotificationService(this);
     }
   }
 
@@ -56,9 +53,5 @@ public class App extends Application {
 
   public AppComponent getAppComponent() {
     return appComponent;
-  }
-
-  private void startNotificationService(@NonNull Context context) {
-    context.sendBroadcast(new Intent(NotificationServiceReceiver.ACTION_START_NOTIFICATION_SERVICE));
   }
 }
