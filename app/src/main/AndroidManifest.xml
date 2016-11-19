@@ -40,7 +40,8 @@
     <activity
         android:launchMode="singleInstance"
         android:name=".presentation.views.activities.LoginActivityView"
-    >
+        android:theme="@style/AppThemeLogin"
+        >
       <intent-filter
           android:autoVerify="true"
           tools:ignore="UnusedAttribute">
@@ -53,7 +54,8 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".presentation.views.activities.AboutActivityView"
+    <activity
+        android:name=".presentation.views.activities.AboutActivityView"
         android:theme="@style/AppThemeAbout"/>
 
     <service android:name=".services.NotificationService"/>

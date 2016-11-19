@@ -19,8 +19,9 @@
   <color name="colorPrimary">#fff4f4f4</color>
   <color name="colorAccent">#ff4078bf</color>
   <color name="windowBackground">#ffffffff</color>
-  <color name="greyBackground">#fff4f4f4</color>
-  <color name="textHighlighted">#ff4078bf</color>
+  <color name="greyBackground">@color/colorPrimary</color>
+  <color name="accentBackground">@color/colorAccent</color>
+  <color name="textHighlighted">@color/colorAccent</color>
   <color name="variationNegative">#d32f2f</color>
   <color name="variationPositive">#388E3C</color>
   <color name="repoItemSeparator">#cccccc</color>
