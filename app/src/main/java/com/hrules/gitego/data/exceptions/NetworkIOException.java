@@ -17,4 +17,7 @@
 package com.hrules.gitego.data.exceptions;
 
 public class NetworkIOException extends Exception {
+  public NetworkIOException(String detailMessage) {
+    super(detailMessage);
+  }
 }

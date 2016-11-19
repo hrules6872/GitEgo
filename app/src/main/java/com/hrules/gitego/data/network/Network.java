@@ -47,7 +47,7 @@ public class Network {
       if (!response.isSuccessful()) throw new NetworkUnauthorizedException();
       return response.body().string();
     } catch (IOException e) {
-      throw new NetworkIOException();
+      throw new NetworkIOException(e.getMessage());
     }
   }
 
@@ -62,7 +62,7 @@ public class Network {
       if (!response.isSuccessful()) throw new NetworkUnauthorizedException();
       return response.body().string();
     } catch (IOException e) {
-      throw new NetworkIOException();
+      throw new NetworkIOException(e.getMessage());
     }
   }
 
