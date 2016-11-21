@@ -98,7 +98,6 @@
           <TextView
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:clickable="true"
               android:text="@string/about_information"
               style="@style/CardViewTitleAbout"
               />
@@ -138,7 +137,6 @@
           <TextView
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:clickable="true"
               android:text="@string/about_developer"
               style="@style/CardViewTitleAbout"
               />
@@ -168,10 +166,6 @@
               />
         </LinearLayout>
       </android.support.v7.widget.CardView>
-
     </LinearLayout>
-
   </ScrollView>
-
-
 </LinearLayout>
