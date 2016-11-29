@@ -119,7 +119,7 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
     getView().showBriefMessage(R.string.error_networkFail);
   }
 
-  public void onClickButton(Button button) {
+  public void onClickButton(@NonNull Button button) {
     switch (button.getId()) {
       case R.id.login:
         getView().launchOAuthLogin(gitHubAPI);
@@ -130,7 +130,7 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
     }
   }
 
-  public void onClickTextView(TextView textView) {
+  public void onClickTextView(@NonNull TextView textView) {
     switch (textView.getId()) {
       case R.id.about:
         getView().launchAboutActivity();

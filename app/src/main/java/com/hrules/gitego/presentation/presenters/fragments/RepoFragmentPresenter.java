@@ -121,7 +121,7 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
     getView().launchLoginActivity();
   }
 
-  public void onListItemClick(GitHubAuthRepo item) {
+  public void onListItemClick(@NonNull GitHubAuthRepo item) {
     getView().launchBrowser(item.getHtml_url());
   }
 
