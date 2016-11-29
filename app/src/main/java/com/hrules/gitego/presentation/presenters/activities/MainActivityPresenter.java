@@ -54,10 +54,6 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     }
   }
 
-  private void doLogin() {
-    getView().launchLoginActivity();
-  }
-
   public void onCreateOptionsMenu(@NonNull Menu menu) {
     menu.findItem(R.id.menu_notifications)
         .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS,
@@ -89,6 +85,10 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
       default:
         throw new UnsupportedOperationException();
     }
+  }
+
+  private void doLogin() {
+    getView().launchLoginActivity();
   }
 
   public interface MainView extends DRView {

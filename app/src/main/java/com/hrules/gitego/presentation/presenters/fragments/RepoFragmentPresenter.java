@@ -61,7 +61,7 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
     getView().updateList(new ArrayList<GitHubAuthRepo>());
   }
 
-  public void onResume() {
+  public void onViewResume() {
     refreshData();
   }
 

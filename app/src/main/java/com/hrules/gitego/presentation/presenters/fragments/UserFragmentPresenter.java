@@ -58,7 +58,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
     }
   }
 
-  public void onResume() {
+  public void onViewResume() {
     refreshData();
   }
 

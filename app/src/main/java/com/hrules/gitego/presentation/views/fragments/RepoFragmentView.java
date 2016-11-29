@@ -108,7 +108,7 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
 
   @Override public void onResume() {
     super.onResume();
-    getPresenter().onResume();
+    getPresenter().onViewResume();
   }
 
   @Override public void onDestroyView() {

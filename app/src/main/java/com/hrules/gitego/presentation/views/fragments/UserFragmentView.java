@@ -79,7 +79,7 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
 
   @Override public void onResume() {
     super.onResume();
-    getPresenter().onResume();
+    getPresenter().onViewResume();
   }
 
   @Override public void onDestroyView() {
