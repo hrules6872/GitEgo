@@ -61,11 +61,6 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
     getView().updateList(new ArrayList<GitHubAuthRepo>());
   }
 
-  @Override public void unbind() {
-    getView().unbind();
-    super.unbind();
-  }
-
   public void onResume() {
     refreshData();
   }
@@ -146,7 +141,5 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
     void showBriefMessage(@StringRes int message);
 
     void showBriefMessageAction(@StringRes int message, @StringRes int action);
-
-    void unbind();
   }
 }

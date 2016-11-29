@@ -82,6 +82,13 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
     getPresenter().onResume();
   }
 
+  @Override public void onDestroyView() {
+    super.onDestroyView();
+    if (unbinder != null) {
+      unbinder.unbind();
+    }
+  }
+
   public void launchLoginActivity() {
     startActivity(new Intent(getActivity(), LoginActivityView.class));
     getActivity().finish();
@@ -165,11 +172,5 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
             getPresenter().doLogin();
           }
         });
-  }
-
-  @Override public void unbind() {
-    if (unbinder != null) {
-      unbinder.unbind();
-    }
   }
 }

@@ -111,6 +111,13 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
     getPresenter().onResume();
   }
 
+  @Override public void onDestroyView() {
+    super.onDestroyView();
+    if (unbinder != null) {
+      unbinder.unbind();
+    }
+  }
+
   public void launchLoginActivity() {
     startActivity(new Intent(getActivity(), LoginActivityView.class));
     getActivity().finish();
@@ -180,12 +187,6 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
             getPresenter().doLogin();
           }
         });
-  }
-
-  @Override public void unbind() {
-    if (unbinder != null) {
-      unbinder.unbind();
-    }
   }
 
   private void setListBackgroundColor(@ColorRes int color) {
