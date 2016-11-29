@@ -73,7 +73,7 @@ public class Network {
     return Headers.of(mapHeaders);
   }
 
-  private RequestBody makePostParams(@Nullable Map<String, String> mapParams) {
+  @SuppressWarnings("deprecation") private RequestBody makePostParams(@Nullable Map<String, String> mapParams) {
     MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
 
     if (mapParams == null || mapParams.isEmpty()) {

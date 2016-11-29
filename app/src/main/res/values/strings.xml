@@ -20,7 +20,6 @@
   <!--login-->
   <string name="login_login">Login GitHub</string>
   <string name="login_about">About GitEgo</string>
-  <string name="login_goToAppWebsiteInstructions">Go to %s</string>
   <string name="login_gettingUser">Retrieving information…</string>
 
   <!--errors-->
