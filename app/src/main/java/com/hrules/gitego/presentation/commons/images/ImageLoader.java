@@ -22,13 +22,7 @@ import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 
 public class ImageLoader {
-  private final Context context;
-
-  public ImageLoader(@NonNull Context context) {
-    this.context = context;
-  }
-
-  public void load(@NonNull String url, @NonNull ImageView target) {
+  public static void load(@NonNull Context context, @NonNull String url, @NonNull ImageView target) {
     Picasso.with(context).load(url).into(target);
   }
 }

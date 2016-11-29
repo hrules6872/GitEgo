@@ -99,7 +99,7 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
   }
 
   @Override public void setUserData(@NonNull GitHubAuthUser gitHubAuthUser) {
-    new ImageLoader(App.getApplication()).load(gitHubAuthUser.getAvatar_url(), avatar);
+    ImageLoader.load(App.getApplication(), gitHubAuthUser.getAvatar_url(), avatar);
 
     userName.setText(gitHubAuthUser.getName());
 
