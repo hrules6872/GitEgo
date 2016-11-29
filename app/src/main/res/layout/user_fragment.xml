@@ -32,7 +32,7 @@
       android:layout_width="@dimen/roundedImageView_width"
       android:layout_height="@dimen/roundedImageView_height"
       android:layout_gravity="center_horizontal"
-      android:layout_marginTop="@dimen/default_margin"
+      android:layout_marginTop="@dimen/avatar_marginTop"
       android:scaleType="fitXY"
       android:src="@color/roundedImageViewBackground"
       app:riv_corner_radius="@dimen/roundedImageView_cornerRadius"
