@@ -25,8 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MergeUtils {
-  public List<GitHubAuthRepo> mergeAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {
+public class ModelUtils {
+  public static List<GitHubAuthRepo> mergeAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {
     Map<String, GitHubAuthRepo> map = new HashMap<>();
     for (GitHubAuthRepo item : list) {
       if (!TextUtils.isEmpty(item.getName())) {
@@ -44,7 +44,7 @@ public class MergeUtils {
     return new ArrayList<>(map.values());
   }
 
-  public GitHubAuthUser mergeAuthUserItems(@NonNull List<GitHubAuthUser> list) {
+  public static GitHubAuthUser mergeAuthUserItems(@NonNull List<GitHubAuthUser> list) {
     Map<String, GitHubAuthUser> map = new HashMap<>();
     for (GitHubAuthUser item : list) {
       if (!TextUtils.isEmpty(item.getLogin())) {

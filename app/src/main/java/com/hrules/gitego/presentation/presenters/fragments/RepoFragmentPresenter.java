@@ -35,7 +35,7 @@ import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
-import com.hrules.gitego.presentation.models.utils.MergeUtils;
+import com.hrules.gitego.presentation.models.utils.ModelUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -73,7 +73,7 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (response.size() > 0) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
-            final List<GitHubAuthRepo> finalList = new MergeUtils().mergeAuthRepoItems(response);
+            final List<GitHubAuthRepo> finalList = ModelUtils.mergeAuthRepoItems(response);
 
             uiThreadExecutor.execute(new Runnable() {
               @Override public void run() {
