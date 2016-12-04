@@ -3,7 +3,8 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.3.0-alpha1'
+    classpath 'com.android.tools.build:gradle:2.3.0-alpha2'
+    classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
   }
 }
 
@@ -17,4 +18,5 @@ task clean(type: Delete) {
   delete rootProject.buildDir
 }
 
+apply plugin: 'com.github.ben-manes.versions'
 apply from: 'buildsystem/dependencies.gradle'
