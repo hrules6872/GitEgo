@@ -21,7 +21,6 @@ GitEgo is not associated with GitHub in any way.
 * [Gson](https://github.com/google/gson)
 * [OkHttp](https://github.com/square/okhttp)
 * [Picasso](https://github.com/square/picasso)
-* [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
 
 Developed by
 -------
