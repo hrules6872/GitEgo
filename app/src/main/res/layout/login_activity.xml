@@ -42,7 +42,7 @@
       <ImageView
           android:id="@+id/logo"
           android:layout_centerHorizontal="true"
-          android:src="@drawable/ic_logo"
+          android:src="@drawable/logo"
           app:layout_heightPercent="30%"
           app:layout_widthPercent="50%"
           tools:ignore="ContentDescription"

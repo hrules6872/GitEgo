@@ -16,28 +16,24 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
->
+    >
   <Space
       android:layout_width="match_parent"
       android:layout_height="?actionBarSize"
-  />
+      />
 
-  <com.makeramen.roundedimageview.RoundedImageView
+  <ImageView
       android:id="@+id/avatar"
-      android:layout_width="@dimen/roundedImageView_width"
-      android:layout_height="@dimen/roundedImageView_height"
+      android:layout_width="@dimen/avatar_width"
+      android:layout_height="@dimen/avatar_height"
       android:layout_gravity="center_horizontal"
       android:layout_marginTop="@dimen/avatar_marginTop"
       android:scaleType="fitXY"
-      android:src="@color/roundedImageViewBackground"
-      app:riv_corner_radius="@dimen/roundedImageView_cornerRadius"
-      app:riv_oval="false"
-  />
+      />
 
   <TextView
       android:id="@+id/userLogin"
@@ -46,7 +42,7 @@
       android:gravity="center_horizontal"
       android:textAppearance="?android:attr/textAppearanceSmall"
       tools:text="userLogin"
-  />
+      />
 
   <TextView
       android:id="@+id/userName"
@@ -56,7 +52,7 @@
       android:text="@string/user_default"
       android:textAppearance="?android:attr/textAppearanceLarge"
       tools:text="userName"
-  />
+      />
 
   <TextView
       android:id="@+id/followers"
@@ -67,7 +63,7 @@
       android:textAppearance="?android:attr/textAppearanceSmall"
       android:textColor="@color/textHighlighted"
       tools:text="followers"
-  />
+      />
 
   <LinearLayout
       android:layout_width="wrap_content"
@@ -75,13 +71,13 @@
       android:layout_gravity="center_horizontal"
       android:layout_margin="@dimen/default_marginDouble"
       android:orientation="horizontal"
-  >
+      >
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-    >
+        >
 
       <TextView
           android:id="@+id/watchersCount"
@@ -92,7 +88,7 @@
           android:textAppearance="?android:attr/textAppearanceSmall"
           android:textColor="@color/textHighlighted"
           tools:text="-"
-      />
+          />
 
       <TextView
           android:id="@+id/watchers"
@@ -103,19 +99,19 @@
           android:textAllCaps="true"
           android:textAppearance="?android:attr/textAppearanceSmall"
           tools:text="watchers"
-      />
+          />
     </LinearLayout>
 
     <Space
         android:layout_width="@dimen/default_marginDouble"
         android:layout_height="0dp"
-    />
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-    >
+        >
 
       <TextView
           android:id="@+id/starsGazersCount"
@@ -126,7 +122,7 @@
           android:textAppearance="?android:attr/textAppearanceSmall"
           android:textColor="@color/textHighlighted"
           tools:text="-"
-      />
+          />
 
       <TextView
           android:id="@+id/starsGazers"
@@ -137,19 +133,19 @@
           android:textAllCaps="true"
           android:textAppearance="?android:attr/textAppearanceSmall"
           tools:text="watchers"
-      />
+          />
     </LinearLayout>
 
     <Space
         android:layout_width="@dimen/default_marginDouble"
         android:layout_height="0dp"
-    />
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-    >
+        >
 
       <TextView
           android:id="@+id/forksCount"
@@ -160,7 +156,7 @@
           android:textAppearance="?android:attr/textAppearanceSmall"
           android:textColor="@color/textHighlighted"
           tools:text="-"
-      />
+          />
 
       <TextView
           android:id="@+id/forks"
@@ -171,7 +167,7 @@
           android:textAllCaps="true"
           android:textAppearance="?android:attr/textAppearanceSmall"
           tools:text="watchers"
-      />
+          />
     </LinearLayout>
 
   </LinearLayout>

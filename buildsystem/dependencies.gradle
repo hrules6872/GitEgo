@@ -23,16 +23,14 @@ ext {
   daRealMVPVersion = '0.14.0'
   gsonVersion = '2.8.0'
   okhttpVersion = '3.4.+'
-  roundedImageViewVersion = '2.2.1'
   picassoViewVersion = '2.5.+'
-  projectDependencies = [butterKnife     : "com.jakewharton:butterknife:${butterKnifeVersion}",
-                         daRealMVP       : "com.hrules:darealmvp:${daRealMVPVersion}",
-                         gson            : "com.google.code.gson:gson:${gsonVersion}",
-                         okhttp          : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
-                         roundedImageView: "com.makeramen:roundedimageview:${roundedImageViewVersion}",
-                         picasso         : "com.squareup.picasso:picasso:${picassoViewVersion}",
-                         dagger          : "com.google.dagger:dagger:${daggerVersion}",
-                         daggerProducers : "com.google.dagger:dagger-producers:${daggerVersion}"]
+  projectDependencies = [butterKnife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
+                         daRealMVP      : "com.hrules:darealmvp:${daRealMVPVersion}",
+                         gson           : "com.google.code.gson:gson:${gsonVersion}",
+                         okhttp         : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+                         picasso        : "com.squareup.picasso:picasso:${picassoViewVersion}",
+                         dagger         : "com.google.dagger:dagger:${daggerVersion}",
+                         daggerProducers: "com.google.dagger:dagger-producers:${daggerVersion}"]
 
   // other dependencies
   otherDependencies = [butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
