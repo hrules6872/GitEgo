@@ -29,6 +29,7 @@ import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.domain.api.GitHubAPI;
+import com.hrules.gitego.domain.interactors.contracts.DeleteAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
@@ -45,7 +46,10 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
   @Inject GetAuthRepo getAuthRepo;
+  @Inject DeleteAuthRepo deleteAuthRepo;
   @Inject UIThreadExecutor uiThreadExecutor;
+
+  private List<GitHubAuthRepo> listToBeDeleted = new ArrayList<>();
 
   @Override public void bind(@NonNull RepoView view) {
     super.bind(view);
@@ -68,13 +72,17 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
   private void refreshData() {
     Account account = gitHubAPI.getAccount();
     if (account != null && !TextUtils.isEmpty(account.getToken())) {
+
       getView().showLoading();
       getAuthRepo.execute(account.getToken(), new GetAuthRepo.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (response.size() > 0) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
-            final List<GitHubAuthRepo> finalList = ModelUtils.mergeAuthRepoItems(response);
+            List<GitHubAuthRepo> list = ModelUtils.mergeAuthRepoItems(response);
+            listToBeDeleted = ModelUtils.getNotValidAuthRepoItems(list);
+            list = ModelUtils.getValidAuthRepoItems(list);
 
+            final List<GitHubAuthRepo> finalList = list;
             uiThreadExecutor.execute(new Runnable() {
               @Override public void run() {
                 getView().updateList(finalList);
@@ -98,12 +106,24 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
         }
 
         @Override public void onFinish() {
+          syncData();
+
           uiThreadExecutor.execute(new Runnable() {
             @Override public void run() {
               getView().hideLoading();
               getView().updateListState();
             }
           });
+        }
+      });
+    }
+  }
+
+  private void syncData() {
+    if (!listToBeDeleted.isEmpty()) {
+      deleteAuthRepo.execute(listToBeDeleted, new DeleteAuthRepo.Callback() {
+        @Override public void onFailure(@NonNull Exception exception) {
+          DebugLog.e(exception.getMessage(), exception);
         }
       });
     }

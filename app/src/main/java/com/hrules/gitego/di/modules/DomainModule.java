@@ -20,9 +20,11 @@ import com.hrules.gitego.BuildConfig;
 import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.repository.base.Repository;
 import com.hrules.gitego.domain.api.GitHubAPI;
+import com.hrules.gitego.domain.interactors.DeleteAuthRepoInteractor;
 import com.hrules.gitego.domain.interactors.GetAccessTokenInteractor;
 import com.hrules.gitego.domain.interactors.GetAuthRepoInteractor;
 import com.hrules.gitego.domain.interactors.GetAuthUserInteractor;
+import com.hrules.gitego.domain.interactors.contracts.DeleteAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
@@ -34,7 +36,8 @@ import javax.inject.Named;
 
 @Module public class DomainModule {
   @Provides GitHubAPI providesGitHubAPI() {
-    return new GitHubAPI(BuildConfig.GITHUB_API_CLIENTID, BuildConfig.GITHUB_API_CLIENTSECRET, BuildConfig.GITHUB_API_SCOPES);
+    return new GitHubAPI(BuildConfig.GITHUB_API_CLIENTID, BuildConfig.GITHUB_API_CLIENTSECRET,
+        BuildConfig.GITHUB_API_SCOPES);
   }
 
   @Provides InteractorExecutor providesInteractorExecutor() {
@@ -45,7 +48,8 @@ import javax.inject.Named;
     return new UIThreadExecutor();
   }
 
-  @Provides GetAccessToken providesGetAccessToken(InteractorExecutor interactorExecutor, GitHubAPI gitHubAPI, Network network) {
+  @Provides GetAccessToken providesGetAccessToken(InteractorExecutor interactorExecutor, GitHubAPI gitHubAPI,
+      Network network) {
     return new GetAccessTokenInteractor(interactorExecutor, gitHubAPI, network);
   }
 
@@ -57,5 +61,10 @@ import javax.inject.Named;
   @Provides GetAuthRepo providesGetAuthRepo(InteractorExecutor interactorExecutor,
       @Named("authRepoRepository") Repository authRepoRepository) {
     return new GetAuthRepoInteractor(interactorExecutor, authRepoRepository);
+  }
+
+  @Provides DeleteAuthRepo providesDeleteAuthRepo(InteractorExecutor interactorExecutor,
+      @Named("authRepoRepository") Repository authRepoRepository) {
+    return new DeleteAuthRepoInteractor(interactorExecutor, authRepoRepository);
   }
 }

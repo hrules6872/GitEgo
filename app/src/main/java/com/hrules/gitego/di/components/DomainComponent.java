@@ -18,7 +18,9 @@ package com.hrules.gitego.di.components;
 
 import com.hrules.gitego.di.modules.DomainModule;
 import com.hrules.gitego.domain.api.GitHubAPI;
+import com.hrules.gitego.domain.interactors.contracts.DeleteAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
+import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.threads.InteractorExecutor;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
@@ -34,4 +36,8 @@ import dagger.Component;
   GetAccessToken getAccessToken();
 
   GetAuthUser getAuthUser();
+
+  GetAuthRepo getAuthRepo();
+
+  DeleteAuthRepo deleteAuthRepo();
 }

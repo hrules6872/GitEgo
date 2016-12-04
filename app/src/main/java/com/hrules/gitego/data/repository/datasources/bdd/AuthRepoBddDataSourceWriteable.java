@@ -24,6 +24,7 @@ import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.transformers.GitHubAuthRepoDtoToMap;
 import com.hrules.gitego.domain.specifications.base.Specification;
+import com.hrules.gitego.domain.specifications.base.SpecificationFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +79,8 @@ public class AuthRepoBddDataSourceWriteable extends DataSourceWriteable<GitHubAu
     throw new UnsupportedOperationException();
   }
 
-  @Override public void remove(@NonNull Specification specification) throws Exception {
-    throw new UnsupportedOperationException();
+  @SuppressWarnings("unchecked") @Override public void remove(@NonNull Specification specification) throws Exception {
+    specification = new SpecificationFactory<String>().get(this, specification);
+    database.execList((String[]) specification.get());
   }
 }

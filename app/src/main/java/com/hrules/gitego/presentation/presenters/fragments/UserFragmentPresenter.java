@@ -110,8 +110,10 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (response.size() > 0) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
-            final List<GitHubAuthRepo> finalList = ModelUtils.mergeAuthRepoItems(response);
+            List<GitHubAuthRepo> list = ModelUtils.mergeAuthRepoItems(response);
+            list = ModelUtils.getValidAuthRepoItems(list);
 
+            final List<GitHubAuthRepo> finalList = list;
             uiThreadExecutor.execute(new Runnable() {
               @Override public void run() {
                 getView().setRepoCounters(finalList);

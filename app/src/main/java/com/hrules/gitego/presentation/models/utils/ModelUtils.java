@@ -18,10 +18,12 @@ package com.hrules.gitego.presentation.models.utils;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import com.hrules.gitego.data.persistence.database.utils.DatabaseDateUtils;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -60,5 +62,40 @@ public class ModelUtils {
       }
     }
     return map.entrySet().iterator().next().getValue();
+  }
+
+  public static List<GitHubAuthRepo> getValidAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {
+    List<GitHubAuthRepo> listToReturn = new ArrayList<>(list);
+    if (hasListMostRecentData(listToReturn)) {
+      Iterator<GitHubAuthRepo> iterator = listToReturn.iterator();
+      while (iterator.hasNext()) {
+        if (!iterator.next().getDate().equals(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()))) {
+          iterator.remove();
+        }
+      }
+    }
+    return listToReturn;
+  }
+
+  public static List<GitHubAuthRepo> getNotValidAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {
+    List<GitHubAuthRepo> listToReturn = new ArrayList<>(list);
+    if (hasListMostRecentData(listToReturn)) {
+      Iterator<GitHubAuthRepo> iterator = listToReturn.iterator();
+      while (iterator.hasNext()) {
+        if (iterator.next().getDate().equals(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()))) {
+          iterator.remove();
+        }
+      }
+    }
+    return listToReturn;
+  }
+
+  private static boolean hasListMostRecentData(List<GitHubAuthRepo> list) {
+    for (GitHubAuthRepo item : list) {
+      if (item.getDate().equals(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()))) {
+        return true;
+      }
+    }
+    return false;
   }
 }
