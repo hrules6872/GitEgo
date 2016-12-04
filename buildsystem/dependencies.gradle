@@ -19,10 +19,10 @@ ext {
 
   // project dependencies
   butterKnifeVersion = '8.4.+'
-  daggerVersion = '2.7'
+  daggerVersion = '2.8'
   daRealMVPVersion = '0.14.0'
   gsonVersion = '2.8.0'
-  okhttpVersion = '3.4.+'
+  okhttpVersion = '3.5.+'
   picassoViewVersion = '2.5.+'
   projectDependencies = [butterKnife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
                          daRealMVP      : "com.hrules:darealmvp:${daRealMVPVersion}",
@@ -41,6 +41,6 @@ ext {
                       runner: "com.android.support.test:runner:0.+"]
 
   // debug build dependencies
-  debugDBVersion = '0.2.+'
+  debugDBVersion = '0.4.+'
   debugDependencies = [debugDB: "com.amitshekhar.android:debug-db:${debugDBVersion}"]
 }
