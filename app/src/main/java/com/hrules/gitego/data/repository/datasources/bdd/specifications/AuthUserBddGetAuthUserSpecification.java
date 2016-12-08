@@ -20,7 +20,7 @@ import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.data.persistence.database.utils.SQLQueryBuilder;
 import com.hrules.gitego.domain.specifications.GetAuthUserSpecification;
 
-public class AuthUserBddGetAuthUserSpecification extends GetAuthUserSpecification<String> {
+@SuppressWarnings("unused") public class AuthUserBddGetAuthUserSpecification extends GetAuthUserSpecification<String> {
   private static final int DAYS_LIMIT = 2;
 
   @Override public String get() {

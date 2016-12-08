@@ -16,8 +16,6 @@
 
 package com.hrules.gitego.presentation.communicator.base;
 
-import com.hrules.gitego.presentation.communicator.BoolStateMessage;
-
 public interface Communicator {
-  void onMessage(BoolStateMessage message);
+  void onMessage(BaseMessage message);
 }

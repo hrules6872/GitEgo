@@ -25,7 +25,8 @@ import com.hrules.gitego.domain.specifications.params.DeleteAuthRepoSpecificatio
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthRepoBddDeleteAuthRepoSpecification extends DeleteAuthRepoSpecification<String[]> {
+@SuppressWarnings("unused") public class AuthRepoBddDeleteAuthRepoSpecification
+    extends DeleteAuthRepoSpecification<String[]> {
   @Override public String[] get() {
     DeleteAuthRepoSpecificationParams params = (DeleteAuthRepoSpecificationParams) getParams();
 

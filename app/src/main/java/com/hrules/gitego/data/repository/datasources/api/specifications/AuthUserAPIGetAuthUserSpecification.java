@@ -22,7 +22,8 @@ import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.specifications.GetAuthUserSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthUserSpecificationParams;
 
-public class AuthUserAPIGetAuthUserSpecification extends GetAuthUserSpecification<RequestNetwork> {
+@SuppressWarnings("unused") public class AuthUserAPIGetAuthUserSpecification
+    extends GetAuthUserSpecification<RequestNetwork> {
   @Override public RequestNetwork get() {
     GetAuthUserSpecificationParams params = (GetAuthUserSpecificationParams) getParams();
 

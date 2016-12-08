@@ -33,6 +33,7 @@ import com.hrules.gitego.App;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.communicator.BoolStateMessage;
 import com.hrules.gitego.presentation.communicator.CommunicatorConstants;
+import com.hrules.gitego.presentation.communicator.base.BaseMessage;
 import com.hrules.gitego.presentation.communicator.base.Communicator;
 import com.hrules.gitego.presentation.presenters.activities.MainActivityPresenter;
 import com.hrules.gitego.presentation.views.fragments.RepoFragmentView;
@@ -108,14 +109,17 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
     notificationManager.cancel(NotificationService.NOTIFICATION_ID);
   }
 
-  @Override public void onMessage(BoolStateMessage message) {
+  @Override public void onMessage(BaseMessage message) {
     if (CommunicatorConstants.ACTION_SHOW_LOADING.equals(message.getAction())) {
-      if (message.isState() && refreshVisibilityCounter.incrementAndGet() == 1) {
-        progressBar.setIndeterminate(true);
-        progressBar.setVisibility(View.VISIBLE);
-      } else if (!message.isState() && refreshVisibilityCounter.decrementAndGet() == 0) {
-        progressBar.setIndeterminate(false);
-        progressBar.setVisibility(View.GONE);
+      if (message instanceof BoolStateMessage) {
+        BoolStateMessage boolStateMessage = (BoolStateMessage) message;
+        if (boolStateMessage.isState() && refreshVisibilityCounter.incrementAndGet() == 1) {
+          progressBar.setIndeterminate(true);
+          progressBar.setVisibility(View.VISIBLE);
+        } else if (!boolStateMessage.isState() && refreshVisibilityCounter.decrementAndGet() == 0) {
+          progressBar.setIndeterminate(false);
+          progressBar.setVisibility(View.GONE);
+        }
       }
     }
   }

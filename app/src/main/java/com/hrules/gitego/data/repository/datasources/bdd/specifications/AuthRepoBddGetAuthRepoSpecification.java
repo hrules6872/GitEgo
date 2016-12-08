@@ -20,7 +20,7 @@ import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.data.persistence.database.utils.SQLQueryBuilder;
 import com.hrules.gitego.domain.specifications.GetAuthRepoSpecification;
 
-public class AuthRepoBddGetAuthRepoSpecification extends GetAuthRepoSpecification<String> {
+@SuppressWarnings("unused") public class AuthRepoBddGetAuthRepoSpecification extends GetAuthRepoSpecification<String> {
   private static final int REPO_LIMIT_PER_DAY = 500;
 
   @Override public String get() {
