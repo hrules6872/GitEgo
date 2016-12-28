@@ -1,5 +1,5 @@
 ext {
-  androidBuildToolsVersion = '25.0.1'
+  androidBuildToolsVersion = '25.0.2'
   androidBuildMinSDKVersion = '15'
   androidBuildTargetSDKVersion = '24'
   androidBuildCompileSDKVersion = 'android-24'
@@ -9,7 +9,7 @@ ext {
   appVersionName = '1.1.0'
 
   // support libraries
-  supportLibraryVersion = '25.0.+'
+  supportLibraryVersion = '25.1.+'
   supportDependencies = [recyclerView      : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
                          appCompat         : "com.android.support:appcompat-v7:${supportLibraryVersion}",
                          supportAnnotations: "com.android.support:support-annotations:${supportLibraryVersion}",
