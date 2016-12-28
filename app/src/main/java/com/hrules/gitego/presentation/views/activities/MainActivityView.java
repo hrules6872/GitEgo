@@ -20,6 +20,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -31,10 +32,10 @@ import butterknife.ButterKnife;
 import com.hrules.darealmvp.DRAppCompatActivity;
 import com.hrules.gitego.App;
 import com.hrules.gitego.R;
-import com.hrules.gitego.presentation.communicator.BoolStateMessage;
-import com.hrules.gitego.presentation.communicator.CommunicatorConstants;
-import com.hrules.gitego.presentation.communicator.base.BaseMessage;
-import com.hrules.gitego.presentation.communicator.base.Communicator;
+import com.hrules.gitego.presentation.bus.BoolStateBus;
+import com.hrules.gitego.presentation.bus.base.Bus;
+import com.hrules.gitego.presentation.bus.base.BusModel;
+import com.hrules.gitego.presentation.bus.constants.BusActionConstants;
 import com.hrules.gitego.presentation.presenters.activities.MainActivityPresenter;
 import com.hrules.gitego.presentation.views.fragments.RepoFragmentView;
 import com.hrules.gitego.presentation.views.fragments.UserFragmentView;
@@ -43,7 +44,7 @@ import com.hrules.gitego.services.NotificationUtils;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter, MainActivityPresenter.MainView>
-    implements MainActivityPresenter.MainView, Communicator {
+    implements MainActivityPresenter.MainView, Bus {
   @BindView(R.id.rootLayout) CoordinatorLayout rootLayout;
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.progressBar) ProgressBar progressBar;
@@ -109,14 +110,14 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
     notificationManager.cancel(NotificationService.NOTIFICATION_ID);
   }
 
-  @Override public void onMessage(BaseMessage message) {
-    if (CommunicatorConstants.ACTION_SHOW_LOADING.equals(message.getAction())) {
-      if (message instanceof BoolStateMessage) {
-        BoolStateMessage boolStateMessage = (BoolStateMessage) message;
-        if (boolStateMessage.isState() && refreshVisibilityCounter.incrementAndGet() == 1) {
+  @Override public void onEvent(@NonNull BusModel event) {
+    if (BusActionConstants.ACTION_SHOW_LOADING.equals(event.getAction())) {
+      if (event instanceof BoolStateBus) {
+        BoolStateBus boolStateBus = (BoolStateBus) event;
+        if (boolStateBus.isState() && refreshVisibilityCounter.incrementAndGet() == 1) {
           progressBar.setIndeterminate(true);
           progressBar.setVisibility(View.VISIBLE);
-        } else if (!boolStateMessage.isState() && refreshVisibilityCounter.decrementAndGet() == 0) {
+        } else if (!boolStateBus.isState() && refreshVisibilityCounter.decrementAndGet() == 0) {
           progressBar.setIndeterminate(false);
           progressBar.setVisibility(View.GONE);
         }

@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.presentation.communicator.base;
+package com.hrules.gitego.presentation.bus.base;
 
 import android.support.annotation.NonNull;
 
-public abstract class BaseMessage {
-  private String action;
-
-  protected BaseMessage(@NonNull String action) {
-    this.action = action;
-  }
-
-  public String getAction() {
-    return action;
-  }
-
-  public void setAction(@NonNull String action) {
-    this.action = action;
-  }
+public interface Bus {
+  void onEvent(@NonNull BusModel event);
 }

@@ -14,8 +14,20 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.presentation.communicator.base;
+package com.hrules.gitego.presentation.bus;
 
-public interface Communicator {
-  void onMessage(BaseMessage message);
+import android.support.annotation.NonNull;
+import com.hrules.gitego.presentation.bus.base.BusModel;
+
+public class BoolStateBus extends BusModel {
+  private final boolean state;
+
+  public BoolStateBus(@NonNull String action, boolean state) {
+    super(action);
+    this.state = state;
+  }
+
+  public boolean isState() {
+    return state;
+  }
 }

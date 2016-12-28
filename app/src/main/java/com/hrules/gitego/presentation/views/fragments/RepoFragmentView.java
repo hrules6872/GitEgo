@@ -37,11 +37,11 @@ import com.hrules.darealmvp.DRFragmentV4;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.adapters.RepoAdapter;
 import com.hrules.gitego.presentation.adapters.decorators.SpaceItemDecoration;
+import com.hrules.gitego.presentation.bus.BoolStateBus;
+import com.hrules.gitego.presentation.bus.base.Bus;
+import com.hrules.gitego.presentation.bus.constants.BusActionConstants;
 import com.hrules.gitego.presentation.commons.StringUtils;
 import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
-import com.hrules.gitego.presentation.communicator.BoolStateMessage;
-import com.hrules.gitego.presentation.communicator.CommunicatorConstants;
-import com.hrules.gitego.presentation.communicator.base.Communicator;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoImplicationsDescendingComparator;
 import com.hrules.gitego.presentation.presenters.fragments.RepoFragmentPresenter;
@@ -57,7 +57,7 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
 
   private Unbinder unbinder;
   private Parcelable recyclerViewState;
-  private Communicator communicator;
+  private Bus bus;
 
   private RepoAdapter adapter;
 
@@ -85,9 +85,9 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
     super.onAttach(context);
     if (context instanceof Activity) {
       try {
-        communicator = (Communicator) context;
+        bus = (Bus) context;
       } catch (ClassCastException e) {
-        throw new ClassCastException(context.toString() + " must implement Communicator delegate");
+        throw new ClassCastException(context.toString() + " must implement Bus delegate");
       }
     }
   }
@@ -163,14 +163,14 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
   }
 
   @Override public void showLoading() {
-    if (communicator != null) {
-      communicator.onMessage(new BoolStateMessage(CommunicatorConstants.ACTION_SHOW_LOADING, true));
+    if (bus != null) {
+      bus.onEvent(new BoolStateBus(BusActionConstants.ACTION_SHOW_LOADING, true));
     }
   }
 
   @Override public void hideLoading() {
-    if (communicator != null) {
-      communicator.onMessage(new BoolStateMessage(CommunicatorConstants.ACTION_SHOW_LOADING, false));
+    if (bus != null) {
+      bus.onEvent(new BoolStateBus(BusActionConstants.ACTION_SHOW_LOADING, false));
     }
   }
 

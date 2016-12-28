@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.presentation.communicator;
+package com.hrules.gitego.presentation.bus.constants;
 
-public class CommunicatorConstants {
-  private CommunicatorConstants() {
+public class BusActionConstants {
+  private BusActionConstants() {
   }
 
   public static final String ACTION_SHOW_LOADING = "ACTION_SHOW_LOADING";
