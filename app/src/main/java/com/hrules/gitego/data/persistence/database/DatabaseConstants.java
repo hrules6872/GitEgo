@@ -17,6 +17,9 @@
 package com.hrules.gitego.data.persistence.database;
 
 public class DatabaseConstants {
+  private DatabaseConstants() {
+  }
+
   static final String DATABASE_NAME = "gitego.db";
   static final int DATABASE_VERSION = 1;
 

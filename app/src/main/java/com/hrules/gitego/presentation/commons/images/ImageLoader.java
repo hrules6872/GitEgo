@@ -26,6 +26,9 @@ import com.hrules.gitego.presentation.commons.images.transforms.RoundedCornersTr
 import com.squareup.picasso.Picasso;
 
 public class ImageLoader {
+  private ImageLoader() {
+  }
+
   public static void loadRounded(@NonNull Context context, @NonNull String url, @NonNull ImageView target) {
     Resources res = context.getResources();
     int radius =

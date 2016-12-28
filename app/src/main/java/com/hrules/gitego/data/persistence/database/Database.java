@@ -24,7 +24,7 @@ import android.support.annotation.NonNull;
 import com.hrules.gitego.data.exceptions.LocalIOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Database extends DatabaseConstants {
+public class Database {
   private static Database instance = null;
 
   private static DatabaseOpenHelper helper;

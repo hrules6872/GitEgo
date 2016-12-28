@@ -17,5 +17,8 @@
 package com.hrules.gitego.presentation.communicator;
 
 public class CommunicatorConstants {
+  private CommunicatorConstants() {
+  }
+
   public static final String ACTION_SHOW_LOADING = "ACTION_SHOW_LOADING";
 }

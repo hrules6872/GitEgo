@@ -21,15 +21,22 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 
 public class BriefMessage {
-  public void showLong(@NonNull View view, @NonNull String message) {
+  public interface BriefMessageListener {
+    void onClick();
+  }
+
+  private BriefMessage() {
+  }
+
+  public static void showLong(@NonNull View view, @NonNull String message) {
     Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
   }
 
-  public void showShort(@NonNull View view, @NonNull String message) {
+  public static void showShort(@NonNull View view, @NonNull String message) {
     Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
   }
 
-  public void showActionIndefinite(@NonNull View view, @NonNull String message, @NonNull String action,
+  public static void showActionIndefinite(@NonNull View view, @NonNull String message, @NonNull String action,
       @NonNull final BriefMessageListener listener) {
     Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE).setAction(action, new View.OnClickListener() {
       @Override public void onClick(View v) {

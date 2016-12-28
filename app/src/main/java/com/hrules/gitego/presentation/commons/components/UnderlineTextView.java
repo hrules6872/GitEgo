@@ -17,24 +17,22 @@
 package com.hrules.gitego.presentation.commons.components;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
-import android.widget.TextView;
 
 /*
  * +info: https://gist.github.com/hrules6872/516ea7e04c8be4c55d26
  */
-public class UnderlineTextView extends TextView {
+public class UnderlineTextView extends AppCompatTextView {
   private int textColor;
 
   public UnderlineTextView(@NonNull Context context) {
@@ -47,11 +45,6 @@ public class UnderlineTextView extends TextView {
 
   public UnderlineTextView(@NonNull Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
-  }
-
-  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-  public UnderlineTextView(@NonNull Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-    super(context, attrs, defStyleAttr, defStyleRes);
   }
 
   @Override public void setText(CharSequence text, BufferType type) {

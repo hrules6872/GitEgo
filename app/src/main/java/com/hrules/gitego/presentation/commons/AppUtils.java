@@ -30,6 +30,9 @@ public class AppUtils {
 
   private static final String SCHEME_MAILTO = "mailto";
 
+  private AppUtils() {
+  }
+
   public static String getAppVersionText(@NonNull Context context) {
     String versionName = DEFAULT_VERSION_NAME;
     String versionCode = DEFAULT_VERSION_CODE;

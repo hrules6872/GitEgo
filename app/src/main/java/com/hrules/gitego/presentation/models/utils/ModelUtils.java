@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ModelUtils {
+  private ModelUtils() {
+  }
+
   public static List<GitHubAuthRepo> mergeAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {
     Map<String, GitHubAuthRepo> map = new HashMap<>();
     for (GitHubAuthRepo item : list) {

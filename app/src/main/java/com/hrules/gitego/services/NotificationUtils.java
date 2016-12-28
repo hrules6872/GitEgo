@@ -23,6 +23,9 @@ import android.support.annotation.NonNull;
 import java.util.Calendar;
 
 public class NotificationUtils {
+  private NotificationUtils() {
+  }
+
   static long getNextNotificationTriggerAtMillis() {
     Calendar calendar = Calendar.getInstance();
     calendar.add(Calendar.DAY_OF_YEAR, 1);

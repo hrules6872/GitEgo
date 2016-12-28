@@ -38,6 +38,10 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
   private final List<GitHubAuthRepo> items;
   private final RepoAdapterListener listener;
 
+  public interface RepoAdapterListener {
+    void onListItemClick(int position);
+  }
+
   public RepoAdapter(@NonNull RepoAdapterListener listener) {
     this.items = new ArrayList<>();
     this.listener = listener;
@@ -62,7 +66,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
     final ViewHolder viewHolder = new ViewHolder(view);
     view.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        listener.onListItemClick(viewHolder.getAdapterPosition(), v);
+        listener.onListItemClick(viewHolder.getAdapterPosition());
       }
     });
     return viewHolder;

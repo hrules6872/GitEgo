@@ -17,6 +17,9 @@
 package com.hrules.gitego;
 
 public class AppConstants {
+  private AppConstants() {
+  }
+
   public class PREFS {
     public static final String ACCOUNTS = "ACCOUNTS";
     public static final String NOTIFICATIONS = "NOTIFICATIONS";

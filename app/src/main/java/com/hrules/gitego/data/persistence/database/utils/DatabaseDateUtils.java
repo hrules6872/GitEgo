@@ -23,6 +23,9 @@ import java.util.Date;
 @SuppressLint("SimpleDateFormat") public class DatabaseDateUtils {
   private final static String DATE_SQL_FORMAT = "yyyy-MM-dd";
 
+  private DatabaseDateUtils() {
+  }
+
   public static String formatDateToSQLShort(long millis) {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_SQL_FORMAT);
     Date now = new Date(millis);

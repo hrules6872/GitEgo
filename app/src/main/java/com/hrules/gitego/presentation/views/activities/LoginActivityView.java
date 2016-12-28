@@ -76,7 +76,7 @@ public class LoginActivityView extends DRAppCompatActivity<LoginActivityPresente
   }
 
   public void showBriefMessage(@StringRes int message) {
-    new BriefMessage().showLong(rootLayout, getString(message));
+    BriefMessage.showLong(rootLayout, getString(message));
   }
 
   @OnClick({ R.id.login }) void onClickButton(Button button) {

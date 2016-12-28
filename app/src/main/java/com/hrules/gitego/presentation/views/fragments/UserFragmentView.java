@@ -35,7 +35,6 @@ import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.commons.StringUtils;
 import com.hrules.gitego.presentation.commons.images.ImageLoader;
 import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
-import com.hrules.gitego.presentation.commons.usernotifications.BriefMessageListener;
 import com.hrules.gitego.presentation.communicator.BoolStateMessage;
 import com.hrules.gitego.presentation.communicator.CommunicatorConstants;
 import com.hrules.gitego.presentation.communicator.base.Communicator;
@@ -162,12 +161,12 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
   }
 
   @Override public void showBriefMessage(@StringRes int message) {
-    new BriefMessage().showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
+    BriefMessage.showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
   }
 
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message),
-        getString(action), new BriefMessageListener() {
+    BriefMessage.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message),
+        getString(action), new BriefMessage.BriefMessageListener() {
           @Override public void onClick() {
             getPresenter().doLogin();
           }

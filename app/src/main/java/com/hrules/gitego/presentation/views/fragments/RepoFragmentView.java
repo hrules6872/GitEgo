@@ -36,11 +36,9 @@ import butterknife.Unbinder;
 import com.hrules.darealmvp.DRFragmentV4;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.adapters.RepoAdapter;
-import com.hrules.gitego.presentation.adapters.RepoAdapterListener;
 import com.hrules.gitego.presentation.adapters.decorators.SpaceItemDecoration;
 import com.hrules.gitego.presentation.commons.StringUtils;
 import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
-import com.hrules.gitego.presentation.commons.usernotifications.BriefMessageListener;
 import com.hrules.gitego.presentation.communicator.BoolStateMessage;
 import com.hrules.gitego.presentation.communicator.CommunicatorConstants;
 import com.hrules.gitego.presentation.communicator.base.Communicator;
@@ -75,8 +73,8 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
     recyclerView.addItemDecoration(new SpaceItemDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
         getResources().getDimension(R.dimen.itemRepoDivider_size), getResources().getDisplayMetrics()), false, false));
 
-    adapter = new RepoAdapter(new RepoAdapterListener() {
-      @Override public void onListItemClick(int position, @NonNull View view) {
+    adapter = new RepoAdapter(new RepoAdapter.RepoAdapterListener() {
+      @Override public void onListItemClick(int position) {
         getPresenter().onListItemClick(adapter.getItem(position));
       }
     });
@@ -177,12 +175,12 @@ public class RepoFragmentView extends DRFragmentV4<RepoFragmentPresenter, RepoFr
   }
 
   @Override public void showBriefMessage(@StringRes int message) {
-    new BriefMessage().showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
+    BriefMessage.showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
   }
 
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    new BriefMessage().showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message),
-        getString(action), new BriefMessageListener() {
+    BriefMessage.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message),
+        getString(action), new BriefMessage.BriefMessageListener() {
           @Override public void onClick() {
             getPresenter().doLogin();
           }

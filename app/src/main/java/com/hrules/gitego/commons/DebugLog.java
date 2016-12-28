@@ -26,6 +26,9 @@ import com.hrules.gitego.BuildConfig;
 public class DebugLog {
   private static final int LOG_TAG_MAX_LENGTH = 23;
 
+  private DebugLog() {
+  }
+
   private static boolean isDebuggable() {
     return BuildConfig.DEBUG;
   }
@@ -33,8 +36,8 @@ public class DebugLog {
   private static String formatMessage(String message) {
     StackTraceElement[] stackTrace = (new Throwable().getStackTrace());
     if (stackTrace.length >= 2) {
-      return String.format("[%s:%s] -> %s(): %s", stackTrace[2].getFileName(),
-          stackTrace[2].getLineNumber(), stackTrace[2].getMethodName(), message);
+      return String.format("[%s:%s] -> %s(): %s", stackTrace[2].getFileName(), stackTrace[2].getLineNumber(),
+          stackTrace[2].getMethodName(), message);
     } else {
       return message;
     }
