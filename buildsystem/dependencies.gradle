@@ -5,8 +5,13 @@ ext {
   androidBuildCompileSDKVersion = 'android-26'
 
   // internal
-  appVersionCode = 1100
-  appVersionName = '1.1.0'
+  def appVersionMajor = 1
+  def appVersionMinor = 1
+  def appVersionPatch = 0
+  def appVersionBuild = 0
+
+  appVersionCode = appVersionMajor * 1000000 + appVersionMinor * 10000 + appVersionPatch * 100 + appVersionBuild
+  appVersionName = "${appVersionMajor}.${appVersionMinor}.${appVersionPatch}"
 
   // support libraries
   supportLibraryVersion = '26.0.+'
@@ -33,16 +38,17 @@ ext {
                          daggerAndroid       : "com.google.dagger:dagger-android:${daggerVersion}",
                          daggerAndroidSupport: "com.google.dagger:dagger-android-support:${daggerVersion}",]
 
-  // other dependencies
-  otherDependencies = [butterKnifeCompiler  : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
-                       daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
-                       daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${daggerVersion}"]
-
-  // test dependencies
-  testDependencies = [junit : "junit:junit:4.+",
-                      runner: "com.android.support.test:runner:1.0.+"]
+  // annotations dependencies
+  annotationsDependencies = [butterKnifeCompiler   : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+                             daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                             daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${daggerVersion}"]
 
   // debug build dependencies
   debugDBVersion = '1.0.+'
   debugDependencies = [debugDB: "com.amitshekhar.android:debug-db:${debugDBVersion}"]
+
+
+  // test dependencies
+  testDependencies = [junit : "junit:junit:4.+",
+                      runner: "com.android.support.test:runner:1.0.+"]
 }

@@ -73,10 +73,6 @@ configurations.all {
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
 
-  // test
-  androidTestCompile testDependencies.runner
-  testCompile testDependencies.junit
-
   // support
   supportDependencies.each {
     add("compile", it.value)
@@ -87,8 +83,8 @@ dependencies {
     add("compile", it.value)
   }
 
-  // other
-  otherDependencies.each {
+  // annotations
+  annotationsDependencies.each {
     add("annotationProcessor", it.value)
   }
 
@@ -96,4 +92,8 @@ dependencies {
   debugDependencies.each {
     add("debugCompile", it.value)
   }
+
+  // test
+  androidTestCompile testDependencies.runner
+  testCompile testDependencies.junit
 }
