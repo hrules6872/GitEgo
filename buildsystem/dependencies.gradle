@@ -1,15 +1,15 @@
 ext {
-  androidBuildToolsVersion = '25.0.2'
+  androidBuildToolsVersion = '26.0.1'
   androidBuildMinSDKVersion = '15'
-  androidBuildTargetSDKVersion = '24'
-  androidBuildCompileSDKVersion = 'android-24'
+  androidBuildTargetSDKVersion = '26'
+  androidBuildCompileSDKVersion = 'android-26'
 
   // internal
   appVersionCode = 1100
   appVersionName = '1.1.0'
 
   // support libraries
-  supportLibraryVersion = '25.1.+'
+  supportLibraryVersion = '26.0.+'
   supportDependencies = [recyclerView      : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
                          appCompat         : "com.android.support:appcompat-v7:${supportLibraryVersion}",
                          supportAnnotations: "com.android.support:support-annotations:${supportLibraryVersion}",
@@ -18,29 +18,31 @@ ext {
                          percent           : "com.android.support:percent:${supportLibraryVersion}"]
 
   // project dependencies
-  butterKnifeVersion = '8.4.+'
-  daggerVersion = '2.8'
+  butterKnifeVersion = '8.7.+'
+  daggerVersion = '2.11'
   daRealMVPVersion = '0.14.0'
-  gsonVersion = '2.8.0'
-  okhttpVersion = '3.5.+'
+  gsonVersion = '2.8.1'
+  okhttpVersion = '3.8.+'
   picassoViewVersion = '2.5.+'
-  projectDependencies = [butterKnife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
-                         daRealMVP      : "com.hrules:darealmvp:${daRealMVPVersion}",
-                         gson           : "com.google.code.gson:gson:${gsonVersion}",
-                         okhttp         : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
-                         picasso        : "com.squareup.picasso:picasso:${picassoViewVersion}",
-                         dagger         : "com.google.dagger:dagger:${daggerVersion}",
-                         daggerProducers: "com.google.dagger:dagger-producers:${daggerVersion}"]
+  projectDependencies = [butterKnife         : "com.jakewharton:butterknife:${butterKnifeVersion}",
+                         daRealMVP           : "com.hrules:darealmvp:${daRealMVPVersion}",
+                         gson                : "com.google.code.gson:gson:${gsonVersion}",
+                         okhttp              : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
+                         picasso             : "com.squareup.picasso:picasso:${picassoViewVersion}",
+                         dagger              : "com.google.dagger:dagger:${daggerVersion}",
+                         daggerAndroid       : "com.google.dagger:dagger-android:${daggerVersion}",
+                         daggerAndroidSupport: "com.google.dagger:dagger-android-support:${daggerVersion}",]
 
   // other dependencies
-  otherDependencies = [butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
-                       daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}"]
+  otherDependencies = [butterKnifeCompiler  : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+                       daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                       daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${daggerVersion}"]
 
   // test dependencies
   testDependencies = [junit : "junit:junit:4.+",
-                      runner: "com.android.support.test:runner:0.+"]
+                      runner: "com.android.support.test:runner:1.0.+"]
 
   // debug build dependencies
-  debugDBVersion = '0.4.+'
+  debugDBVersion = '1.0.+'
   debugDependencies = [debugDB: "com.amitshekhar.android:debug-db:${debugDBVersion}"]
 }
