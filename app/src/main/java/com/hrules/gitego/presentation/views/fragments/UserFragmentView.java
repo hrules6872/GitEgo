@@ -19,6 +19,7 @@ package com.hrules.gitego.presentation.views.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
@@ -29,7 +30,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import com.hrules.darealmvp.DRFragmentV4;
 import com.hrules.gitego.App;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.bus.BoolStateBus;
@@ -42,10 +42,11 @@ import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import com.hrules.gitego.presentation.presenters.fragments.UserFragmentPresenter;
 import com.hrules.gitego.presentation.views.activities.LoginActivityView;
+import com.hrules.gitego.presentation.views.fragments.base.DRMVPFragmentV4;
 import java.util.List;
 
-public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFragmentPresenter.UserView>
-    implements UserFragmentPresenter.UserView {
+public class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresenter, UserFragmentPresenter.Contract>
+    implements UserFragmentPresenter.Contract {
   @BindView(R.id.userLogin) TextView userLogin;
   @BindView(R.id.userName) TextView userName;
   @BindView(R.id.followers) TextView followers;
@@ -57,11 +58,16 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
   private Unbinder unbinder;
   private Bus bus;
 
-  @Override protected int getLayoutResource() {
+  @Override protected int getLayoutResId() {
     return R.layout.user_fragment;
   }
 
-  @Override public void initializeViews(@NonNull View view) {
+  @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    initializeViews(view);
+  }
+
+  private void initializeViews(@NonNull View view) {
     unbinder = ButterKnife.bind(this, view);
   }
 
@@ -88,13 +94,13 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
     }
   }
 
-  public void launchLoginActivity() {
+  private void launchLoginActivity() {
     startActivity(new Intent(getActivity(), LoginActivityView.class));
     getActivity().finish();
   }
 
-  public void setUserLogin(@NonNull String userLogin) {
-    this.userLogin.setText(userLogin);
+  public void setUserLogin(@NonNull String userLoginString) {
+    userLogin.setText(userLoginString);
   }
 
   @Override public void setUserData(@NonNull GitHubAuthUser gitHubAuthUser) {
@@ -103,9 +109,8 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
     userName.setText(gitHubAuthUser.getName());
 
     Spannable spannableUserFollowers =
-        StringUtils.createVariationSpannableString(getString(R.string.user_followersFormatted),
-            gitHubAuthUser.getFollowers(), gitHubAuthUser.getGitHubAuthUserOlder().getFollowers(),
-            ContextCompat.getColor(getActivity(), R.color.variationPositive),
+        StringUtils.createVariationSpannableString(getString(R.string.user_followersFormatted), gitHubAuthUser.getFollowers(),
+            gitHubAuthUser.getGitHubAuthUserOlder().getFollowers(), ContextCompat.getColor(getActivity(), R.color.variationPositive),
             ContextCompat.getColor(getActivity(), R.color.variationNegative));
     followers.setText(spannableUserFollowers, TextView.BufferType.SPANNABLE);
   }
@@ -132,16 +137,14 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
     int colorVariationNegative = ContextCompat.getColor(getActivity(), R.color.variationNegative);
 
     final Spannable spannableWatchersCount =
-        StringUtils.createVariationSpannableString(textVariation, watchers, watchersOlder, colorVariationPositive,
-            colorVariationNegative);
+        StringUtils.createVariationSpannableString(textVariation, watchers, watchersOlder, colorVariationPositive, colorVariationNegative);
 
     final Spannable spannableStargazersCount =
         StringUtils.createVariationSpannableString(textVariation, stargazers, stargazersOlder, colorVariationPositive,
             colorVariationNegative);
 
     final Spannable spannableForksCount =
-        StringUtils.createVariationSpannableString(textVariation, forks, forksOlder, colorVariationPositive,
-            colorVariationNegative);
+        StringUtils.createVariationSpannableString(textVariation, forks, forksOlder, colorVariationPositive, colorVariationNegative);
 
     watchersCount.setText(spannableWatchersCount, TextView.BufferType.SPANNABLE);
     starsCount.setText(spannableStargazersCount, TextView.BufferType.SPANNABLE);
@@ -165,10 +168,10 @@ public class UserFragmentView extends DRFragmentV4<UserFragmentPresenter, UserFr
   }
 
   @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    BriefMessage.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message),
-        getString(action), new BriefMessage.BriefMessageListener() {
+    BriefMessage.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message), getString(action),
+        new BriefMessage.BriefMessageListener() {
           @Override public void onClick() {
-            getPresenter().doLogin();
+            launchLoginActivity();
           }
         });
   }

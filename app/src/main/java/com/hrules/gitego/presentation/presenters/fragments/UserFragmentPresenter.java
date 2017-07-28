@@ -19,8 +19,8 @@ package com.hrules.gitego.presentation.presenters.fragments;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
-import com.hrules.darealmvp.DRPresenter;
-import com.hrules.darealmvp.DRView;
+import com.hrules.darealmvp.DRMVPPresenter;
+import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
 import com.hrules.gitego.R;
 import com.hrules.gitego.commons.DebugLog;
@@ -41,14 +41,14 @@ import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
-public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.UserView> {
+public class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
   @Inject GetAuthUser getAuthUser;
   @Inject GetAuthRepo getAuthRepo;
   @Inject UIThreadExecutor uiThreadExecutor;
 
-  @Override public void bind(@NonNull UserView view) {
+  @Override public void bind(@NonNull Contract view) {
     super.bind(view);
     App.getApplication().getAppComponent().inject(this);
 
@@ -155,13 +155,7 @@ public class UserFragmentPresenter extends DRPresenter<UserFragmentPresenter.Use
     getView().showBriefMessageAction(R.string.error_loginFail, R.string.action_login);
   }
 
-  public void doLogin() {
-    getView().launchLoginActivity();
-  }
-
-  public interface UserView extends DRView {
-    void launchLoginActivity();
-
+  public interface Contract extends DRMVPView {
     void setUserLogin(@NonNull String userLogin);
 
     void setUserData(@NonNull GitHubAuthUser gitHubAuthUser);

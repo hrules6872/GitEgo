@@ -20,10 +20,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
-import android.widget.Button;
-import android.widget.TextView;
-import com.hrules.darealmvp.DRPresenter;
-import com.hrules.darealmvp.DRView;
+import com.hrules.darealmvp.DRMVPPresenter;
+import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
 import com.hrules.gitego.BuildConfig;
 import com.hrules.gitego.R;
@@ -42,7 +40,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
-public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.LoginView> {
+public class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
   @Inject GetAccessToken getAccessToken;
   @Inject GetAuthUser getAuthUser;
@@ -51,13 +49,13 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
   private boolean showLoginFail = false;
   private boolean showNetworkFail = false;
 
-  @Override public void bind(@NonNull LoginView view) {
+  @Override public void bind(@NonNull Contract view) {
     super.bind(view);
     App.getApplication().getAppComponent().inject(this);
   }
 
   public void onNewIntent(Intent intent) {
-    getView().showProgressDialog(R.string.login_gettingUser);
+    getView().showProgressDialog();
 
     showLoginFail = false;
     showNetworkFail = false;
@@ -73,8 +71,7 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
               String login = gitHubAuthUser.getLogin();
               String type = gitHubAuthUser.getType();
               String token = gitHubAccessToken.getAccess_token();
-              boolean defaultAccount = true;
-              Account account = new Account(login, type, token, defaultAccount);
+              Account account = new Account(login, type, token, true);
 
               if (!TextUtils.isEmpty(account.getUser()) && !TextUtils.isEmpty(account.getToken())) {
                 gitHubAPI.setAccount(account);
@@ -119,36 +116,14 @@ public class LoginActivityPresenter extends DRPresenter<LoginActivityPresenter.L
     getView().showBriefMessage(R.string.error_networkFail);
   }
 
-  public void onClickButton(@NonNull Button button) {
-    switch (button.getId()) {
-      case R.id.login:
-        getView().launchOAuthLogin(gitHubAPI);
-        break;
-
-      default:
-        throw new UnsupportedOperationException();
-    }
+  public void onLoginClick() {
+    gitHubAPI.launchOAuthLogin(App.getApplication());
   }
 
-  public void onClickTextView(@NonNull TextView textView) {
-    switch (textView.getId()) {
-      case R.id.about:
-        getView().launchAboutActivity();
-        break;
-
-      default:
-        throw new UnsupportedOperationException();
-    }
-  }
-
-  public interface LoginView extends DRView {
+  public interface Contract extends DRMVPView {
     void startMainActivity();
 
-    void launchOAuthLogin(@NonNull GitHubAPI gitHubAPI);
-
-    void launchAboutActivity();
-
-    void showProgressDialog(@StringRes int message);
+    void showProgressDialog();
 
     void hideProgressDialog();
 

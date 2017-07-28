@@ -15,6 +15,7 @@
   ~ limitations under the License.
   -->
 
+<!--suppress ALL -->
 <android.support.percent.PercentFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,7 +24,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/accentBackground"
-    >
+>
 
   <android.support.v7.widget.CardView
       android:layout_width="match_parent"
@@ -33,12 +34,12 @@
       app:layout_marginLeftPercent="10%"
       app:layout_marginRightPercent="10%"
       app:layout_marginTopPercent="15%"
-      >
+  >
 
     <android.support.percent.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+    >
       <ImageView
           android:id="@+id/logo"
           android:layout_centerHorizontal="true"
@@ -46,7 +47,7 @@
           app:layout_heightPercent="30%"
           app:layout_widthPercent="50%"
           tools:ignore="ContentDescription"
-          />
+      />
 
       <TextView
           android:layout_width="match_parent"
@@ -56,7 +57,7 @@
           android:text="@string/app_name"
           android:textAllCaps="true"
           style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-          />
+      />
 
       <com.hrules.gitego.presentation.commons.components.UnderlineTextView
           android:id="@+id/about"
@@ -68,7 +69,7 @@
           android:text="@string/login_about"
           android:textAppearance="?android:attr/textAppearanceSmall"
           app:layout_marginBottomPercent="10%"
-          />
+      />
 
       <Button
           android:id="@+id/login"
@@ -82,7 +83,7 @@
           android:textColor="@color/textHighlighted"
           android:textStyle="bold"
           style="@style/Widget.AppCompat.Button.Borderless"
-          />
+      />
 
     </android.support.percent.PercentRelativeLayout>
   </android.support.v7.widget.CardView>

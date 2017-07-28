@@ -16,35 +16,31 @@
 
 package com.hrules.gitego.presentation.presenters.activities;
 
-import android.os.Bundle;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
-import com.hrules.darealmvp.DRPresenter;
-import com.hrules.darealmvp.DRView;
+import com.hrules.darealmvp.DRMVPPresenter;
+import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
-import com.hrules.gitego.AppConstants;
-import com.hrules.gitego.R;
-import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
+import com.hrules.gitego.services.NotificationService;
+import com.hrules.gitego.services.NotificationUtils;
 import javax.inject.Inject;
 
-public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.MainView> {
+public class MainActivityPresenter extends DRMVPPresenter<MainActivityPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
-  @Inject Preferences preferences;
   @Inject AccountsManager accountsManager;
 
-  @Override public void bind(@NonNull MainView view) {
+  @Override public void bind(@NonNull Contract view) {
     super.bind(view);
     App.getApplication().getAppComponent().inject(this);
   }
 
-  @Override public void onViewReady(@Nullable Bundle savedInstanceState) {
-    getView().removeNotification();
+  public void onViewReady() {
+    removeNotification();
 
     Account account = accountsManager.getDefaultAccount();
     if (TextUtils.isEmpty(account.getToken())) {
@@ -54,36 +50,16 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     }
   }
 
-  public void onCreateOptionsMenu(@NonNull Menu menu) {
-    menu.findItem(R.id.menu_notifications)
-        .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS,
-            AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
+  private void removeNotification() {
+    NotificationManager notificationManager = (NotificationManager) App.getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
+    notificationManager.cancel(NotificationService.NOTIFICATION_ID);
   }
 
-  public void onMenuItemClick(@NonNull MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.menu_notifications:
-        if (item.isChecked()) {
-          getView().stopNotificationServiceReceiver();
-        } else {
-          getView().startNotificationServiceReceiver();
-        }
-        item.setChecked(!item.isChecked());
-        preferences.save(AppConstants.PREFS.NOTIFICATIONS, item.isChecked());
-        break;
-
-      case R.id.menu_signOut:
-        accountsManager.removeAccount(accountsManager.getDefaultAccount());
-        getView().launchLoginActivity();
-        getView().finish();
-        break;
-
-      case R.id.menu_about:
-        getView().launchAboutActivity();
-        break;
-
-      default:
-        throw new UnsupportedOperationException();
+  public void startOrStopNotificationServiceReceiver(boolean checked) {
+    if (checked) {
+      NotificationUtils.startNotificationService(App.getApplication());
+    } else {
+      NotificationUtils.stopNotificationService(App.getApplication());
     }
   }
 
@@ -91,17 +67,11 @@ public class MainActivityPresenter extends DRPresenter<MainActivityPresenter.Mai
     getView().launchLoginActivity();
   }
 
-  public interface MainView extends DRView {
+  public void signOut() {
+    accountsManager.removeAccount(accountsManager.getDefaultAccount());
+  }
+
+  public interface Contract extends DRMVPView {
     void launchLoginActivity();
-
-    void launchAboutActivity();
-
-    void startNotificationServiceReceiver();
-
-    void stopNotificationServiceReceiver();
-
-    void removeNotification();
-
-    void finish();
   }
 }

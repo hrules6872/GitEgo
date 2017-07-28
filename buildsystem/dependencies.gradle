@@ -25,7 +25,7 @@ ext {
   // project dependencies
   butterKnifeVersion = '8.7.+'
   daggerVersion = '2.11'
-  daRealMVPVersion = '0.14.0'
+  daRealMVPVersion = '0.20.0'
   gsonVersion = '2.8.1'
   okhttpVersion = '3.8.+'
   picassoViewVersion = '2.5.+'

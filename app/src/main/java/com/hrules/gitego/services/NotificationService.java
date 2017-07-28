@@ -98,8 +98,8 @@ public class NotificationService extends Service {
 
   private boolean isCheckedToday() {
     Calendar present = milliToCalendar(System.currentTimeMillis());
-    Calendar past = milliToCalendar(
-        preferences.getLong(PREFS_NOTIFICATION_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
+    Calendar past =
+        milliToCalendar(preferences.getLong(PREFS_NOTIFICATION_CHECKED_TODAY, present.getTimeInMillis() - TimeUnit.DAYS.toMillis(1)));
     return TimeUnit.MILLISECONDS.toDays(present.getTimeInMillis() - past.getTimeInMillis()) <= 0;
   }
 
@@ -187,6 +187,7 @@ public class NotificationService extends Service {
         getString(R.string.notification_message));
   }
 
+  @SuppressWarnings("deprecation")
   private void showNotification(int smallIcon, @NonNull String ticker, @NonNull String title, @NonNull String content) {
     if (!AppLifecycleManager.isAppInForeground()) {
       Intent intent = new Intent(this, MainActivityView.class);

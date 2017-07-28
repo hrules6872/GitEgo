@@ -21,7 +21,9 @@ import android.support.annotation.Nullable;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import okhttp3.Headers;
@@ -35,7 +37,8 @@ import okhttp3.internal.Util;
 public class Network {
   private final OkHttpClient client = new OkHttpClient();
 
-  public String post(@NonNull RequestNetwork requestNetwork) throws NetworkIOException, NetworkUnauthorizedException {
+  @SuppressWarnings("ConstantConditions") public String post(@NonNull RequestNetwork requestNetwork)
+      throws NetworkIOException, NetworkUnauthorizedException {
     Request request = new Request.Builder().url(requestNetwork.getUrl())
         .headers(makeHeaders(requestNetwork.getMapHeaders()))
         .post(makePostParams(requestNetwork.getMapParams()))
@@ -46,12 +49,13 @@ public class Network {
       response = client.newCall(request).execute();
       if (!response.isSuccessful()) throw new NetworkUnauthorizedException();
       return response.body().string();
-    } catch (IOException e) {
+    } catch (IOException | NullPointerException e) {
       throw new NetworkIOException(e.getMessage());
     }
   }
 
-  public String get(@NonNull RequestNetwork requestNetwork) throws NetworkIOException, NetworkUnauthorizedException {
+  @SuppressWarnings("ConstantConditions") public String get(@NonNull RequestNetwork requestNetwork)
+      throws NetworkIOException, NetworkUnauthorizedException {
     Request request = new Request.Builder().url(makeGetParams(requestNetwork.getUrl(), requestNetwork.getMapParams()))
         .headers(makeHeaders(requestNetwork.getMapHeaders()))
         .build();
@@ -61,7 +65,7 @@ public class Network {
       response = client.newCall(request).execute();
       if (!response.isSuccessful()) throw new NetworkUnauthorizedException();
       return response.body().string();
-    } catch (IOException e) {
+    } catch (IOException | NullPointerException e) {
       throw new NetworkIOException(e.getMessage());
     }
   }
@@ -101,7 +105,12 @@ public class Network {
       if (params.length() > 0) {
         params.append('&');
       }
-      params.append(URLEncoder.encode(entry.getKey())).append('=').append(URLEncoder.encode(entry.getValue()));
+      try {
+        params.append(URLEncoder.encode(entry.getKey(), Charset.defaultCharset().name()))
+            .append('=')
+            .append(URLEncoder.encode(entry.getValue(), Charset.defaultCharset().name()));
+      } catch (UnsupportedEncodingException ignored) {
+      }
     }
     return url + "?" + params.toString();
   }

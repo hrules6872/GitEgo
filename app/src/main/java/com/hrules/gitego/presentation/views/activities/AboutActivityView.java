@@ -17,8 +17,13 @@
 package com.hrules.gitego.presentation.views.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -27,21 +32,24 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.hrules.darealmvp.DRAppCompatActivity;
 import com.hrules.gitego.R;
-import com.hrules.gitego.presentation.commons.AppUtils;
-import com.hrules.gitego.presentation.presenters.activities.AboutActivityPresenter;
 
-public class AboutActivityView extends DRAppCompatActivity<AboutActivityPresenter, AboutActivityPresenter.AboutView>
-    implements AboutActivityPresenter.AboutView {
+import static android.webkit.WebView.SCHEME_MAILTO;
+
+public class AboutActivityView extends AppCompatActivity {
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.about_version) TextView aboutVersion;
 
-  @Override protected int getLayoutResource() {
-    return R.layout.about_activity;
+  private static final String DEFAULT_VERSION_CODE = "1";
+  private static final String DEFAULT_VERSION_NAME = "1";
+
+  @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.about_activity);
+    initializeViews();
   }
 
-  @Override protected void initializeViews() {
+  private void initializeViews() {
     ButterKnife.bind(this);
 
     setSupportActionBar(toolbar);
@@ -53,7 +61,7 @@ public class AboutActivityView extends DRAppCompatActivity<AboutActivityPresente
       actionBar.setDisplayShowTitleEnabled(true);
     }
 
-    aboutVersion.setText(AppUtils.getAppVersionText(this));
+    aboutVersion.setText(getAppVersionText());
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
@@ -65,41 +73,76 @@ public class AboutActivityView extends DRAppCompatActivity<AboutActivityPresente
     return super.onOptionsItemSelected(item);
   }
 
+  private String getAppVersionText() {
+    String versionName = DEFAULT_VERSION_NAME;
+    String versionCode = DEFAULT_VERSION_CODE;
+    try {
+      PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+      versionName = packageInfo.versionName;
+      versionCode = String.valueOf(packageInfo.versionCode);
+    } catch (PackageManager.NameNotFoundException ignored) {
+    }
+
+    return String.format(getString(R.string.text_appVersionFormatted), versionName, versionCode);
+  }
+
   @OnClick({
       R.id.about_rateIt, R.id.about_sendFeedback, R.id.about_twitter, R.id.about_moreApps, R.id.about_sourceCode
   }) void onClickButton(Button button) {
-    getPresenter().onClickButton(button);
+    switch (button.getId()) {
+      case R.id.about_rateIt:
+        goToPlayStore();
+        break;
+
+      case R.id.about_sendFeedback:
+        sendFeedbackByEmail();
+        break;
+
+      case R.id.about_moreApps:
+        goToPlayStoreDeveloper();
+        break;
+
+      case R.id.about_twitter:
+        goToTwitterDeveloper();
+        break;
+
+      case R.id.about_sourceCode:
+        goToSourceCode();
+        break;
+    }
   }
 
-  @Override public void goToPlayStore() {
+  private void goToPlayStore() {
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_playStoreURL))));
-    } catch (Exception e) {
+    } catch (Exception ignored) {
       showUnknownError();
     }
   }
 
-  @Override public void sendFeedbackByEmail() {
-    AppUtils.sendFeedbackByEmail(this);
+  private void sendFeedbackByEmail() {
+    Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(SCHEME_MAILTO, getString(R.string.feedback_developerEmail), null));
+    intent.putExtra(Intent.EXTRA_SUBJECT, String.format(getString(R.string.feedback_emailSubject), getAppVersionText()));
+    startActivity(Intent.createChooser(intent, getString(R.string.feedback_emailChooserTitle)));
   }
 
-  @Override public void goToPlayStoreDeveloper() {
+  private void goToPlayStoreDeveloper() {
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_developerPlayStoreURL))));
-    } catch (Exception e) {
+    } catch (Exception ignored) {
       showUnknownError();
     }
   }
 
-  @Override public void goToTwitterDeveloper() {
+  private void goToTwitterDeveloper() {
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_developerTwitterURL))));
-    } catch (Exception e) {
+    } catch (Exception ignored) {
       showUnknownError();
     }
   }
 
-  @Override public void goToSourceCode() {
+  private void goToSourceCode() {
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_sourceCodeURL))));
     } catch (Exception e) {

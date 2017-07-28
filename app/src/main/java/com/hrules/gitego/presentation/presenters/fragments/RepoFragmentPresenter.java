@@ -16,13 +16,11 @@
 
 package com.hrules.gitego.presentation.presenters.fragments;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
-import com.hrules.darealmvp.DRPresenter;
-import com.hrules.darealmvp.DRView;
+import com.hrules.darealmvp.DRMVPPresenter;
+import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
 import com.hrules.gitego.R;
 import com.hrules.gitego.commons.DebugLog;
@@ -42,7 +40,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
-public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.RepoView> {
+public class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
   @Inject GetAuthRepo getAuthRepo;
@@ -51,7 +49,7 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
 
   private List<GitHubAuthRepo> listToBeDeleted = new ArrayList<>();
 
-  @Override public void bind(@NonNull RepoView view) {
+  @Override public void bind(@NonNull Contract view) {
     super.bind(view);
     App.getApplication().getAppComponent().inject(this);
 
@@ -59,10 +57,6 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
     if (!TextUtils.isEmpty(account.getToken())) {
       gitHubAPI.setAccount(account);
     }
-  }
-
-  @Override public void onViewReady(@Nullable Bundle savedInstanceState) {
-    getView().updateList(new ArrayList<GitHubAuthRepo>());
   }
 
   public void onViewResume() {
@@ -137,22 +131,10 @@ public class RepoFragmentPresenter extends DRPresenter<RepoFragmentPresenter.Rep
     getView().showBriefMessageAction(R.string.error_loginFail, R.string.action_login);
   }
 
-  public void doLogin() {
-    getView().launchLoginActivity();
-  }
-
-  public void onListItemClick(@NonNull GitHubAuthRepo item) {
-    getView().launchBrowser(item.getHtml_url());
-  }
-
-  public interface RepoView extends DRView {
-    void launchLoginActivity();
-
+  public interface Contract extends DRMVPView {
     void updateList(@NonNull List<GitHubAuthRepo> list);
 
     void updateListState();
-
-    void launchBrowser(@NonNull String html_url);
 
     void showLoading();
 

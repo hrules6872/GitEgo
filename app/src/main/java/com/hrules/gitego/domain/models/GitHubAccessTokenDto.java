@@ -16,24 +16,31 @@
 
 package com.hrules.gitego.domain.models;
 
+import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 public class GitHubAccessTokenDto {
-  @SerializedName("access_token") private String access_token;
+  @SerializedName("access_token") private final String access_token;
 
-  @SerializedName("token_type") private String token_type;
+  @SerializedName("token_type") private final String token_type;
 
-  @SerializedName("scope") private String scope;
+  @SerializedName("scope") private final String scope;
 
-  public String getAccess_token() {
+  public GitHubAccessTokenDto(@NonNull String access_token, @NonNull String token_type, @NonNull String scope) {
+    this.access_token = access_token;
+    this.token_type = token_type;
+    this.scope = scope;
+  }
+
+  public @NonNull String getAccess_token() {
     return access_token;
   }
 
-  public String getToken_type() {
+  public @NonNull String getToken_type() {
     return token_type;
   }
 
-  public String getScope() {
+  public @NonNull String getScope() {
     return scope;
   }
 }

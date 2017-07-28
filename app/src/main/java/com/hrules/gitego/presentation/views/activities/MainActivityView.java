@@ -16,11 +16,10 @@
 
 package com.hrules.gitego.presentation.views.activities;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -29,63 +28,80 @@ import android.view.View;
 import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.hrules.darealmvp.DRAppCompatActivity;
 import com.hrules.gitego.App;
+import com.hrules.gitego.AppConstants;
 import com.hrules.gitego.R;
+import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.presentation.bus.BoolStateBus;
 import com.hrules.gitego.presentation.bus.base.Bus;
 import com.hrules.gitego.presentation.bus.base.BusModel;
 import com.hrules.gitego.presentation.bus.constants.BusActionConstants;
 import com.hrules.gitego.presentation.presenters.activities.MainActivityPresenter;
+import com.hrules.gitego.presentation.views.activities.base.DRMVPAppCompatActivity;
 import com.hrules.gitego.presentation.views.fragments.RepoFragmentView;
 import com.hrules.gitego.presentation.views.fragments.UserFragmentView;
-import com.hrules.gitego.services.NotificationService;
-import com.hrules.gitego.services.NotificationUtils;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.inject.Inject;
 
-public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter, MainActivityPresenter.MainView>
-    implements MainActivityPresenter.MainView, Bus {
+public class MainActivityView extends DRMVPAppCompatActivity<MainActivityPresenter, MainActivityPresenter.Contract>
+    implements MainActivityPresenter.Contract, Bus {
   @BindView(R.id.rootLayout) CoordinatorLayout rootLayout;
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.progressBar) ProgressBar progressBar;
 
+  @Inject Preferences preferences;
+
   private static final AtomicInteger refreshVisibilityCounter = new AtomicInteger();
 
-  @Override public int getLayoutResource() {
+  @Override public int getLayoutResId() {
     return R.layout.main_activity;
   }
 
-  @Override public void initializeViews() {
+  @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    App.getApplication().getAppComponent().inject(this);
+    initializeViews();
+
+    if (savedInstanceState == null) {
+      getSupportFragmentManager().beginTransaction().replace(R.id.fragmentUser, new UserFragmentView()).commit();
+      getSupportFragmentManager().beginTransaction().replace(R.id.fragmentRepo, new RepoFragmentView()).commit();
+    }
+
+    getPresenter().onViewReady();
+  }
+
+  private void initializeViews() {
     ButterKnife.bind(this);
 
     setSupportActionBar(toolbar);
   }
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction().replace(R.id.fragmentUser, new UserFragmentView()).commit();
-      getSupportFragmentManager().beginTransaction().replace(R.id.fragmentRepo, new RepoFragmentView()).commit();
-    }
-  }
-
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu_main, menu);
-    getPresenter().onCreateOptionsMenu(menu);
+    menu.findItem(R.id.menu_notifications)
+        .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
     return true;
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.menu_notifications:
-      case R.id.menu_signOut:
-      case R.id.menu_about:
-        getPresenter().onMenuItemClick(item);
-        return true;
+        item.setChecked(!item.isChecked());
+        preferences.save(AppConstants.PREFS.NOTIFICATIONS, item.isChecked());
+        getPresenter().startOrStopNotificationServiceReceiver(item.isChecked());
+        break;
 
-      default:
-        return super.onOptionsItemSelected(item);
+      case R.id.menu_signOut:
+        getPresenter().signOut();
+        launchLoginActivity();
+        finish();
+        break;
+
+      case R.id.menu_about:
+        launchAboutActivity();
+        break;
     }
+    return super.onOptionsItemSelected(item);
   }
 
   public void launchLoginActivity() {
@@ -93,21 +109,8 @@ public class MainActivityView extends DRAppCompatActivity<MainActivityPresenter,
     finish();
   }
 
-  @Override public void launchAboutActivity() {
+  private void launchAboutActivity() {
     startActivity(new Intent(this, AboutActivityView.class));
-  }
-
-  @Override public void startNotificationServiceReceiver() {
-    NotificationUtils.startNotificationService(App.getApplication());
-  }
-
-  @Override public void stopNotificationServiceReceiver() {
-    NotificationUtils.stopNotificationService(App.getApplication());
-  }
-
-  @Override public void removeNotification() {
-    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-    notificationManager.cancel(NotificationService.NOTIFICATION_ID);
   }
 
   @Override public void onEvent(@NonNull BusModel event) {
