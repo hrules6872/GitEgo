@@ -36,7 +36,7 @@ import com.hrules.gitego.R;
 
 import static android.webkit.WebView.SCHEME_MAILTO;
 
-public class AboutActivityView extends AppCompatActivity {
+public final class AboutActivityView extends AppCompatActivity {
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.about_version) TextView aboutVersion;
 

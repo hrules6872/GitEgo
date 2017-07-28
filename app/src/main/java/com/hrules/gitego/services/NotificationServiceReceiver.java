@@ -24,7 +24,7 @@ import android.content.Intent;
 import android.os.Build;
 import com.hrules.gitego.App;
 
-public class NotificationServiceReceiver extends BroadcastReceiver {
+public final class NotificationServiceReceiver extends BroadcastReceiver {
   public static final String ACTION_NOTIFICATION_SERVICE_START = "com.hrules.gitego.NOTIFICATION_SERVICE_START";
   public static final String ACTION_NOTIFICATION_SERVICE_STOP = "com.hrules.gitego.NOTIFICATION_SERVICE_STOP";
 
@@ -45,8 +45,7 @@ public class NotificationServiceReceiver extends BroadcastReceiver {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
     } else {
-      alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, AlarmManager.INTERVAL_DAY,
-          pendingIntent);
+      alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, AlarmManager.INTERVAL_DAY, pendingIntent);
     }
   }
 

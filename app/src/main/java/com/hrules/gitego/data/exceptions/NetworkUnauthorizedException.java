@@ -16,5 +16,5 @@
 
 package com.hrules.gitego.data.exceptions;
 
-public class NetworkUnauthorizedException extends Exception {
+public final class NetworkUnauthorizedException extends Exception {
 }

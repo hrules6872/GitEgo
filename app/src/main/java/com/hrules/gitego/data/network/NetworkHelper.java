@@ -19,7 +19,7 @@ package com.hrules.gitego.data.network;
 import android.support.annotation.NonNull;
 import java.util.HashMap;
 
-public class NetworkHelper {
+public final class NetworkHelper {
   private NetworkHelper() {
   }
 

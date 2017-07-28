@@ -16,7 +16,7 @@
 
 package com.hrules.gitego.presentation.bus.constants;
 
-public class BusActionConstants {
+public final class BusActionConstants {
   private BusActionConstants() {
   }
 

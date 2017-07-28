@@ -22,7 +22,7 @@ import com.hrules.gitego.domain.internal.AccountsManager;
 import dagger.Module;
 import dagger.Provides;
 
-@Module public class MainModule {
+@Module public final class MainModule {
   @Provides Preferences providesPreferences(App application) {
     return new Preferences(application);
   }

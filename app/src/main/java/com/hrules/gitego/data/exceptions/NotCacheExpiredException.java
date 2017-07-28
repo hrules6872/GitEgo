@@ -16,7 +16,7 @@
 
 package com.hrules.gitego.data.exceptions;
 
-public class NotCacheExpiredException extends Exception {
+public final class NotCacheExpiredException extends Exception {
   public NotCacheExpiredException(String detailMessage) {
     super(detailMessage);
   }

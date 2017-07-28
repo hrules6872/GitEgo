@@ -19,7 +19,7 @@ package com.hrules.gitego.domain.models;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
-public class GitHubAccessTokenDto {
+public final class GitHubAccessTokenDto {
   @SerializedName("access_token") private final String access_token;
 
   @SerializedName("token_type") private final String token_type;

@@ -19,7 +19,7 @@ package com.hrules.gitego.presentation.models;
 import android.text.Spannable;
 import com.hrules.gitego.presentation.models.base.Model;
 
-public class GitHubAuthRepo extends Model<String> {
+public final class GitHubAuthRepo extends Model<String> {
   private String date;
   private String id;
   private String name;

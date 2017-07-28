@@ -25,19 +25,14 @@ import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.commons.images.transforms.RoundedCornersTransformation;
 import com.squareup.picasso.Picasso;
 
-public class ImageLoader {
+public final class ImageLoader {
   private ImageLoader() {
   }
 
   public static void loadRounded(@NonNull Context context, @NonNull String url, @NonNull ImageView target) {
     Resources res = context.getResources();
-    int radius =
-        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, res.getDimension(R.dimen.avatar_cornerRadius),
-            res.getDisplayMetrics());
-    Picasso.with(context)
-        .load(url)
-        .error(R.drawable.noconnection)
-        .transform(new RoundedCornersTransformation(radius))
-        .into(target);
+    int radius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, res.getDimension(R.dimen.avatar_cornerRadius),
+        res.getDisplayMetrics());
+    Picasso.with(context).load(url).error(R.drawable.noconnection).transform(new RoundedCornersTransformation(radius)).into(target);
   }
 }

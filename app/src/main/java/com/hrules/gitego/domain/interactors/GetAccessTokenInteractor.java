@@ -31,7 +31,7 @@ import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
 import java.util.HashMap;
 
-public class GetAccessTokenInteractor extends BaseInteractor implements GetAccessToken {
+public final class GetAccessTokenInteractor extends BaseInteractor implements GetAccessToken {
   private final GitHubAPI gitHubAPI;
   private final Network network;
 

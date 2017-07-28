@@ -30,7 +30,7 @@ import com.hrules.gitego.services.NotificationService;
 import com.hrules.gitego.services.NotificationUtils;
 import javax.inject.Inject;
 
-public class MainActivityPresenter extends DRMVPPresenter<MainActivityPresenter.Contract> {
+public final class MainActivityPresenter extends DRMVPPresenter<MainActivityPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
 

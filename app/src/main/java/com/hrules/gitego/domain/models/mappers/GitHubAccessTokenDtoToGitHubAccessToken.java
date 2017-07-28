@@ -21,8 +21,7 @@ import com.hrules.gitego.domain.models.GitHubAccessTokenDto;
 import com.hrules.gitego.domain.models.mappers.base.Mapper;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
 
-public class GitHubAccessTokenDtoToGitHubAccessToken
-    implements Mapper<GitHubAccessTokenDto, GitHubAccessToken> {
+public final class GitHubAccessTokenDtoToGitHubAccessToken implements Mapper<GitHubAccessTokenDto, GitHubAccessToken> {
   @Override public GitHubAccessToken map(@NonNull GitHubAccessTokenDto from) {
     GitHubAccessToken gitHubAccessToken = new GitHubAccessToken();
     gitHubAccessToken.setAccess_token(from.getAccess_token());

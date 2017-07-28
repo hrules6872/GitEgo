@@ -45,7 +45,7 @@ import com.hrules.gitego.presentation.views.activities.LoginActivityView;
 import com.hrules.gitego.presentation.views.fragments.base.DRMVPFragmentV4;
 import java.util.List;
 
-public class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresenter, UserFragmentPresenter.Contract>
+public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresenter, UserFragmentPresenter.Contract>
     implements UserFragmentPresenter.Contract {
   @BindView(R.id.userLogin) TextView userLogin;
   @BindView(R.id.userName) TextView userName;

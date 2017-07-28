@@ -39,29 +39,27 @@ import dagger.Module;
 import dagger.Provides;
 import javax.inject.Named;
 
-@Module public class DataModule {
+@Module public final class DataModule {
   @Provides @Named("authUserRepository") Repository providesAuthUserRepository(
       @Named("authUserBddDataSourceReadable") DataSourceReadable authUserBddDataSourceReadable,
       @Named("authUserAPIDataSourceReadable") DataSourceReadable authUserAPIDataSourceReadable,
       @Named("authUserBddDataSourceWriteable") DataSourceWriteable authUserBddDataSourceWriteable) {
     // readables: first local then remote, writeables: first remote then local
-    return new AuthUserRepository(
-        new DataSourceReadable[] { authUserBddDataSourceReadable, authUserAPIDataSourceReadable },
+    return new AuthUserRepository(new DataSourceReadable[] { authUserBddDataSourceReadable, authUserAPIDataSourceReadable },
         new DataSourceWriteable[] { authUserBddDataSourceWriteable });
   }
 
-  @Provides @Named("authUserBddDataSourceReadable") DataSourceReadable providesAuthUserBddDataSourceReadable(
-      Database database, @Named("authUserBddBasicCache") BasicCache cache) {
+  @Provides @Named("authUserBddDataSourceReadable") DataSourceReadable providesAuthUserBddDataSourceReadable(Database database,
+      @Named("authUserBddBasicCache") BasicCache cache) {
     return new AuthUserBddDataSourceReadable(database, cache);
   }
 
-  @Provides @Named("authUserBddDataSourceWriteable") DataSourceWriteable providesAuthUserBddDataSourceWriteable(
-      Database database) {
+  @Provides @Named("authUserBddDataSourceWriteable") DataSourceWriteable providesAuthUserBddDataSourceWriteable(Database database) {
     return new AuthUserBddDataSourceWriteable(database);
   }
 
-  @Provides @Named("authUserAPIDataSourceReadable") DataSourceReadable providesAuthUserAPIDataSourceReadable(
-      Network network, @Named("authUserAPIBasicCache") BasicCache cache) {
+  @Provides @Named("authUserAPIDataSourceReadable") DataSourceReadable providesAuthUserAPIDataSourceReadable(Network network,
+      @Named("authUserAPIBasicCache") BasicCache cache) {
     return new AuthUserAPIDataSourceReadable(network, cache);
   }
 
@@ -70,23 +68,21 @@ import javax.inject.Named;
       @Named("authRepoAPIDataSourceReadable") DataSourceReadable authRepoAPIDataSourceReadable,
       @Named("authRepoBddDataSourceWriteable") DataSourceWriteable authRepoBddDataSourceWriteable) {
     // readables: first local then remote, writeables: first remote then local
-    return new AuthRepoRepository(
-        new DataSourceReadable[] { authRepoBddDataSourceReadable, authRepoAPIDataSourceReadable },
+    return new AuthRepoRepository(new DataSourceReadable[] { authRepoBddDataSourceReadable, authRepoAPIDataSourceReadable },
         new DataSourceWriteable[] { authRepoBddDataSourceWriteable });
   }
 
-  @Provides @Named("authRepoBddDataSourceReadable") DataSourceReadable providesAuthRepoBddDataSourceReadable(
-      Database database, @Named("authRepoBddBasicCache") BasicCache cache) {
+  @Provides @Named("authRepoBddDataSourceReadable") DataSourceReadable providesAuthRepoBddDataSourceReadable(Database database,
+      @Named("authRepoBddBasicCache") BasicCache cache) {
     return new AuthRepoBddDataSourceReadable(database, cache);
   }
 
-  @Provides @Named("authRepoBddDataSourceWriteable") DataSourceWriteable providesAuthRepoBddDataSourceWriteable(
-      Database database) {
+  @Provides @Named("authRepoBddDataSourceWriteable") DataSourceWriteable providesAuthRepoBddDataSourceWriteable(Database database) {
     return new AuthRepoBddDataSourceWriteable(database);
   }
 
-  @Provides @Named("authRepoAPIDataSourceReadable") DataSourceReadable providesAuthRepoAPIDataSourceReadable(
-      Network network, @Named("authRepoAPIBasicCache") BasicCache cache) {
+  @Provides @Named("authRepoAPIDataSourceReadable") DataSourceReadable providesAuthRepoAPIDataSourceReadable(Network network,
+      @Named("authRepoAPIBasicCache") BasicCache cache) {
     return new AuthRepoAPIDataSourceReadable(network, cache);
   }
 

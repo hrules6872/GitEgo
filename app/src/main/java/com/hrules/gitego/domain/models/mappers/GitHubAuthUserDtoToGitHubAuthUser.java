@@ -21,8 +21,7 @@ import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.mappers.base.InverseMapper;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 
-public class GitHubAuthUserDtoToGitHubAuthUser
-    implements InverseMapper<GitHubAuthUserDto, GitHubAuthUser> {
+public final class GitHubAuthUserDtoToGitHubAuthUser implements InverseMapper<GitHubAuthUserDto, GitHubAuthUser> {
   @Override public GitHubAuthUser map(@NonNull GitHubAuthUserDto from) {
     GitHubAuthUser gitHubAuthUser = new GitHubAuthUser();
     gitHubAuthUser.setModelId(from.getModelId());

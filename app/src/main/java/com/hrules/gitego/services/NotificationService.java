@@ -50,7 +50,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
-public class NotificationService extends Service {
+public final class NotificationService extends Service {
   private static final String PREFS_NOTIFICATION_CHECKED_TODAY = "PREFS_NOTIFICATION_CHECKED_TODAY";
 
   public static final int SERVICE_REQUEST_CODE = 1;

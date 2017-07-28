@@ -21,7 +21,7 @@ import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.specifications.base.SpecificationParams;
 import java.util.List;
 
-public class DeleteAuthRepoSpecificationParams extends SpecificationParams {
+public final class DeleteAuthRepoSpecificationParams extends SpecificationParams {
   private final List<GitHubAuthRepoDto> list;
 
   public DeleteAuthRepoSpecificationParams(@NonNull List<GitHubAuthRepoDto> list) {

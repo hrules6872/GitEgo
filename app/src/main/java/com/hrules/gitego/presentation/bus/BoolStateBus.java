@@ -19,7 +19,7 @@ package com.hrules.gitego.presentation.bus;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.presentation.bus.base.BusModel;
 
-public class BoolStateBus extends BusModel {
+public final class BoolStateBus extends BusModel {
   private final boolean state;
 
   public BoolStateBus(@NonNull String action, boolean state) {

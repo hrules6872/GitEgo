@@ -24,7 +24,7 @@ import com.hrules.gitego.domain.models.serializers.base.Serializer;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
-public class GitHubAuthRepoDtoSerializer implements Serializer<Collection<GitHubAuthRepoDto>, String> {
+public final class GitHubAuthRepoDtoSerializer implements Serializer<Collection<GitHubAuthRepoDto>, String> {
   public Collection<GitHubAuthRepoDto> deserialize(@NonNull String from) {
     Type type = new TypeToken<Collection<GitHubAuthRepoDto>>() {
     }.getType();

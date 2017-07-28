@@ -19,7 +19,7 @@ package com.hrules.gitego.presentation.models.comparators;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import java.util.Comparator;
 
-public class GitHubAuthRepoDateDescendingComparator implements Comparator<GitHubAuthRepo> {
+public final class GitHubAuthRepoDateDescendingComparator implements Comparator<GitHubAuthRepo> {
   @Override public int compare(GitHubAuthRepo lhs, GitHubAuthRepo rhs) {
     return rhs.getDate().compareTo(lhs.getDate());
   }

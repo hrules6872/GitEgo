@@ -30,14 +30,13 @@ import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import java.util.List;
 
-public class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser {
+public final class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser {
   private final Repository repository;
 
   private String access_token;
   private Callback callback;
 
-  public GetAuthUserInteractor(@NonNull InteractorExecutorInterface interactorExecutor,
-      @NonNull Repository repository) {
+  public GetAuthUserInteractor(@NonNull InteractorExecutorInterface interactorExecutor, @NonNull Repository repository) {
     super(interactorExecutor);
     this.repository = repository;
   }

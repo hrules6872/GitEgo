@@ -18,7 +18,7 @@ package com.hrules.gitego.data.repository.cache;
 
 import com.hrules.gitego.data.repository.cache.base.BasicCache;
 
-public class AuthRepoBddBasicCache extends BasicCache {
+public final class AuthRepoBddBasicCache extends BasicCache {
   private static final String CACHE_ID = "AuthRepoBddBasicCache";
   private static final long EXPIRATION_TIME = Long.MIN_VALUE;
 

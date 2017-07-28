@@ -16,7 +16,7 @@
 
 package com.hrules.gitego.presentation.models;
 
-public class GitHubAccessToken {
+public final class GitHubAccessToken {
   private String access_token;
   private String token_type;
   private String scope;

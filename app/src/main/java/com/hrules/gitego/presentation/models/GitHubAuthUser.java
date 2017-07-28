@@ -18,7 +18,7 @@ package com.hrules.gitego.presentation.models;
 
 import com.hrules.gitego.presentation.models.base.Model;
 
-public class GitHubAuthUser extends Model<String> {
+public final class GitHubAuthUser extends Model<String> {
   private String date;
   private String login;
   private String avatar_url;

@@ -34,7 +34,7 @@ import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
+public final class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
   private final List<GitHubAuthRepo> items;
   private final RepoAdapterListener listener;
 

@@ -21,7 +21,7 @@ import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
 
-@Singleton @Module public class AppModule {
+@Singleton @Module public final class AppModule {
   private final App application;
 
   public AppModule(App application) {

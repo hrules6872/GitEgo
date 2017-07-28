@@ -16,7 +16,7 @@
 
 package com.hrules.gitego.data.exceptions;
 
-public class LocalIOException extends Exception {
+public final class LocalIOException extends Exception {
   public LocalIOException(String detailMessage) {
     super(detailMessage);
   }

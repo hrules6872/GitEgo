@@ -32,7 +32,7 @@ import android.view.MotionEvent;
 /*
  * +info: https://gist.github.com/hrules6872/516ea7e04c8be4c55d26
  */
-public class UnderlineTextView extends AppCompatTextView {
+public final class UnderlineTextView extends AppCompatTextView {
   private int textColor;
 
   public UnderlineTextView(@NonNull Context context) {

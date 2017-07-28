@@ -40,7 +40,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
-public class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPresenter.Contract> {
+public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
   @Inject GetAccessToken getAccessToken;
   @Inject GetAuthUser getAuthUser;

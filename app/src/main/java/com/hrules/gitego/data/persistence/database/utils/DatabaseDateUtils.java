@@ -20,7 +20,7 @@ import android.annotation.SuppressLint;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@SuppressLint("SimpleDateFormat") public class DatabaseDateUtils {
+@SuppressLint("SimpleDateFormat") public final class DatabaseDateUtils {
   private final static String DATE_SQL_FORMAT = "yyyy-MM-dd";
 
   private DatabaseDateUtils() {

@@ -43,7 +43,7 @@ import com.hrules.gitego.presentation.views.fragments.UserFragmentView;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Inject;
 
-public class MainActivityView extends DRMVPAppCompatActivity<MainActivityPresenter, MainActivityPresenter.Contract>
+public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityPresenter, MainActivityPresenter.Contract>
     implements MainActivityPresenter.Contract, Bus {
   @BindView(R.id.rootLayout) CoordinatorLayout rootLayout;
   @BindView(R.id.toolbar) Toolbar toolbar;

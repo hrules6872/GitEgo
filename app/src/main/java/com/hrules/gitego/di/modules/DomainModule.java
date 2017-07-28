@@ -34,10 +34,9 @@ import dagger.Module;
 import dagger.Provides;
 import javax.inject.Named;
 
-@Module public class DomainModule {
+@Module public final class DomainModule {
   @Provides GitHubAPI providesGitHubAPI() {
-    return new GitHubAPI(BuildConfig.GITHUB_API_CLIENTID, BuildConfig.GITHUB_API_CLIENTSECRET,
-        BuildConfig.GITHUB_API_SCOPES);
+    return new GitHubAPI(BuildConfig.GITHUB_API_CLIENTID, BuildConfig.GITHUB_API_CLIENTSECRET, BuildConfig.GITHUB_API_SCOPES);
   }
 
   @Provides InteractorExecutor providesInteractorExecutor() {
@@ -48,8 +47,7 @@ import javax.inject.Named;
     return new UIThreadExecutor();
   }
 
-  @Provides GetAccessToken providesGetAccessToken(InteractorExecutor interactorExecutor, GitHubAPI gitHubAPI,
-      Network network) {
+  @Provides GetAccessToken providesGetAccessToken(InteractorExecutor interactorExecutor, GitHubAPI gitHubAPI, Network network) {
     return new GetAccessTokenInteractor(interactorExecutor, gitHubAPI, network);
   }
 

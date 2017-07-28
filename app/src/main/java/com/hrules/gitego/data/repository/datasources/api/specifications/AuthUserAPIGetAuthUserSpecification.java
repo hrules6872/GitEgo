@@ -22,13 +22,11 @@ import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.specifications.GetAuthUserSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthUserSpecificationParams;
 
-@SuppressWarnings("unused") public class AuthUserAPIGetAuthUserSpecification
-    extends GetAuthUserSpecification<RequestNetwork> {
+@SuppressWarnings("unused") public final class AuthUserAPIGetAuthUserSpecification extends GetAuthUserSpecification<RequestNetwork> {
   @Override public RequestNetwork get() {
     GetAuthUserSpecificationParams params = (GetAuthUserSpecificationParams) getParams();
 
     String access_token = params.getAccess_token();
-    return new RequestNetwork(GitHubAPI.GITHUB_GET_AUTHUSER_URL, NetworkHelper.makeAuthorizationHeader(access_token),
-        null);
+    return new RequestNetwork(GitHubAPI.GITHUB_GET_AUTHUSER_URL, NetworkHelper.makeAuthorizationHeader(access_token), null);
   }
 }

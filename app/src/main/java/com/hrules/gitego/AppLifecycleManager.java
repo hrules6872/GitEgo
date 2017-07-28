@@ -20,7 +20,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-public class AppLifecycleManager implements Application.ActivityLifecycleCallbacks {
+public final class AppLifecycleManager implements Application.ActivityLifecycleCallbacks {
   private static int foregroundActivityCount = 0;
 
   @Override public void onActivityCreated(Activity activity, Bundle savedInstanceState) {

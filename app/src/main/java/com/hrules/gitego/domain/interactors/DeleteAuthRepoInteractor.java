@@ -29,14 +29,13 @@ import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import java.util.List;
 
-public class DeleteAuthRepoInteractor extends BaseInteractor implements DeleteAuthRepo {
+public final class DeleteAuthRepoInteractor extends BaseInteractor implements DeleteAuthRepo {
   private final Repository repository;
 
   private List<GitHubAuthRepo> list;
   private Callback callback;
 
-  public DeleteAuthRepoInteractor(@NonNull InteractorExecutorInterface interactorExecutor,
-      @NonNull Repository repository) {
+  public DeleteAuthRepoInteractor(@NonNull InteractorExecutorInterface interactorExecutor, @NonNull Repository repository) {
     super(interactorExecutor);
     this.repository = repository;
   }

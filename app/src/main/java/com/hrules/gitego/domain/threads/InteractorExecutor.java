@@ -22,7 +22,7 @@ import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class InteractorExecutor implements InteractorExecutorInterface {
+public final class InteractorExecutor implements InteractorExecutorInterface {
   private static final int THREADS = 3;
 
   private final ExecutorService executorService = Executors.newFixedThreadPool(THREADS);

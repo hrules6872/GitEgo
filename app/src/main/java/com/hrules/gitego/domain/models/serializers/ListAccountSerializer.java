@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ListAccountSerializer implements Serializer<Collection<Account>, String> {
+public final class ListAccountSerializer implements Serializer<Collection<Account>, String> {
   public Collection<Account> deserialize(@NonNull String from) {
     Type type = new TypeToken<Collection<Account>>() {
     }.getType();

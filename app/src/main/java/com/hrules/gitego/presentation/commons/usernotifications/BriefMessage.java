@@ -20,7 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-public class BriefMessage {
+public final class BriefMessage {
   public interface BriefMessageListener {
     void onClick();
   }

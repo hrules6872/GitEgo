@@ -23,17 +23,15 @@ import com.hrules.gitego.domain.models.transformers.base.Transformer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GitHubAuthRepoDtoToMap implements Transformer<GitHubAuthRepoDto, Map<String, Object>> {
+public final class GitHubAuthRepoDtoToMap implements Transformer<GitHubAuthRepoDto, Map<String, Object>> {
   @Override public Map<String, Object> transform(@NonNull GitHubAuthRepoDto from) {
     Map<String, Object> values = new HashMap<>();
     values.put(DatabaseConstants.KEY_REPO_DATE, from.getDate());
     values.put(DatabaseConstants.KEY_REPO_ID, from.getId());
     values.put(DatabaseConstants.KEY_REPO_NAME, from.getName());
-    values.put(DatabaseConstants.KEY_REPO_IS_PRIVATE,
-        from.isPrivate() ? DatabaseConstants.BOOLEAN.TRUE : DatabaseConstants.BOOLEAN.FALSE);
+    values.put(DatabaseConstants.KEY_REPO_IS_PRIVATE, from.isPrivate() ? DatabaseConstants.BOOLEAN.TRUE : DatabaseConstants.BOOLEAN.FALSE);
     values.put(DatabaseConstants.KEY_REPO_HTML_URL, from.getHtml_url());
-    values.put(DatabaseConstants.KEY_REPO_IS_FORK,
-        from.isFork() ? DatabaseConstants.BOOLEAN.TRUE : DatabaseConstants.BOOLEAN.FALSE);
+    values.put(DatabaseConstants.KEY_REPO_IS_FORK, from.isFork() ? DatabaseConstants.BOOLEAN.TRUE : DatabaseConstants.BOOLEAN.FALSE);
     values.put(DatabaseConstants.KEY_REPO_HOMEPAGE, from.getHomepage());
     values.put(DatabaseConstants.KEY_REPO_STARGAZERS_COUNT, from.getStargazers_count());
     values.put(DatabaseConstants.KEY_REPO_WATCHERS_COUNT, from.getWatchers_count());

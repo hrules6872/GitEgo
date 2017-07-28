@@ -19,7 +19,7 @@ package com.hrules.gitego.domain.models;
 import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
-public class Account {
+public final class Account {
   @SerializedName("user") private final String user;
 
   @SerializedName("type") private final String type;

@@ -16,14 +16,14 @@
 
 package com.hrules.gitego.data.persistence.database;
 
-public class DatabaseConstants {
+public final class DatabaseConstants {
   private DatabaseConstants() {
   }
 
   static final String DATABASE_NAME = "gitego.db";
   static final int DATABASE_VERSION = 1;
 
-  public class BOOLEAN {
+  public final class BOOLEAN {
     public static final int FALSE = 0;
     public static final int TRUE = 1;
   }

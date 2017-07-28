@@ -22,7 +22,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.models.Account;
 
-public class GitHubAPI {
+public final class GitHubAPI {
   private static final String GITHUB_OAUTH_AUTHORIZE_URL = "https://github.com/login/oauth/authorize";
   public static final String GITHUB_OAUTH_TOKEN_URL = "https://github.com/login/oauth/access_token";
   public static final String GITHUB_GET_AUTHUSER_URL = "https://api.github.com/user";

@@ -16,20 +16,20 @@
 
 package com.hrules.gitego;
 
-public class AppConstants {
+public final class AppConstants {
   private AppConstants() {
   }
 
-  public class PREFS {
+  public final class PREFS {
     public static final String ACCOUNTS = "ACCOUNTS";
     public static final String NOTIFICATIONS = "NOTIFICATIONS";
   }
 
-  public class PREFS_DEFAULTS {
+  public final class PREFS_DEFAULTS {
     public static final boolean NOTIFICATIONS_DEFAULT = true;
   }
 
-  public class DEFAULTS {
+  public final class DEFAULTS {
     public static final boolean ACCOUNTS_MULTIPLE_DEFAULT = false;
   }
 }

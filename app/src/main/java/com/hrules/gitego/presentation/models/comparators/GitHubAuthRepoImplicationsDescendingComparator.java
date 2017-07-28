@@ -19,9 +19,10 @@ package com.hrules.gitego.presentation.models.comparators;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import java.util.Comparator;
 
-public class GitHubAuthRepoImplicationsDescendingComparator implements Comparator<GitHubAuthRepo> {
+public final class GitHubAuthRepoImplicationsDescendingComparator implements Comparator<GitHubAuthRepo> {
   @Override public int compare(GitHubAuthRepo lhs, GitHubAuthRepo rhs) {
-    return (rhs.getStargazers_count() + rhs.getWatchers_count() + rhs.getForks_count())
-        - (lhs.getStargazers_count() + lhs.getWatchers_count() + lhs.getForks_count());
+    return (rhs.getStargazers_count() + rhs.getWatchers_count() + rhs.getForks_count()) - (lhs.getStargazers_count()
+        + lhs.getWatchers_count()
+        + lhs.getForks_count());
   }
 }

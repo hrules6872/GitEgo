@@ -20,7 +20,7 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import java.lang.reflect.Type;
 
-public class Json {
+public final class Json {
   private final Gson gson = new Gson();
 
   public <T> String toJson(@NonNull T model) {

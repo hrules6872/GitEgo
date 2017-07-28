@@ -22,7 +22,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-public class Preferences {
+public final class Preferences {
   private final SharedPreferences preferences;
 
   public Preferences(Context context) {

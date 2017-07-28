@@ -19,13 +19,11 @@ package com.hrules.gitego.domain.specifications.base;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.data.repository.datasources.base.DataSource;
 
-public class SpecificationFactory<T> {
-  @SuppressWarnings("unchecked")
-  public Specification<T> get(@NonNull DataSource dataSource, @NonNull Specification<T> specification) {
+public final class SpecificationFactory<T> {
+  @SuppressWarnings("unchecked") public Specification<T> get(@NonNull DataSource dataSource, @NonNull Specification<T> specification) {
     try {
       Class<?> clazz = Class.forName(
-          dataSource.getSpecificationsPath() + "." + dataSource.getSpecificationsPrefix() + specification.getClass()
-              .getSimpleName());
+          dataSource.getSpecificationsPath() + "." + dataSource.getSpecificationsPrefix() + specification.getClass().getSimpleName());
       Object result = clazz.newInstance();
       ((Specification) result).setParams(specification.getParams());
       return (Specification<T>) result;

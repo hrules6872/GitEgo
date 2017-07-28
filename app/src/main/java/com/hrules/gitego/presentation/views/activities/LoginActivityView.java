@@ -30,7 +30,7 @@ import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
 import com.hrules.gitego.presentation.presenters.activities.LoginActivityPresenter;
 import com.hrules.gitego.presentation.views.activities.base.DRMVPAppCompatActivity;
 
-public class LoginActivityView extends DRMVPAppCompatActivity<LoginActivityPresenter, LoginActivityPresenter.Contract>
+public final class LoginActivityView extends DRMVPAppCompatActivity<LoginActivityPresenter, LoginActivityPresenter.Contract>
     implements LoginActivityPresenter.Contract {
   @SuppressWarnings("deprecation") @BindView(R.id.rootLayout) PercentFrameLayout rootLayout;
 

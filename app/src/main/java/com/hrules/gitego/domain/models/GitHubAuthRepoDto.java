@@ -19,7 +19,7 @@ package com.hrules.gitego.domain.models;
 import com.google.gson.annotations.SerializedName;
 import com.hrules.gitego.domain.models.base.ModelDto;
 
-public class GitHubAuthRepoDto extends ModelDto<String> {
+public final class GitHubAuthRepoDto extends ModelDto<String> {
   private String date;
 
   @SerializedName("id") private String id;

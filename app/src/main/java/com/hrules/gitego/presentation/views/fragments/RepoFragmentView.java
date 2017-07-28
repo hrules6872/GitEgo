@@ -49,7 +49,7 @@ import com.hrules.gitego.presentation.views.fragments.base.DRMVPFragmentV4;
 import java.util.Collections;
 import java.util.List;
 
-public class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresenter, RepoFragmentPresenter.Contract>
+public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresenter, RepoFragmentPresenter.Contract>
     implements RepoFragmentPresenter.Contract {
   @BindView(R.id.recyclerView) RecyclerView recyclerView;
 

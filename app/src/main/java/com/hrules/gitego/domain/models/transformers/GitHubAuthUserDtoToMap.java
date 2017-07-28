@@ -23,7 +23,7 @@ import com.hrules.gitego.domain.models.transformers.base.Transformer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GitHubAuthUserDtoToMap implements Transformer<GitHubAuthUserDto, Map<String, Object>> {
+public final class GitHubAuthUserDtoToMap implements Transformer<GitHubAuthUserDto, Map<String, Object>> {
   @Override public Map<String, Object> transform(@NonNull GitHubAuthUserDto from) {
     Map<String, Object> values = new HashMap<>();
     values.put(DatabaseConstants.KEY_USER_DATE, from.getDate());

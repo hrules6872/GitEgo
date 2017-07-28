@@ -19,7 +19,7 @@ package com.hrules.gitego.domain.specifications.params;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.specifications.base.SpecificationParams;
 
-public class GetAuthRepoSpecificationParams extends SpecificationParams {
+public final class GetAuthRepoSpecificationParams extends SpecificationParams {
   private final String access_token;
 
   public GetAuthRepoSpecificationParams(@NonNull String access_token) {

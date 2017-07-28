@@ -34,7 +34,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.internal.Util;
 
-public class Network {
+public final class Network {
   private final OkHttpClient client = new OkHttpClient();
 
   @SuppressWarnings("ConstantConditions") public String post(@NonNull RequestNetwork requestNetwork)

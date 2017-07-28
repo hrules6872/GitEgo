@@ -21,8 +21,7 @@ import com.hrules.gitego.data.network.RequestNetwork;
 import com.hrules.gitego.domain.specifications.GetAuthRepoSubscribersSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthRepoSubscribersSpecificationParams;
 
-public class AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification
-    extends GetAuthRepoSubscribersSpecification<RequestNetwork> {
+public final class AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification extends GetAuthRepoSubscribersSpecification<RequestNetwork> {
   @Override public RequestNetwork get() {
     GetAuthRepoSubscribersSpecificationParams params = (GetAuthRepoSubscribersSpecificationParams) getParams();
 

@@ -40,7 +40,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
-public class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPresenter.Contract> {
+public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
   @Inject GetAuthRepo getAuthRepo;

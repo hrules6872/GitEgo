@@ -24,7 +24,7 @@ import com.hrules.gitego.di.modules.AppModule;
 import com.hrules.gitego.services.NotificationUtils;
 import javax.inject.Inject;
 
-public class App extends Application {
+public final class App extends Application {
   private static App application;
   private AppComponent appComponent;
 

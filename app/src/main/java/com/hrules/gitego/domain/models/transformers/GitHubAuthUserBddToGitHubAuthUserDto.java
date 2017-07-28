@@ -22,8 +22,7 @@ import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.transformers.base.Transformer;
 
-public class GitHubAuthUserBddToGitHubAuthUserDto
-    implements Transformer<Cursor, GitHubAuthUserDto> {
+public final class GitHubAuthUserBddToGitHubAuthUserDto implements Transformer<Cursor, GitHubAuthUserDto> {
   @Override public GitHubAuthUserDto transform(@NonNull Cursor from) {
     GitHubAuthUserDto to = new GitHubAuthUserDto();
     to.setDate(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_DATE)));

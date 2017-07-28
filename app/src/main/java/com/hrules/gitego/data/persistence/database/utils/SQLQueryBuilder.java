@@ -23,7 +23,7 @@ import java.util.Map;
 
 // +info: https://gist.github.com/hrules6872/a85edc751076258f2aa95d5070be461b
 
-@SuppressWarnings({ "WeakerAccess", "unused" }) public class SQLQueryBuilder {
+@SuppressWarnings({ "WeakerAccess", "unused" }) public final class SQLQueryBuilder {
   private static final String STATEMENT_SELECT = "SELECT";
   private static final String STATEMENT_DISTINCT_SELECT = "SELECT DISTINCT";
   private static final String STATEMENT_UPDATE = "UPDATE";

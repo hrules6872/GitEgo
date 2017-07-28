@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class AuthUserAPIDataSourceReadable extends DataSourceReadable<GitHubAuthUserDto> {
+public final class AuthUserAPIDataSourceReadable extends DataSourceReadable<GitHubAuthUserDto> {
   private final Network network;
   private final BasicCache cache;
 
@@ -39,8 +39,8 @@ public class AuthUserAPIDataSourceReadable extends DataSourceReadable<GitHubAuth
     this.cache = cache;
   }
 
-  @SuppressWarnings("unchecked") @Override
-  public Collection<GitHubAuthUserDto> query(@NonNull Specification specification) throws Exception {
+  @SuppressWarnings("unchecked") @Override public Collection<GitHubAuthUserDto> query(@NonNull Specification specification)
+      throws Exception {
     specification = new SpecificationFactory<String>().get(this, specification);
     List<GitHubAuthUserDto> list = new ArrayList<>();
 

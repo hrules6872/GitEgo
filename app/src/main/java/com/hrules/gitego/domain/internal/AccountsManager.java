@@ -24,18 +24,17 @@ import com.hrules.gitego.domain.models.serializers.ListAccountSerializer;
 import java.util.Collection;
 import java.util.List;
 
-public class AccountsManager extends BaseAccountsManager {
-  public AccountsManager(Context context) {
+public final class AccountsManager extends BaseAccountsManager {
+  public AccountsManager(@NonNull Context context) {
     super(context);
   }
 
-  public AccountsManager(Context context, boolean multipleAccounts) {
+  public AccountsManager(@NonNull Context context, boolean multipleAccounts) {
     super(context, multipleAccounts);
   }
 
   @Override public Collection<Account> getAccounts() {
-    return new ListAccountSerializer().deserialize(
-        preferences.getString(AppConstants.PREFS.ACCOUNTS, ""));
+    return new ListAccountSerializer().deserialize(preferences.getString(AppConstants.PREFS.ACCOUNTS, ""));
   }
 
   @NonNull @Override public Account getAccount(@NonNull Account whatAccount) {
@@ -98,7 +97,6 @@ public class AccountsManager extends BaseAccountsManager {
   }
 
   private void putAccounts(List<Account> accounts) {
-    preferences.save(AppConstants.PREFS.ACCOUNTS,
-        new ListAccountSerializer().serialize(accounts));
+    preferences.save(AppConstants.PREFS.ACCOUNTS, new ListAccountSerializer().serialize(accounts));
   }
 }

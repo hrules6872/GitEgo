@@ -19,7 +19,7 @@ package com.hrules.gitego.data.repository.cache;
 import com.hrules.gitego.data.repository.cache.base.BasicCache;
 import java.util.concurrent.TimeUnit;
 
-public class AuthUserAPIBasicCache extends BasicCache {
+public final class AuthUserAPIBasicCache extends BasicCache {
   private static final String CACHE_ID = "AuthUserAPIBasicCache";
   private static final long EXPIRATION_TIME = TimeUnit.MINUTES.toMillis(2);
 

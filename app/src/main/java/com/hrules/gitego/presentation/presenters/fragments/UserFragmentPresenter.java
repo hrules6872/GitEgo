@@ -41,7 +41,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
-public class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPresenter.Contract> {
+public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
   @Inject AccountsManager accountsManager;
   @Inject GetAuthUser getAuthUser;

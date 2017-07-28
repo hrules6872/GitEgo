@@ -24,9 +24,9 @@ import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import java.util.Arrays;
 
-public class AuthRepoRepository extends Repository<GitHubAuthRepoDto> {
-  @SuppressWarnings("unchecked") public AuthRepoRepository(@NonNull DataSourceReadable[] dataSourcesReadables,
-      @NonNull DataSourceWriteable[] dataSourcesWriteables) {
+public final class AuthRepoRepository extends Repository<GitHubAuthRepoDto> {
+  @SuppressWarnings("unchecked")
+  public AuthRepoRepository(@NonNull DataSourceReadable[] dataSourcesReadables, @NonNull DataSourceWriteable[] dataSourcesWriteables) {
     super(Arrays.<DataSource<GitHubAuthRepoDto>>asList(dataSourcesReadables),
         Arrays.<DataSource<GitHubAuthRepoDto>>asList(dataSourcesWriteables));
   }

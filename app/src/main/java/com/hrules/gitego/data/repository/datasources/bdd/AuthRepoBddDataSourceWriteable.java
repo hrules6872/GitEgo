@@ -28,7 +28,7 @@ import com.hrules.gitego.domain.specifications.base.SpecificationFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthRepoBddDataSourceWriteable extends DataSourceWriteable<GitHubAuthRepoDto> {
+public final class AuthRepoBddDataSourceWriteable extends DataSourceWriteable<GitHubAuthRepoDto> {
   private final Database database;
 
   public AuthRepoBddDataSourceWriteable(@NonNull Database database) {
@@ -57,9 +57,7 @@ public class AuthRepoBddDataSourceWriteable extends DataSourceWriteable<GitHubAu
   }
 
   private String convertDtoToSqlInsert(@NonNull GitHubAuthRepoDto item) {
-    return new SQLQueryBuilder().insertInto(DatabaseConstants.TABLE_REPO)
-        .values(new GitHubAuthRepoDtoToMap().transform(item))
-        .build();
+    return new SQLQueryBuilder().insertInto(DatabaseConstants.TABLE_REPO).values(new GitHubAuthRepoDtoToMap().transform(item)).build();
   }
 
   private String convertDtoToSqlDelete(GitHubAuthRepoDto item) {

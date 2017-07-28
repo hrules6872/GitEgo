@@ -20,7 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import java.util.Map;
 
-public class RequestNetwork {
+public final class RequestNetwork {
   private final String url;
   private final Map<String, String> mapHeaders;
   private final java.util.Map<String, String> mapParams;

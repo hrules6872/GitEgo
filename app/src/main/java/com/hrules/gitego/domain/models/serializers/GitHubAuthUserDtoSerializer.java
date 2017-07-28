@@ -21,7 +21,7 @@ import com.hrules.gitego.data.commons.Json;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.serializers.base.Serializer;
 
-public class GitHubAuthUserDtoSerializer implements Serializer<GitHubAuthUserDto, String> {
+public final class GitHubAuthUserDtoSerializer implements Serializer<GitHubAuthUserDto, String> {
   public GitHubAuthUserDto deserialize(@NonNull String from) {
     return new Json().fromJson(from, GitHubAuthUserDto.class);
   }

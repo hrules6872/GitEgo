@@ -22,7 +22,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import java.util.Calendar;
 
-public class NotificationUtils {
+public final class NotificationUtils {
   private NotificationUtils() {
   }
 
@@ -37,8 +37,7 @@ public class NotificationUtils {
 
   static PendingIntent getNotificationPendingIntent(@NonNull Context context) {
     Intent intent = new Intent(context, NotificationService.class);
-    return PendingIntent.getService(context, NotificationService.SERVICE_REQUEST_CODE, intent,
-        PendingIntent.FLAG_UPDATE_CURRENT);
+    return PendingIntent.getService(context, NotificationService.SERVICE_REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
   }
 
   public static void startNotificationService(@NonNull Context context) {

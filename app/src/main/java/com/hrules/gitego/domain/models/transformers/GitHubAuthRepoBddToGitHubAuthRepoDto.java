@@ -22,23 +22,18 @@ import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.transformers.base.Transformer;
 
-public class GitHubAuthRepoBddToGitHubAuthRepoDto
-    implements Transformer<Cursor, GitHubAuthRepoDto> {
+public final class GitHubAuthRepoBddToGitHubAuthRepoDto implements Transformer<Cursor, GitHubAuthRepoDto> {
   @Override public GitHubAuthRepoDto transform(@NonNull Cursor from) {
     GitHubAuthRepoDto to = new GitHubAuthRepoDto();
     to.setDate(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_DATE)));
     to.setId(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_ID)));
     to.setName(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_NAME)));
-    to.setPrivate(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_IS_PRIVATE))
-        == DatabaseConstants.BOOLEAN.TRUE);
+    to.setPrivate(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_IS_PRIVATE)) == DatabaseConstants.BOOLEAN.TRUE);
     to.setHtml_url(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_HTML_URL)));
-    to.setFork(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_IS_FORK))
-        == DatabaseConstants.BOOLEAN.TRUE);
+    to.setFork(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_IS_FORK)) == DatabaseConstants.BOOLEAN.TRUE);
     to.setHomepage(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_HOMEPAGE)));
-    to.setStargazers_count(
-        from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_STARGAZERS_COUNT)));
-    to.setWatchers_count(
-        from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_WATCHERS_COUNT)));
+    to.setStargazers_count(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_STARGAZERS_COUNT)));
+    to.setWatchers_count(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_WATCHERS_COUNT)));
     to.setForks_count(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_FORKS_COUNT)));
     to.setLanguage(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_LANGUAGE)));
     return to;

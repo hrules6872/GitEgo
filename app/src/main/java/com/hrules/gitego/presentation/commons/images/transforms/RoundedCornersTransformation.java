@@ -24,7 +24,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import com.squareup.picasso.Transformation;
 
-public class RoundedCornersTransformation implements Transformation {
+public final class RoundedCornersTransformation implements Transformation {
   private final int radius;
 
   public RoundedCornersTransformation(int radius) {
