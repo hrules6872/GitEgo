@@ -1,5 +1,3 @@
-package com.hrules.gitego.presentation.views.fragments.base;
-
 /*
  * Copyright (c) 2017. Héctor de Isidro - hrules6872
  *
@@ -15,6 +13,8 @@ package com.hrules.gitego.presentation.views.fragments.base;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.hrules.gitego.presentation.views.fragments.base;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
