@@ -59,7 +59,7 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
   private Bus bus;
 
   @Override protected int getLayoutResId() {
-    return R.layout.user_fragment;
+    return R.layout.fragment_user;
   }
 
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {

@@ -61,7 +61,7 @@ public final class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHold
   }
 
   @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.repo_item, parent, false);
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_repo, parent, false);
     final ViewHolder viewHolder = new ViewHolder(view);
     view.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {

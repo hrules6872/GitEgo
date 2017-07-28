@@ -54,7 +54,7 @@ public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityP
   private static final AtomicInteger refreshVisibilityCounter = new AtomicInteger();
 
   @Override public int getLayoutResId() {
-    return R.layout.main_activity;
+    return R.layout.activity_main;
   }
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -62,7 +62,7 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
   private RepoAdapter adapter;
 
   @Override public int getLayoutResId() {
-    return R.layout.repo_fragment;
+    return R.layout.fragment_repo;
   }
 
   @Override public void onViewCreated(View view, Bundle savedInstanceState) {

@@ -37,7 +37,7 @@ public final class LoginActivityView extends DRMVPAppCompatActivity<LoginActivit
   @SuppressWarnings("deprecation") private ProgressDialog progress;
 
   @Override public int getLayoutResId() {
-    return R.layout.login_activity;
+    return R.layout.activity_login;
   }
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {

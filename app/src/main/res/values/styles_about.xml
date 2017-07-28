@@ -45,14 +45,14 @@
   </style>
 
   <style name="CardViewTitleAbout">
-    <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
     <item name="android:textColor">@color/about_titleTextColor</item>
     <item name="android:layout_margin">@dimen/default_margin</item>
     <item name="android:textStyle">bold</item>
   </style>
 
   <style name="CardViewButtonAbout" parent="@style/Widget.AppCompat.Button.Borderless">
-    <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
     <item name="android:gravity">left|center_vertical</item>
     <item name="android:layout_marginLeft">@dimen/about_buttonMarginLeftHack</item>
   </style>
