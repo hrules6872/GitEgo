@@ -23,7 +23,7 @@ import java.util.Map;
 
 // +info: https://gist.github.com/hrules6872/a85edc751076258f2aa95d5070be461b
 
-public class SQLQueryBuilder {
+@SuppressWarnings({ "WeakerAccess", "unused" }) public class SQLQueryBuilder {
   private static final String STATEMENT_SELECT = "SELECT";
   private static final String STATEMENT_DISTINCT_SELECT = "SELECT DISTINCT";
   private static final String STATEMENT_UPDATE = "UPDATE";
@@ -92,6 +92,22 @@ public class SQLQueryBuilder {
       return "'" + value + "'";
     }
     return String.valueOf(value);
+  }
+
+  public SQLQueryBuilder addElement(@NonNull String element) {
+    elements.add(element);
+    return this;
+  }
+
+  public SQLQueryBuilder addElements(@NonNull List<String> elements) {
+    for (String element : elements) {
+      this.elements.add(element);
+    }
+    return this;
+  }
+
+  public @NonNull List<String> getElements() {
+    return elements;
   }
 
   public SQLQueryBuilder select() {
