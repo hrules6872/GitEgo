@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
-  private final List<GitHubAuthRepo> items;
+  private final List<GitHubAuthRepo> items = new ArrayList<>();
   private final RepoAdapterListener listener;
 
   public interface RepoAdapterListener {
@@ -43,7 +43,6 @@ public final class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHold
   }
 
   public RepoAdapter(@NonNull RepoAdapterListener listener) {
-    this.items = new ArrayList<>();
     this.listener = listener;
   }
 

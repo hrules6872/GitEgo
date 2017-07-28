@@ -26,14 +26,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public final class ListAccountSerializer implements Serializer<Collection<Account>, String> {
+  private final Json json = new Json();
+
   public Collection<Account> deserialize(@NonNull String from) {
     Type type = new TypeToken<Collection<Account>>() {
     }.getType();
-    Collection<Account> accountsDeserialize = new Json().fromJson(from, type);
+    Collection<Account> accountsDeserialize = json.fromJson(from, type);
     return accountsDeserialize != null ? accountsDeserialize : new ArrayList<Account>();
   }
 
   public String serialize(@NonNull Collection<Account> from) {
-    return new Json().toJson(from);
+    return json.toJson(from);
   }
 }

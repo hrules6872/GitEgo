@@ -70,7 +70,7 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
       getView().showLoading();
       getAuthUser.execute(account.getToken(), new GetAuthUser.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
-          if (response.size() > 0) {
+          if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
             final GitHubAuthUser finalGitHubAuthUser = ModelUtils.mergeAuthUserItems(response);
 
@@ -108,7 +108,7 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
       getView().showLoading();
       getAuthRepo.execute(account.getToken(), new GetAuthRepo.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
-          if (response.size() > 0) {
+          if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
             List<GitHubAuthRepo> list = ModelUtils.mergeAuthRepoItems(response);
             list = ModelUtils.getValidAuthRepoItems(list);

@@ -70,7 +70,7 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
       getView().showLoading();
       getAuthRepo.execute(account.getToken(), new GetAuthRepo.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
-          if (response.size() > 0) {
+          if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
             List<GitHubAuthRepo> list = ModelUtils.mergeAuthRepoItems(response);
             listToBeDeleted = ModelUtils.getNotValidAuthRepoItems(list);

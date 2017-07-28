@@ -142,10 +142,10 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
     Collections.sort(list, new GitHubAuthRepoImplicationsDescendingComparator());
     adapter.update(list);
 
-    if (list.size() > 0) {
-      setListBackgroundColor(R.color.greyBackground);
-    } else {
+    if (list.isEmpty()) {
       setListBackgroundColor(R.color.windowBackground);
+    } else {
+      setListBackgroundColor(R.color.greyBackground);
     }
   }
 

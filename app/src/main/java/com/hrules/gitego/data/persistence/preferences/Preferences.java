@@ -25,7 +25,7 @@ import android.support.annotation.Nullable;
 public final class Preferences {
   private final SharedPreferences preferences;
 
-  public Preferences(Context context) {
+  public Preferences(@NonNull Context context) {
     preferences = PreferenceManager.getDefaultSharedPreferences(context);
   }
 

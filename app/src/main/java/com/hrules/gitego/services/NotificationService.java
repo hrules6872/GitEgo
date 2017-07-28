@@ -122,7 +122,7 @@ public final class NotificationService extends Service {
         GitHubAuthUser gitHubAuthUser;
 
         @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
-          if (response.size() > 0) {
+          if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
             gitHubAuthUser = ModelUtils.mergeAuthUserItems(response);
           }
@@ -146,7 +146,7 @@ public final class NotificationService extends Service {
         List<GitHubAuthRepo> list;
 
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
-          if (response.size() > 0) {
+          if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
             list = ModelUtils.mergeAuthRepoItems(response);
           }

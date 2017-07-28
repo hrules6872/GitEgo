@@ -64,7 +64,7 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
       @Override public void onSuccess(@NonNull final GitHubAccessToken gitHubAccessToken) {
         getAuthUser.execute(gitHubAccessToken.getAccess_token(), new GetAuthUser.Callback() {
           @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
-            if (response.size() > 0) {
+            if (!response.isEmpty()) {
               Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
               GitHubAuthUser gitHubAuthUser = response.get(0);
 

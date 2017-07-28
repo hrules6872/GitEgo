@@ -25,10 +25,12 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 
 public final class GitHubAuthRepoDtoSerializer implements Serializer<Collection<GitHubAuthRepoDto>, String> {
+  private final Json json = new Json();
+
   public Collection<GitHubAuthRepoDto> deserialize(@NonNull String from) {
     Type type = new TypeToken<Collection<GitHubAuthRepoDto>>() {
     }.getType();
-    return new Json().fromJson(from, type);
+    return json.fromJson(from, type);
   }
 
   @Override public String serialize(@NonNull Collection<GitHubAuthRepoDto> from) {
