@@ -42,7 +42,7 @@ import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthUserDateDescendingComparator;
-import com.hrules.gitego.presentation.models.utils.ModelUtils;
+import com.hrules.gitego.presentation.models.utils.ListModelUtils;
 import com.hrules.gitego.presentation.views.activities.MainActivityView;
 import java.util.Calendar;
 import java.util.Collections;
@@ -124,7 +124,7 @@ public final class NotificationService extends Service {
         @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
           if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
-            gitHubAuthUser = ModelUtils.mergeAuthUserItems(response);
+            gitHubAuthUser = ListModelUtils.mergeAuthUserItems(response);
           }
         }
 
@@ -148,7 +148,7 @@ public final class NotificationService extends Service {
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
-            list = ModelUtils.mergeAuthRepoItems(response);
+            list = ListModelUtils.mergeAuthRepoItems(response);
           }
         }
 

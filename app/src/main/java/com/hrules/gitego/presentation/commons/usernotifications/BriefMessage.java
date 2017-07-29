@@ -32,10 +32,6 @@ public final class BriefMessage {
     Snackbar.make(view, message, Snackbar.LENGTH_LONG).show();
   }
 
-  public static void showShort(@NonNull View view, @NonNull String message) {
-    Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
-  }
-
   public static void showActionIndefinite(@NonNull View view, @NonNull String message, @NonNull String action,
       @NonNull final BriefMessageListener listener) {
     Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE).setAction(action, new View.OnClickListener() {

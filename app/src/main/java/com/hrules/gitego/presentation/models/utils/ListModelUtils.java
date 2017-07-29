@@ -27,8 +27,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public final class ModelUtils {
-  private ModelUtils() {
+public final class ListModelUtils {
+  private ListModelUtils() {
   }
 
   public static List<GitHubAuthRepo> mergeAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {

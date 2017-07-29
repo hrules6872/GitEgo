@@ -18,6 +18,6 @@ package com.hrules.gitego.domain.models.serializers.base;
 
 import android.support.annotation.NonNull;
 
-public interface Deserializer<P1, P2> {
+interface Deserializer<P1, P2> {
   P1 deserialize(@NonNull P2 from);
 }

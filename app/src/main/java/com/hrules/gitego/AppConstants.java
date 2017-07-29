@@ -26,7 +26,7 @@ public final class AppConstants {
   }
 
   public final class PREFS_DEFAULTS {
-    public static final boolean NOTIFICATIONS_DEFAULT = true;
+    public static final boolean NOTIFICATIONS_DEFAULT = false;
   }
 
   public final class DEFAULTS {

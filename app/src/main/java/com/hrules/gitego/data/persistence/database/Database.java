@@ -63,17 +63,6 @@ public final class Database {
     return database.rawQuery(query, null);
   }
 
-  public void exec(@NonNull String sql) throws LocalIOException {
-    try {
-      open();
-      database.execSQL(sql);
-    } catch (SQLException e) {
-      throw new LocalIOException(e.getMessage());
-    } finally {
-      close();
-    }
-  }
-
   public void execList(@NonNull String[] sqlList) throws Exception {
     try {
       open();

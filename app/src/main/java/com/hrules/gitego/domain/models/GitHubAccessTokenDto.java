@@ -20,17 +20,11 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 
 public final class GitHubAccessTokenDto {
-  @SerializedName("access_token") private final String access_token;
+  @SerializedName("access_token") private String access_token;
 
-  @SerializedName("token_type") private final String token_type;
+  @SerializedName("token_type") private String token_type;
 
-  @SerializedName("scope") private final String scope;
-
-  public GitHubAccessTokenDto(@NonNull String access_token, @NonNull String token_type, @NonNull String scope) {
-    this.access_token = access_token;
-    this.token_type = token_type;
-    this.scope = scope;
-  }
+  @SerializedName("scope") private String scope;
 
   public @NonNull String getAccess_token() {
     return access_token;

@@ -69,6 +69,7 @@
     </receiver>
     <receiver
         android:enabled="true"
+        android:exported="false"
         android:name=".services.NotificationServiceReceiver">
       <intent-filter>
         <action android:name="com.hrules.gitego.NOTIFICATION_SERVICE_START"/>

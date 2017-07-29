@@ -52,8 +52,4 @@ public final class Preferences {
   public void save(@NonNull String key, boolean value) {
     preferences.edit().putBoolean(key, value).apply();
   }
-
-  public void remove(@NonNull String key) {
-    preferences.edit().remove(key).apply();
-  }
 }

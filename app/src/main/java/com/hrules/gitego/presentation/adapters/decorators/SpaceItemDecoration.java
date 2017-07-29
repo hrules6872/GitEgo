@@ -17,6 +17,7 @@
 package com.hrules.gitego.presentation.adapters.decorators;
 
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -66,11 +67,11 @@ public final class SpaceItemDecoration extends RecyclerView.ItemDecoration {
     }
   }
 
-  private int getTotalItemCount(RecyclerView parent) {
+  private int getTotalItemCount(@NonNull RecyclerView parent) {
     return parent.getAdapter().getItemCount();
   }
 
-  private int getOrientation(RecyclerView parent) {
+  private int getOrientation(@NonNull RecyclerView parent) {
     if (parent.getLayoutManager() instanceof LinearLayoutManager) {
       return ((LinearLayoutManager) parent.getLayoutManager()).getOrientation();
     } else {

@@ -34,7 +34,7 @@ import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
-import com.hrules.gitego.presentation.models.utils.ModelUtils;
+import com.hrules.gitego.presentation.models.utils.ListModelUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -72,9 +72,9 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
-            List<GitHubAuthRepo> list = ModelUtils.mergeAuthRepoItems(response);
-            listToBeDeleted = ModelUtils.getNotValidAuthRepoItems(list);
-            list = ModelUtils.getValidAuthRepoItems(list);
+            List<GitHubAuthRepo> list = ListModelUtils.mergeAuthRepoItems(response);
+            listToBeDeleted = ListModelUtils.getNotValidAuthRepoItems(list);
+            list = ListModelUtils.getValidAuthRepoItems(list);
 
             final List<GitHubAuthRepo> finalList = list;
             uiThreadExecutor.execute(new Runnable() {

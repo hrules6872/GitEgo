@@ -27,10 +27,6 @@ public final class Json {
     return gson.toJson(model);
   }
 
-  @SuppressWarnings("unchecked") public <T> T fromJson(@NonNull String json, @NonNull T model) {
-    return gson.fromJson(json, (Class<T>) model);
-  }
-
   public <T> T fromJson(@NonNull String json, @NonNull Type model) {
     return gson.fromJson(json, model);
   }

@@ -36,7 +36,7 @@ import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthUserDateDescendingComparator;
-import com.hrules.gitego.presentation.models.utils.ModelUtils;
+import com.hrules.gitego.presentation.models.utils.ListModelUtils;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
@@ -72,7 +72,7 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
         @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
           if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
-            final GitHubAuthUser finalGitHubAuthUser = ModelUtils.mergeAuthUserItems(response);
+            final GitHubAuthUser finalGitHubAuthUser = ListModelUtils.mergeAuthUserItems(response);
 
             uiThreadExecutor.execute(new Runnable() {
               @Override public void run() {
@@ -110,8 +110,8 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (!response.isEmpty()) {
             Collections.sort(response, new GitHubAuthRepoDateDescendingComparator());
-            List<GitHubAuthRepo> list = ModelUtils.mergeAuthRepoItems(response);
-            list = ModelUtils.getValidAuthRepoItems(list);
+            List<GitHubAuthRepo> list = ListModelUtils.mergeAuthRepoItems(response);
+            list = ListModelUtils.getValidAuthRepoItems(list);
 
             final List<GitHubAuthRepo> finalList = list;
             uiThreadExecutor.execute(new Runnable() {

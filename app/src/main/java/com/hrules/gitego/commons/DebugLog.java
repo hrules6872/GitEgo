@@ -88,40 +88,4 @@ public final class DebugLog {
       Log.e(getApplicationId(), formatMessage(String.valueOf(message)), tr);
     }
   }
-
-  public static void i(@NonNull Object... messages) {
-    if (isDebuggable()) {
-      Log.i(getApplicationId(), formatMessage(concatenate(messages)));
-    }
-  }
-
-  public static void i(@NonNull Object message, @NonNull Throwable tr) {
-    if (isDebuggable()) {
-      Log.i(getApplicationId(), formatMessage(String.valueOf(message)), tr);
-    }
-  }
-
-  public static void v(@NonNull Object... messages) {
-    if (isDebuggable()) {
-      Log.v(getApplicationId(), formatMessage(concatenate(messages)));
-    }
-  }
-
-  public static void v(@NonNull Object message, @NonNull Throwable tr) {
-    if (isDebuggable()) {
-      Log.v(getApplicationId(), formatMessage(String.valueOf(message)), tr);
-    }
-  }
-
-  public static void w(@NonNull Object... messages) {
-    if (isDebuggable()) {
-      Log.w(getApplicationId(), formatMessage(concatenate(messages)));
-    }
-  }
-
-  public static void w(@NonNull Object message, @NonNull Throwable tr) {
-    if (isDebuggable()) {
-      Log.w(getApplicationId(), formatMessage(String.valueOf(message)), tr);
-    }
-  }
 }
