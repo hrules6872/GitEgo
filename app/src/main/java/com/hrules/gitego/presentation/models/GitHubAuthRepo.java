@@ -16,147 +16,91 @@
 
 package com.hrules.gitego.presentation.models;
 
+import android.support.annotation.Nullable;
 import android.text.Spannable;
+import com.google.auto.value.AutoValue;
 import com.hrules.gitego.presentation.models.base.Model;
 
-public final class GitHubAuthRepo extends Model<String> {
-  private String date;
-  private String id;
-  private String name;
-  private boolean _private;
-  private String html_url;
-  private boolean fork;
-  private String homepage;
-  private int stargazers_count;
-  private int watchers_count;
-  private int forks_count;
-  private String language;
-  private Spannable stargazers_countSpannable;
-  private Spannable watchers_countSpannable;
-  private Spannable forks_countSpannable;
-  private GitHubAuthRepo gitHubAuthRepoOlder;
+@AutoValue public abstract class GitHubAuthRepo extends Model {
+  public abstract String getDate();
 
-  @Override public String createModelId() {
-    return getDate() + SEPARATOR + getId();
+  public abstract String getId();
+
+  public abstract String getName();
+
+  public abstract boolean isPrivateRepository();
+
+  public abstract String getHtmlUrl();
+
+  public abstract boolean isFork();
+
+  @Nullable public abstract String getHomepage();
+
+  public abstract int getStargazersCount();
+
+  public abstract int getWatchersCount();
+
+  public abstract int getForksCount();
+
+  public abstract String getLanguage();
+
+  @Nullable public abstract Spannable getStargazersCountSpannable();
+
+  @Nullable public abstract Spannable getWatchersCountSpannable();
+
+  @Nullable public abstract Spannable getForksCountSpannable();
+
+  @Nullable public abstract GitHubAuthRepo getGitHubAuthRepoOlder();
+
+  public static Builder builder() {
+    return new AutoValue_GitHubAuthRepo.Builder();
   }
 
-  public String getDate() {
-    return date;
+  @AutoValue.Builder public abstract static class Builder {
+    public abstract Builder date(String newDate);
+
+    public abstract Builder id(String newId);
+
+    public abstract Builder name(String newName);
+
+    public abstract Builder privateRepository(boolean newPrivateRepository);
+
+    public abstract Builder htmlUrl(String newHtmlUrl);
+
+    public abstract Builder fork(boolean newFork);
+
+    public abstract Builder homepage(String newHomepage);
+
+    public abstract Builder stargazersCount(int newStargazersCount);
+
+    public abstract Builder watchersCount(int newWatchersCount);
+
+    public abstract Builder forksCount(int newForksCount);
+
+    public abstract Builder language(String newLanguage);
+
+    public abstract Builder stargazersCountSpannable(Spannable newStargazersCountSpannable);
+
+    public abstract Builder watchersCountSpannable(Spannable newWatchersCountSpannable);
+
+    public abstract Builder forksCountSpannable(Spannable newForksCountSpannable);
+
+    public abstract Builder gitHubAuthRepoOlder(GitHubAuthRepo newGitHubAuthRepoOlder);
+
+    public abstract GitHubAuthRepo build();
   }
 
-  public void setDate(String date) {
-    this.date = date;
+  abstract Builder toBuilder();
+
+  public GitHubAuthRepo withGitHubAuthRepoOlder(GitHubAuthRepo newGitHubAuthRepoOlder) {
+    return toBuilder().gitHubAuthRepoOlder(newGitHubAuthRepoOlder).build();
   }
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public boolean isPrivate() {
-    return _private;
-  }
-
-  public void setPrivate(boolean bool) {
-    this._private = bool;
-  }
-
-  public String getHtml_url() {
-    return html_url;
-  }
-
-  public void setHtml_url(String html_url) {
-    this.html_url = html_url;
-  }
-
-  public boolean isFork() {
-    return fork;
-  }
-
-  public void setFork(boolean fork) {
-    this.fork = fork;
-  }
-
-  public String getHomepage() {
-    return homepage;
-  }
-
-  public void setHomepage(String homepage) {
-    this.homepage = homepage;
-  }
-
-  public int getStargazers_count() {
-    return stargazers_count;
-  }
-
-  public void setStargazers_count(int stargazers_count) {
-    this.stargazers_count = stargazers_count;
-  }
-
-  public int getWatchers_count() {
-    return watchers_count;
-  }
-
-  public void setWatchers_count(int watchers_count) {
-    this.watchers_count = watchers_count;
-  }
-
-  public int getForks_count() {
-    return forks_count;
-  }
-
-  public void setForks_count(int forks_count) {
-    this.forks_count = forks_count;
-  }
-
-  public String getLanguage() {
-    return language;
-  }
-
-  public void setLanguage(String language) {
-    this.language = language;
-  }
-
-  public Spannable getStargazers_countSpannable() {
-    return stargazers_countSpannable;
-  }
-
-  public void setStargazers_countSpannable(Spannable stargazers_countSpannable) {
-    this.stargazers_countSpannable = stargazers_countSpannable;
-  }
-
-  public Spannable getWatchers_countSpannable() {
-    return watchers_countSpannable;
-  }
-
-  public void setWatchers_countSpannable(Spannable watchers_countSpannable) {
-    this.watchers_countSpannable = watchers_countSpannable;
-  }
-
-  public Spannable getForks_countSpannable() {
-    return forks_countSpannable;
-  }
-
-  public void setForks_countSpannable(Spannable forks_countSpannable) {
-    this.forks_countSpannable = forks_countSpannable;
-  }
-
-  public GitHubAuthRepo getGitHubAuthRepoOlder() {
-    return gitHubAuthRepoOlder;
-  }
-
-  public void setGitHubAuthRepoOlder(GitHubAuthRepo gitHubAuthRepoOlder) {
-    this.gitHubAuthRepoOlder = gitHubAuthRepoOlder;
+  public GitHubAuthRepo withCountSpannables(Spannable newStargazersCountSpannable, Spannable newWatchersCountSpannable,
+      Spannable newForksCountSpannable) {
+    return toBuilder().stargazersCountSpannable(newStargazersCountSpannable)
+        .watchersCountSpannable(newWatchersCountSpannable)
+        .forksCountSpannable(newForksCountSpannable)
+        .build();
   }
 }

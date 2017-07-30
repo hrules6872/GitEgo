@@ -16,48 +16,43 @@
 
 package com.hrules.gitego.domain.models;
 
-import android.support.annotation.NonNull;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-public final class Account {
-  @SerializedName("user") private final String user;
+@AutoValue public abstract class Account {
+  @SerializedName("user") public abstract String getUser();
 
-  @SerializedName("type") private final String type;
+  @SerializedName("type") public abstract String getType();
 
-  @SerializedName("token") private final String token;
+  @SerializedName("token") public abstract String getToken();
 
-  @SerializedName("defaultUser") private boolean defaultUser;
+  @SerializedName("defaultUser") public abstract boolean isDefaultUser();
 
-  public Account() {
-    this.user = "";
-    this.type = "";
-    this.token = "";
+  public static Builder builder() {
+    return new AutoValue_Account.Builder().user("").type("").token("").defaultUser(false);
   }
 
-  public Account(@NonNull String user, @NonNull String type, @NonNull String token, boolean defaultUser) {
-    this.user = user;
-    this.type = type;
-    this.token = token;
-    this.defaultUser = defaultUser;
+  @SuppressWarnings("WeakerAccess") @AutoValue.Builder public abstract static class Builder {
+    public abstract Builder user(String newUser);
+
+    public abstract Builder type(String newType);
+
+    public abstract Builder token(String newToken);
+
+    public abstract Builder defaultUser(boolean newDefaultUser);
+
+    public abstract Account build();
   }
 
-  public @NonNull String getUser() {
-    return user;
+  public static TypeAdapter<Account> typeAdapter(Gson gson) {
+    return new AutoValue_Account.GsonTypeAdapter(gson);
   }
 
-  public @NonNull String getType() {
-    return type;
-  }
+  abstract Builder toBuilder();
 
-  public @NonNull String getToken() {
-    return token;
-  }
-
-  public boolean isDefaultUser() {
-    return defaultUser;
-  }
-
-  public void setDefaultUser(boolean defaultUser) {
-    this.defaultUser = defaultUser;
+  public Account withDefaultUser(boolean newDefaultUser) {
+    return toBuilder().defaultUser(newDefaultUser).build();
   }
 }

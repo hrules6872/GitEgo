@@ -76,17 +76,17 @@ public final class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHold
     holder.repoName.setText(item.getName());
     holder.repoFork.setVisibility(item.isFork() ? View.VISIBLE : View.GONE);
 
-    holder.watchersCount.setText(item.getWatchers_countSpannable());
-    holder.watchersCount.setEnabled(item.getWatchers_count() != 0);
-    setDrawableEnabled(holder.watchersCount, 0, item.getWatchers_count() != 0);
+    holder.watchersCount.setText(item.getWatchersCountSpannable());
+    holder.watchersCount.setEnabled(item.getWatchersCount() != 0);
+    setDrawableEnabled(holder.watchersCount, 0, item.getWatchersCount() != 0);
 
-    holder.starsGazersCount.setText(item.getStargazers_countSpannable());
-    holder.starsGazersCount.setEnabled(item.getStargazers_count() != 0);
-    setDrawableEnabled(holder.starsGazersCount, 0, item.getStargazers_count() != 0);
+    holder.starsGazersCount.setText(item.getStargazersCountSpannable());
+    holder.starsGazersCount.setEnabled(item.getStargazersCount() != 0);
+    setDrawableEnabled(holder.starsGazersCount, 0, item.getStargazersCount() != 0);
 
-    holder.forksCount.setText(item.getForks_countSpannable());
-    holder.forksCount.setEnabled(item.getForks_count() != 0);
-    setDrawableEnabled(holder.forksCount, 0, item.getForks_count() != 0);
+    holder.forksCount.setText(item.getForksCountSpannable());
+    holder.forksCount.setEnabled(item.getForksCount() != 0);
+    setDrawableEnabled(holder.forksCount, 0, item.getForksCount() != 0);
   }
 
   private void setDrawableEnabled(@NonNull TextView textView, int drawablePosition, boolean enabled) {
@@ -112,7 +112,7 @@ public final class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHold
 
   public GitHubAuthRepo getItem(int position) {
     if (position > items.size()) {
-      return new GitHubAuthRepo();
+      return GitHubAuthRepo.builder().build();
     }
     return items.get(position);
   }

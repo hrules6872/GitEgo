@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import com.hrules.gitego.AppConstants;
 import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.models.serializers.ListAccountSerializer;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,34 +39,33 @@ public final class AccountsManager extends BaseAccountsManager {
   }
 
   @NonNull @Override public Account getAccount(@NonNull Account whatAccount) {
-    List<Account> accounts = (List<Account>) getAccounts();
-    for (Account account : accounts) {
+    for (Account account : getAccounts()) {
       if (account.getUser().equals(whatAccount.getUser())) {
         return account;
       }
     }
-    return new Account();
+    return Account.builder().build();
   }
 
   @NonNull @Override public Account getDefaultAccount() {
-    List<Account> accounts = (List<Account>) getAccounts();
-    for (Account account : accounts) {
+    for (Account account : getAccounts()) {
       if (account.isDefaultUser()) {
         return account;
       }
     }
-    return new Account();
+    return Account.builder().build();
   }
 
   @Override public void setDefaultAccount(@NonNull Account whatAccount) {
-    List<Account> accounts = (List<Account>) getAccounts();
-    for (Account account : accounts) {
-      account.setDefaultUser(false);
+    List<Account> accounts = new ArrayList<>();
+    for (Account account : getAccounts()) {
+      account = account.withDefaultUser(false);
       if (account.getUser().equals(whatAccount.getUser())) {
-        account.setDefaultUser(true);
-        break;
+        account = account.withDefaultUser(true);
       }
+      accounts.add(account);
     }
+    putAccounts(accounts);
   }
 
   @Override public boolean removeAccount(@NonNull Account whatAccount) {

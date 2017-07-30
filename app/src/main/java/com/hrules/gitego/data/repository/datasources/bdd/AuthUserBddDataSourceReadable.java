@@ -49,9 +49,7 @@ public final class AuthUserBddDataSourceReadable extends DataSourceReadable<GitH
       database.open();
       cursor = database.get((String) specification.get());
       while (cursor.moveToNext()) {
-        GitHubAuthUserDto gitHubAuthUserDto = new GitHubAuthUserBddToGitHubAuthUserDto().transform(cursor);
-        gitHubAuthUserDto.setModelId(gitHubAuthUserDto.createModelId());
-        list.add(gitHubAuthUserDto);
+        list.add(new GitHubAuthUserBddToGitHubAuthUserDto().transform(cursor));
       }
     } catch (Exception e) {
       throw new LocalIOException(e.getMessage());

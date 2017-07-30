@@ -16,32 +16,26 @@
 
 package com.hrules.gitego.presentation.models;
 
-public final class GitHubAccessToken {
-  private String access_token;
-  private String token_type;
-  private String scope;
+import com.google.auto.value.AutoValue;
 
-  public String getAccess_token() {
-    return access_token;
+@AutoValue public abstract class GitHubAccessToken {
+  public abstract String getAccessToken();
+
+  public abstract String getTokenType();
+
+  public abstract String getScope();
+
+  public static Builder builder() {
+    return new AutoValue_GitHubAccessToken.Builder();
   }
 
-  public String getToken_type() {
-    return token_type;
-  }
+  @AutoValue.Builder public abstract static class Builder {
+    public abstract Builder accessToken(String newAccessToken);
 
-  public String getScope() {
-    return scope;
-  }
+    public abstract Builder tokenType(String newTokenType);
 
-  public void setAccess_token(String access_token) {
-    this.access_token = access_token;
-  }
+    public abstract Builder scope(String newScope);
 
-  public void setToken_type(String token_type) {
-    this.token_type = token_type;
-  }
-
-  public void setScope(String scope) {
-    this.scope = scope;
+    public abstract GitHubAccessToken build();
   }
 }

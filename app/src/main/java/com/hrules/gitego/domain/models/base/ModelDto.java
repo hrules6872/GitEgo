@@ -16,20 +16,6 @@
 
 package com.hrules.gitego.domain.models.base;
 
-import android.support.annotation.NonNull;
+public abstract class ModelDto {
 
-public abstract class ModelDto<K> {
-  protected static final String SEPARATOR = " ";
-
-  private K modelId;
-
-  public K getModelId() {
-    return modelId;
-  }
-
-  public void setModelId(@NonNull K modelId) {
-    this.modelId = modelId;
-  }
-
-  public abstract K createModelId();
 }

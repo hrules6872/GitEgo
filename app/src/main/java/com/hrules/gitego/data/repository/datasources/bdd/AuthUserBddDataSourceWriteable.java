@@ -63,8 +63,7 @@ public final class AuthUserBddDataSourceWriteable extends DataSourceWriteable<Gi
     return new SQLQueryBuilder().deleteFrom(DatabaseConstants.TABLE_USER)
         .where(DatabaseConstants.KEY_USER_DATE)
         .equalsTo(item.getDate())
-        .and(DatabaseConstants.KEY_USER_LOGIN)
-        .equalsTo(item.getLogin())
+        .and(DatabaseConstants.KEY_USER_LOGIN).equalsTo(item.getUser())
         .build();
   }
 

@@ -23,15 +23,13 @@ import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.transformers.base.Transformer;
 
 public final class GitHubAuthUserBddToGitHubAuthUserDto implements Transformer<Cursor, GitHubAuthUserDto> {
-  @Override public GitHubAuthUserDto transform(@NonNull Cursor from) {
-    GitHubAuthUserDto to = new GitHubAuthUserDto();
-    to.setDate(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_DATE)));
-    to.setLogin(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_LOGIN)));
-    to.setAvatar_url(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_AVATAR_URL)));
-    to.setHtml_url(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_HTML_URL)));
-    to.setType(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_TYPE)));
-    to.setName(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_NAME)));
-    to.setFollowers(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_USER_FOLLOWERS)));
-    return to;
+  @NonNull @Override public GitHubAuthUserDto transform(@NonNull Cursor from) {
+    return GitHubAuthUserDto.builder().date(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_DATE))).
+        user(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_LOGIN))).
+        avatarUrl(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_AVATAR_URL))).
+        htmlUrl(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_HTML_URL))).
+        type(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_TYPE))).
+        name(from.getString(from.getColumnIndex(DatabaseConstants.KEY_USER_NAME))).
+        followers(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_USER_FOLLOWERS))).build();
   }
 }

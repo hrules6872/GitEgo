@@ -18,6 +18,7 @@ package com.hrules.gitego.domain.interactors;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import com.hrules.gitego.data.exceptions.LocalIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.network.RequestNetwork;
@@ -72,8 +73,12 @@ public final class GetAccessTokenInteractor extends BaseInteractor implements Ge
       try {
         String response = network.post(new RequestNetwork(GitHubAPI.GITHUB_OAUTH_TOKEN_URL, headers, params));
         GitHubAccessTokenDto GitHubAccessTokenDto = new GitHubAccessTokenDtoSerializer().deserialize(response);
-        GitHubAccessToken gitHubAccessToken = new GitHubAccessTokenDtoToGitHubAccessToken().map(GitHubAccessTokenDto);
-        notifySuccess(gitHubAccessToken);
+        if (GitHubAccessTokenDto != null) {
+          GitHubAccessToken gitHubAccessToken = new GitHubAccessTokenDtoToGitHubAccessToken().map(GitHubAccessTokenDto);
+          notifySuccess(gitHubAccessToken);
+        } else {
+          throw new LocalIOException("response malformed");
+        }
       } catch (Exception exception) {
         notifyFail(exception);
       }

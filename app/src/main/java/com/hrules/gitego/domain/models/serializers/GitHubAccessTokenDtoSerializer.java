@@ -17,18 +17,20 @@
 package com.hrules.gitego.domain.models.serializers;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.data.commons.Json;
+import android.support.annotation.Nullable;
+import com.hrules.gitego.data.commons.serializator.GitHubAccessTokenDtoSerializator;
+import com.hrules.gitego.data.commons.serializator.base.Serializator;
 import com.hrules.gitego.domain.models.GitHubAccessTokenDto;
 import com.hrules.gitego.domain.models.serializers.base.Serializer;
 
 public final class GitHubAccessTokenDtoSerializer implements Serializer<GitHubAccessTokenDto, String> {
-  private final Json json = new Json();
+  private final Serializator serializator = new GitHubAccessTokenDtoSerializator();
 
-  public GitHubAccessTokenDto deserialize(@NonNull String from) {
-    return json.fromJson(from, GitHubAccessTokenDto.class);
+  @Nullable public GitHubAccessTokenDto deserialize(@NonNull String from) {
+    return serializator.from(from);
   }
 
-  @Override public String serialize(@NonNull GitHubAccessTokenDto from) {
+  @Nullable @Override public String serialize(@NonNull GitHubAccessTokenDto from) {
     throw new UnsupportedOperationException();
   }
 }

@@ -24,12 +24,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class GitHubAuthUserDtoToMap implements Transformer<GitHubAuthUserDto, Map<String, Object>> {
-  @Override public Map<String, Object> transform(@NonNull GitHubAuthUserDto from) {
+  @NonNull @Override public Map<String, Object> transform(@NonNull GitHubAuthUserDto from) {
     Map<String, Object> values = new HashMap<>();
     values.put(DatabaseConstants.KEY_USER_DATE, from.getDate());
-    values.put(DatabaseConstants.KEY_USER_LOGIN, from.getLogin());
-    values.put(DatabaseConstants.KEY_USER_AVATAR_URL, from.getAvatar_url());
-    values.put(DatabaseConstants.KEY_USER_HTML_URL, from.getHtml_url());
+    values.put(DatabaseConstants.KEY_USER_LOGIN, from.getUser());
+    values.put(DatabaseConstants.KEY_USER_AVATAR_URL, from.getAvatarUrl());
+    values.put(DatabaseConstants.KEY_USER_HTML_URL, from.getHtmlUrl());
     values.put(DatabaseConstants.KEY_USER_TYPE, from.getType());
     values.put(DatabaseConstants.KEY_USER_NAME, from.getName());
     values.put(DatabaseConstants.KEY_USER_FOLLOWERS, from.getFollowers());

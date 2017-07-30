@@ -89,7 +89,7 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
         }
 
         for (ModelDto item : list) {
-          map.put(item.getModelId(), (T) item);
+          map.put(item.hashCode(), (T) item);
         }
         callback.onSuccess(new ArrayList<>(map.values()));
       } catch (Exception e) {

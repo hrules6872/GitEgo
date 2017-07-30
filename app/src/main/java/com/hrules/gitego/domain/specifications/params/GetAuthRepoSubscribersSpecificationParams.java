@@ -17,13 +17,14 @@
 package com.hrules.gitego.domain.specifications.params;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import com.hrules.gitego.domain.specifications.base.SpecificationParams;
 
 public final class GetAuthRepoSubscribersSpecificationParams extends SpecificationParams {
   private final String access_token;
   private final String subscribers_url;
 
-  public GetAuthRepoSubscribersSpecificationParams(@NonNull String access_token, @NonNull String subscribers_url) {
+  public GetAuthRepoSubscribersSpecificationParams(@NonNull String access_token, @Nullable String subscribers_url) {
     this.access_token = access_token;
     this.subscribers_url = subscribers_url;
   }

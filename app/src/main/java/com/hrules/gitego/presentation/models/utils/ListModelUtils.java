@@ -25,42 +25,47 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 public final class ListModelUtils {
   private ListModelUtils() {
   }
 
-  public static List<GitHubAuthRepo> mergeAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {
+  @SuppressWarnings("ConstantConditions") public static List<GitHubAuthRepo> mergeAuthRepoItems(@NonNull List<GitHubAuthRepo> list) {
     Map<String, GitHubAuthRepo> map = new HashMap<>();
-    for (GitHubAuthRepo item : list) {
+    for (ListIterator<GitHubAuthRepo> iterator = list.listIterator(); iterator.hasNext(); ) {
+      GitHubAuthRepo item = iterator.next();
+
       if (!TextUtils.isEmpty(item.getName())) {
         GitHubAuthRepo itemInMap = map.get(item.getName());
         if (itemInMap != null) {
           if (itemInMap.getDate().equalsIgnoreCase(itemInMap.getGitHubAuthRepoOlder().getDate())) {
-            itemInMap.setGitHubAuthRepoOlder(item);
+            map.put(item.getName(), itemInMap.withGitHubAuthRepoOlder(item));
           }
         } else {
-          item.setGitHubAuthRepoOlder(item);
-          map.put(item.getName(), item);
+          iterator.set(item.withGitHubAuthRepoOlder(item));
+          map.put(item.getName(), item.withGitHubAuthRepoOlder(item));
         }
       }
     }
     return new ArrayList<>(map.values());
   }
 
-  public static GitHubAuthUser mergeAuthUserItems(@NonNull List<GitHubAuthUser> list) {
+  @SuppressWarnings("ConstantConditions") public static GitHubAuthUser mergeAuthUserItems(@NonNull List<GitHubAuthUser> list) {
     Map<String, GitHubAuthUser> map = new HashMap<>();
-    for (GitHubAuthUser item : list) {
-      if (!TextUtils.isEmpty(item.getLogin())) {
-        GitHubAuthUser itemInMap = map.get(item.getLogin());
+    for (ListIterator<GitHubAuthUser> iterator = list.listIterator(); iterator.hasNext(); ) {
+      GitHubAuthUser item = iterator.next();
+
+      if (!TextUtils.isEmpty(item.getUser())) {
+        GitHubAuthUser itemInMap = map.get(item.getUser());
         if (itemInMap != null) {
           if (itemInMap.getDate().equalsIgnoreCase(itemInMap.getGitHubAuthUserOlder().getDate())) {
-            itemInMap.setGitHubAuthUserOlder(item);
+            map.put(item.getName(), itemInMap.withGitHubAuthRepoOlder(item));
           }
         } else {
-          item.setGitHubAuthUserOlder(item);
-          map.put(item.getLogin(), item);
+          iterator.set(item.withGitHubAuthRepoOlder(item));
+          map.put(item.getName(), item.withGitHubAuthRepoOlder(item));
         }
       }
     }

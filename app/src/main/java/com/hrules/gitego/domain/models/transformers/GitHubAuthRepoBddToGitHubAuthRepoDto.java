@@ -23,19 +23,19 @@ import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.transformers.base.Transformer;
 
 public final class GitHubAuthRepoBddToGitHubAuthRepoDto implements Transformer<Cursor, GitHubAuthRepoDto> {
-  @Override public GitHubAuthRepoDto transform(@NonNull Cursor from) {
-    GitHubAuthRepoDto to = new GitHubAuthRepoDto();
-    to.setDate(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_DATE)));
-    to.setId(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_ID)));
-    to.setName(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_NAME)));
-    to.setPrivate(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_IS_PRIVATE)) == DatabaseConstants.BOOLEAN.TRUE);
-    to.setHtml_url(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_HTML_URL)));
-    to.setFork(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_IS_FORK)) == DatabaseConstants.BOOLEAN.TRUE);
-    to.setHomepage(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_HOMEPAGE)));
-    to.setStargazers_count(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_STARGAZERS_COUNT)));
-    to.setWatchers_count(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_WATCHERS_COUNT)));
-    to.setForks_count(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_FORKS_COUNT)));
-    to.setLanguage(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_LANGUAGE)));
-    return to;
+  @NonNull @Override public GitHubAuthRepoDto transform(@NonNull Cursor from) {
+    return GitHubAuthRepoDto.builder()
+        .date(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_DATE)))
+        .id(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_ID)))
+        .name(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_NAME)))
+        .privateRepository(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_IS_PRIVATE)) == DatabaseConstants.BOOLEAN.TRUE)
+        .htmlUrl(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_HTML_URL)))
+        .fork(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_IS_FORK)) == DatabaseConstants.BOOLEAN.TRUE)
+        .homepage(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_HOMEPAGE)))
+        .stargazersCount(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_STARGAZERS_COUNT)))
+        .watchersCount(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_WATCHERS_COUNT)))
+        .forksCount(from.getInt(from.getColumnIndex(DatabaseConstants.KEY_REPO_FORKS_COUNT)))
+        .language(from.getString(from.getColumnIndex(DatabaseConstants.KEY_REPO_LANGUAGE)))
+        .build();
   }
 }

@@ -17,7 +17,7 @@
 <resources>
   <string name="activity_aboutTitle">About</string>
 
-  <!--login-->
+  <!--user-->
   <string name="login_login">Login GitHub</string>
   <string name="login_about">About GitEgo</string>
   <string name="login_gettingUser">Retrieving information…</string>

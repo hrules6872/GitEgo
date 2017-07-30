@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.data.commons;
+package com.hrules.gitego.data.commons.serializator.extras;
 
-import android.support.annotation.NonNull;
-import com.google.gson.Gson;
-import java.lang.reflect.Type;
+import com.google.gson.TypeAdapterFactory;
+import com.ryanharter.auto.value.gson.GsonTypeAdapterFactory;
 
-public final class Json {
-  private final Gson gson = new Gson();
-
-  public <T> String toJson(@NonNull T model) {
-    return gson.toJson(model);
-  }
-
-  public <T> T fromJson(@NonNull String json, @NonNull Type model) {
-    return gson.fromJson(json, model);
+@GsonTypeAdapterFactory public abstract class SerializatorTypeAdapterFactory implements TypeAdapterFactory {
+  public static SerializatorTypeAdapterFactory create() {
+    return new AutoValueGson_SerializatorTypeAdapterFactory();
   }
 }

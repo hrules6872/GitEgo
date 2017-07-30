@@ -22,11 +22,7 @@ import com.hrules.gitego.domain.models.mappers.base.Mapper;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
 
 public final class GitHubAccessTokenDtoToGitHubAccessToken implements Mapper<GitHubAccessTokenDto, GitHubAccessToken> {
-  @Override public GitHubAccessToken map(@NonNull GitHubAccessTokenDto from) {
-    GitHubAccessToken gitHubAccessToken = new GitHubAccessToken();
-    gitHubAccessToken.setAccess_token(from.getAccess_token());
-    gitHubAccessToken.setToken_type(from.getToken_type());
-    gitHubAccessToken.setScope(from.getScope());
-    return gitHubAccessToken;
+  @NonNull @Override public GitHubAccessToken map(@NonNull GitHubAccessTokenDto from) {
+    return GitHubAccessToken.builder().accessToken(from.getAccessToken()).tokenType(from.getTokenType()).scope(from.getScope()).build();
   }
 }

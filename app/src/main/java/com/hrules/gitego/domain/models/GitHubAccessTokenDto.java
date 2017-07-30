@@ -16,25 +16,19 @@
 
 package com.hrules.gitego.domain.models;
 
-import android.support.annotation.NonNull;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-public final class GitHubAccessTokenDto {
-  @SerializedName("access_token") private String access_token;
+@AutoValue public abstract class GitHubAccessTokenDto {
+  @SerializedName("access_token") public abstract String getAccessToken();
 
-  @SerializedName("token_type") private String token_type;
+  @SerializedName("token_type") public abstract String getTokenType();
 
-  @SerializedName("scope") private String scope;
+  @SerializedName("scope") public abstract String getScope();
 
-  public @NonNull String getAccess_token() {
-    return access_token;
-  }
-
-  public @NonNull String getToken_type() {
-    return token_type;
-  }
-
-  public @NonNull String getScope() {
-    return scope;
+  public static TypeAdapter<GitHubAccessTokenDto> typeAdapter(Gson gson) {
+    return new AutoValue_GitHubAccessTokenDto.GsonTypeAdapter(gson);
   }
 }

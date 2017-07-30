@@ -16,131 +16,82 @@
 
 package com.hrules.gitego.domain.models;
 
+import android.support.annotation.Nullable;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.hrules.gitego.domain.models.base.ModelDto;
 
-public final class GitHubAuthRepoDto extends ModelDto<String> {
-  private String date;
+@AutoValue public abstract class GitHubAuthRepoDto extends ModelDto {
+  @Nullable public abstract String getDate();
 
-  @SerializedName("id") private String id;
+  @SerializedName("id") public abstract String getId();
 
-  @SerializedName("name") private String name;
+  @SerializedName("name") public abstract String getName();
 
-  @SerializedName("private") private boolean _private;
+  @SerializedName("private") public abstract boolean isPrivateRepository();
 
-  @SerializedName("html_url") private String html_url;
+  @SerializedName("html_url") public abstract String getHtmlUrl();
 
-  @SerializedName("fork") private boolean fork;
+  @SerializedName("fork") public abstract boolean isFork();
 
-  @SerializedName("homepage") private String homepage;
+  @SerializedName("homepage") @Nullable public abstract String getHomepage();
 
-  @SerializedName("stargazers_count") private int stargazers_count;
+  @SerializedName("stargazers_count") public abstract int getStargazersCount();
 
-  @SerializedName("watchers_count") private int watchers_count;
+  @SerializedName("watchers_count") public abstract int getWatchersCount();
 
-  @SerializedName("forks_count") private int forks_count;
+  @SerializedName("forks_count") public abstract int getForksCount();
 
-  @SerializedName("language") private String language;
+  @SerializedName("language") public abstract String getLanguage();
 
-  @SerializedName("subscribers_url") private String subscribers_url;
+  @SerializedName("subscribers_url") @Nullable public abstract String getSubscribersUrl();
 
-  @Override public String createModelId() {
-    return getDate() + SEPARATOR + getId();
+  public static Builder builder() {
+    return new AutoValue_GitHubAuthRepoDto.Builder();
   }
 
-  public String getDate() {
-    return date;
+  @AutoValue.Builder public abstract static class Builder {
+
+    public abstract Builder date(String newDate);
+
+    public abstract Builder id(String newId);
+
+    public abstract Builder name(String newName);
+
+    public abstract Builder privateRepository(boolean newPrivateRepository);
+
+    public abstract Builder htmlUrl(String newHtmlUrl);
+
+    public abstract Builder fork(boolean newFork);
+
+    public abstract Builder homepage(String newHomepage);
+
+    public abstract Builder stargazersCount(int newStargazersCount);
+
+    public abstract Builder watchersCount(int newWatchersCount);
+
+    public abstract Builder forksCount(int newForksCount);
+
+    public abstract Builder language(String newLanguage);
+
+    public abstract Builder subscribersUrl(String newSubscribersUrl);
+
+    public abstract GitHubAuthRepoDto build();
   }
 
-  public void setDate(String date) {
-    this.date = date;
+  public static TypeAdapter<GitHubAuthRepoDto> typeAdapter(Gson gson) {
+    return new AutoValue_GitHubAuthRepoDto.GsonTypeAdapter(gson);
   }
 
-  public String getId() {
-    return id;
+  abstract Builder toBuilder();
+
+  public GitHubAuthRepoDto withDate(String newDate) {
+    return toBuilder().date(newDate).build();
   }
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public boolean isPrivate() {
-    return _private;
-  }
-
-  public void setPrivate(boolean _private) {
-    this._private = _private;
-  }
-
-  public String getHtml_url() {
-    return html_url;
-  }
-
-  public void setHtml_url(String html_url) {
-    this.html_url = html_url;
-  }
-
-  public boolean isFork() {
-    return fork;
-  }
-
-  public void setFork(boolean fork) {
-    this.fork = fork;
-  }
-
-  public String getHomepage() {
-    return homepage;
-  }
-
-  public void setHomepage(String homepage) {
-    this.homepage = homepage;
-  }
-
-  public int getStargazers_count() {
-    return stargazers_count;
-  }
-
-  public void setStargazers_count(int stargazers_count) {
-    this.stargazers_count = stargazers_count;
-  }
-
-  public int getWatchers_count() {
-    return watchers_count;
-  }
-
-  public void setWatchers_count(int watchers_count) {
-    this.watchers_count = watchers_count;
-  }
-
-  public int getForks_count() {
-    return forks_count;
-  }
-
-  public void setForks_count(int forks_count) {
-    this.forks_count = forks_count;
-  }
-
-  public String getLanguage() {
-    return language;
-  }
-
-  public void setLanguage(String language) {
-    this.language = language;
-  }
-
-  public String getSubscribers_url() {
-    return subscribers_url;
-  }
-
-  public void setSubscribers_url(String subscribers_url) {
-    this.subscribers_url = subscribers_url;
+  public GitHubAuthRepoDto withDateAndWatchersCount(String newDate, int newWatchersCount) {
+    return toBuilder().date(newDate).watchersCount(newWatchersCount).build();
   }
 }

@@ -14,23 +14,27 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.models.serializers;
+package com.hrules.gitego.data.commons.serializator;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.hrules.gitego.data.commons.serializator.GitHubAuthUserDtoSerializator;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hrules.gitego.data.commons.serializator.base.Serializator;
-import com.hrules.gitego.domain.models.GitHubAuthUserDto;
-import com.hrules.gitego.domain.models.serializers.base.Serializer;
+import com.hrules.gitego.data.commons.serializator.extras.SerializatorTypeAdapterFactory;
+import com.hrules.gitego.domain.models.Account;
+import java.util.Collection;
 
-public final class GitHubAuthUserDtoSerializer implements Serializer<GitHubAuthUserDto, String> {
-  private final Serializator serializator = new GitHubAuthUserDtoSerializator();
+public final class ListAccountJsonSerializator implements Serializator {
+  private final Gson gson = new GsonBuilder().registerTypeAdapterFactory(SerializatorTypeAdapterFactory.create()).create();
 
-  @Nullable public GitHubAuthUserDto deserialize(@NonNull String from) {
-    return serializator.from(from);
+  @Nullable @Override public <T> String to(@NonNull T output) {
+    return gson.toJson(output);
   }
 
-  @Nullable @Override public String serialize(@NonNull GitHubAuthUserDto from) {
-    throw new UnsupportedOperationException();
+  @Nullable @Override public <T> T from(@NonNull String input) {
+    return gson.fromJson(input, new TypeToken<Collection<Account>>() {
+    }.getType());
   }
 }

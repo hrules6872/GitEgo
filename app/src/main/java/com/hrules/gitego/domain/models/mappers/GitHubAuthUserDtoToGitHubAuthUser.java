@@ -22,30 +22,25 @@ import com.hrules.gitego.domain.models.mappers.base.InverseMapper;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 
 public final class GitHubAuthUserDtoToGitHubAuthUser implements InverseMapper<GitHubAuthUserDto, GitHubAuthUser> {
-  @Override public GitHubAuthUser map(@NonNull GitHubAuthUserDto from) {
-    GitHubAuthUser gitHubAuthUser = new GitHubAuthUser();
-    gitHubAuthUser.setModelId(from.getModelId());
-    gitHubAuthUser.setDate(from.getDate());
-    gitHubAuthUser.setLogin(from.getLogin());
-    gitHubAuthUser.setAvatar_url(from.getAvatar_url());
-    gitHubAuthUser.setHtml_url(from.getHtml_url());
-    gitHubAuthUser.setType(from.getType());
-    gitHubAuthUser.setName(from.getName());
-    gitHubAuthUser.setFollowers(from.getFollowers());
-    return gitHubAuthUser;
+  @NonNull @Override public GitHubAuthUser map(@NonNull GitHubAuthUserDto from) {
+    return GitHubAuthUser.builder().
+        date(from.getDate()).
+        user(from.getUser()).
+        avatarUrl(from.getAvatarUrl()).
+        htmlUrl(from.getHtmlUrl()).
+        type(from.getType()).
+        name(from.getName()).
+        followers(from.getFollowers()).build();
   }
 
-  @Override public GitHubAuthUserDto inverseMap(@NonNull GitHubAuthUser from) {
-    GitHubAuthUserDto gitHubAuthUserDto = new GitHubAuthUserDto();
-    gitHubAuthUserDto.setModelId(from.getModelId());
-    gitHubAuthUserDto.setDate(from.getDate());
-    gitHubAuthUserDto.setLogin(from.getLogin());
-    gitHubAuthUserDto.setLogin(from.getLogin());
-    gitHubAuthUserDto.setAvatar_url(from.getAvatar_url());
-    gitHubAuthUserDto.setHtml_url(from.getHtml_url());
-    gitHubAuthUserDto.setType(from.getType());
-    gitHubAuthUserDto.setName(from.getName());
-    gitHubAuthUserDto.setFollowers(from.getFollowers());
-    return gitHubAuthUserDto;
+  @NonNull @Override public GitHubAuthUserDto inverseMap(@NonNull GitHubAuthUser from) {
+    return GitHubAuthUserDto.builder().
+        date(from.getDate()).
+        user(from.getUser()).
+        avatarUrl(from.getAvatarUrl()).
+        htmlUrl(from.getHtmlUrl()).
+        type(from.getType()).
+        name(from.getName()).
+        followers(from.getFollowers()).build();
   }
 }

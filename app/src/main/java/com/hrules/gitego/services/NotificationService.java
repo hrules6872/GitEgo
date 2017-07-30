@@ -132,7 +132,7 @@ public final class NotificationService extends Service {
           DebugLog.e(exception.getMessage(), exception);
         }
 
-        @Override public void onFinish() {
+        @SuppressWarnings("ConstantConditions") @Override public void onFinish() {
           if (gitHubAuthUser != null) {
             int difference = gitHubAuthUser.getFollowers() - gitHubAuthUser.getGitHubAuthUserOlder().getFollowers();
             if (difference != 0) {
@@ -156,19 +156,19 @@ public final class NotificationService extends Service {
           DebugLog.e(exception.getMessage(), exception);
         }
 
-        @Override public void onFinish() {
+        @SuppressWarnings("ConstantConditions") @Override public void onFinish() {
           if (list != null) {
             boolean showNotification = false;
             for (GitHubAuthRepo item : list) {
-              if (item.getWatchers_count() - item.getGitHubAuthRepoOlder().getWatchers_count() != 0) {
+              if (item.getWatchersCount() - item.getGitHubAuthRepoOlder().getWatchersCount() != 0) {
                 showNotification = true;
                 break;
               }
-              if (item.getStargazers_count() - item.getGitHubAuthRepoOlder().getStargazers_count() != 0) {
+              if (item.getStargazersCount() - item.getGitHubAuthRepoOlder().getStargazersCount() != 0) {
                 showNotification = true;
                 break;
               }
-              if (item.getForks_count() - item.getGitHubAuthRepoOlder().getForks_count() != 0) {
+              if (item.getForksCount() - item.getGitHubAuthRepoOlder().getForksCount() != 0) {
                 showNotification = true;
                 break;
               }

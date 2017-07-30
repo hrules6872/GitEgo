@@ -27,7 +27,7 @@ public final class ListMapper<M1, M2> implements InverseMapper<List<M1>, List<M2
     this.mapper = mapper;
   }
 
-  @Override public List<M2> map(@NonNull List<M1> from) {
+  @NonNull @Override public List<M2> map(@NonNull List<M1> from) {
     ArrayList<M2> listMapped = new ArrayList<>();
     if (!from.isEmpty()) {
       for (M1 model : from) {
@@ -37,7 +37,7 @@ public final class ListMapper<M1, M2> implements InverseMapper<List<M1>, List<M2
     return listMapped;
   }
 
-  @Override public List<M1> inverseMap(@NonNull List<M2> from) {
+  @NonNull @Override public List<M1> inverseMap(@NonNull List<M2> from) {
     ArrayList<M1> listMapped = new ArrayList<>();
     if (!from.isEmpty()) {
       for (M2 model : from) {

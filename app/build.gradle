@@ -99,6 +99,11 @@ dependencies {
     add("compile", it.value)
   }
 
+  // provided
+  providedDependencies.each {
+    add("provided", it.value)
+  }
+
   // annotations
   annotationsDependencies.each {
     add("annotationProcessor", it.value)

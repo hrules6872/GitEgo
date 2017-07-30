@@ -62,21 +62,23 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
 
     getAccessToken.execute(intent, BuildConfig.GITHUB_API_CALLBACKURL, new GetAccessToken.Callback() {
       @Override public void onSuccess(@NonNull final GitHubAccessToken gitHubAccessToken) {
-        getAuthUser.execute(gitHubAccessToken.getAccess_token(), new GetAuthUser.Callback() {
+        getAuthUser.execute(gitHubAccessToken.getAccessToken(), new GetAuthUser.Callback() {
           @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
             if (!response.isEmpty()) {
               Collections.sort(response, new GitHubAuthUserDateDescendingComparator());
               GitHubAuthUser gitHubAuthUser = response.get(0);
 
-              String login = gitHubAuthUser.getLogin();
+              String user = gitHubAuthUser.getUser();
               String type = gitHubAuthUser.getType();
-              String token = gitHubAccessToken.getAccess_token();
-              Account account = new Account(login, type, token, true);
+              String token = gitHubAccessToken.getAccessToken();
+              Account account = Account.builder().user(user).type(type).token(token).defaultUser(true).build();
 
               if (!TextUtils.isEmpty(account.getUser()) && !TextUtils.isEmpty(account.getToken())) {
                 gitHubAPI.setAccount(account);
                 accountsManager.get().addAccount(account);
                 getView().startMainActivity();
+              } else {
+                showLoginFail = true;
               }
             }
           }

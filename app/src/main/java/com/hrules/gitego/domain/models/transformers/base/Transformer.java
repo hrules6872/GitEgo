@@ -19,5 +19,5 @@ package com.hrules.gitego.domain.models.transformers.base;
 import android.support.annotation.NonNull;
 
 public interface Transformer<M1, M2> {
-  M2 transform(@NonNull M1 from);
+  @NonNull M2 transform(@NonNull M1 from);
 }

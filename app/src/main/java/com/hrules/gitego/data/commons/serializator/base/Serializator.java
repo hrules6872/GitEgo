@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.models.serializers.base;
+package com.hrules.gitego.data.commons.serializator.base;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-interface Deserializer<P1, P2> {
-  @Nullable P1 deserialize(@NonNull P2 from);
+public interface Serializator {
+  @Nullable <T> String to(@NonNull T output);
+
+  @Nullable <T> T from(@NonNull String input);
 }

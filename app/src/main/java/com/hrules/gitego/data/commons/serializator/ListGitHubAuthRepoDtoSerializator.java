@@ -14,26 +14,27 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.models.serializers;
+package com.hrules.gitego.data.commons.serializator;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.hrules.gitego.data.commons.serializator.ListAccountJsonSerializator;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.hrules.gitego.data.commons.serializator.base.Serializator;
-import com.hrules.gitego.domain.models.Account;
-import com.hrules.gitego.domain.models.serializers.base.Serializer;
-import java.util.ArrayList;
+import com.hrules.gitego.data.commons.serializator.extras.SerializatorTypeAdapterFactory;
+import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import java.util.Collection;
 
-public final class ListAccountSerializer implements Serializer<Collection<Account>, String> {
-  private final Serializator serializator = new ListAccountJsonSerializator();
+public final class ListGitHubAuthRepoDtoSerializator implements Serializator {
+  private final Gson gson = new GsonBuilder().registerTypeAdapterFactory(SerializatorTypeAdapterFactory.create()).create();
 
-  @NonNull public Collection<Account> deserialize(@NonNull String from) {
-    Collection<Account> list = serializator.from(from);
-    return list != null ? list : new ArrayList<Account>();
+  @Nullable @Override public <T> String to(@NonNull T output) {
+    return gson.toJson(output);
   }
 
-  @Nullable @SuppressWarnings("ConstantConditions") public String serialize(@NonNull Collection<Account> from) {
-    return serializator.to(from);
+  @Nullable @Override public <T> T from(@NonNull String input) {
+    return gson.fromJson(input, new TypeToken<Collection<GitHubAuthRepoDto>>() {
+    }.getType());
   }
 }

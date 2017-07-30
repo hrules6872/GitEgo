@@ -46,10 +46,10 @@ public final class AuthUserAPIDataSourceReadable extends DataSourceReadable<GitH
 
     String response = network.get((RequestNetwork) specification.get());
     GitHubAuthUserDto gitHubAuthUserDto = new GitHubAuthUserDtoSerializer().deserialize(response);
-    gitHubAuthUserDto.setDate(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()));
-    gitHubAuthUserDto.setModelId(gitHubAuthUserDto.createModelId());
-    list.add(gitHubAuthUserDto);
-    cache.persist();
+    if (gitHubAuthUserDto != null) {
+      list.add(gitHubAuthUserDto.withDate(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis())));
+      cache.persist();
+    }
     return list;
   }
 

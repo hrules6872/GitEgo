@@ -54,10 +54,18 @@ ext {
                          daggerAndroid       : "com.google.dagger:dagger-android:${daggerVersion}",
                          daggerAndroidSupport: "com.google.dagger:dagger-android-support:${daggerVersion}",]
 
+  // provided dependencies
+  autoValueVersion = '1.2'
+  autoValueGsonVersion = '0.5.+'
+  providedDependencies = [autoValue             : "com.google.auto.value:auto-value:${autoValueVersion}",
+                          autoValueGsonExtension: "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"]
+
   // annotations dependencies
   annotationsDependencies = [butterKnifeCompiler   : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
                              daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
-                             daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${daggerVersion}"]
+                             daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${daggerVersion}",
+                             autoValueProcessor    : "com.google.auto.value:auto-value:${autoValueVersion}",
+                             autoValueGsonExtension: "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"]
 
   // debug build dependencies
   debugDBVersion = '1.0.+'

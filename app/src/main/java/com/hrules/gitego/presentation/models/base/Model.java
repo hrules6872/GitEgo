@@ -18,5 +18,5 @@ package com.hrules.gitego.presentation.models.base;
 
 import com.hrules.gitego.domain.models.base.ModelDto;
 
-public abstract class Model<K> extends ModelDto<K> {
+public abstract class Model extends ModelDto {
 }

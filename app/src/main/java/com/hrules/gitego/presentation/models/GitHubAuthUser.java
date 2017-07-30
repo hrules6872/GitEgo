@@ -16,83 +16,54 @@
 
 package com.hrules.gitego.presentation.models;
 
+import android.support.annotation.Nullable;
+import com.google.auto.value.AutoValue;
 import com.hrules.gitego.presentation.models.base.Model;
 
-public final class GitHubAuthUser extends Model<String> {
-  private String date;
-  private String login;
-  private String avatar_url;
-  private String html_url;
-  private String type;
-  private String name;
-  private int followers;
-  private GitHubAuthUser gitHubAuthUserOlder;
+@AutoValue public abstract class GitHubAuthUser extends Model {
+  public abstract String getDate();
 
-  @Override public String createModelId() {
-    return getDate();
+  public abstract String getUser();
+
+  public abstract String getAvatarUrl();
+
+  public abstract String getHtmlUrl();
+
+  public abstract String getType();
+
+  public abstract String getName();
+
+  public abstract int getFollowers();
+
+  @Nullable public abstract GitHubAuthUser getGitHubAuthUserOlder();
+
+  public static Builder builder() {
+    return new AutoValue_GitHubAuthUser.Builder();
   }
 
-  public String getDate() {
-    return date;
+  @AutoValue.Builder public abstract static class Builder {
+    public abstract Builder date(String newDate);
+
+    public abstract Builder user(String newUser);
+
+    public abstract Builder avatarUrl(String newAvatarUrl);
+
+    public abstract Builder htmlUrl(String newHtmlUrl);
+
+    public abstract Builder type(String newType);
+
+    public abstract Builder name(String newName);
+
+    public abstract Builder followers(int newFollowers);
+
+    public abstract Builder gitHubAuthUserOlder(GitHubAuthUser newGitHubAuthUserOlder);
+
+    public abstract GitHubAuthUser build();
   }
 
-  public void setDate(String date) {
-    this.date = date;
-  }
+  abstract Builder toBuilder();
 
-  public String getLogin() {
-    return login;
-  }
-
-  public String getAvatar_url() {
-    return avatar_url;
-  }
-
-  public String getHtml_url() {
-    return html_url;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public int getFollowers() {
-    return followers;
-  }
-
-  public void setLogin(String login) {
-    this.login = login;
-  }
-
-  public void setAvatar_url(String avatar_url) {
-    this.avatar_url = avatar_url;
-  }
-
-  public void setHtml_url(String html_url) {
-    this.html_url = html_url;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setFollowers(int followers) {
-    this.followers = followers;
-  }
-
-  public GitHubAuthUser getGitHubAuthUserOlder() {
-    return gitHubAuthUserOlder;
-  }
-
-  public void setGitHubAuthUserOlder(GitHubAuthUser gitHubAuthUserOlder) {
-    this.gitHubAuthUserOlder = gitHubAuthUserOlder;
+  public GitHubAuthUser withGitHubAuthRepoOlder(GitHubAuthUser newGitHubAuthUserOlder) {
+    return toBuilder().gitHubAuthUserOlder(newGitHubAuthUserOlder).build();
   }
 }

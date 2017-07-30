@@ -17,7 +17,8 @@
 package com.hrules.gitego.domain.models.serializers.base;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 public interface Serializer<P1, P2> extends Deserializer<P1, P2> {
-  P2 serialize(@NonNull P1 from);
+  @Nullable P2 serialize(@NonNull P1 from);
 }

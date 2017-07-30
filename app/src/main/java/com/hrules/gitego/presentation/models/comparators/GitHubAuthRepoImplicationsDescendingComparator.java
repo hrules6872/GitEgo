@@ -21,8 +21,8 @@ import java.util.Comparator;
 
 public final class GitHubAuthRepoImplicationsDescendingComparator implements Comparator<GitHubAuthRepo> {
   @Override public int compare(GitHubAuthRepo lhs, GitHubAuthRepo rhs) {
-    return (rhs.getStargazers_count() + rhs.getWatchers_count() + rhs.getForks_count()) - (lhs.getStargazers_count()
-        + lhs.getWatchers_count()
-        + lhs.getForks_count());
+    return (rhs.getStargazersCount() + rhs.getWatchersCount() + rhs.getForksCount()) - (lhs.getStargazersCount()
+        + lhs.getWatchersCount()
+        + lhs.getForksCount());
   }
 }

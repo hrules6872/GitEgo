@@ -16,81 +16,57 @@
 
 package com.hrules.gitego.domain.models;
 
+import android.support.annotation.Nullable;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.hrules.gitego.domain.models.base.ModelDto;
 
-public final class GitHubAuthUserDto extends ModelDto<String> {
-  private String date;
+@AutoValue public abstract class GitHubAuthUserDto extends ModelDto {
+  @Nullable public abstract String getDate();
 
-  @SerializedName("login") private String login;
+  @SerializedName("login") public abstract String getUser();
 
-  @SerializedName("avatar_url") private String avatar_url;
+  @SerializedName("avatar_url") public abstract String getAvatarUrl();
 
-  @SerializedName("html_url") private String html_url;
+  @SerializedName("html_url") public abstract String getHtmlUrl();
 
-  @SerializedName("type") private String type;
+  @SerializedName("type") public abstract String getType();
 
-  @SerializedName("name") private String name;
+  @SerializedName("name") public abstract String getName();
 
-  @SerializedName("followers") private int followers;
+  @SerializedName("followers") public abstract int getFollowers();
 
-  @Override public String createModelId() {
-    return getDate();
+  public static Builder builder() {
+    return new AutoValue_GitHubAuthUserDto.Builder();
   }
 
-  public String getDate() {
-    return date;
+  @AutoValue.Builder public abstract static class Builder {
+    public abstract Builder date(String newDate);
+
+    public abstract Builder user(String newUser);
+
+    public abstract Builder avatarUrl(String newAvatarUrl);
+
+    public abstract Builder htmlUrl(String newHtmlUrl);
+
+    public abstract Builder type(String newType);
+
+    public abstract Builder name(String newName);
+
+    public abstract Builder followers(int newFollowers);
+
+    public abstract GitHubAuthUserDto build();
   }
 
-  public void setDate(String date) {
-    this.date = date;
+  public static TypeAdapter<GitHubAuthUserDto> typeAdapter(Gson gson) {
+    return new AutoValue_GitHubAuthUserDto.GsonTypeAdapter(gson);
   }
 
-  public String getLogin() {
-    return login;
-  }
+  abstract Builder toBuilder();
 
-  public String getAvatar_url() {
-    return avatar_url;
-  }
-
-  public String getHtml_url() {
-    return html_url;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public int getFollowers() {
-    return followers;
-  }
-
-  public void setLogin(String login) {
-    this.login = login;
-  }
-
-  public void setAvatar_url(String avatar_url) {
-    this.avatar_url = avatar_url;
-  }
-
-  public void setHtml_url(String html_url) {
-    this.html_url = html_url;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setFollowers(int followers) {
-    this.followers = followers;
+  public GitHubAuthUserDto withDate(String newDate) {
+    return toBuilder().date(newDate).build();
   }
 }

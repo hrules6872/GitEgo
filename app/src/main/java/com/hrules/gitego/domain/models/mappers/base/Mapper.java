@@ -19,5 +19,5 @@ package com.hrules.gitego.domain.models.mappers.base;
 import android.support.annotation.NonNull;
 
 public interface Mapper<M1, M2> {
-  M2 map(@NonNull M1 from);
+  @NonNull M2 map(@NonNull M1 from);
 }

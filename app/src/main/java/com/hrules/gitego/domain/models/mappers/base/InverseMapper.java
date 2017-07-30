@@ -19,5 +19,5 @@ package com.hrules.gitego.domain.models.mappers.base;
 import android.support.annotation.NonNull;
 
 public interface InverseMapper<M1, M2> extends Mapper<M1, M2> {
-  M1 inverseMap(@NonNull M2 from);
+  @NonNull M1 inverseMap(@NonNull M2 from);
 }

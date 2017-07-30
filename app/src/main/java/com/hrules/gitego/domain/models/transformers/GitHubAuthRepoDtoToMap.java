@@ -24,18 +24,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class GitHubAuthRepoDtoToMap implements Transformer<GitHubAuthRepoDto, Map<String, Object>> {
-  @Override public Map<String, Object> transform(@NonNull GitHubAuthRepoDto from) {
+  @NonNull @Override public Map<String, Object> transform(@NonNull GitHubAuthRepoDto from) {
     Map<String, Object> values = new HashMap<>();
     values.put(DatabaseConstants.KEY_REPO_DATE, from.getDate());
     values.put(DatabaseConstants.KEY_REPO_ID, from.getId());
     values.put(DatabaseConstants.KEY_REPO_NAME, from.getName());
-    values.put(DatabaseConstants.KEY_REPO_IS_PRIVATE, from.isPrivate() ? DatabaseConstants.BOOLEAN.TRUE : DatabaseConstants.BOOLEAN.FALSE);
-    values.put(DatabaseConstants.KEY_REPO_HTML_URL, from.getHtml_url());
+    values.put(DatabaseConstants.KEY_REPO_IS_PRIVATE,
+        from.isPrivateRepository() ? DatabaseConstants.BOOLEAN.TRUE : DatabaseConstants.BOOLEAN.FALSE);
+    values.put(DatabaseConstants.KEY_REPO_HTML_URL, from.getHtmlUrl());
     values.put(DatabaseConstants.KEY_REPO_IS_FORK, from.isFork() ? DatabaseConstants.BOOLEAN.TRUE : DatabaseConstants.BOOLEAN.FALSE);
     values.put(DatabaseConstants.KEY_REPO_HOMEPAGE, from.getHomepage());
-    values.put(DatabaseConstants.KEY_REPO_STARGAZERS_COUNT, from.getStargazers_count());
-    values.put(DatabaseConstants.KEY_REPO_WATCHERS_COUNT, from.getWatchers_count());
-    values.put(DatabaseConstants.KEY_REPO_FORKS_COUNT, from.getForks_count());
+    values.put(DatabaseConstants.KEY_REPO_STARGAZERS_COUNT, from.getStargazersCount());
+    values.put(DatabaseConstants.KEY_REPO_WATCHERS_COUNT, from.getWatchersCount());
+    values.put(DatabaseConstants.KEY_REPO_FORKS_COUNT, from.getForksCount());
     values.put(DatabaseConstants.KEY_REPO_LANGUAGE, from.getLanguage());
     return values;
   }

@@ -22,37 +22,35 @@ import com.hrules.gitego.domain.models.mappers.base.InverseMapper;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 
 public final class GitHubAuthRepoDtoToGitHubAuthRepo implements InverseMapper<GitHubAuthRepoDto, GitHubAuthRepo> {
-  @Override public GitHubAuthRepo map(@NonNull GitHubAuthRepoDto from) {
-    GitHubAuthRepo gitHubAuthRepo = new GitHubAuthRepo();
-    gitHubAuthRepo.setModelId(from.getModelId());
-    gitHubAuthRepo.setDate(from.getDate());
-    gitHubAuthRepo.setId(from.getId());
-    gitHubAuthRepo.setName(from.getName());
-    gitHubAuthRepo.setPrivate(from.isPrivate());
-    gitHubAuthRepo.setHtml_url(from.getHtml_url());
-    gitHubAuthRepo.setFork(from.isFork());
-    gitHubAuthRepo.setHomepage(from.getHomepage());
-    gitHubAuthRepo.setStargazers_count(from.getStargazers_count());
-    gitHubAuthRepo.setWatchers_count(from.getWatchers_count());
-    gitHubAuthRepo.setForks_count(from.getForks_count());
-    gitHubAuthRepo.setLanguage(from.getLanguage());
-    return gitHubAuthRepo;
+  @NonNull @Override public GitHubAuthRepo map(@NonNull GitHubAuthRepoDto from) {
+    return GitHubAuthRepo.builder()
+        .date(from.getDate())
+        .id(from.getId())
+        .name(from.getName())
+        .privateRepository(from.isPrivateRepository())
+        .htmlUrl(from.getHtmlUrl())
+        .fork(from.isFork())
+        .homepage(from.getHomepage())
+        .stargazersCount(from.getStargazersCount())
+        .watchersCount(from.getWatchersCount())
+        .forksCount(from.getForksCount())
+        .language(from.getLanguage())
+        .build();
   }
 
-  @Override public GitHubAuthRepoDto inverseMap(@NonNull GitHubAuthRepo from) {
-    GitHubAuthRepoDto gitHubAuthRepoDto = new GitHubAuthRepoDto();
-    gitHubAuthRepoDto.setModelId(from.getModelId());
-    gitHubAuthRepoDto.setDate(from.getDate());
-    gitHubAuthRepoDto.setId(from.getId());
-    gitHubAuthRepoDto.setName(from.getName());
-    gitHubAuthRepoDto.setPrivate(from.isPrivate());
-    gitHubAuthRepoDto.setHtml_url(from.getHtml_url());
-    gitHubAuthRepoDto.setFork(from.isFork());
-    gitHubAuthRepoDto.setHomepage(from.getHomepage());
-    gitHubAuthRepoDto.setStargazers_count(from.getStargazers_count());
-    gitHubAuthRepoDto.setWatchers_count(from.getWatchers_count());
-    gitHubAuthRepoDto.setForks_count(from.getForks_count());
-    gitHubAuthRepoDto.setLanguage(from.getLanguage());
-    return gitHubAuthRepoDto;
+  @NonNull @Override public GitHubAuthRepoDto inverseMap(@NonNull GitHubAuthRepo from) {
+    return GitHubAuthRepoDto.builder()
+        .date(from.getDate())
+        .id(from.getId())
+        .name(from.getName())
+        .privateRepository(from.isPrivateRepository())
+        .htmlUrl(from.getHtmlUrl())
+        .fork(from.isFork())
+        .homepage(from.getHomepage())
+        .stargazersCount(from.getStargazersCount())
+        .watchersCount(from.getWatchersCount())
+        .forksCount(from.getForksCount())
+        .language(from.getLanguage())
+        .build();
   }
 }

@@ -17,23 +17,23 @@
 package com.hrules.gitego.domain.models.serializers;
 
 import android.support.annotation.NonNull;
-import com.google.gson.reflect.TypeToken;
-import com.hrules.gitego.data.commons.Json;
+import android.support.annotation.Nullable;
+import com.hrules.gitego.data.commons.serializator.ListGitHubAuthRepoDtoSerializator;
+import com.hrules.gitego.data.commons.serializator.base.Serializator;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.serializers.base.Serializer;
-import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public final class GitHubAuthRepoDtoSerializer implements Serializer<Collection<GitHubAuthRepoDto>, String> {
-  private final Json json = new Json();
+  private final Serializator serializator = new ListGitHubAuthRepoDtoSerializator();
 
-  public Collection<GitHubAuthRepoDto> deserialize(@NonNull String from) {
-    Type type = new TypeToken<Collection<GitHubAuthRepoDto>>() {
-    }.getType();
-    return json.fromJson(from, type);
+  @NonNull public Collection<GitHubAuthRepoDto> deserialize(@NonNull String from) {
+    Collection<GitHubAuthRepoDto> list = serializator.from(from);
+    return list != null ? list : new ArrayList<GitHubAuthRepoDto>();
   }
 
-  @Override public String serialize(@NonNull Collection<GitHubAuthRepoDto> from) {
+  @Nullable @Override public String serialize(@NonNull Collection<GitHubAuthRepoDto> from) {
     throw new UnsupportedOperationException();
   }
 }

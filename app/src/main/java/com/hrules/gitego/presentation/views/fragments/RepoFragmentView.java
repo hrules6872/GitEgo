@@ -28,6 +28,7 @@ import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
 import android.util.TypedValue;
 import android.view.View;
 import butterknife.BindView;
@@ -48,6 +49,9 @@ import com.hrules.gitego.presentation.views.activities.LoginActivityView;
 import com.hrules.gitego.presentation.views.fragments.base.DRMVPFragmentV4;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
+
+import static com.hrules.gitego.presentation.commons.StringUtils.createVariationSpannableString;
 
 public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresenter, RepoFragmentPresenter.Contract>
     implements RepoFragmentPresenter.Contract {
@@ -81,7 +85,7 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
 
     adapter = new RepoAdapter(new RepoAdapter.RepoAdapterListener() {
       @Override public void onListItemClick(int position) {
-        launchBrowser(adapter.getItem(position).getHtml_url());
+        launchBrowser(adapter.getItem(position).getHtmlUrl());
       }
     });
     recyclerView.setAdapter(adapter);
@@ -122,21 +126,24 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
     }
   }
 
-  @Override public void updateList(@NonNull List<GitHubAuthRepo> list) {
+  @SuppressWarnings("ConstantConditions") @Override public void updateList(@NonNull List<GitHubAuthRepo> list) {
     String textVariation = getString(R.string.text_variationFormatted);
     int colorVariationPositive = ContextCompat.getColor(getActivity(), R.color.variationPositive);
     int colorVariationNegative = ContextCompat.getColor(getActivity(), R.color.variationNegative);
 
-    for (GitHubAuthRepo item : list) {
-      item.setWatchers_countSpannable(StringUtils.createVariationSpannableString(textVariation, item.getWatchers_count(),
-          item.getGitHubAuthRepoOlder().getWatchers_count(), colorVariationPositive, colorVariationNegative));
+    for (ListIterator<GitHubAuthRepo> iterator = list.listIterator(); iterator.hasNext(); ) {
+      GitHubAuthRepo item = iterator.next();
 
-      item.setStargazers_countSpannable(StringUtils.createVariationSpannableString(textVariation, item.getStargazers_count(),
-          item.getGitHubAuthRepoOlder().getStargazers_count(), colorVariationPositive, colorVariationNegative));
+      Spannable stargazersCountSpannable = StringUtils.createVariationSpannableString(textVariation, item.getWatchersCount(),
+          item.getGitHubAuthRepoOlder().getWatchersCount(), colorVariationPositive, colorVariationNegative);
+      Spannable watchersCountSpannable =
+          createVariationSpannableString(textVariation, item.getStargazersCount(), item.getGitHubAuthRepoOlder().getStargazersCount(),
+              colorVariationPositive, colorVariationNegative);
+      Spannable forksCountSpannable =
+          createVariationSpannableString(textVariation, item.getForksCount(), item.getGitHubAuthRepoOlder().getForksCount(),
+              colorVariationPositive, colorVariationNegative);
 
-      item.setForks_countSpannable(
-          StringUtils.createVariationSpannableString(textVariation, item.getForks_count(), item.getGitHubAuthRepoOlder().getForks_count(),
-              colorVariationPositive, colorVariationNegative));
+      iterator.set(item.withCountSpannables(stargazersCountSpannable, watchersCountSpannable, forksCountSpannable));
     }
 
     Collections.sort(list, new GitHubAuthRepoImplicationsDescendingComparator());

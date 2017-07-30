@@ -21,7 +21,6 @@ import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.network.RequestNetwork;
 import com.hrules.gitego.data.persistence.database.utils.DatabaseDateUtils;
 import com.hrules.gitego.data.repository.cache.base.BasicCache;
-import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoAPIGetAuthRepoSpecification;
 import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification;
 import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
@@ -32,6 +31,7 @@ import com.hrules.gitego.domain.specifications.params.GetAuthRepoSpecificationPa
 import com.hrules.gitego.domain.specifications.params.GetAuthRepoSubscribersSpecificationParams;
 import java.util.Collection;
 import java.util.List;
+import java.util.ListIterator;
 import org.json.JSONArray;
 
 public final class AuthRepoAPIDataSourceReadable extends DataSourceReadable<GitHubAuthRepoDto> {
@@ -46,24 +46,22 @@ public final class AuthRepoAPIDataSourceReadable extends DataSourceReadable<GitH
   @SuppressWarnings("unchecked") @Override public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
       throws Exception {
     specification = new SpecificationFactory<String>().get(this, specification);
-    List<GitHubAuthRepoDto> list;
-
     String response = network.get((RequestNetwork) specification.get());
-    list = (List<GitHubAuthRepoDto>) new GitHubAuthRepoDtoSerializer().deserialize(response);
-    for (GitHubAuthRepoDto item : list) {
-      item.setDate(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()));
-      item.setModelId(item.createModelId());
+    List<GitHubAuthRepoDto> list = (List<GitHubAuthRepoDto>) new GitHubAuthRepoDtoSerializer().deserialize(response);
 
-      if (specification instanceof AuthRepoAPIGetAuthRepoSpecification) {
-        GetAuthRepoSpecificationParams repoSpecificationParams = (GetAuthRepoSpecificationParams) specification.getParams();
-        AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification subscribersSpecification =
-            new AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification();
-        subscribersSpecification.setParams(
-            new GetAuthRepoSubscribersSpecificationParams(repoSpecificationParams.getAccess_token(), item.getSubscribers_url()));
-        String subscribers = network.get(subscribersSpecification.get());
-        JSONArray subscribersJSONArray = new JSONArray(subscribers);
-        item.setWatchers_count(subscribersJSONArray.length());
-      }
+    for (ListIterator<GitHubAuthRepoDto> iterator = list.listIterator(); iterator.hasNext(); ) {
+      GitHubAuthRepoDto item = iterator.next();
+
+      GetAuthRepoSpecificationParams repoSpecificationParams = (GetAuthRepoSpecificationParams) specification.getParams();
+      AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification subscribersSpecification =
+          new AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification();
+      subscribersSpecification.setParams(
+          new GetAuthRepoSubscribersSpecificationParams(repoSpecificationParams.getAccess_token(), item.getSubscribersUrl()));
+      String subscribers = network.get(subscribersSpecification.get());
+      JSONArray subscribersJSONArray = new JSONArray(subscribers);
+
+      iterator.set(
+          item.withDateAndWatchersCount(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()), subscribersJSONArray.length()));
     }
     cache.persist();
     return list;

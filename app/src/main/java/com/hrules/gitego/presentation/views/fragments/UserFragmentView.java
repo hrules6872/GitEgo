@@ -103,8 +103,8 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     userLogin.setText(userLoginString);
   }
 
-  @Override public void setUserData(@NonNull GitHubAuthUser gitHubAuthUser) {
-    ImageLoader.loadRounded(App.getApplication(), gitHubAuthUser.getAvatar_url(), avatar);
+  @SuppressWarnings("ConstantConditions") @Override public void setUserData(@NonNull GitHubAuthUser gitHubAuthUser) {
+    ImageLoader.loadRounded(App.getApplication(), gitHubAuthUser.getAvatarUrl(), avatar);
 
     userName.setText(gitHubAuthUser.getName());
 
@@ -115,7 +115,7 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     followers.setText(spannableUserFollowers, TextView.BufferType.SPANNABLE);
   }
 
-  @Override public void setRepoCounters(@NonNull List<GitHubAuthRepo> list) {
+  @SuppressWarnings("ConstantConditions") @Override public void setRepoCounters(@NonNull List<GitHubAuthRepo> list) {
     int watchers = 0;
     int stargazers = 0;
     int forks = 0;
@@ -124,12 +124,12 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     int forksOlder = 0;
 
     for (GitHubAuthRepo item : list) {
-      watchers += item.getWatchers_count();
-      stargazers += item.getStargazers_count();
-      forks += item.getForks_count();
-      watchersOlder += item.getGitHubAuthRepoOlder().getWatchers_count();
-      stargazersOlder += item.getGitHubAuthRepoOlder().getStargazers_count();
-      forksOlder += item.getGitHubAuthRepoOlder().getForks_count();
+      watchers += item.getWatchersCount();
+      stargazers += item.getStargazersCount();
+      forks += item.getForksCount();
+      watchersOlder += item.getGitHubAuthRepoOlder().getWatchersCount();
+      stargazersOlder += item.getGitHubAuthRepoOlder().getStargazersCount();
+      forksOlder += item.getGitHubAuthRepoOlder().getForksCount();
     }
 
     String textVariation = getString(R.string.text_variationFormatted);
