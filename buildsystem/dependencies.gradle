@@ -55,9 +55,9 @@ ext {
                          daggerAndroidSupport: "com.google.dagger:dagger-android-support:${daggerVersion}",]
 
   // provided dependencies
-  autoValueVersion = '1.2'
+  autoValueVersion = '1.4'
   autoValueGsonVersion = '0.5.+'
-  providedDependencies = [autoValue             : "com.google.auto.value:auto-value:${autoValueVersion}",
+  providedDependencies = [autoValueAnnotations  : "com.jakewharton.auto.value:auto-value-annotations:${autoValueVersion}",
                           autoValueGsonExtension: "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"]
 
   // annotations dependencies
