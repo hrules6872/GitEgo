@@ -152,11 +152,11 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
   }
 
   @Override public void showBriefMessage(@NonNull String message) {
-    BriefMessage.showLong(getActivity().findViewById(R.id.rootLayout), message);
+    BriefMessage.INSTANCE.showLong(getActivity().findViewById(R.id.rootLayout), message);
   }
 
   @Override public void showBriefMessageAction(@NonNull String message, @NonNull String action) {
-    BriefMessage.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), message, action,
+    BriefMessage.INSTANCE.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), message, action,
         new BriefMessage.BriefMessageListener() {
           @Override public void onClick() {
             launchLoginActivity();

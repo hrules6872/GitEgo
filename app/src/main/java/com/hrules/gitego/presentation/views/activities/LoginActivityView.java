@@ -75,7 +75,7 @@ public final class LoginActivityView extends DRMVPAppCompatActivity<LoginActivit
   }
 
   public void showBriefMessage(@NonNull String message) {
-    BriefMessage.showLong(rootLayout, message);
+    BriefMessage.INSTANCE.showLong(rootLayout, message);
   }
 
   @OnClick(R.id.login) void onLoginClick() {
