@@ -32,6 +32,7 @@ import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
+import com.hrules.gitego.presentation.bus.BoolEvent;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
 import com.hrules.gitego.presentation.models.utils.ListModelUtils;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
 
 public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
@@ -67,7 +69,7 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
     Account account = gitHubAPI.getAccount();
     if (account != null && !TextUtils.isEmpty(account.getToken())) {
 
-      getView().showLoading();
+      showLoading();
       getAuthRepo.execute(account.getToken(), new GetAuthRepo.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (!response.isEmpty()) {
@@ -101,16 +103,24 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
 
         @Override public void onFinish() {
           syncData();
+          hideLoading();
 
           uiThreadExecutor.execute(new Runnable() {
             @Override public void run() {
-              getView().hideLoading();
               getView().updateListState();
             }
           });
         }
       });
     }
+  }
+
+  private void hideLoading() {
+    EventBus.getDefault().post(new BoolEvent(false));
+  }
+
+  private void showLoading() {
+    EventBus.getDefault().post(new BoolEvent(true));
   }
 
   private void syncData() {
@@ -135,10 +145,6 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
     void updateList(@NonNull List<GitHubAuthRepo> list);
 
     void updateListState();
-
-    void showLoading();
-
-    void hideLoading();
 
     void showBriefMessage(@StringRes int message);
 

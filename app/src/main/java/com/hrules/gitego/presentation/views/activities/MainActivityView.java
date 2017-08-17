@@ -32,19 +32,19 @@ import com.hrules.gitego.App;
 import com.hrules.gitego.AppConstants;
 import com.hrules.gitego.R;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
-import com.hrules.gitego.presentation.bus.BoolStateBus;
-import com.hrules.gitego.presentation.bus.base.Bus;
-import com.hrules.gitego.presentation.bus.base.BusModel;
-import com.hrules.gitego.presentation.bus.constants.BusActionConstants;
+import com.hrules.gitego.presentation.bus.BoolEvent;
 import com.hrules.gitego.presentation.presenters.activities.MainActivityPresenter;
 import com.hrules.gitego.presentation.views.activities.base.DRMVPAppCompatActivity;
 import com.hrules.gitego.presentation.views.fragments.RepoFragmentView;
 import com.hrules.gitego.presentation.views.fragments.UserFragmentView;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityPresenter, MainActivityPresenter.Contract>
-    implements MainActivityPresenter.Contract, Bus {
+    implements MainActivityPresenter.Contract {
   @BindView(R.id.rootLayout) CoordinatorLayout rootLayout;
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.progressBar) ProgressBar progressBar;
@@ -61,6 +61,7 @@ public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityP
     super.onCreate(savedInstanceState);
     App.getApplication().getAppComponent().inject(this);
     initializeViews();
+    EventBus.getDefault().register(this);
 
     if (savedInstanceState == null) {
       getSupportFragmentManager().beginTransaction().replace(R.id.fragmentUser, new UserFragmentView()).commit();
@@ -104,6 +105,11 @@ public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityP
     return super.onOptionsItemSelected(item);
   }
 
+  @Override protected void onDestroy() {
+    EventBus.getDefault().unregister(this);
+    super.onDestroy();
+  }
+
   public void launchLoginActivity() {
     startActivity(new Intent(getApplicationContext(), LoginActivityView.class));
     finish();
@@ -113,18 +119,13 @@ public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityP
     startActivity(new Intent(this, AboutActivityView.class));
   }
 
-  @Override public void onEvent(@NonNull BusModel event) {
-    if (BusActionConstants.ACTION_SHOW_LOADING.equals(event.getAction())) {
-      if (event instanceof BoolStateBus) {
-        BoolStateBus boolStateBus = (BoolStateBus) event;
-        if (boolStateBus.isState() && refreshVisibilityCounter.incrementAndGet() == 1) {
-          progressBar.setIndeterminate(true);
-          progressBar.setVisibility(View.VISIBLE);
-        } else if (!boolStateBus.isState() && refreshVisibilityCounter.decrementAndGet() == 0) {
-          progressBar.setIndeterminate(false);
-          progressBar.setVisibility(View.GONE);
-        }
-      }
+  @SuppressWarnings("unused") @Subscribe(threadMode = ThreadMode.MAIN) public void onEvent(@NonNull final BoolEvent boolEvent) {
+    if (boolEvent.isState() && refreshVisibilityCounter.incrementAndGet() == 1) {
+      progressBar.setIndeterminate(true);
+      progressBar.setVisibility(View.VISIBLE);
+    } else if (!boolEvent.isState() && refreshVisibilityCounter.decrementAndGet() == 0) {
+      progressBar.setIndeterminate(false);
+      progressBar.setVisibility(View.GONE);
     }
   }
 }

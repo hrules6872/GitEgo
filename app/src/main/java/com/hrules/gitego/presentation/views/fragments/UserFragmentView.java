@@ -16,8 +16,6 @@
 
 package com.hrules.gitego.presentation.views.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -32,9 +30,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.hrules.gitego.App;
 import com.hrules.gitego.R;
-import com.hrules.gitego.presentation.bus.BoolStateBus;
-import com.hrules.gitego.presentation.bus.base.Bus;
-import com.hrules.gitego.presentation.bus.constants.BusActionConstants;
 import com.hrules.gitego.presentation.commons.StringUtils;
 import com.hrules.gitego.presentation.commons.images.ImageLoader;
 import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
@@ -57,7 +52,6 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
   @BindView(R.id.forksCount) TextSwitcher forksCount;
 
   private Unbinder unbinder;
-  private Bus bus;
 
   @Override protected int getLayoutResId() {
     return R.layout.fragment_user;
@@ -77,17 +71,6 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     watchersCount.setFactory(new TextSwitcherFactory(watchersCount, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
     starsCount.setFactory(new TextSwitcherFactory(starsCount, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
     forksCount.setFactory(new TextSwitcherFactory(forksCount, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
-  }
-
-  @Override public void onAttach(Context context) {
-    super.onAttach(context);
-    if (context instanceof Activity) {
-      try {
-        bus = (Bus) context;
-      } catch (ClassCastException e) {
-        throw new ClassCastException(context.toString() + " must implement Bus delegate");
-      }
-    }
   }
 
   @Override public void onResume() {
@@ -157,18 +140,6 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     watchersCount.setText(spannableWatchersCount);
     starsCount.setText(spannableStargazersCount);
     forksCount.setText(spannableForksCount);
-  }
-
-  @Override public void showLoading() {
-    if (bus != null) {
-      bus.onEvent(new BoolStateBus(BusActionConstants.ACTION_SHOW_LOADING, true));
-    }
-  }
-
-  @Override public void hideLoading() {
-    if (bus != null) {
-      bus.onEvent(new BoolStateBus(BusActionConstants.ACTION_SHOW_LOADING, false));
-    }
   }
 
   @Override public void showBriefMessage(@StringRes int message) {

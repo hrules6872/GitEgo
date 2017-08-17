@@ -16,8 +16,6 @@
 
 package com.hrules.gitego.presentation.views.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,9 +35,6 @@ import butterknife.Unbinder;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.adapters.RepoAdapter;
 import com.hrules.gitego.presentation.adapters.decorators.SpaceItemDecoration;
-import com.hrules.gitego.presentation.bus.BoolStateBus;
-import com.hrules.gitego.presentation.bus.base.Bus;
-import com.hrules.gitego.presentation.bus.constants.BusActionConstants;
 import com.hrules.gitego.presentation.commons.StringUtils;
 import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
@@ -61,7 +56,6 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
 
   private Unbinder unbinder;
   private Parcelable recyclerViewState;
-  private Bus bus;
 
   private RepoAdapter adapter;
 
@@ -89,17 +83,6 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
       }
     });
     recyclerView.setAdapter(adapter);
-  }
-
-  @Override public void onAttach(Context context) {
-    super.onAttach(context);
-    if (context instanceof Activity) {
-      try {
-        bus = (Bus) context;
-      } catch (ClassCastException e) {
-        throw new ClassCastException(context.toString() + " must implement Bus delegate");
-      }
-    }
   }
 
   @Override public void onViewStateRestored(Bundle savedInstanceState) {
@@ -166,18 +149,6 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
     try {
       startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(html_url)));
     } catch (Exception ignored) {
-    }
-  }
-
-  @Override public void showLoading() {
-    if (bus != null) {
-      bus.onEvent(new BoolStateBus(BusActionConstants.ACTION_SHOW_LOADING, true));
-    }
-  }
-
-  @Override public void hideLoading() {
-    if (bus != null) {
-      bus.onEvent(new BoolStateBus(BusActionConstants.ACTION_SHOW_LOADING, false));
     }
   }
 

@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.presentation.bus.base;
+package com.hrules.gitego.presentation.bus;
 
-import android.support.annotation.NonNull;
+public class BoolEvent {
+  private final boolean state;
 
-public interface Bus {
-  void onEvent(@NonNull BusModel event);
+  public BoolEvent(boolean state) {
+    this.state = state;
+  }
+
+  public boolean isState() {
+    return state;
+  }
 }

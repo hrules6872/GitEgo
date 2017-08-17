@@ -32,6 +32,7 @@ import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
+import com.hrules.gitego.presentation.bus.BoolEvent;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
@@ -40,6 +41,7 @@ import com.hrules.gitego.presentation.models.utils.ListModelUtils;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
+import org.greenrobot.eventbus.EventBus;
 
 public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPresenter.Contract> {
   @Inject GitHubAPI gitHubAPI;
@@ -67,7 +69,7 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
     if (account != null && !TextUtils.isEmpty(account.getToken())) {
       getView().setUserLogin(account.getUser());
 
-      getView().showLoading();
+      showLoading();
       getAuthUser.execute(account.getToken(), new GetAuthUser.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthUser> response) {
           if (!response.isEmpty()) {
@@ -97,15 +99,11 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
         }
 
         @Override public void onFinish() {
-          uiThreadExecutor.execute(new Runnable() {
-            @Override public void run() {
-              getView().hideLoading();
-            }
-          });
+          hideLoading();
         }
       });
 
-      getView().showLoading();
+      showLoading();
       getAuthRepo.execute(account.getToken(), new GetAuthRepo.Callback() {
         @Override public void onSuccess(@NonNull List<GitHubAuthRepo> response) {
           if (!response.isEmpty()) {
@@ -137,14 +135,18 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
         }
 
         @Override public void onFinish() {
-          uiThreadExecutor.execute(new Runnable() {
-            @Override public void run() {
-              getView().hideLoading();
-            }
-          });
+          hideLoading();
         }
       });
     }
+  }
+
+  private void hideLoading() {
+    EventBus.getDefault().post(new BoolEvent(false));
+  }
+
+  private void showLoading() {
+    EventBus.getDefault().post(new BoolEvent(true));
   }
 
   private void networkFail() {
@@ -161,10 +163,6 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
     void setUserData(@NonNull GitHubAuthUser gitHubAuthUser);
 
     void setRepoCounters(@NonNull List<GitHubAuthRepo> list);
-
-    void showLoading();
-
-    void hideLoading();
 
     void showBriefMessage(@StringRes int message);
 
