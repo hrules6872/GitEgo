@@ -39,12 +39,13 @@ ext {
                          percent           : "com.android.support:percent:${supportLibraryVersion}"]
 
   // project dependencies
-  butterKnifeVersion = '8.7.+'
+  butterKnifeVersion = '8.8.+'
   daggerVersion = '2.11'
   daRealMVPVersion = '0.20.0'
   gsonVersion = '2.8.1'
   okhttpVersion = '3.8.+'
   picassoViewVersion = '2.5.+'
+  eventbusVersion = '3.0.+'
   projectDependencies = [butterKnife         : "com.jakewharton:butterknife:${butterKnifeVersion}",
                          daRealMVP           : "com.hrules:darealmvp:${daRealMVPVersion}",
                          gson                : "com.google.code.gson:gson:${gsonVersion}",
@@ -52,12 +53,13 @@ ext {
                          picasso             : "com.squareup.picasso:picasso:${picassoViewVersion}",
                          dagger              : "com.google.dagger:dagger:${daggerVersion}",
                          daggerAndroid       : "com.google.dagger:dagger-android:${daggerVersion}",
-                         daggerAndroidSupport: "com.google.dagger:dagger-android-support:${daggerVersion}",]
+                         daggerAndroidSupport: "com.google.dagger:dagger-android-support:${daggerVersion}",
+                         eventbus            : "org.greenrobot:eventbus:${eventbusVersion}"]
 
   // provided dependencies
-  autoValueVersion = '1.4'
+  autoValueVersion = '1.5'
   autoValueGsonVersion = '0.5.+'
-  providedDependencies = [autoValueAnnotations  : "com.jakewharton.auto.value:auto-value-annotations:${autoValueVersion}",
+  providedDependencies = [autoValueAnnotations  : "com.google.auto.value:auto-value:${autoValueVersion}",
                           autoValueGsonExtension: "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"]
 
   // annotations dependencies
