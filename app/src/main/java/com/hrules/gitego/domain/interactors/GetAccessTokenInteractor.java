@@ -23,6 +23,8 @@ import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.network.RequestNetwork;
 import com.hrules.gitego.domain.api.GitHubAPI;
+import com.hrules.gitego.domain.errors.base.Error;
+import com.hrules.gitego.domain.errors.base.ErrorFactory;
 import com.hrules.gitego.domain.interactors.base.BaseInteractor;
 import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.models.GitHubAccessTokenDto;
@@ -79,11 +81,11 @@ public final class GetAccessTokenInteractor extends BaseInteractor implements Ge
         } else {
           throw new LocalIOException("response malformed");
         }
-      } catch (Exception exception) {
-        notifyFail(exception);
+      } catch (Exception e) {
+        notifyFail(ErrorFactory.create(e));
       }
     } else {
-      notifyFail(new NetworkUnauthorizedException());
+      notifyFail(ErrorFactory.create(new NetworkUnauthorizedException()));
     }
   }
 
@@ -93,9 +95,9 @@ public final class GetAccessTokenInteractor extends BaseInteractor implements Ge
     }
   }
 
-  private void notifyFail(@NonNull Exception exception) {
+  private void notifyFail(@NonNull Error error) {
     if (callback != null) {
-      callback.onFailure(exception);
+      callback.onFailure(error);
     }
   }
 }

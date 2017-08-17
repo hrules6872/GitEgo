@@ -18,6 +18,8 @@ package com.hrules.gitego.domain.interactors;
 
 import android.support.annotation.NonNull;
 import com.hrules.gitego.data.repository.base.Repository;
+import com.hrules.gitego.domain.errors.base.Error;
+import com.hrules.gitego.domain.errors.base.ErrorFactory;
 import com.hrules.gitego.domain.interactors.base.BaseInteractor;
 import com.hrules.gitego.domain.interactors.contracts.DeleteAuthRepo;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
@@ -56,13 +58,13 @@ public final class DeleteAuthRepoInteractor extends BaseInteractor implements De
     try {
       repository.remove(deleteAuthRepoSpecification);
     } catch (Exception e) {
-      notifyFail(e);
+      notifyFail(ErrorFactory.create(e));
     }
   }
 
-  private void notifyFail(@NonNull Exception exception) {
+  private void notifyFail(@NonNull Error error) {
     if (callback != null) {
-      callback.onFailure(exception);
+      callback.onFailure(error);
     }
   }
 }

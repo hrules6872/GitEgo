@@ -22,9 +22,10 @@ import com.hrules.darealmvp.DRMVPPresenter;
 import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
 import com.hrules.gitego.commons.DebugLog;
-import com.hrules.gitego.data.exceptions.NetworkIOException;
-import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.domain.api.GitHubAPI;
+import com.hrules.gitego.domain.errors.NetworkIOError;
+import com.hrules.gitego.domain.errors.NetworkUnauthorizedError;
+import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
@@ -84,18 +85,14 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
           }
         }
 
-        @Override public void onFailure(@NonNull final Exception exception) {
-          uiThreadExecutor.execute(new Runnable() {
-            @Override public void run() {
-              if (exception instanceof NetworkUnauthorizedException) {
-                loginFail();
-              } else if (exception instanceof NetworkIOException) {
-                networkFail();
-              } else {
-                DebugLog.e(exception.getMessage(), exception);
-              }
-            }
-          });
+        @Override public void onFailure(@NonNull Error error) {
+          if (error instanceof NetworkUnauthorizedError) {
+            loginFail();
+          } else if (error instanceof NetworkIOError) {
+            networkFail();
+          } else {
+            DebugLog.e(error.getMessage(), error.getException());
+          }
         }
 
         @Override public void onFinish() {
@@ -120,18 +117,14 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
           }
         }
 
-        @Override public void onFailure(@NonNull final Exception exception) {
-          uiThreadExecutor.execute(new Runnable() {
-            @Override public void run() {
-              if (exception instanceof NetworkUnauthorizedException) {
-                loginFail();
-              } else if (exception instanceof NetworkIOException) {
-                networkFail();
-              } else {
-                DebugLog.e(exception.getMessage(), exception);
-              }
-            }
-          });
+        @Override public void onFailure(@NonNull Error error) {
+          if (error instanceof NetworkUnauthorizedError) {
+            loginFail();
+          } else if (error instanceof NetworkIOError) {
+            networkFail();
+          } else {
+            DebugLog.e(error.getMessage(), error.getException());
+          }
         }
 
         @Override public void onFinish() {

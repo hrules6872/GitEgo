@@ -17,11 +17,11 @@
 package com.hrules.gitego.domain.interactors.contracts;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.data.repository.base.RepositoryInterface;
+import com.hrules.gitego.domain.interactors.base.BaseInteractorInterface;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 
 public interface GetAuthRepo {
-  interface Callback extends RepositoryInterface.QueryCallback<GitHubAuthRepo> {
+  interface Callback extends BaseInteractorInterface.QueryCallback<GitHubAuthRepo> {
   }
 
   void execute(@NonNull String access_token, @NonNull Callback callback);

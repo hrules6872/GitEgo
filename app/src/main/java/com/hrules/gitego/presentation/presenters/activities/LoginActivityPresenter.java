@@ -23,9 +23,11 @@ import com.hrules.darealmvp.DRMVPPresenter;
 import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
 import com.hrules.gitego.BuildConfig;
-import com.hrules.gitego.data.exceptions.NetworkIOException;
-import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
+import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.domain.api.GitHubAPI;
+import com.hrules.gitego.domain.errors.NetworkIOError;
+import com.hrules.gitego.domain.errors.NetworkUnauthorizedError;
+import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
@@ -83,10 +85,10 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
             }
           }
 
-          @Override public void onFailure(@NonNull Exception exception) {
-            if (exception instanceof NetworkUnauthorizedException) {
+          @Override public void onFailure(@NonNull Error error) {
+            if (error instanceof NetworkUnauthorizedError) {
               showLoginFail = true;
-            } else if (exception instanceof NetworkIOException) {
+            } else if (error instanceof NetworkIOError) {
               showNetworkFail = true;
             }
           }
@@ -103,7 +105,9 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
         });
       }
 
-      @Override public void onFailure(@NonNull Exception exception) {
+      @Override public void onFailure(@NonNull Error error) {
+        DebugLog.e(error.getMessage(), error.getException());
+
         getView().hideProgressDialog();
         loginFail();
       }

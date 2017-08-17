@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.interactors.contracts;
+package com.hrules.gitego.domain.interactors.base;
 
 import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.errors.base.Error;
-import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import java.util.List;
 
-public interface DeleteAuthRepo {
-  interface Callback {
-    void onFailure(@NonNull Error error);
-  }
+public interface BaseInteractorInterface {
+  interface QueryCallback<T> {
+    void onSuccess(@NonNull List<T> response);
 
-  void execute(@NonNull List<GitHubAuthRepo> listToBeDeleted, @NonNull Callback callback);
+    void onFailure(@NonNull Error error);
+
+    void onFinish();
+  }
 }

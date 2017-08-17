@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.interactors.contracts;
+package com.hrules.gitego.domain.errors;
 
 import android.support.annotation.NonNull;
+import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.domain.errors.base.Error;
-import com.hrules.gitego.presentation.models.GitHubAuthRepo;
-import java.util.List;
 
-public interface DeleteAuthRepo {
-  interface Callback {
-    void onFailure(@NonNull Error error);
+public class NetworkUnauthorizedError implements Error {
+  private static final String DEFAULT_MESSAGE = "NetworkUnauthorizedError";
+
+  @NonNull @Override public Exception getException() {
+    return new NetworkUnauthorizedException();
   }
 
-  void execute(@NonNull List<GitHubAuthRepo> listToBeDeleted, @NonNull Callback callback);
+  @NonNull @Override public String getMessage() {
+    return DEFAULT_MESSAGE;
+  }
 }

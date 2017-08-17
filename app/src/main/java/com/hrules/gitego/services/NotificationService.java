@@ -34,6 +34,7 @@ import com.hrules.gitego.R;
 import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.domain.api.GitHubAPI;
+import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
@@ -128,8 +129,8 @@ public final class NotificationService extends Service {
           }
         }
 
-        @Override public void onFailure(@NonNull Exception exception) {
-          DebugLog.e(exception.getMessage(), exception);
+        @Override public void onFailure(@NonNull Error error) {
+          DebugLog.e(error.getMessage(), error.getException());
         }
 
         @SuppressWarnings("ConstantConditions") @Override public void onFinish() {
@@ -152,8 +153,8 @@ public final class NotificationService extends Service {
           }
         }
 
-        @Override public void onFailure(@NonNull Exception exception) {
-          DebugLog.e(exception.getMessage(), exception);
+        @Override public void onFailure(@NonNull Error error) {
+          DebugLog.e(error.getMessage(), error.getException());
         }
 
         @SuppressWarnings("ConstantConditions") @Override public void onFinish() {

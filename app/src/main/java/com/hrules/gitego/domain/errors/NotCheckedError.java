@@ -14,17 +14,30 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.interactors.contracts;
+package com.hrules.gitego.domain.errors;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import com.hrules.gitego.domain.errors.base.Error;
-import com.hrules.gitego.presentation.models.GitHubAuthRepo;
-import java.util.List;
 
-public interface DeleteAuthRepo {
-  interface Callback {
-    void onFailure(@NonNull Error error);
+public class NotCheckedError implements Error {
+  private final Exception exception;
+
+  public NotCheckedError(@Nullable Exception e) {
+    this.exception = e;
   }
 
-  void execute(@NonNull List<GitHubAuthRepo> listToBeDeleted, @NonNull Callback callback);
+  @NonNull @Override public Exception getException() {
+    if (exception == null) {
+      throw new IllegalArgumentException();
+    }
+    return exception;
+  }
+
+  @NonNull @Override public String getMessage() {
+    if (exception == null) {
+      throw new IllegalArgumentException();
+    }
+    return exception.getMessage();
+  }
 }

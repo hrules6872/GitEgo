@@ -19,6 +19,8 @@ package com.hrules.gitego.domain.interactors;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.data.repository.base.Repository;
 import com.hrules.gitego.data.repository.base.RepositoryInterface;
+import com.hrules.gitego.domain.errors.base.Error;
+import com.hrules.gitego.domain.errors.base.ErrorFactory;
 import com.hrules.gitego.domain.interactors.base.BaseInteractor;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
@@ -59,7 +61,7 @@ public final class GetAuthRepoInteractor extends BaseInteractor implements GetAu
       }
 
       @Override public void onFailure(@NonNull Exception exception) {
-        notifyFail(exception);
+        notifyFail(ErrorFactory.create(exception));
       }
 
       @Override public void onFinish() {
@@ -80,9 +82,9 @@ public final class GetAuthRepoInteractor extends BaseInteractor implements GetAu
     }
   }
 
-  private void notifyFail(@NonNull Exception exception) {
+  private void notifyFail(@NonNull Error error) {
     if (callback != null) {
-      callback.onFailure(exception);
+      callback.onFailure(error);
     }
   }
 }
