@@ -47,12 +47,13 @@
   <!--notifications-->
   <string name="notification_message">Changes detected!</string>
 
-  <!--general-->
-  <string name="text_variationFormatted">%1$s %2$s</string>
-
   <!--app utils-->
   <string name="text_appVersionFormatted">version %1$s (%2$s)</string>
   <string name="feedback_developerEmail">hrules.e@gmail.com</string>
   <string name="feedback_emailSubject">Feedback about GitEgo %s</string>
   <string name="feedback_emailChooserTitle">Send email</string>
+
+  <!--general-->
+  <string name="text_variationFormatted">%1$s %2$s</string>
+  <string name="text_empty">-</string>
 </resources>

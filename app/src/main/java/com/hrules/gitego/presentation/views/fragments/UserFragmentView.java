@@ -26,7 +26,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.TextSwitcher;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -43,17 +43,18 @@ import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import com.hrules.gitego.presentation.presenters.fragments.UserFragmentPresenter;
 import com.hrules.gitego.presentation.views.activities.LoginActivityView;
 import com.hrules.gitego.presentation.views.fragments.base.DRMVPFragmentV4;
+import com.hrules.gitego.presentation.views.utils.TextSwitcherFactory;
 import java.util.List;
 
 public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresenter, UserFragmentPresenter.Contract>
     implements UserFragmentPresenter.Contract {
-  @BindView(R.id.userLogin) TextView userLogin;
-  @BindView(R.id.userName) TextView userName;
-  @BindView(R.id.followers) TextView followers;
+  @BindView(R.id.userLogin) TextSwitcher userLogin;
+  @BindView(R.id.userName) TextSwitcher userName;
+  @BindView(R.id.followers) TextSwitcher followers;
   @BindView(R.id.avatar) ImageView avatar;
-  @BindView(R.id.watchersCount) TextView watchersCount;
-  @BindView(R.id.starsGazersCount) TextView starsCount;
-  @BindView(R.id.forksCount) TextView forksCount;
+  @BindView(R.id.watchersCount) TextSwitcher watchersCount;
+  @BindView(R.id.starsGazersCount) TextSwitcher starsCount;
+  @BindView(R.id.forksCount) TextSwitcher forksCount;
 
   private Unbinder unbinder;
   private Bus bus;
@@ -69,6 +70,13 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
 
   private void initializeViews(@NonNull View view) {
     unbinder = ButterKnife.bind(this, view);
+
+    userLogin.setFactory(new TextSwitcherFactory(userLogin, "", R.style.TextSwitcherSmall));
+    userName.setFactory(new TextSwitcherFactory(userName, getString(R.string.text_empty), R.style.TextSwitcherLarge));
+    followers.setFactory(new TextSwitcherFactory(followers, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
+    watchersCount.setFactory(new TextSwitcherFactory(watchersCount, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
+    starsCount.setFactory(new TextSwitcherFactory(starsCount, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
+    forksCount.setFactory(new TextSwitcherFactory(forksCount, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
   }
 
   @Override public void onAttach(Context context) {
@@ -112,7 +120,7 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
         StringUtils.createVariationSpannableString(getString(R.string.user_followersFormatted), gitHubAuthUser.getFollowers(),
             gitHubAuthUser.getGitHubAuthUserOlder().getFollowers(), ContextCompat.getColor(getActivity(), R.color.variationPositive),
             ContextCompat.getColor(getActivity(), R.color.variationNegative));
-    followers.setText(spannableUserFollowers, TextView.BufferType.SPANNABLE);
+    followers.setText(spannableUserFollowers);
   }
 
   @SuppressWarnings("ConstantConditions") @Override public void setRepoCounters(@NonNull List<GitHubAuthRepo> list) {
@@ -146,9 +154,9 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     final Spannable spannableForksCount =
         StringUtils.createVariationSpannableString(textVariation, forks, forksOlder, colorVariationPositive, colorVariationNegative);
 
-    watchersCount.setText(spannableWatchersCount, TextView.BufferType.SPANNABLE);
-    starsCount.setText(spannableStargazersCount, TextView.BufferType.SPANNABLE);
-    forksCount.setText(spannableForksCount, TextView.BufferType.SPANNABLE);
+    watchersCount.setText(spannableWatchersCount);
+    starsCount.setText(spannableStargazersCount);
+    forksCount.setText(spannableForksCount);
   }
 
   @Override public void showLoading() {

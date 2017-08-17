@@ -33,4 +33,5 @@
     <item name="colorAccent">@color/colorAccent</item>
     <item name="colorPrimaryDark">@color/colorAccent</item>
   </style>
+
 </resources>
