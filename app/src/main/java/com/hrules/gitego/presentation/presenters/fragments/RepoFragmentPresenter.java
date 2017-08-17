@@ -17,12 +17,10 @@
 package com.hrules.gitego.presentation.presenters.fragments;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import com.hrules.darealmvp.DRMVPPresenter;
 import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
-import com.hrules.gitego.R;
 import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
@@ -33,6 +31,7 @@ import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.presentation.bus.BoolEvent;
+import com.hrules.gitego.presentation.commons.StringResUtils;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
 import com.hrules.gitego.presentation.models.utils.ListModelUtils;
@@ -48,6 +47,7 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
   @Inject GetAuthRepo getAuthRepo;
   @Inject DeleteAuthRepo deleteAuthRepo;
   @Inject UIThreadExecutor uiThreadExecutor;
+  @Inject StringResUtils stringResUtils;
 
   private List<GitHubAuthRepo> listToBeDeleted = new ArrayList<>();
 
@@ -134,11 +134,11 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
   }
 
   private void networkFail() {
-    getView().showBriefMessage(R.string.error_networkFail);
+    getView().showBriefMessage(stringResUtils.getNetworkFail());
   }
 
   private void loginFail() {
-    getView().showBriefMessageAction(R.string.error_loginFail, R.string.action_login);
+    getView().showBriefMessageAction(stringResUtils.getLoginFail(), stringResUtils.getActionLogin());
   }
 
   public interface Contract extends DRMVPView {
@@ -146,8 +146,8 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
 
     void updateListState();
 
-    void showBriefMessage(@StringRes int message);
+    void showBriefMessage(@NonNull String message);
 
-    void showBriefMessageAction(@StringRes int message, @StringRes int action);
+    void showBriefMessageAction(@NonNull String message, @NonNull String action);
   }
 }

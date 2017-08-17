@@ -19,7 +19,6 @@ package com.hrules.gitego.presentation.views.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.view.View;
@@ -142,12 +141,12 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     forksCount.setText(spannableForksCount);
   }
 
-  @Override public void showBriefMessage(@StringRes int message) {
-    BriefMessage.showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
+  @Override public void showBriefMessage(@NonNull String message) {
+    BriefMessage.showLong(getActivity().findViewById(R.id.rootLayout), message);
   }
 
-  @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    BriefMessage.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message), getString(action),
+  @Override public void showBriefMessageAction(@NonNull String message, @NonNull String action) {
+    BriefMessage.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), message, action,
         new BriefMessage.BriefMessageListener() {
           @Override public void onClick() {
             launchLoginActivity();

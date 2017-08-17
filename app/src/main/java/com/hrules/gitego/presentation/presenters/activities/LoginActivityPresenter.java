@@ -18,13 +18,11 @@ package com.hrules.gitego.presentation.presenters.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import com.hrules.darealmvp.DRMVPPresenter;
 import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
 import com.hrules.gitego.BuildConfig;
-import com.hrules.gitego.R;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
 import com.hrules.gitego.domain.api.GitHubAPI;
@@ -32,6 +30,7 @@ import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
+import com.hrules.gitego.presentation.commons.StringResUtils;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthUserDateDescendingComparator;
@@ -45,6 +44,7 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
   @Inject GetAccessToken getAccessToken;
   @Inject GetAuthUser getAuthUser;
   @Inject Lazy<AccountsManager> accountsManager;
+  @Inject StringResUtils stringResUtils;
 
   private boolean showLoginFail = false;
   private boolean showNetworkFail = false;
@@ -111,11 +111,11 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
   }
 
   private void loginFail() {
-    getView().showBriefMessage(R.string.error_loginFail);
+    getView().showBriefMessage(stringResUtils.getLoginFail());
   }
 
   private void networkFail() {
-    getView().showBriefMessage(R.string.error_networkFail);
+    getView().showBriefMessage(stringResUtils.getNetworkFail());
   }
 
   public void onLoginClick() {
@@ -129,6 +129,6 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
 
     void hideProgressDialog();
 
-    void showBriefMessage(@StringRes int message);
+    void showBriefMessage(@NonNull String message);
   }
 }

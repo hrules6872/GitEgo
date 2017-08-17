@@ -22,7 +22,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -152,12 +151,12 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
     }
   }
 
-  @Override public void showBriefMessage(@StringRes int message) {
-    BriefMessage.showLong(getActivity().findViewById(R.id.rootLayout), getString(message));
+  @Override public void showBriefMessage(@NonNull String message) {
+    BriefMessage.showLong(getActivity().findViewById(R.id.rootLayout), message);
   }
 
-  @Override public void showBriefMessageAction(@StringRes int message, @StringRes int action) {
-    BriefMessage.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), getString(message), getString(action),
+  @Override public void showBriefMessageAction(@NonNull String message, @NonNull String action) {
+    BriefMessage.showActionIndefinite(getActivity().findViewById(R.id.rootLayout), message, action,
         new BriefMessage.BriefMessageListener() {
           @Override public void onClick() {
             launchLoginActivity();

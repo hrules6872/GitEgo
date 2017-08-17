@@ -19,8 +19,8 @@ package com.hrules.gitego.presentation.views.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.percent.PercentFrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,8 +74,8 @@ public final class LoginActivityView extends DRMVPAppCompatActivity<LoginActivit
     progress.cancel();
   }
 
-  public void showBriefMessage(@StringRes int message) {
-    BriefMessage.showLong(rootLayout, getString(message));
+  public void showBriefMessage(@NonNull String message) {
+    BriefMessage.showLong(rootLayout, message);
   }
 
   @OnClick(R.id.login) void onLoginClick() {

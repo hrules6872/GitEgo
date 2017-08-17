@@ -14,25 +14,29 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.di.modules;
+package com.hrules.gitego.presentation.commons;
 
+import android.content.res.Resources;
+import android.support.annotation.NonNull;
 import com.hrules.gitego.App;
-import com.hrules.gitego.data.persistence.preferences.Preferences;
-import com.hrules.gitego.domain.internal.AccountsManager;
-import com.hrules.gitego.presentation.commons.StringResUtils;
-import dagger.Module;
-import dagger.Provides;
+import com.hrules.gitego.R;
 
-@Module public final class MainModule {
-  @Provides Preferences providesPreferences(App application) {
-    return new Preferences(application);
+public class StringResUtils {
+  private final Resources res;
+
+  public StringResUtils(@NonNull App application) {
+    res = application.getResources();
   }
 
-  @Provides AccountsManager providesAccountManager(App application) {
-    return new AccountsManager(application);
+  public @NonNull String getLoginFail() {
+    return res.getString(R.string.error_loginFail);
   }
 
-  @Provides StringResUtils providesStringResUtils(App application) {
-    return new StringResUtils(application);
+  public @NonNull String getNetworkFail() {
+    return res.getString(R.string.error_networkFail);
+  }
+
+  public @NonNull String getActionLogin() {
+    return res.getString(R.string.action_login);
   }
 }
