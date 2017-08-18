@@ -19,13 +19,19 @@ package com.hrules.gitego.data.repository.datasources.bdd.specifications;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.data.persistence.database.utils.SQLQueryBuilder;
+import com.hrules.gitego.data.repository.datasources.bdd.AuthRepoBddDataSourceWriteable;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.specifications.DeleteAuthRepoSpecification;
 import com.hrules.gitego.domain.specifications.params.DeleteAuthRepoSpecificationParams;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("unused") public final class AuthRepoBddDeleteAuthRepoSpecification extends DeleteAuthRepoSpecification<String[]> {
+@SuppressWarnings("unused") public final class AuthRepoBddDeleteAuthRepoSpecification
+    extends DeleteAuthRepoSpecification<String[]> {
+  @Override public @NonNull Class getParent() {
+    return AuthRepoBddDataSourceWriteable.class;
+  }
+
   @Override public String[] get() {
     DeleteAuthRepoSpecificationParams params = (DeleteAuthRepoSpecificationParams) getParams();
 

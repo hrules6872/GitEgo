@@ -76,7 +76,8 @@ public abstract class Repository<T extends ModelDto> implements RepositoryInterf
     }
   }
 
-  @SuppressWarnings("unchecked") @Override public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
+  @SuppressWarnings("unchecked") @Override
+  public void query(@NonNull Specification specification, @NonNull QueryCallback callback) {
     Map<Object, T> map = new HashMap<>();
 
     for (DataSourceReadable dataSourceReadable : dataSourceReadables) {

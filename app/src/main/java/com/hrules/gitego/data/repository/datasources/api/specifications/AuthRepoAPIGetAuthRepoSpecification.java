@@ -16,17 +16,24 @@
 
 package com.hrules.gitego.data.repository.datasources.api.specifications;
 
+import android.support.annotation.NonNull;
 import com.hrules.gitego.data.network.NetworkHelper;
 import com.hrules.gitego.data.network.RequestNetwork;
+import com.hrules.gitego.data.repository.datasources.api.AuthRepoAPIDataSourceReadable;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.specifications.GetAuthRepoSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthRepoSpecificationParams;
 
 public final class AuthRepoAPIGetAuthRepoSpecification extends GetAuthRepoSpecification<RequestNetwork> {
+  @NonNull @Override public Class getParent() {
+    return AuthRepoAPIDataSourceReadable.class;
+  }
+
   @Override public RequestNetwork get() {
     GetAuthRepoSpecificationParams params = (GetAuthRepoSpecificationParams) getParams();
 
     String access_token = params.getAccess_token();
-    return new RequestNetwork(GitHubAPI.GITHUB_GET_AUTHREPO_URL, NetworkHelper.makeAuthorizationHeader(access_token), null);
+    return new RequestNetwork(GitHubAPI.GITHUB_GET_AUTHREPO_URL, NetworkHelper.makeAuthorizationHeader(access_token),
+        null);
   }
 }

@@ -16,12 +16,19 @@
 
 package com.hrules.gitego.data.repository.datasources.bdd.specifications;
 
+import android.support.annotation.NonNull;
 import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.data.persistence.database.utils.SQLQueryBuilder;
+import com.hrules.gitego.data.repository.datasources.bdd.AuthUserBddDataSourceReadable;
 import com.hrules.gitego.domain.specifications.GetAuthUserSpecification;
 
-@SuppressWarnings("unused") public final class AuthUserBddGetAuthUserSpecification extends GetAuthUserSpecification<String> {
+@SuppressWarnings("unused") public final class AuthUserBddGetAuthUserSpecification
+    extends GetAuthUserSpecification<String> {
   private static final int DAYS_LIMIT = 2;
+
+  @NonNull @Override public Class getParent() {
+    return AuthUserBddDataSourceReadable.class;
+  }
 
   @Override public String get() {
     return new SQLQueryBuilder().select()

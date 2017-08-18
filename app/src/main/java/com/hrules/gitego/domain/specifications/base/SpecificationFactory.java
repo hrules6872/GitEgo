@@ -17,18 +17,36 @@
 package com.hrules.gitego.domain.specifications.base;
 
 import android.support.annotation.NonNull;
+import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoAPIGetAuthRepoSpecification;
+import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification;
+import com.hrules.gitego.data.repository.datasources.api.specifications.AuthUserAPIGetAuthUserSpecification;
 import com.hrules.gitego.data.repository.datasources.base.DataSource;
+import com.hrules.gitego.data.repository.datasources.bdd.specifications.AuthRepoBddDeleteAuthRepoSpecification;
+import com.hrules.gitego.data.repository.datasources.bdd.specifications.AuthRepoBddGetAuthRepoSpecification;
+import com.hrules.gitego.data.repository.datasources.bdd.specifications.AuthUserBddGetAuthUserSpecification;
 
 public final class SpecificationFactory<T> {
-  @SuppressWarnings("unchecked") public Specification<T> get(@NonNull DataSource dataSource, @NonNull Specification<T> specification) {
-    try {
-      Class<?> clazz = Class.forName(
-          dataSource.getSpecificationsPath() + "." + dataSource.getSpecificationsPrefix() + specification.getClass().getSimpleName());
-      Object result = clazz.newInstance();
-      ((Specification) result).setParams(specification.getParams());
-      return (Specification<T>) result;
-    } catch (Exception e) {
-      return specification;
+  private final Class[] clazzes = {
+      AuthRepoAPIGetAuthRepoSpecification.class, AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification.class,
+      AuthUserAPIGetAuthUserSpecification.class, AuthRepoBddDeleteAuthRepoSpecification.class,
+      AuthRepoBddGetAuthRepoSpecification.class, AuthUserBddGetAuthUserSpecification.class
+  };
+
+  @SuppressWarnings({ "unchecked", "TryWithIdenticalCatches" }) public @NonNull Specification<T> create(
+      @NonNull DataSource dataSource, @NonNull Specification<T> specification) {
+    for (Class clazz : clazzes) {
+      if (clazz.getSimpleName().contains(specification.getClass().getSimpleName())) {
+        try {
+          Specification candidate = (Specification) clazz.newInstance();
+          if (candidate.getParent() == dataSource.getClass()) {
+            candidate.setParams(specification.getParams());
+            return candidate;
+          }
+        } catch (InstantiationException ignored) {
+        } catch (IllegalAccessException ignored) {
+        }
+      }
     }
+    throw new IllegalArgumentException("Specification not found");
   }
 }

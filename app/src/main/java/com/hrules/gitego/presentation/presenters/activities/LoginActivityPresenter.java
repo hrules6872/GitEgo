@@ -90,6 +90,8 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
               showLoginFail = true;
             } else if (error instanceof NetworkIOError) {
               showNetworkFail = true;
+            } else {
+              DebugLog.e(error.getMessage(), error.getException());
             }
           }
 

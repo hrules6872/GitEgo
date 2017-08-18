@@ -21,8 +21,6 @@ import android.support.annotation.NonNull;
 public abstract class Specification<T> {
   private SpecificationParams params;
 
-  public abstract T get();
-
   public SpecificationParams getParams() {
     return params;
   }
@@ -30,4 +28,8 @@ public abstract class Specification<T> {
   public void setParams(@NonNull SpecificationParams params) {
     this.params = params;
   }
+
+  public abstract @NonNull Class getParent();
+
+  public abstract T get();
 }

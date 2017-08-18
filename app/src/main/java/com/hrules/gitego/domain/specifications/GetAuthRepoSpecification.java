@@ -16,9 +16,14 @@
 
 package com.hrules.gitego.domain.specifications;
 
+import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.specifications.base.Specification;
 
 public class GetAuthRepoSpecification<T> extends Specification<T> {
+  @NonNull @Override public Class getParent() {
+    throw new UnsupportedOperationException();
+  }
+
   @Override public T get() {
     throw new UnsupportedOperationException();
   }

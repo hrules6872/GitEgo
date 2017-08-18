@@ -57,10 +57,12 @@ public final class AuthRepoBddDataSourceWriteable extends DataSourceWriteable<Gi
   }
 
   private String convertDtoToSqlInsert(@NonNull GitHubAuthRepoDto item) {
-    return new SQLQueryBuilder().insertInto(DatabaseConstants.TABLE_REPO).values(new GitHubAuthRepoDtoToMap().transform(item)).build();
+    return new SQLQueryBuilder().insertInto(DatabaseConstants.TABLE_REPO)
+        .values(new GitHubAuthRepoDtoToMap().transform(item))
+        .build();
   }
 
-  private String convertDtoToSqlDelete(GitHubAuthRepoDto item) {
+  @SuppressWarnings("ConstantConditions") private String convertDtoToSqlDelete(@NonNull GitHubAuthRepoDto item) {
     return new SQLQueryBuilder().deleteFrom(DatabaseConstants.TABLE_REPO)
         .where(DatabaseConstants.KEY_REPO_DATE)
         .equalsTo(item.getDate())
@@ -78,7 +80,7 @@ public final class AuthRepoBddDataSourceWriteable extends DataSourceWriteable<Gi
   }
 
   @SuppressWarnings("unchecked") @Override public void remove(@NonNull Specification specification) throws Exception {
-    specification = new SpecificationFactory<String>().get(this, specification);
+    specification = new SpecificationFactory<String>().create(this, specification);
     database.execList((String[]) specification.get());
   }
 }

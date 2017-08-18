@@ -43,25 +43,27 @@ public final class AuthRepoAPIDataSourceReadable extends DataSourceReadable<GitH
     this.cache = cache;
   }
 
-  @SuppressWarnings("unchecked") @Override public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
-      throws Exception {
-    specification = new SpecificationFactory<String>().get(this, specification);
+  @SuppressWarnings("unchecked") @Override
+  public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification) throws Exception {
+    specification = new SpecificationFactory<String>().create(this, specification);
     String response = network.get((RequestNetwork) specification.get());
     List<GitHubAuthRepoDto> list = (List<GitHubAuthRepoDto>) new GitHubAuthRepoDtoSerializer().deserialize(response);
 
     for (ListIterator<GitHubAuthRepoDto> iterator = list.listIterator(); iterator.hasNext(); ) {
       GitHubAuthRepoDto item = iterator.next();
 
-      GetAuthRepoSpecificationParams repoSpecificationParams = (GetAuthRepoSpecificationParams) specification.getParams();
+      GetAuthRepoSpecificationParams repoSpecificationParams =
+          (GetAuthRepoSpecificationParams) specification.getParams();
       AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification subscribersSpecification =
           new AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification();
       subscribersSpecification.setParams(
-          new GetAuthRepoSubscribersSpecificationParams(repoSpecificationParams.getAccess_token(), item.getSubscribersUrl()));
+          new GetAuthRepoSubscribersSpecificationParams(repoSpecificationParams.getAccess_token(),
+              item.getSubscribersUrl()));
       String subscribers = network.get(subscribersSpecification.get());
       JSONArray subscribersJSONArray = new JSONArray(subscribers);
 
-      iterator.set(
-          item.withDateAndWatchersCount(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()), subscribersJSONArray.length()));
+      iterator.set(item.withDateAndWatchersCount(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()),
+          subscribersJSONArray.length()));
     }
     cache.persist();
     return list;

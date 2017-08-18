@@ -19,12 +19,4 @@ package com.hrules.gitego.data.repository.datasources.base;
 import com.hrules.gitego.domain.models.base.ModelDto;
 
 @SuppressWarnings("unused") public abstract class DataSource<T extends ModelDto> {
-  public String getSpecificationsPath() {
-    return getClass().getPackage().getName() + ".specifications";
-  }
-
-  public String getSpecificationsPrefix() {
-    return getClass().getSimpleName().replace("DataSourceReadable", "").replace("DataSourceWriteable", "");
-  }
 }
-

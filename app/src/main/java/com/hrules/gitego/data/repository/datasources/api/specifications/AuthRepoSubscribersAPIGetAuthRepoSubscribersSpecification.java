@@ -16,12 +16,19 @@
 
 package com.hrules.gitego.data.repository.datasources.api.specifications;
 
+import android.support.annotation.NonNull;
 import com.hrules.gitego.data.network.NetworkHelper;
 import com.hrules.gitego.data.network.RequestNetwork;
+import com.hrules.gitego.data.repository.datasources.api.AuthRepoAPIDataSourceReadable;
 import com.hrules.gitego.domain.specifications.GetAuthRepoSubscribersSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthRepoSubscribersSpecificationParams;
 
-public final class AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification extends GetAuthRepoSubscribersSpecification<RequestNetwork> {
+public final class AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification
+    extends GetAuthRepoSubscribersSpecification<RequestNetwork> {
+  @NonNull @Override public Class getParent() {
+    return AuthRepoAPIDataSourceReadable.class;
+  }
+
   @Override public RequestNetwork get() {
     GetAuthRepoSubscribersSpecificationParams params = (GetAuthRepoSubscribersSpecificationParams) getParams();
 
