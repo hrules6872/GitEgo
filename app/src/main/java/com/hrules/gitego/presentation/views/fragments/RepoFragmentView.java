@@ -72,9 +72,8 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
 
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-    recyclerView.addItemDecoration(new SpaceItemDecoration(
-        (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.itemRepoDivider_size),
-            getResources().getDisplayMetrics()), false, false));
+    recyclerView.addItemDecoration(new SpaceItemDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+        getResources().getDimension(R.dimen.itemRepoDivider_size), getResources().getDisplayMetrics()), false, false));
 
     adapter = new RepoAdapter(new RepoAdapter.RepoAdapterListener() {
       @Override public void onListItemClick(int position) {
@@ -116,14 +115,13 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
     for (ListIterator<GitHubAuthRepo> iterator = list.listIterator(); iterator.hasNext(); ) {
       GitHubAuthRepo item = iterator.next();
 
-      Spannable stargazersCountSpannable = StringUtils.createVariationSpannableString(textVariation, item.getWatchersCount(),
-          item.getGitHubAuthRepoOlder().getWatchersCount(), colorVariationPositive, colorVariationNegative);
+      Spannable stargazersCountSpannable = createVariationSpannableString(textVariation, item.getStargazersCount(),
+          item.getGitHubAuthRepoOlder().getStargazersCount(), colorVariationPositive, colorVariationNegative);
       Spannable watchersCountSpannable =
-          createVariationSpannableString(textVariation, item.getStargazersCount(), item.getGitHubAuthRepoOlder().getStargazersCount(),
-              colorVariationPositive, colorVariationNegative);
-      Spannable forksCountSpannable =
-          createVariationSpannableString(textVariation, item.getForksCount(), item.getGitHubAuthRepoOlder().getForksCount(),
-              colorVariationPositive, colorVariationNegative);
+          StringUtils.createVariationSpannableString(textVariation, item.getWatchersCount(),
+              item.getGitHubAuthRepoOlder().getWatchersCount(), colorVariationPositive, colorVariationNegative);
+      Spannable forksCountSpannable = createVariationSpannableString(textVariation, item.getForksCount(),
+          item.getGitHubAuthRepoOlder().getForksCount(), colorVariationPositive, colorVariationNegative);
 
       iterator.set(item.withCountSpannables(stargazersCountSpannable, watchersCountSpannable, forksCountSpannable));
     }
