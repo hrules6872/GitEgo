@@ -21,6 +21,9 @@ GitEgo is not associated with GitHub in any way.
 * [Gson](https://github.com/google/gson)
 * [OkHttp](https://github.com/square/okhttp)
 * [Picasso](https://github.com/square/picasso)
+* [EventBus](https://github.com/greenrobot/EventBus)
+* [AutoValue](https://github.com/google/auto)
+* [Android-Debug-Database](https://github.com/amitshekhariitbhu/Android-Debug-Database)
 
 Developed by
 -------
@@ -28,7 +31,7 @@ Héctor de Isidro - hrules6872 [![Twitter](http://img.shields.io/badge/contact-@
 
 License
 -------
-    Copyright 2016 Héctor de Isidro - hrules6872
+    Copyright 2017 Héctor de Isidro - hrules6872
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
