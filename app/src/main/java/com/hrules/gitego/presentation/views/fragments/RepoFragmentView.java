@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -107,7 +108,8 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
     }
   }
 
-  @SuppressWarnings("ConstantConditions") @Override public void updateList(@NonNull List<GitHubAuthRepo> list) {
+  @SuppressWarnings("ConstantConditions") @Override @UiThread
+  public void updateList(@NonNull List<GitHubAuthRepo> list) {
     String textVariation = getString(R.string.text_variationFormatted);
     int colorVariationPositive = ContextCompat.getColor(getActivity(), R.color.variationPositive);
     int colorVariationNegative = ContextCompat.getColor(getActivity(), R.color.variationNegative);
@@ -136,7 +138,7 @@ public final class RepoFragmentView extends DRMVPFragmentV4<RepoFragmentPresente
     }
   }
 
-  @Override public void updateListState() {
+  @Override @UiThread public void updateListState() {
     if (recyclerViewState != null) {
       recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
     }
