@@ -16,14 +16,17 @@
 
 package com.hrules.gitego.data.repository.cache;
 
+import com.hrules.gitego.BuildConfig;
 import com.hrules.gitego.data.repository.cache.base.BasicCache;
 import java.util.concurrent.TimeUnit;
 
 public final class AuthUserAPIBasicCache extends BasicCache {
   private static final String CACHE_ID = "AuthUserAPIBasicCache";
+
   private static final long EXPIRATION_TIME = TimeUnit.MINUTES.toMillis(2);
+  private static final long EXPIRATION_TIME_DEBUG = TimeUnit.SECONDS.toMillis(15);
 
   public AuthUserAPIBasicCache() {
-    super(CACHE_ID, EXPIRATION_TIME);
+    super(CACHE_ID, BuildConfig.DEBUG ? EXPIRATION_TIME_DEBUG : EXPIRATION_TIME);
   }
 }
