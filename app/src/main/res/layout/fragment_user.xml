@@ -30,7 +30,6 @@
       android:layout_width="@dimen/avatar_width"
       android:layout_height="@dimen/avatar_height"
       android:layout_gravity="center_horizontal"
-      android:layout_marginTop="@dimen/avatar_marginTop"
       android:scaleType="fitXY"
   />
 
@@ -56,7 +55,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center_horizontal"
-      android:layout_margin="@dimen/default_marginDouble"
+      android:layout_marginTop="@dimen/default_marginDouble"
       android:orientation="horizontal"
   >
 

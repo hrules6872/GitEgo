@@ -33,14 +33,14 @@
   </style>
 
   <style name="AppTitleAbout">
-    <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/about_titleTextColor</item>
     <item name="android:gravity">center</item>
   </style>
 
   <style name="AppVersionAbout">
-    <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
     <item name="android:gravity">center</item>
   </style>
 

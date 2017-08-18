@@ -19,23 +19,31 @@
   <!--textSwitcher-->
   <style name="TextSwitcherSmall">
     <item name="android:gravity">center_horizontal</item>
-    <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
   </style>
 
   <style name="TextSwitcherLarge">
     <item name="android:gravity">center_horizontal</item>
-    <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
   </style>
 
-  <style name="TextSwitcherSmallHighLighted">
+  <style name="TextSwitcherMediumHighLighted">
     <item name="android:gravity">center_horizontal</item>
-    <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
     <item name="android:textColor">@color/textHighlighted</item>
   </style>
 
   <style name="TextSwitcherSmallAllCaps">
     <item name="android:gravity">center_horizontal</item>
-    <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
     <item name="android:textAllCaps">true</item>
+  </style>
+
+  <!--toolbar-->
+  <style name="ToolbarTransparentText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+    <item name="android:textColor">#00000000</item>
+  </style>
+  <style name="ToolbarNormalText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+    <item name="android:textColor">@android:color/secondary_text_light</item>
   </style>
 </resources>

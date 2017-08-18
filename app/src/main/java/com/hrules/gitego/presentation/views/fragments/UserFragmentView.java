@@ -68,13 +68,13 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     userLogin.setFactory(new TextSwitcherFactory(userLogin, "", R.style.TextSwitcherSmall));
     userName.setFactory(new TextSwitcherFactory(userName, getString(R.string.text_empty), R.style.TextSwitcherLarge));
     followers.setFactory(
-        new TextSwitcherFactory(followers, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
+        new TextSwitcherFactory(followers, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
     watchersCount.setFactory(
-        new TextSwitcherFactory(watchersCount, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
+        new TextSwitcherFactory(watchersCount, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
     starsCount.setFactory(
-        new TextSwitcherFactory(starsCount, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
+        new TextSwitcherFactory(starsCount, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
     forksCount.setFactory(
-        new TextSwitcherFactory(forksCount, getString(R.string.text_empty), R.style.TextSwitcherSmallHighLighted));
+        new TextSwitcherFactory(forksCount, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
   }
 
   @Override public void onResume() {

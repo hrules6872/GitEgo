@@ -17,20 +17,22 @@
 
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="0dp"
 >
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:paddingLeft="@dimen/default_paddingDouble"
-      android:paddingTop="@dimen/default_padding"
-      android:paddingRight="@dimen/default_paddingDouble"
       android:paddingBottom="@dimen/default_padding"
+      android:paddingLeft="@dimen/default_paddingDouble"
+      android:paddingRight="@dimen/default_paddingDouble"
+      android:paddingTop="@dimen/default_padding"
   >
 
     <LinearLayout
@@ -45,7 +47,7 @@
           android:layout_height="wrap_content"
           android:gravity="start"
           android:maxLines="1"
-          android:textAppearance="?android:attr/textAppearanceMedium"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
           android:textColor="@color/colorAccent"
           tools:text="repoName"
       />
@@ -82,8 +84,8 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:drawableLeft="@drawable/ic_small_watchers"
-          android:drawableStart="@drawable/ic_small_watchers"
           android:drawablePadding="@dimen/default_padding"
+          android:drawableStart="@drawable/ic_small_watchers"
           tools:text="watchersCount"
       />
 
@@ -93,8 +95,8 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:drawableLeft="@drawable/ic_small_stars"
-          android:drawableStart="@drawable/ic_small_stars"
           android:drawablePadding="@dimen/default_padding"
+          android:drawableStart="@drawable/ic_small_stars"
           tools:text="starsCount"
       />
 
@@ -104,8 +106,8 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:drawableLeft="@drawable/ic_small_forks"
-          android:drawableStart="@drawable/ic_small_forks"
           android:drawablePadding="@dimen/default_padding"
+          android:drawableStart="@drawable/ic_small_forks"
           tools:text="forksCount"
       />
 

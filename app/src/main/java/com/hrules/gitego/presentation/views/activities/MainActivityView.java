@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -46,6 +47,7 @@ import org.greenrobot.eventbus.ThreadMode;
 public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityPresenter, MainActivityPresenter.Contract>
     implements MainActivityPresenter.Contract {
   @BindView(R.id.rootLayout) CoordinatorLayout rootLayout;
+  @BindView(R.id.collapsingToolbar) CollapsingToolbarLayout collapsingToolbar;
   @BindView(R.id.toolbar) Toolbar toolbar;
   @BindView(R.id.progressBar) ProgressBar progressBar;
 

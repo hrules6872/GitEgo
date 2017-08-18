@@ -21,7 +21,9 @@
 
   <color name="windowBackground">#ffffffff</color>
   <color name="greyBackground">@color/colorPrimary</color>
-  <color name="accentBackground">@color/colorAccent</color>
+
+  <color name="brandedBackground">#24292e</color>
+  <color name="brandedPrimaryDark">#404448</color>
 
   <color name="textHighlighted">@color/colorAccent</color>
 

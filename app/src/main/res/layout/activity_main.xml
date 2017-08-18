@@ -21,6 +21,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
 >
 
@@ -32,11 +33,14 @@
       android:fitsSystemWindows="true"
   >
     <android.support.design.widget.CollapsingToolbarLayout
+        android:id="@+id/collapsingToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:collapsedTitleTextAppearance="@style/ToolbarNormalText"
         app:contentScrim="@color/greyBackground"
+        app:expandedTitleTextAppearance="@style/ToolbarTransparentText"
         app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
-        app:titleEnabled="false"
+        app:title="@string/app_name"
     >
 
       <FrameLayout
