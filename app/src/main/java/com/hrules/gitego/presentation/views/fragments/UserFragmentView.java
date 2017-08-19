@@ -31,6 +31,7 @@ import butterknife.Unbinder;
 import com.hrules.gitego.App;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.commons.StringUtils;
+import com.hrules.gitego.presentation.commons.TextSwitcherFactory;
 import com.hrules.gitego.presentation.commons.images.ImageLoader;
 import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
@@ -38,7 +39,6 @@ import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import com.hrules.gitego.presentation.presenters.fragments.UserFragmentPresenter;
 import com.hrules.gitego.presentation.views.activities.LoginActivityView;
 import com.hrules.gitego.presentation.views.fragments.base.DRMVPFragmentV4;
-import com.hrules.gitego.presentation.views.utils.TextSwitcherFactory;
 import java.util.List;
 
 public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresenter, UserFragmentPresenter.Contract>
