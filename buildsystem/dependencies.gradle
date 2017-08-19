@@ -22,7 +22,7 @@ ext {
 
   // internal
   def appVersionMajor = 1
-  def appVersionMinor = 1
+  def appVersionMinor = 2
   def appVersionPatch = 0
   def appVersionBuild = 0
 
