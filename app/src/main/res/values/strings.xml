@@ -32,7 +32,6 @@
   <string name="menu_about">About</string>
 
   <!--user-->
-  <string name="user_default">-</string>
   <string name="user_watchers">Watchers</string>
   <string name="user_starsGazers">Stars</string>
   <string name="user_forks">Forks</string>

@@ -21,7 +21,6 @@
   <dimen name="default_marginDouble">16dp</dimen>
   <dimen name="itemRepoDivider_size">4dp</dimen>
   <dimen name="progress_marginTopHack">-6dp</dimen>
-  <dimen name="avatar_marginTop">24dp</dimen>
   <dimen name="avatar_width">80dp</dimen>
   <dimen name="avatar_height">80dp</dimen>
   <dimen name="avatar_cornerRadius">2dp</dimen>
