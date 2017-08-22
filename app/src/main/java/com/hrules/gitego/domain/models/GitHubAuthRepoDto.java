@@ -44,7 +44,7 @@ import com.hrules.gitego.domain.models.base.ModelDto;
 
   @SerializedName("forks_count") public abstract int getForksCount();
 
-  @SerializedName("language") public abstract String getLanguage();
+  @SerializedName("language") @Nullable public abstract String getLanguage();
 
   @SerializedName("subscribers_url") @Nullable public abstract String getSubscribersUrl();
 
@@ -86,10 +86,6 @@ import com.hrules.gitego.domain.models.base.ModelDto;
   }
 
   abstract Builder toBuilder();
-
-  public GitHubAuthRepoDto withDate(String newDate) {
-    return toBuilder().date(newDate).build();
-  }
 
   public GitHubAuthRepoDto withDateAndWatchersCount(String newDate, int newWatchersCount) {
     return toBuilder().date(newDate).watchersCount(newWatchersCount).build();

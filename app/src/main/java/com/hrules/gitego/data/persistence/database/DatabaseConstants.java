@@ -21,7 +21,7 @@ public final class DatabaseConstants {
   }
 
   static final String DATABASE_NAME = "gitego.db";
-  static final int DATABASE_VERSION = 1;
+  static final int DATABASE_VERSION = 2;
 
   public final class BOOLEAN {
     public static final int FALSE = 0;
@@ -70,6 +70,32 @@ public final class DatabaseConstants {
   public static final String TABLE_REPO = "REPO";
   static final String SQL_CREATE_TABLE_REPO = "create table "
       + TABLE_REPO
+      + " ("
+      + KEY_REPO_DATE
+      + " STRING NOT NULL, "
+      + KEY_REPO_ID
+      + " STRING NOT NULL, "
+      + KEY_REPO_NAME
+      + " STRING NOT NULL, "
+      + KEY_REPO_IS_PRIVATE
+      + " INTEGER NOT NULL, "
+      + KEY_REPO_HTML_URL
+      + " STRING NOT NULL, "
+      + KEY_REPO_IS_FORK
+      + " INTEGER NOT NULL, "
+      + KEY_REPO_HOMEPAGE
+      + " STRING NULL, "
+      + KEY_REPO_STARGAZERS_COUNT
+      + " INTEGER NOT NULL, "
+      + KEY_REPO_WATCHERS_COUNT
+      + " INTEGER NOT NULL, "
+      + KEY_REPO_FORKS_COUNT
+      + " INTEGER NOT NULL, "
+      + KEY_REPO_LANGUAGE
+      + " STRING NULL);";
+
+  static final String TABLE_REPO_BACKUP = "REPO_BACKUP";
+  static final String SQL_CREATE_TABLE_REPO_BACKUP_V1 = "create table " + TABLE_REPO_BACKUP
       + " ("
       + KEY_REPO_DATE
       + " STRING NOT NULL, "

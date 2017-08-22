@@ -42,7 +42,7 @@ import com.hrules.gitego.presentation.models.base.Model;
 
   public abstract int getForksCount();
 
-  public abstract String getLanguage();
+  @Nullable public abstract String getLanguage();
 
   @Nullable public abstract Spannable getStargazersCountSpannable();
 

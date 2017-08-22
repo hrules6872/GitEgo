@@ -32,6 +32,19 @@ class DatabaseOpenHelper extends SQLiteOpenHelper {
   }
 
   @Override public void onUpgrade(@NonNull SQLiteDatabase db, int oldVersion, int newVersion) {
-    throw new UnsupportedOperationException();
+    if (oldVersion == 1 && newVersion == 2) {
+      db.beginTransaction();
+      try {
+        db.execSQL(DatabaseConstants.SQL_CREATE_TABLE_REPO_BACKUP_V1);
+        db.execSQL("INSERT INTO " + DatabaseConstants.TABLE_REPO_BACKUP + " SELECT * FROM " + DatabaseConstants.TABLE_REPO + ";");
+        db.execSQL("DROP TABLE " + DatabaseConstants.TABLE_REPO + ";");
+        db.execSQL(DatabaseConstants.SQL_CREATE_TABLE_REPO);
+        db.execSQL("INSERT INTO " + DatabaseConstants.TABLE_REPO + " SELECT * FROM " + DatabaseConstants.TABLE_REPO_BACKUP + ";");
+        db.execSQL("DROP TABLE " + DatabaseConstants.TABLE_REPO_BACKUP + ";");
+        db.setTransactionSuccessful();
+      } finally {
+        db.endTransaction();
+      }
+    }
   }
 }
