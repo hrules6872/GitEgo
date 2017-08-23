@@ -59,7 +59,7 @@ ext {
   // provided dependencies
   autoValueVersion = '1.5'
   autoValueGsonVersion = '0.5.+'
-  providedDependencies = [autoValueAnnotations  : "com.google.auto.value:auto-value:${autoValueVersion}",
+  providedDependencies = [autoValueAnnotations  : "com.jakewharton.auto.value:auto-value-annotations:${autoValueVersion}",
                           autoValueGsonExtension: "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"]
 
   // annotations dependencies
