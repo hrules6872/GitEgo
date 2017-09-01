@@ -17,7 +17,6 @@
 package com.hrules.gitego.presentation.presenters.fragments;
 
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import com.hrules.darealmvp.DRMVPPresenter;
 import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
@@ -32,6 +31,7 @@ import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.presentation.bus.BoolEvent;
+import com.hrules.gitego.presentation.commons.PreConditions;
 import com.hrules.gitego.presentation.commons.StringResUtils;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
@@ -56,7 +56,7 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
     App.getApplication().getAppComponent().inject(this);
 
     Account account = accountsManager.getDefaultAccount();
-    if (!TextUtils.isEmpty(account.getToken())) {
+    if (!PreConditions.isStringNullOrEmpty(account.getToken())) {
       gitHubAPI.setAccount(account);
     }
   }
@@ -67,7 +67,7 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
 
   private void refreshData() {
     Account account = gitHubAPI.getAccount();
-    if (account != null && !TextUtils.isEmpty(account.getToken())) {
+    if (account != null && !PreConditions.isStringNullOrEmpty(account.getToken())) {
       getView().setUserLogin(account.getUser());
 
       showLoading();

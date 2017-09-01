@@ -18,7 +18,6 @@ package com.hrules.gitego.presentation.presenters.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import com.hrules.darealmvp.DRMVPPresenter;
 import com.hrules.darealmvp.DRMVPView;
 import com.hrules.gitego.App;
@@ -32,6 +31,7 @@ import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
+import com.hrules.gitego.presentation.commons.PreConditions;
 import com.hrules.gitego.presentation.commons.StringResUtils;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
@@ -75,7 +75,7 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
               String token = gitHubAccessToken.getAccessToken();
               Account account = Account.builder().user(user).type(type).token(token).defaultUser(true).build();
 
-              if (!TextUtils.isEmpty(account.getUser()) && !TextUtils.isEmpty(account.getToken())) {
+              if (!PreConditions.isStringNullOrEmpty(account.getUser()) && !PreConditions.isStringNullOrEmpty(account.getToken())) {
                 gitHubAPI.setAccount(account);
                 accountsManager.get().addAccount(account);
                 getView().startMainActivity();
