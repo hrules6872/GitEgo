@@ -19,7 +19,6 @@ package com.hrules.gitego.di.modules;
 import com.hrules.gitego.App;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.domain.internal.AccountsManager;
-import com.hrules.gitego.presentation.commons.StringResUtils;
 import dagger.Module;
 import dagger.Provides;
 
@@ -30,9 +29,5 @@ import dagger.Provides;
 
   @Provides AccountsManager providesAccountManager(App application) {
     return new AccountsManager(application);
-  }
-
-  @Provides StringResUtils providesStringResUtils(App application) {
-    return new StringResUtils(application);
   }
 }

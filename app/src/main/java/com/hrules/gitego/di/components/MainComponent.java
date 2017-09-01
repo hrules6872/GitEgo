@@ -19,13 +19,10 @@ package com.hrules.gitego.di.components;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.di.modules.MainModule;
 import com.hrules.gitego.domain.internal.AccountsManager;
-import com.hrules.gitego.presentation.commons.StringResUtils;
 import dagger.Component;
 
 @Component(dependencies = AppComponent.class, modules = MainModule.class) interface MainComponent {
   Preferences preferences();
 
   AccountsManager accountsManager();
-
-  StringResUtils stringResUtils();
 }

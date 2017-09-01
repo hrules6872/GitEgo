@@ -16,6 +16,8 @@
 
 package com.hrules.gitego.presentation.views.activities;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +40,8 @@ import com.hrules.gitego.presentation.presenters.activities.MainActivityPresente
 import com.hrules.gitego.presentation.views.activities.base.DRMVPAppCompatActivity;
 import com.hrules.gitego.presentation.views.fragments.RepoFragmentView;
 import com.hrules.gitego.presentation.views.fragments.UserFragmentView;
+import com.hrules.gitego.services.NotificationService;
+import com.hrules.gitego.services.NotificationUtils;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
@@ -91,7 +95,7 @@ public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityP
       case R.id.menu_notifications:
         item.setChecked(!item.isChecked());
         preferences.save(AppConstants.PREFS.NOTIFICATIONS, item.isChecked());
-        getPresenter().startOrStopNotificationServiceReceiver(item.isChecked());
+        startOrStopNotificationServiceReceiver(item.isChecked());
         break;
 
       case R.id.menu_signOut:
@@ -112,13 +116,26 @@ public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityP
     super.onDestroy();
   }
 
-  public void launchLoginActivity() {
-    startActivity(new Intent(getApplicationContext(), LoginActivityView.class));
-    finish();
+  private void startOrStopNotificationServiceReceiver(boolean checked) {
+    if (checked) {
+      NotificationUtils.startNotificationService(App.getApplication());
+    } else {
+      NotificationUtils.stopNotificationService(App.getApplication());
+    }
   }
 
   private void launchAboutActivity() {
     startActivity(new Intent(this, AboutActivityView.class));
+  }
+
+  @Override public void launchLoginActivity() {
+    startActivity(new Intent(getApplicationContext(), LoginActivityView.class));
+    finish();
+  }
+
+  @Override public void removeNotification() {
+    NotificationManager notificationManager = (NotificationManager) App.getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
+    notificationManager.cancel(NotificationService.NOTIFICATION_ID);
   }
 
   @SuppressWarnings("unused") @Subscribe(threadMode = ThreadMode.MAIN) public void onEvent(@NonNull final BoolEvent boolEvent) {

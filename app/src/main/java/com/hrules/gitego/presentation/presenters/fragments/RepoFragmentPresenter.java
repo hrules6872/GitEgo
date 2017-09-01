@@ -32,7 +32,7 @@ import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.presentation.bus.BoolEvent;
 import com.hrules.gitego.presentation.commons.PreConditions;
-import com.hrules.gitego.presentation.commons.StringResUtils;
+import com.hrules.gitego.presentation.commons.resources.ResString;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
 import com.hrules.gitego.presentation.models.utils.ListModelUtils;
@@ -48,7 +48,6 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
   @Inject GetAuthRepo getAuthRepo;
   @Inject DeleteAuthRepo deleteAuthRepo;
   @Inject UIThreadExecutor uiThreadExecutor;
-  @Inject StringResUtils stringResUtils;
 
   private List<GitHubAuthRepo> listToBeDeleted = new ArrayList<>();
 
@@ -131,11 +130,11 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
   }
 
   private void networkFail() {
-    getView().showBriefMessage(stringResUtils.getNetworkFail());
+    getView().showBriefMessage(ResString.getNetworkFail());
   }
 
   private void loginFail() {
-    getView().showBriefMessageAction(stringResUtils.getLoginFail(), stringResUtils.getActionLogin());
+    getView().showBriefMessageAction(ResString.getLoginFail(), ResString.getActionLogin());
   }
 
   public interface Contract extends DRMVPView {

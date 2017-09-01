@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.presentation.commons;
+package com.hrules.gitego.presentation.commons.extensions;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;

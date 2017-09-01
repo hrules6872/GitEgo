@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.interactors.contracts;
+package com.hrules.gitego.presentation.commons.resources;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.errors.base.Error;
-import com.hrules.gitego.presentation.models.GitHubAccessToken;
-import com.hrules.gitego.presentation.models.Intent;
+import com.hrules.gitego.R;
+import com.hrules.gitego.presentation.commons.resources.base.ResWrapper;
 
-public interface GetAccessToken {
-  interface Callback {
-    void onSuccess(@NonNull GitHubAccessToken gitHubAccessToken);
-
-    void onFailure(@NonNull Error error);
+public final class ResString {
+  private ResString() {
   }
 
-  void execute(@NonNull Intent intent, @NonNull String redirectUri, @NonNull Callback callback);
+  public @NonNull static String getLoginFail() {
+    return ResWrapper.getString(R.string.error_loginFail);
+  }
+
+  public @NonNull static String getNetworkFail() {
+    return ResWrapper.getString(R.string.error_networkFail);
+  }
+
+  public @NonNull static String getActionLogin() {
+    return ResWrapper.getString(R.string.action_login);
+  }
 }

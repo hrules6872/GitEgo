@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
+import com.hrules.gitego.presentation.models.transformers.IntentToIntent;
 import com.hrules.gitego.presentation.presenters.activities.LoginActivityPresenter;
 import com.hrules.gitego.presentation.views.activities.base.DRMVPAppCompatActivity;
 
@@ -87,6 +88,6 @@ public final class LoginActivityView extends DRMVPAppCompatActivity<LoginActivit
   }
 
   public void onNewIntent(Intent intent) {
-    getPresenter().onNewIntent(intent);
+    getPresenter().onNewIntent(new IntentToIntent().transform(intent));
   }
 }

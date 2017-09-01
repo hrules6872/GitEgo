@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.interactors.contracts;
+package com.hrules.gitego.presentation.models;
 
-import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.errors.base.Error;
-import com.hrules.gitego.presentation.models.GitHubAccessToken;
-import com.hrules.gitego.presentation.models.Intent;
+import android.support.annotation.Nullable;
+import com.google.auto.value.AutoValue;
 
-public interface GetAccessToken {
-  interface Callback {
-    void onSuccess(@NonNull GitHubAccessToken gitHubAccessToken);
+@AutoValue public abstract class Intent {
+  @Nullable public abstract String getScheme();
 
-    void onFailure(@NonNull Error error);
+  @Nullable public abstract String getCode();
+
+  public static Builder builder() {
+    return new AutoValue_Intent.Builder();
   }
 
-  void execute(@NonNull Intent intent, @NonNull String redirectUri, @NonNull Callback callback);
+  @AutoValue.Builder public abstract static class Builder {
+    public abstract Builder scheme(String newScheme);
+
+    public abstract Builder code(String newCode);
+
+    public abstract Intent build();
+  }
 }

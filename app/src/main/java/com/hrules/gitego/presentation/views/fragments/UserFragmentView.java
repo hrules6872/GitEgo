@@ -31,7 +31,7 @@ import butterknife.Unbinder;
 import com.hrules.gitego.App;
 import com.hrules.gitego.R;
 import com.hrules.gitego.presentation.commons.StringUtils;
-import com.hrules.gitego.presentation.commons.TextSwitcherFactory;
+import com.hrules.gitego.presentation.commons.extensions.TextSwitcherFactory;
 import com.hrules.gitego.presentation.commons.images.ImageLoader;
 import com.hrules.gitego.presentation.commons.usernotifications.BriefMessage;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
@@ -67,14 +67,10 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
 
     userLogin.setFactory(new TextSwitcherFactory(userLogin, "", R.style.TextSwitcherSmall));
     userName.setFactory(new TextSwitcherFactory(userName, getString(R.string.text_empty), R.style.TextSwitcherLarge));
-    followers.setFactory(
-        new TextSwitcherFactory(followers, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
-    watchersCount.setFactory(
-        new TextSwitcherFactory(watchersCount, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
-    starsCount.setFactory(
-        new TextSwitcherFactory(starsCount, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
-    forksCount.setFactory(
-        new TextSwitcherFactory(forksCount, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
+    followers.setFactory(new TextSwitcherFactory(followers, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
+    watchersCount.setFactory(new TextSwitcherFactory(watchersCount, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
+    starsCount.setFactory(new TextSwitcherFactory(starsCount, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
+    forksCount.setFactory(new TextSwitcherFactory(forksCount, getString(R.string.text_empty), R.style.TextSwitcherMediumHighLighted));
   }
 
   @Override public void onResume() {
@@ -98,22 +94,19 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     userLogin.setText(userLoginString);
   }
 
-  @SuppressWarnings("ConstantConditions") @Override @UiThread
-  public void setUserData(@NonNull GitHubAuthUser gitHubAuthUser) {
+  @SuppressWarnings("ConstantConditions") @Override @UiThread public void setUserData(@NonNull GitHubAuthUser gitHubAuthUser) {
     ImageLoader.loadRounded(App.getApplication(), gitHubAuthUser.getAvatarUrl(), avatar);
 
     userName.setText(gitHubAuthUser.getName());
 
     Spannable spannableUserFollowers =
-        StringUtils.createVariationSpannableString(getString(R.string.user_followersFormatted),
-            gitHubAuthUser.getFollowers(), gitHubAuthUser.getGitHubAuthUserOlder().getFollowers(),
-            ContextCompat.getColor(getActivity(), R.color.variationPositive),
+        StringUtils.createVariationSpannableString(getString(R.string.user_followersFormatted), gitHubAuthUser.getFollowers(),
+            gitHubAuthUser.getGitHubAuthUserOlder().getFollowers(), ContextCompat.getColor(getActivity(), R.color.variationPositive),
             ContextCompat.getColor(getActivity(), R.color.variationNegative));
     followers.setText(spannableUserFollowers);
   }
 
-  @SuppressWarnings("ConstantConditions") @Override @UiThread
-  public void setRepoCounters(@NonNull List<GitHubAuthRepo> list) {
+  @SuppressWarnings("ConstantConditions") @Override @UiThread public void setRepoCounters(@NonNull List<GitHubAuthRepo> list) {
     int watchers = 0;
     int stargazers = 0;
     int forks = 0;
@@ -135,16 +128,14 @@ public final class UserFragmentView extends DRMVPFragmentV4<UserFragmentPresente
     int colorVariationNegative = ContextCompat.getColor(getActivity(), R.color.variationNegative);
 
     final Spannable spannableWatchersCount =
-        StringUtils.createVariationSpannableString(textVariation, watchers, watchersOlder, colorVariationPositive,
-            colorVariationNegative);
+        StringUtils.createVariationSpannableString(textVariation, watchers, watchersOlder, colorVariationPositive, colorVariationNegative);
 
     final Spannable spannableStargazersCount =
         StringUtils.createVariationSpannableString(textVariation, stargazers, stargazersOlder, colorVariationPositive,
             colorVariationNegative);
 
     final Spannable spannableForksCount =
-        StringUtils.createVariationSpannableString(textVariation, forks, forksOlder, colorVariationPositive,
-            colorVariationNegative);
+        StringUtils.createVariationSpannableString(textVariation, forks, forksOlder, colorVariationPositive, colorVariationNegative);
 
     watchersCount.setText(spannableWatchersCount);
     starsCount.setText(spannableStargazersCount);

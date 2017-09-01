@@ -32,7 +32,7 @@ import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.presentation.bus.BoolEvent;
 import com.hrules.gitego.presentation.commons.PreConditions;
-import com.hrules.gitego.presentation.commons.StringResUtils;
+import com.hrules.gitego.presentation.commons.resources.ResString;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
@@ -49,7 +49,6 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
   @Inject GetAuthUser getAuthUser;
   @Inject GetAuthRepo getAuthRepo;
   @Inject UIThreadExecutor uiThreadExecutor;
-  @Inject StringResUtils stringResUtils;
 
   @Override public void bind(@NonNull Contract view) {
     super.bind(view);
@@ -143,11 +142,11 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
   }
 
   private void networkFail() {
-    getView().showBriefMessage(stringResUtils.getNetworkFail());
+    getView().showBriefMessage(ResString.getNetworkFail());
   }
 
   private void loginFail() {
-    getView().showBriefMessageAction(stringResUtils.getLoginFail(), stringResUtils.getActionLogin());
+    getView().showBriefMessageAction(ResString.getLoginFail(), ResString.getActionLogin());
   }
 
   public interface Contract extends DRMVPView {

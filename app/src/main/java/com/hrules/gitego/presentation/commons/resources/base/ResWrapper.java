@@ -14,29 +14,17 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.presentation.commons;
+package com.hrules.gitego.presentation.commons.resources.base;
 
-import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import com.hrules.gitego.App;
-import com.hrules.gitego.R;
 
-public class StringResUtils {
-  private final Resources res;
-
-  public StringResUtils(@NonNull App application) {
-    res = application.getResources();
+public final class ResWrapper {
+  private ResWrapper() {
   }
 
-  public @NonNull String getLoginFail() {
-    return res.getString(R.string.error_loginFail);
-  }
-
-  public @NonNull String getNetworkFail() {
-    return res.getString(R.string.error_networkFail);
-  }
-
-  public @NonNull String getActionLogin() {
-    return res.getString(R.string.action_login);
+  public static @NonNull String getString(@StringRes int resId) {
+    return App.getApplication().getResources().getString(resId);
   }
 }

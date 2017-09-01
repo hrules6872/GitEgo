@@ -27,7 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.hrules.darealmvp.DRMVPPresenter;
 import com.hrules.darealmvp.DRMVPView;
-import com.hrules.gitego.presentation.commons.DRMVPUtils;
+import com.hrules.gitego.presentation.views.activities.base.utils.DRMVPUtils;
 
 @SuppressWarnings("unchecked") public abstract class DRMVPFragmentV4<P extends DRMVPPresenter<V>, V extends DRMVPView> extends Fragment {
   private P presenter;

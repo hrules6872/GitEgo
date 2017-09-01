@@ -16,8 +16,6 @@
 
 package com.hrules.gitego.presentation.presenters.activities;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import com.hrules.darealmvp.DRMVPPresenter;
 import com.hrules.darealmvp.DRMVPView;
@@ -26,8 +24,6 @@ import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.presentation.commons.PreConditions;
-import com.hrules.gitego.services.NotificationService;
-import com.hrules.gitego.services.NotificationUtils;
 import javax.inject.Inject;
 
 public final class MainActivityPresenter extends DRMVPPresenter<MainActivityPresenter.Contract> {
@@ -40,26 +36,13 @@ public final class MainActivityPresenter extends DRMVPPresenter<MainActivityPres
   }
 
   public void onViewReady() {
-    removeNotification();
+    getView().removeNotification();
 
     Account account = accountsManager.getDefaultAccount();
     if (PreConditions.isStringNullOrEmpty(account.getToken())) {
       doLogin();
     } else {
       gitHubAPI.setAccount(account);
-    }
-  }
-
-  private void removeNotification() {
-    NotificationManager notificationManager = (NotificationManager) App.getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
-    notificationManager.cancel(NotificationService.NOTIFICATION_ID);
-  }
-
-  public void startOrStopNotificationServiceReceiver(boolean checked) {
-    if (checked) {
-      NotificationUtils.startNotificationService(App.getApplication());
-    } else {
-      NotificationUtils.stopNotificationService(App.getApplication());
     }
   }
 
@@ -73,5 +56,7 @@ public final class MainActivityPresenter extends DRMVPPresenter<MainActivityPres
 
   public interface Contract extends DRMVPView {
     void launchLoginActivity();
+
+    void removeNotification();
   }
 }

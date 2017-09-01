@@ -16,7 +16,6 @@
 
 package com.hrules.gitego.presentation.presenters.activities;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import com.hrules.darealmvp.DRMVPPresenter;
 import com.hrules.darealmvp.DRMVPView;
@@ -32,9 +31,10 @@ import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
 import com.hrules.gitego.presentation.commons.PreConditions;
-import com.hrules.gitego.presentation.commons.StringResUtils;
+import com.hrules.gitego.presentation.commons.resources.ResString;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
+import com.hrules.gitego.presentation.models.Intent;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthUserDateDescendingComparator;
 import dagger.Lazy;
 import java.util.Collections;
@@ -46,7 +46,6 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
   @Inject GetAccessToken getAccessToken;
   @Inject GetAuthUser getAuthUser;
   @Inject Lazy<AccountsManager> accountsManager;
-  @Inject StringResUtils stringResUtils;
 
   private boolean showLoginFail = false;
   private boolean showNetworkFail = false;
@@ -117,11 +116,11 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
   }
 
   private void loginFail() {
-    getView().showBriefMessage(stringResUtils.getLoginFail());
+    getView().showBriefMessage(ResString.getLoginFail());
   }
 
   private void networkFail() {
-    getView().showBriefMessage(stringResUtils.getNetworkFail());
+    getView().showBriefMessage(ResString.getNetworkFail());
   }
 
   public void onLoginClick() {
@@ -129,6 +128,7 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
   }
 
   public interface Contract extends DRMVPView {
+
     void startMainActivity();
 
     void showProgressDialog();

@@ -16,7 +16,6 @@
 
 package com.hrules.gitego.domain.interactors;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.data.exceptions.LocalIOException;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
@@ -32,6 +31,7 @@ import com.hrules.gitego.domain.models.mappers.GitHubAccessTokenDtoToGitHubAcces
 import com.hrules.gitego.domain.models.serializers.GitHubAccessTokenDtoSerializer;
 import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
+import com.hrules.gitego.presentation.models.Intent;
 import java.util.HashMap;
 
 public final class GetAccessTokenInteractor extends BaseInteractor implements GetAccessToken {
@@ -58,19 +58,14 @@ public final class GetAccessTokenInteractor extends BaseInteractor implements Ge
   }
 
   @Override public void run() {
-    if (intent != null && intent.getData() != null && intent.getData().getScheme() != null && intent.getData()
-        .getScheme()
-        .equals(redirectUri)) {
-
-      String code = intent.getData().getQueryParameter("code");
-
+    if (intent.getScheme() != null && intent.getScheme().equals(redirectUri)) {
       HashMap<String, String> headers = new HashMap<>();
       headers.put("Accept", "application/json");
 
       HashMap<String, String> params = new HashMap<>();
       params.put("client_id", gitHubAPI.getClientId());
       params.put("client_secret", gitHubAPI.getClientSecret());
-      params.put("code", code);
+      params.put("code", intent.getCode());
 
       try {
         String response = network.post(new RequestNetwork(GitHubAPI.GITHUB_OAUTH_TOKEN_URL, headers, params));

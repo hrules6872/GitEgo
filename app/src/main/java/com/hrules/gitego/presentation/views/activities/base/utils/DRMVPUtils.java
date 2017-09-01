@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.presentation.commons;
+package com.hrules.gitego.presentation.views.activities.base.utils;
 
 import android.support.annotation.NonNull;
 import java.lang.reflect.ParameterizedType;
