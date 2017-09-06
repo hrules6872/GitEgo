@@ -17,24 +17,12 @@
 package com.hrules.gitego.domain.specifications.base;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoAPIGetAuthRepoSpecification;
-import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification;
-import com.hrules.gitego.data.repository.datasources.api.specifications.AuthUserAPIGetAuthUserSpecification;
 import com.hrules.gitego.data.repository.datasources.base.DataSource;
-import com.hrules.gitego.data.repository.datasources.bdd.specifications.AuthRepoBddDeleteAuthRepoSpecification;
-import com.hrules.gitego.data.repository.datasources.bdd.specifications.AuthRepoBddGetAuthRepoSpecification;
-import com.hrules.gitego.data.repository.datasources.bdd.specifications.AuthUserBddGetAuthUserSpecification;
 
 public final class SpecificationFactory<T> {
-  private final Class[] clazzes = {
-      AuthRepoAPIGetAuthRepoSpecification.class, AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification.class,
-      AuthUserAPIGetAuthUserSpecification.class, AuthRepoBddDeleteAuthRepoSpecification.class,
-      AuthRepoBddGetAuthRepoSpecification.class, AuthUserBddGetAuthUserSpecification.class
-  };
-
-  @SuppressWarnings({ "unchecked", "TryWithIdenticalCatches" }) public @NonNull Specification<T> create(
-      @NonNull DataSource dataSource, @NonNull Specification<T> specification) {
-    for (Class clazz : clazzes) {
+  @SuppressWarnings({ "unchecked", "TryWithIdenticalCatches" }) public @NonNull Specification<T> create(@NonNull DataSource dataSource,
+      @NonNull Specification<T> specification, @NonNull Class[] specifications) {
+    for (Class clazz : specifications) {
       if (clazz.getSimpleName().contains(specification.getClass().getSimpleName())) {
         try {
           Specification candidate = (Specification) clazz.newInstance();

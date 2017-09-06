@@ -22,6 +22,7 @@ import com.hrules.gitego.data.exceptions.LocalIOException;
 import com.hrules.gitego.data.persistence.database.Database;
 import com.hrules.gitego.data.repository.cache.base.BasicCache;
 import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
+import com.hrules.gitego.data.repository.datasources.specifications.Specifications;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.transformers.GitHubAuthUserBddToGitHubAuthUserDto;
 import com.hrules.gitego.domain.specifications.base.Specification;
@@ -39,9 +40,9 @@ public final class AuthUserBddDataSourceReadable extends DataSourceReadable<GitH
     this.cache = cache;
   }
 
-  @SuppressWarnings("unchecked") @Override
-  public Collection<GitHubAuthUserDto> query(@NonNull Specification specification) throws Exception {
-    specification = new SpecificationFactory<String>().create(this, specification);
+  @SuppressWarnings("unchecked") @Override public Collection<GitHubAuthUserDto> query(@NonNull Specification specification)
+      throws Exception {
+    specification = new SpecificationFactory<String>().create(this, specification, Specifications.get());
     List<GitHubAuthUserDto> list = new ArrayList<>();
 
     Cursor cursor = null;

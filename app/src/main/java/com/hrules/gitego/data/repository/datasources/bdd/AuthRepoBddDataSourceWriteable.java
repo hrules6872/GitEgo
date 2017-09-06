@@ -21,6 +21,7 @@ import com.hrules.gitego.data.persistence.database.Database;
 import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.data.persistence.database.utils.SQLQueryBuilder;
 import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
+import com.hrules.gitego.data.repository.datasources.specifications.Specifications;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.transformers.GitHubAuthRepoDtoToMap;
 import com.hrules.gitego.domain.specifications.base.Specification;
@@ -57,9 +58,7 @@ public final class AuthRepoBddDataSourceWriteable extends DataSourceWriteable<Gi
   }
 
   private String convertDtoToSqlInsert(@NonNull GitHubAuthRepoDto item) {
-    return new SQLQueryBuilder().insertInto(DatabaseConstants.TABLE_REPO)
-        .values(new GitHubAuthRepoDtoToMap().transform(item))
-        .build();
+    return new SQLQueryBuilder().insertInto(DatabaseConstants.TABLE_REPO).values(new GitHubAuthRepoDtoToMap().transform(item)).build();
   }
 
   @SuppressWarnings("ConstantConditions") private String convertDtoToSqlDelete(@NonNull GitHubAuthRepoDto item) {
@@ -80,7 +79,7 @@ public final class AuthRepoBddDataSourceWriteable extends DataSourceWriteable<Gi
   }
 
   @SuppressWarnings("unchecked") @Override public void remove(@NonNull Specification specification) throws Exception {
-    specification = new SpecificationFactory<String>().create(this, specification);
+    specification = new SpecificationFactory<String>().create(this, specification, Specifications.get());
     database.execList((String[]) specification.get());
   }
 }

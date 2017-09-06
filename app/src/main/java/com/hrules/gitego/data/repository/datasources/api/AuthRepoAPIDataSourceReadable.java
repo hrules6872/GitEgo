@@ -23,6 +23,7 @@ import com.hrules.gitego.data.persistence.database.utils.DatabaseDateUtils;
 import com.hrules.gitego.data.repository.cache.base.BasicCache;
 import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification;
 import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
+import com.hrules.gitego.data.repository.datasources.specifications.Specifications;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.serializers.GitHubAuthRepoDtoSerializer;
 import com.hrules.gitego.domain.specifications.base.Specification;
@@ -45,7 +46,7 @@ public final class AuthRepoAPIDataSourceReadable extends DataSourceReadable<GitH
 
   @SuppressWarnings("unchecked") @Override
   public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification) throws Exception {
-    specification = new SpecificationFactory<String>().create(this, specification);
+    specification = new SpecificationFactory<String>().create(this, specification, Specifications.get());
     String response = network.get((RequestNetwork) specification.get());
     List<GitHubAuthRepoDto> list = (List<GitHubAuthRepoDto>) new GitHubAuthRepoDtoSerializer().deserialize(response);
 
