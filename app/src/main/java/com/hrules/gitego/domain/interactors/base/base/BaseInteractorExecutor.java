@@ -14,18 +14,10 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.interactors.base;
+package com.hrules.gitego.domain.interactors.base.base;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.errors.base.Error;
-import java.util.List;
 
-public interface BaseInteractorInterface {
-  interface QueryCallback<T> {
-    void onSuccess(@NonNull List<T> response);
-
-    void onFailure(@NonNull Error error);
-
-    void onFinish();
-  }
+public interface BaseInteractorExecutor {
+  void execute(@NonNull BaseInteractor interactor);
 }

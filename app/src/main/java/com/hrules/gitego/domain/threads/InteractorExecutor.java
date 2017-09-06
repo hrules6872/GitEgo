@@ -17,17 +17,17 @@
 package com.hrules.gitego.domain.threads;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.threads.base.Interactor;
-import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
+import com.hrules.gitego.domain.interactors.base.base.BaseInteractor;
+import com.hrules.gitego.domain.interactors.base.base.BaseInteractorExecutor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public final class InteractorExecutor implements InteractorExecutorInterface {
+public final class InteractorExecutor implements BaseInteractorExecutor {
   private static final int THREADS = 3;
 
   private final ExecutorService executorService = Executors.newFixedThreadPool(THREADS);
 
-  @Override public void execute(@NonNull Interactor interactor) {
+  @Override public void execute(@NonNull BaseInteractor interactor) {
     executorService.submit(interactor);
   }
 }

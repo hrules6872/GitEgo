@@ -21,24 +21,24 @@ import com.hrules.gitego.data.repository.base.Repository;
 import com.hrules.gitego.data.repository.base.RepositoryInterface;
 import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.errors.base.ErrorFactory;
-import com.hrules.gitego.domain.interactors.base.BaseInteractor;
+import com.hrules.gitego.domain.interactors.base.Interactor;
+import com.hrules.gitego.domain.interactors.base.base.BaseInteractorExecutor;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.mappers.GitHubAuthUserDtoToGitHubAuthUser;
 import com.hrules.gitego.domain.models.mappers.base.ListMapper;
 import com.hrules.gitego.domain.specifications.GetAuthUserSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthUserSpecificationParams;
-import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import java.util.List;
 
-public final class GetAuthUserInteractor extends BaseInteractor implements GetAuthUser {
+public final class GetAuthUserInteractor extends Interactor implements GetAuthUser {
   private final Repository repository;
 
   private String access_token;
   private Callback callback;
 
-  public GetAuthUserInteractor(@NonNull InteractorExecutorInterface interactorExecutor, @NonNull Repository repository) {
+  public GetAuthUserInteractor(@NonNull BaseInteractorExecutor interactorExecutor, @NonNull Repository repository) {
     super(interactorExecutor);
     this.repository = repository;
   }

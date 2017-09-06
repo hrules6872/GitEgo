@@ -18,6 +18,6 @@ package com.hrules.gitego.domain.threads.base;
 
 import android.support.annotation.NonNull;
 
-public interface ThreadExecutorInterface {
+public interface ThreadExecutor {
   void execute(@NonNull Runnable runnable);
 }

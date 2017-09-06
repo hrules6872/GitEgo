@@ -14,7 +14,20 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.threads.base;
+package com.hrules.gitego.domain.interactors.base;
 
-public interface Interactor extends Runnable {
+import android.support.annotation.NonNull;
+import com.hrules.gitego.domain.interactors.base.base.BaseInteractor;
+import com.hrules.gitego.domain.interactors.base.base.BaseInteractorExecutor;
+
+public abstract class Interactor implements BaseInteractor {
+  private final BaseInteractorExecutor interactorExecutor;
+
+  protected Interactor(@NonNull BaseInteractorExecutor interactorExecutor) {
+    this.interactorExecutor = interactorExecutor;
+  }
+
+  protected BaseInteractorExecutor getInteractorExecutor() {
+    return interactorExecutor;
+  }
 }

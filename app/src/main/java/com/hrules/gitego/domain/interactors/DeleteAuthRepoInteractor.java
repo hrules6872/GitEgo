@@ -20,24 +20,24 @@ import android.support.annotation.NonNull;
 import com.hrules.gitego.data.repository.base.Repository;
 import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.errors.base.ErrorFactory;
-import com.hrules.gitego.domain.interactors.base.BaseInteractor;
+import com.hrules.gitego.domain.interactors.base.Interactor;
+import com.hrules.gitego.domain.interactors.base.base.BaseInteractorExecutor;
 import com.hrules.gitego.domain.interactors.contracts.DeleteAuthRepo;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.mappers.GitHubAuthRepoDtoToGitHubAuthRepo;
 import com.hrules.gitego.domain.models.mappers.base.ListMapper;
 import com.hrules.gitego.domain.specifications.DeleteAuthRepoSpecification;
 import com.hrules.gitego.domain.specifications.params.DeleteAuthRepoSpecificationParams;
-import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import java.util.List;
 
-public final class DeleteAuthRepoInteractor extends BaseInteractor implements DeleteAuthRepo {
+public final class DeleteAuthRepoInteractor extends Interactor implements DeleteAuthRepo {
   private final Repository repository;
 
   private List<GitHubAuthRepo> list;
   private Callback callback;
 
-  public DeleteAuthRepoInteractor(@NonNull InteractorExecutorInterface interactorExecutor, @NonNull Repository repository) {
+  public DeleteAuthRepoInteractor(@NonNull BaseInteractorExecutor interactorExecutor, @NonNull Repository repository) {
     super(interactorExecutor);
     this.repository = repository;
   }

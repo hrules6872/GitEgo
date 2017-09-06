@@ -19,9 +19,9 @@ package com.hrules.gitego.domain.threads;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.threads.base.ThreadExecutorInterface;
+import com.hrules.gitego.domain.threads.base.ThreadExecutor;
 
-public final class UIThreadExecutor implements ThreadExecutorInterface {
+public final class UIThreadExecutor implements ThreadExecutor {
   private final Handler handler = new Handler(Looper.getMainLooper());
 
   public void execute(@NonNull Runnable runnable) {

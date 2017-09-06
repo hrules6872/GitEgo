@@ -24,17 +24,17 @@ import com.hrules.gitego.data.network.RequestNetwork;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.errors.base.ErrorFactory;
-import com.hrules.gitego.domain.interactors.base.BaseInteractor;
+import com.hrules.gitego.domain.interactors.base.Interactor;
+import com.hrules.gitego.domain.interactors.base.base.BaseInteractorExecutor;
 import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.models.GitHubAccessTokenDto;
 import com.hrules.gitego.domain.models.mappers.GitHubAccessTokenDtoToGitHubAccessToken;
 import com.hrules.gitego.domain.models.serializers.GitHubAccessTokenDtoSerializer;
-import com.hrules.gitego.domain.threads.base.InteractorExecutorInterface;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
 import com.hrules.gitego.presentation.models.Intent;
 import java.util.HashMap;
 
-public final class GetAccessTokenInteractor extends BaseInteractor implements GetAccessToken {
+public final class GetAccessTokenInteractor extends Interactor implements GetAccessToken {
   private final GitHubAPI gitHubAPI;
   private final Network network;
 
@@ -42,7 +42,7 @@ public final class GetAccessTokenInteractor extends BaseInteractor implements Ge
   private String redirectUri;
   private Callback callback;
 
-  public GetAccessTokenInteractor(@NonNull InteractorExecutorInterface interactorExecutor, @NonNull GitHubAPI gitHubAPI,
+  public GetAccessTokenInteractor(@NonNull BaseInteractorExecutor interactorExecutor, @NonNull GitHubAPI gitHubAPI,
       @NonNull Network network) {
     super(interactorExecutor);
     this.gitHubAPI = gitHubAPI;
