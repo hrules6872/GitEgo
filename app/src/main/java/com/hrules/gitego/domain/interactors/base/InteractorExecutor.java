@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.threads;
+package com.hrules.gitego.domain.interactors.base;
 
 import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.interactors.base.base.BaseInteractor;

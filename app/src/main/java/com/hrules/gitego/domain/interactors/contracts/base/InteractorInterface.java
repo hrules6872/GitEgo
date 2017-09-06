@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hrules.gitego.domain.interactors.base;
+package com.hrules.gitego.domain.interactors.contracts.base;
 
 import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.errors.base.Error;
