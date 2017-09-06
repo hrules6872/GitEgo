@@ -43,7 +43,7 @@ ext {
   daggerVersion = '2.11'
   daRealMVPVersion = '0.20.0'
   gsonVersion = '2.8.1'
-  okhttpVersion = '3.8.+'
+  okhttpVersion = '3.9.+'
   picassoViewVersion = '2.5.+'
   eventbusVersion = '3.0.+'
   projectDependencies = [butterKnife         : "com.jakewharton:butterknife:${butterKnifeVersion}",
