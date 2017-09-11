@@ -21,8 +21,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import com.hrules.gitego.App;
+import com.hrules.gitego.commons.SupportVersion;
 
 public final class NotificationServiceReceiver extends BroadcastReceiver {
   public static final String ACTION_NOTIFICATION_SERVICE_START = "com.hrules.gitego.NOTIFICATION_SERVICE_START";
@@ -42,7 +42,7 @@ public final class NotificationServiceReceiver extends BroadcastReceiver {
     long triggerAtMillis = NotificationUtils.getNextNotificationTriggerAtMillis();
     PendingIntent pendingIntent = NotificationUtils.getNotificationPendingIntent(App.getApplication());
     AlarmManager alarmManager = (AlarmManager) App.getApplication().getSystemService(Context.ALARM_SERVICE);
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    if (SupportVersion.isMarshmallowOrAbove()) {
       alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
     } else {
       alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, AlarmManager.INTERVAL_DAY, pendingIntent);

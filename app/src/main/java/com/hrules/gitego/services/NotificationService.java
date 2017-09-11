@@ -22,7 +22,6 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,6 +31,7 @@ import com.hrules.gitego.App;
 import com.hrules.gitego.AppLifecycleManager;
 import com.hrules.gitego.R;
 import com.hrules.gitego.commons.DebugLog;
+import com.hrules.gitego.commons.SupportVersion;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.errors.base.Error;
@@ -207,7 +207,7 @@ public final class NotificationService extends Service {
   }
 
   private void startAgainNotificationAlarmOnlyForAPI23OrAbove() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    if (SupportVersion.isMarshmallowOrAbove()) {
       long triggerAtMillis = NotificationUtils.getNextNotificationTriggerAtMillis();
       PendingIntent pendingIntent = NotificationUtils.getNotificationPendingIntent(App.getApplication());
       AlarmManager alarmManager = (AlarmManager) App.getApplication().getSystemService(Context.ALARM_SERVICE);
