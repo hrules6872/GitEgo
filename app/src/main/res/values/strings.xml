@@ -27,7 +27,6 @@
   <string name="error_loginFail">Login error</string>
 
   <!--menu-->
-  <string name="menu_notifications">Notifications</string>
   <string name="menu_signOut">Sign out</string>
   <string name="menu_about">About</string>
 
@@ -42,9 +41,6 @@
 
   <!--actions-->
   <string name="action_login">Login GitHub</string>
-
-  <!--notifications-->
-  <string name="notification_message">Changes detected!</string>
 
   <!--app utils-->
   <string name="text_appVersionFormatted">version %1$s (%2$s)</string>

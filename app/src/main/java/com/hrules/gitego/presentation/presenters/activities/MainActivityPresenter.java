@@ -36,8 +36,6 @@ public final class MainActivityPresenter extends DRMVPPresenter<MainActivityPres
   }
 
   public void onViewReady() {
-    getView().removeNotification();
-
     Account account = accountsManager.getDefaultAccount();
     if (PreConditions.isStringNullOrEmpty(account.getToken())) {
       doLogin();
@@ -56,7 +54,5 @@ public final class MainActivityPresenter extends DRMVPPresenter<MainActivityPres
 
   public interface Contract extends DRMVPView {
     void launchLoginActivity();
-
-    void removeNotification();
   }
 }

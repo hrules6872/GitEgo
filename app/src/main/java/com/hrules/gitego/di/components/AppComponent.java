@@ -26,7 +26,6 @@ import com.hrules.gitego.presentation.presenters.activities.MainActivityPresente
 import com.hrules.gitego.presentation.presenters.fragments.RepoFragmentPresenter;
 import com.hrules.gitego.presentation.presenters.fragments.UserFragmentPresenter;
 import com.hrules.gitego.presentation.views.activities.MainActivityView;
-import com.hrules.gitego.services.NotificationService;
 import dagger.Component;
 
 @Component(modules = { AppModule.class, DomainModule.class, DataModule.class, MainModule.class }) public interface AppComponent {
@@ -45,7 +44,4 @@ import dagger.Component;
   void inject(RepoFragmentPresenter presenter);
 
   void inject(UserFragmentPresenter presenter);
-
-  // services
-  void inject(NotificationService service);
 }

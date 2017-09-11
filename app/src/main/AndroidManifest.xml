@@ -17,10 +17,10 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.hrules.gitego">
+    package="com.hrules.gitego"
+    >
 
   <uses-permission android:name="android.permission.INTERNET"/>
-  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
   <application
       android:allowBackup="true"
@@ -29,7 +29,8 @@
       android:name=".App"
       android:supportsRtl="true"
       android:theme="@style/AppTheme"
-      tools:ignore="AllowBackup">
+      tools:ignore="AllowBackup"
+      >
     <activity android:name=".presentation.views.activities.MainActivityView">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -44,7 +45,8 @@
         >
       <intent-filter
           android:autoVerify="true"
-          tools:ignore="UnusedAttribute">
+          tools:ignore="UnusedAttribute"
+          >
         <action android:name="android.intent.action.VIEW"/>
 
         <data android:scheme="@string/GITHUB_API_CALLBACKURL"/>
@@ -56,26 +58,7 @@
 
     <activity
         android:name=".presentation.views.activities.AboutActivityView"
-        android:theme="@style/AppThemeAbout"/>
-
-    <service android:name=".services.NotificationService"/>
-
-    <receiver
-        android:enabled="true"
-        android:name=".services.BootReceiver">
-      <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED"/>
-      </intent-filter>
-    </receiver>
-    <receiver
-        android:enabled="true"
-        android:exported="false"
-        android:name=".services.NotificationServiceReceiver">
-      <intent-filter>
-        <action android:name="com.hrules.gitego.NOTIFICATION_SERVICE_START"/>
-        <action android:name="com.hrules.gitego.NOTIFICATION_SERVICE_STOP"/>
-      </intent-filter>
-    </receiver>
+        android:theme="@style/AppThemeAbout"
+        />
   </application>
-
 </manifest>

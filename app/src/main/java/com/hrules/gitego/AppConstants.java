@@ -22,11 +22,6 @@ public final class AppConstants {
 
   public final class PREFS {
     public static final String ACCOUNTS = "ACCOUNTS";
-    public static final String NOTIFICATIONS = "NOTIFICATIONS";
-  }
-
-  public final class PREFS_DEFAULTS {
-    public static final boolean NOTIFICATIONS_DEFAULT = false;
   }
 
   public final class DEFAULTS {

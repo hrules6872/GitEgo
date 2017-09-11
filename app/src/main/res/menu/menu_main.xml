@@ -17,20 +17,16 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
->
-  <item
-      android:id="@+id/menu_notifications"
-      android:checkable="true"
-      android:title="@string/menu_notifications"
-      app:actionViewClass="android.widget.CheckBox"
-      app:showAsAction="never"/>
-
+    >
   <item
       android:id="@+id/menu_signOut"
       android:title="@string/menu_signOut"
-      app:showAsAction="never"/>
+      app:showAsAction="never"
+      />
 
-  <item android:id="@+id/menu_about"
+  <item
+      android:id="@+id/menu_about"
       android:title="@string/menu_about"
-      app:showAsAction="never"/>
+      app:showAsAction="never"
+      />
 </menu>

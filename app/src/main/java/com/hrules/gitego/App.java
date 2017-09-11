@@ -21,7 +21,6 @@ import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.di.components.AppComponent;
 import com.hrules.gitego.di.components.DaggerAppComponent;
 import com.hrules.gitego.di.modules.AppModule;
-import com.hrules.gitego.services.NotificationUtils;
 import javax.inject.Inject;
 
 public final class App extends Application {
@@ -33,13 +32,7 @@ public final class App extends Application {
   @Override public void onCreate() {
     super.onCreate();
     application = this;
-
-    registerActivityLifecycleCallbacks(new AppLifecycleManager());
     initComponents();
-
-    if (preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT)) {
-      NotificationUtils.startNotificationService(this);
-    }
   }
 
   public static App getApplication() {

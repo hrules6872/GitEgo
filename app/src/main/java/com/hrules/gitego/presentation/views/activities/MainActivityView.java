@@ -16,8 +16,6 @@
 
 package com.hrules.gitego.presentation.views.activities;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -32,7 +30,6 @@ import android.widget.ProgressBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.hrules.gitego.App;
-import com.hrules.gitego.AppConstants;
 import com.hrules.gitego.R;
 import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.presentation.bus.BoolEvent;
@@ -40,8 +37,6 @@ import com.hrules.gitego.presentation.presenters.activities.MainActivityPresente
 import com.hrules.gitego.presentation.views.activities.base.DRMVPAppCompatActivity;
 import com.hrules.gitego.presentation.views.fragments.RepoFragmentView;
 import com.hrules.gitego.presentation.views.fragments.UserFragmentView;
-import com.hrules.gitego.services.NotificationService;
-import com.hrules.gitego.services.NotificationUtils;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Inject;
 import org.greenrobot.eventbus.EventBus;
@@ -85,19 +80,11 @@ public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityP
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu_main, menu);
-    menu.findItem(R.id.menu_notifications)
-        .setChecked(preferences.getBoolean(AppConstants.PREFS.NOTIFICATIONS, AppConstants.PREFS_DEFAULTS.NOTIFICATIONS_DEFAULT));
     return true;
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.menu_notifications:
-        item.setChecked(!item.isChecked());
-        preferences.save(AppConstants.PREFS.NOTIFICATIONS, item.isChecked());
-        startOrStopNotificationServiceReceiver(item.isChecked());
-        break;
-
       case R.id.menu_signOut:
         getPresenter().signOut();
         launchLoginActivity();
@@ -116,14 +103,6 @@ public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityP
     super.onDestroy();
   }
 
-  private void startOrStopNotificationServiceReceiver(boolean checked) {
-    if (checked) {
-      NotificationUtils.startNotificationService(App.getApplication());
-    } else {
-      NotificationUtils.stopNotificationService(App.getApplication());
-    }
-  }
-
   private void launchAboutActivity() {
     startActivity(new Intent(this, AboutActivityView.class));
   }
@@ -131,11 +110,6 @@ public final class MainActivityView extends DRMVPAppCompatActivity<MainActivityP
   @Override public void launchLoginActivity() {
     startActivity(new Intent(getApplicationContext(), LoginActivityView.class));
     finish();
-  }
-
-  @Override public void removeNotification() {
-    NotificationManager notificationManager = (NotificationManager) App.getApplication().getSystemService(Context.NOTIFICATION_SERVICE);
-    notificationManager.cancel(NotificationService.NOTIFICATION_ID);
   }
 
   @SuppressWarnings("unused") @Subscribe(threadMode = ThreadMode.MAIN) public void onEvent(@NonNull final BoolEvent boolEvent) {
