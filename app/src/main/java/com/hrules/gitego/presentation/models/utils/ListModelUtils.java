@@ -61,11 +61,11 @@ public final class ListModelUtils {
         GitHubAuthUser itemInMap = map.get(item.getUser());
         if (itemInMap != null) {
           if (itemInMap.getDate().equalsIgnoreCase(itemInMap.getGitHubAuthUserOlder().getDate())) {
-            map.put(item.getName(), itemInMap.withGitHubAuthRepoOlder(item));
+            map.put(item.getUser(), itemInMap.withGitHubAuthRepoOlder(item));
           }
         } else {
           iterator.set(item.withGitHubAuthRepoOlder(item));
-          map.put(item.getName(), item.withGitHubAuthRepoOlder(item));
+          map.put(item.getUser(), item.withGitHubAuthRepoOlder(item));
         }
       }
     }
