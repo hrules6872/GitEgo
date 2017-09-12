@@ -1,8 +1,10 @@
 GitEgo
 =====
-![image](art/logo.png)
 
-This repository contains the source code for the GitEgo Android app.
+> ImClean library official example
+> https://github.com/hrules6872/ImClean#examples
+
+![image](art/logo.png)
 
 GitEgo lets you track followers, watchers, stars, and forks for all your repositories on GitHub.
 
@@ -15,6 +17,7 @@ GitEgo is not associated with GitHub in any way.
 ![image](art/screenshot1.png) ![image](art/screenshot2.png)
 
 ### Libraries used in the project
+* [ImClean](https://github.com/hrules6872/ImClean)
 * [Dagger](https://github.com/google/dagger)
 * [ButterKnife](https://github.com/JakeWharton/butterknife)
 * [DaRealMVP](https://github.com/hrules6872/DaRealMVP)
