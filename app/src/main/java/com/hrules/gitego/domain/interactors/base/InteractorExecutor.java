@@ -17,8 +17,8 @@
 package com.hrules.gitego.domain.interactors.base;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.interactors.base.base.BaseInteractor;
-import com.hrules.gitego.domain.interactors.base.base.BaseInteractorExecutor;
+import com.hrules.imclean.domain.interactors.base.BaseInteractor;
+import com.hrules.imclean.domain.interactors.base.BaseInteractorExecutor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

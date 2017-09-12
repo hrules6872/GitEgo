@@ -18,9 +18,8 @@ package com.hrules.gitego.domain.errors;
 
 import android.support.annotation.NonNull;
 import com.hrules.gitego.data.exceptions.NetworkIOException;
-import com.hrules.gitego.domain.errors.base.Error;
 
-public class NetworkIOError implements Error {
+public class NetworkIOError implements com.hrules.imclean.domain.errors.Error {
   private final String message;
 
   public NetworkIOError(@NonNull String message) {

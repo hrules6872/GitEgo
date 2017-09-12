@@ -21,7 +21,7 @@ import android.support.annotation.Nullable;
 import com.hrules.gitego.data.commons.serializator.ListGitHubAuthRepoDtoSerializator;
 import com.hrules.gitego.data.commons.serializator.base.Serializator;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
-import com.hrules.gitego.domain.models.serializers.base.Serializer;
+import com.hrules.imclean.domain.models.serializers.Serializer;
 import java.util.ArrayList;
 import java.util.Collection;
 

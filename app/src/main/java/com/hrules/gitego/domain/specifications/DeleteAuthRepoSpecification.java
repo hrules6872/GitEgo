@@ -17,7 +17,7 @@
 package com.hrules.gitego.domain.specifications;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.specifications.base.Specification;
+import com.hrules.imclean.domain.specifications.Specification;
 
 public class DeleteAuthRepoSpecification<T> extends Specification<T> {
   @NonNull @Override public Class getParent() {

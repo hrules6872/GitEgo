@@ -18,11 +18,11 @@ package com.hrules.gitego.di.components;
 
 import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.persistence.database.Database;
-import com.hrules.gitego.data.repository.base.Repository;
-import com.hrules.gitego.data.repository.cache.base.BasicCache;
-import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
-import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
 import com.hrules.gitego.di.modules.DataModule;
+import com.hrules.imclean.data.repository.Repository;
+import com.hrules.imclean.data.repository.cache.BasicCache;
+import com.hrules.imclean.data.repository.datasources.DataSourceReadable;
+import com.hrules.imclean.data.repository.datasources.DataSourceWriteable;
 import dagger.Component;
 import javax.inject.Named;
 

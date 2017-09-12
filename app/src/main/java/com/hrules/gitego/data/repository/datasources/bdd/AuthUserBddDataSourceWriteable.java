@@ -20,10 +20,10 @@ import android.support.annotation.NonNull;
 import com.hrules.gitego.data.persistence.database.Database;
 import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.data.persistence.database.utils.SQLQueryBuilder;
-import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
 import com.hrules.gitego.domain.models.transformers.GitHubAuthUserDtoToMap;
-import com.hrules.gitego.domain.specifications.base.Specification;
+import com.hrules.imclean.data.repository.datasources.DataSourceWriteable;
+import com.hrules.imclean.domain.specifications.Specification;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +62,7 @@ public final class AuthUserBddDataSourceWriteable extends DataSourceWriteable<Gi
   private String convertDtoToSqlDelete(GitHubAuthUserDto item) {
     return new SQLQueryBuilder().deleteFrom(DatabaseConstants.TABLE_USER)
         .where(DatabaseConstants.KEY_USER_DATE)
-        .equalsTo(item.getDate())
-        .and(DatabaseConstants.KEY_USER_LOGIN).equalsTo(item.getUser())
+        .equalsTo(item.getDate()).and(DatabaseConstants.KEY_USER_LOGIN).equalsTo(item.getUser())
         .build();
   }
 

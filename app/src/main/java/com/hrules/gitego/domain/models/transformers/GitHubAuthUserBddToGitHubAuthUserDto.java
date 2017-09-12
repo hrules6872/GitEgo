@@ -20,7 +20,7 @@ import android.database.Cursor;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
-import com.hrules.gitego.domain.models.transformers.base.Transformer;
+import com.hrules.imclean.domain.models.transformers.Transformer;
 
 public final class GitHubAuthUserBddToGitHubAuthUserDto implements Transformer<Cursor, GitHubAuthUserDto> {
   @NonNull @Override public GitHubAuthUserDto transform(@NonNull Cursor from) {

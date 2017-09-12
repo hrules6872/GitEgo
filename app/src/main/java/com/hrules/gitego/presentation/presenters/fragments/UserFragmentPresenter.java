@@ -24,12 +24,10 @@ import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.errors.NetworkIOError;
 import com.hrules.gitego.domain.errors.NetworkUnauthorizedError;
-import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
-import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.presentation.bus.BoolEvent;
 import com.hrules.gitego.presentation.commons.PreConditions;
 import com.hrules.gitego.presentation.commons.resources.ResString;
@@ -38,6 +36,7 @@ import com.hrules.gitego.presentation.models.GitHubAuthUser;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthUserDateDescendingComparator;
 import com.hrules.gitego.presentation.models.utils.ListModelUtils;
+import com.hrules.imclean.domain.threads.UIThreadExecutor;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
@@ -84,7 +83,7 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
           }
         }
 
-        @Override public void onFailure(@NonNull Error error) {
+        @Override public void onFailure(@NonNull com.hrules.imclean.domain.errors.Error error) {
           if (error instanceof NetworkUnauthorizedError) {
             loginFail();
           } else if (error instanceof NetworkIOError) {
@@ -116,7 +115,7 @@ public final class UserFragmentPresenter extends DRMVPPresenter<UserFragmentPres
           }
         }
 
-        @Override public void onFailure(@NonNull Error error) {
+        @Override public void onFailure(@NonNull com.hrules.imclean.domain.errors.Error error) {
           if (error instanceof NetworkUnauthorizedError) {
             loginFail();
           } else if (error instanceof NetworkIOError) {

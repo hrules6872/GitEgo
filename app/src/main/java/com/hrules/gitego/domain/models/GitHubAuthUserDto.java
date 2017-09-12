@@ -21,7 +21,7 @@ import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.hrules.gitego.domain.models.base.ModelDto;
+import com.hrules.imclean.domain.models.ModelDto;
 
 @AutoValue public abstract class GitHubAuthUserDto extends ModelDto {
   @Nullable public abstract String getDate();

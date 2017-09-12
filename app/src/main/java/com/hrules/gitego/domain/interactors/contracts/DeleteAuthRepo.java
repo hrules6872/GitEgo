@@ -17,13 +17,12 @@
 package com.hrules.gitego.domain.interactors.contracts;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import java.util.List;
 
 public interface DeleteAuthRepo {
   interface Callback {
-    void onFailure(@NonNull Error error);
+    void onFailure(@NonNull com.hrules.imclean.domain.errors.Error error);
   }
 
   void execute(@NonNull List<GitHubAuthRepo> listToBeDeleted, @NonNull Callback callback);

@@ -18,9 +18,8 @@ package com.hrules.gitego.domain.errors;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import com.hrules.gitego.domain.errors.base.Error;
 
-public class NotCheckedError implements Error {
+public class NotCheckedError implements com.hrules.imclean.domain.errors.Error {
   private final Exception exception;
 
   public NotCheckedError(@Nullable Exception e) {

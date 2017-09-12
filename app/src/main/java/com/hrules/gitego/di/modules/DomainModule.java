@@ -18,7 +18,6 @@ package com.hrules.gitego.di.modules;
 
 import com.hrules.gitego.BuildConfig;
 import com.hrules.gitego.data.network.Network;
-import com.hrules.gitego.data.repository.base.Repository;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.interactors.DeleteAuthRepoInteractor;
 import com.hrules.gitego.domain.interactors.GetAccessTokenInteractor;
@@ -29,7 +28,8 @@ import com.hrules.gitego.domain.interactors.contracts.DeleteAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
-import com.hrules.gitego.domain.threads.UIThreadExecutor;
+import com.hrules.imclean.data.repository.Repository;
+import com.hrules.imclean.domain.threads.UIThreadExecutor;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Named;

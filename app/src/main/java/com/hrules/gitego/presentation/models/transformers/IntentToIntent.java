@@ -18,7 +18,7 @@ package com.hrules.gitego.presentation.models.transformers;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.models.transformers.base.Transformer;
+import com.hrules.imclean.domain.models.transformers.Transformer;
 
 public final class IntentToIntent implements Transformer<Intent, com.hrules.gitego.presentation.models.Intent> {
   @SuppressWarnings("ConstantConditions") @NonNull @Override

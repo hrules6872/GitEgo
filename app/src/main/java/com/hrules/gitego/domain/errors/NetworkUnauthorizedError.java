@@ -18,9 +18,8 @@ package com.hrules.gitego.domain.errors;
 
 import android.support.annotation.NonNull;
 import com.hrules.gitego.data.exceptions.NetworkUnauthorizedException;
-import com.hrules.gitego.domain.errors.base.Error;
 
-public class NetworkUnauthorizedError implements Error {
+public class NetworkUnauthorizedError implements com.hrules.imclean.domain.errors.Error {
   private static final String DEFAULT_MESSAGE = "NetworkUnauthorizedError";
 
   @NonNull @Override public Exception getException() {

@@ -18,7 +18,7 @@ package com.hrules.gitego.domain.specifications.params;
 
 import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
-import com.hrules.gitego.domain.specifications.base.SpecificationParams;
+import com.hrules.imclean.domain.specifications.SpecificationParams;
 import java.util.List;
 
 public final class DeleteAuthRepoSpecificationParams extends SpecificationParams {

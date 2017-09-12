@@ -20,16 +20,16 @@ import android.support.annotation.NonNull;
 import com.hrules.gitego.data.network.Network;
 import com.hrules.gitego.data.network.RequestNetwork;
 import com.hrules.gitego.data.persistence.database.utils.DatabaseDateUtils;
-import com.hrules.gitego.data.repository.cache.base.BasicCache;
 import com.hrules.gitego.data.repository.datasources.api.specifications.AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification;
-import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
 import com.hrules.gitego.data.repository.datasources.specifications.Specifications;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.serializers.GitHubAuthRepoDtoSerializer;
-import com.hrules.gitego.domain.specifications.base.Specification;
-import com.hrules.gitego.domain.specifications.base.SpecificationFactory;
 import com.hrules.gitego.domain.specifications.params.GetAuthRepoSpecificationParams;
 import com.hrules.gitego.domain.specifications.params.GetAuthRepoSubscribersSpecificationParams;
+import com.hrules.imclean.data.repository.cache.BasicCache;
+import com.hrules.imclean.data.repository.datasources.DataSourceReadable;
+import com.hrules.imclean.domain.specifications.Specification;
+import com.hrules.imclean.domain.specifications.SpecificationFactory;
 import java.util.Collection;
 import java.util.List;
 import java.util.ListIterator;
@@ -44,8 +44,8 @@ public final class AuthRepoAPIDataSourceReadable extends DataSourceReadable<GitH
     this.cache = cache;
   }
 
-  @SuppressWarnings("unchecked") @Override
-  public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification) throws Exception {
+  @SuppressWarnings("unchecked") @Override public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
+      throws Exception {
     specification = new SpecificationFactory<String>().create(this, specification, Specifications.get());
     String response = network.get((RequestNetwork) specification.get());
     List<GitHubAuthRepoDto> list = (List<GitHubAuthRepoDto>) new GitHubAuthRepoDtoSerializer().deserialize(response);
@@ -53,18 +53,16 @@ public final class AuthRepoAPIDataSourceReadable extends DataSourceReadable<GitH
     for (ListIterator<GitHubAuthRepoDto> iterator = list.listIterator(); iterator.hasNext(); ) {
       GitHubAuthRepoDto item = iterator.next();
 
-      GetAuthRepoSpecificationParams repoSpecificationParams =
-          (GetAuthRepoSpecificationParams) specification.getParams();
+      GetAuthRepoSpecificationParams repoSpecificationParams = (GetAuthRepoSpecificationParams) specification.getParams();
       AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification subscribersSpecification =
           new AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification();
       subscribersSpecification.setParams(
-          new GetAuthRepoSubscribersSpecificationParams(repoSpecificationParams.getAccess_token(),
-              item.getSubscribersUrl()));
+          new GetAuthRepoSubscribersSpecificationParams(repoSpecificationParams.getAccess_token(), item.getSubscribersUrl()));
       String subscribers = network.get(subscribersSpecification.get());
       JSONArray subscribersJSONArray = new JSONArray(subscribers);
 
-      iterator.set(item.withDateAndWatchersCount(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()),
-          subscribersJSONArray.length()));
+      iterator.set(
+          item.withDateAndWatchersCount(DatabaseDateUtils.formatDateToSQLShort(System.currentTimeMillis()), subscribersJSONArray.length()));
     }
     cache.persist();
     return list;

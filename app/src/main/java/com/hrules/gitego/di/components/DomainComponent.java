@@ -23,7 +23,7 @@ import com.hrules.gitego.domain.interactors.contracts.DeleteAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
-import com.hrules.gitego.domain.threads.UIThreadExecutor;
+import com.hrules.imclean.domain.threads.UIThreadExecutor;
 import dagger.Component;
 
 @Component(dependencies = DataComponent.class, modules = DomainModule.class) interface DomainComponent {

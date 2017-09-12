@@ -18,8 +18,8 @@ package com.hrules.gitego.domain.models.mappers;
 
 import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.models.GitHubAccessTokenDto;
-import com.hrules.gitego.domain.models.mappers.base.Mapper;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
+import com.hrules.imclean.domain.models.mappers.Mapper;
 
 public final class GitHubAccessTokenDtoToGitHubAccessToken implements Mapper<GitHubAccessTokenDto, GitHubAccessToken> {
   @NonNull @Override public GitHubAccessToken map(@NonNull GitHubAccessTokenDto from) {

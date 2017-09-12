@@ -17,7 +17,6 @@
 package com.hrules.gitego.domain.interactors.contracts;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.presentation.models.GitHubAccessToken;
 import com.hrules.gitego.presentation.models.Intent;
 
@@ -25,7 +24,7 @@ public interface GetAccessToken {
   interface Callback {
     void onSuccess(@NonNull GitHubAccessToken gitHubAccessToken);
 
-    void onFailure(@NonNull Error error);
+    void onFailure(@NonNull com.hrules.imclean.domain.errors.Error error);
   }
 
   void execute(@NonNull Intent intent, @NonNull String redirectUri, @NonNull Callback callback);

@@ -20,12 +20,12 @@ import android.support.annotation.NonNull;
 import com.hrules.gitego.data.persistence.database.Database;
 import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.data.persistence.database.utils.SQLQueryBuilder;
-import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
 import com.hrules.gitego.data.repository.datasources.specifications.Specifications;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.transformers.GitHubAuthRepoDtoToMap;
-import com.hrules.gitego.domain.specifications.base.Specification;
-import com.hrules.gitego.domain.specifications.base.SpecificationFactory;
+import com.hrules.imclean.data.repository.datasources.DataSourceWriteable;
+import com.hrules.imclean.domain.specifications.Specification;
+import com.hrules.imclean.domain.specifications.SpecificationFactory;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -24,18 +24,17 @@ import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.errors.NetworkIOError;
 import com.hrules.gitego.domain.errors.NetworkUnauthorizedError;
-import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.interactors.contracts.DeleteAuthRepo;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.internal.AccountsManager;
 import com.hrules.gitego.domain.models.Account;
-import com.hrules.gitego.domain.threads.UIThreadExecutor;
 import com.hrules.gitego.presentation.bus.BoolEvent;
 import com.hrules.gitego.presentation.commons.PreConditions;
 import com.hrules.gitego.presentation.commons.resources.ResString;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
 import com.hrules.gitego.presentation.models.comparators.GitHubAuthRepoDateDescendingComparator;
 import com.hrules.gitego.presentation.models.utils.ListModelUtils;
+import com.hrules.imclean.domain.threads.UIThreadExecutor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -87,7 +86,7 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
           }
         }
 
-        @Override public void onFailure(@NonNull final Error error) {
+        @Override public void onFailure(@NonNull final com.hrules.imclean.domain.errors.Error error) {
           if (error instanceof NetworkUnauthorizedError) {
             loginFail();
           } else if (error instanceof NetworkIOError) {
@@ -122,7 +121,7 @@ public final class RepoFragmentPresenter extends DRMVPPresenter<RepoFragmentPres
   private void syncData() {
     if (!listToBeDeleted.isEmpty()) {
       deleteAuthRepo.execute(listToBeDeleted, new DeleteAuthRepo.Callback() {
-        @Override public void onFailure(@NonNull Error error) {
+        @Override public void onFailure(@NonNull com.hrules.imclean.domain.errors.Error error) {
           DebugLog.e(error.getMessage(), error.getException());
         }
       });

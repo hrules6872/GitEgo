@@ -17,11 +17,11 @@
 package com.hrules.gitego.data.repository;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.data.repository.base.Repository;
-import com.hrules.gitego.data.repository.datasources.base.DataSource;
-import com.hrules.gitego.data.repository.datasources.base.DataSourceReadable;
-import com.hrules.gitego.data.repository.datasources.base.DataSourceWriteable;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
+import com.hrules.imclean.data.repository.Repository;
+import com.hrules.imclean.data.repository.datasources.DataSource;
+import com.hrules.imclean.data.repository.datasources.DataSourceReadable;
+import com.hrules.imclean.data.repository.datasources.DataSourceWriteable;
 import java.util.Arrays;
 
 public final class AuthUserRepository extends Repository<GitHubAuthUserDto> {

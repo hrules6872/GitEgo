@@ -27,7 +27,7 @@ public final class ErrorFactory {
   private ErrorFactory() {
   }
 
-  public static @NonNull Error create(@NonNull Exception exception) {
+  public static @NonNull com.hrules.imclean.domain.errors.Error create(@NonNull Exception exception) {
     if (exception instanceof NetworkUnauthorizedException) {
       return new NetworkUnauthorizedError();
     } else if (exception instanceof NetworkIOException) {

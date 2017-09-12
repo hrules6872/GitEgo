@@ -21,7 +21,7 @@ import android.support.annotation.Nullable;
 import com.hrules.gitego.data.commons.serializator.GitHubAuthUserDtoSerializator;
 import com.hrules.gitego.data.commons.serializator.base.Serializator;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
-import com.hrules.gitego.domain.models.serializers.base.Serializer;
+import com.hrules.imclean.domain.models.serializers.Serializer;
 
 public final class GitHubAuthUserDtoSerializer implements Serializer<GitHubAuthUserDto, String> {
   private final Serializator serializator = new GitHubAuthUserDtoSerializator();

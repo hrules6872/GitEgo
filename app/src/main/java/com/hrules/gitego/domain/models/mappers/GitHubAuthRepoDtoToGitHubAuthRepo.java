@@ -18,8 +18,8 @@ package com.hrules.gitego.domain.models.mappers;
 
 import android.support.annotation.NonNull;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
-import com.hrules.gitego.domain.models.mappers.base.InverseMapper;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
+import com.hrules.imclean.domain.models.mappers.InverseMapper;
 
 public final class GitHubAuthRepoDtoToGitHubAuthRepo implements InverseMapper<GitHubAuthRepoDto, GitHubAuthRepo> {
   @NonNull @Override public GitHubAuthRepo map(@NonNull GitHubAuthRepoDto from) {

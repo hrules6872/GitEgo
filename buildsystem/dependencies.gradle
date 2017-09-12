@@ -46,6 +46,7 @@ ext {
   okhttpVersion = '3.9.+'
   picassoViewVersion = '2.5.+'
   eventbusVersion = '3.0.+'
+  imCleanVersion = '0.1.+'
   projectDependencies = [butterKnife         : "com.jakewharton:butterknife:${butterKnifeVersion}",
                          daRealMVP           : "com.hrules:darealmvp:${daRealMVPVersion}",
                          gson                : "com.google.code.gson:gson:${gsonVersion}",
@@ -54,7 +55,8 @@ ext {
                          dagger              : "com.google.dagger:dagger:${daggerVersion}",
                          daggerAndroid       : "com.google.dagger:dagger-android:${daggerVersion}",
                          daggerAndroidSupport: "com.google.dagger:dagger-android-support:${daggerVersion}",
-                         eventbus            : "org.greenrobot:eventbus:${eventbusVersion}"]
+                         eventbus            : "org.greenrobot:eventbus:${eventbusVersion}",
+                         imClean             : "com.hrules:imclean:${imCleanVersion}"]
 
   // provided dependencies
   autoValueVersion = '1.5'

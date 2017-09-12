@@ -25,7 +25,6 @@ import com.hrules.gitego.commons.DebugLog;
 import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.errors.NetworkIOError;
 import com.hrules.gitego.domain.errors.NetworkUnauthorizedError;
-import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.interactors.contracts.GetAccessToken;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthUser;
 import com.hrules.gitego.domain.internal.AccountsManager;
@@ -84,7 +83,7 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
             }
           }
 
-          @Override public void onFailure(@NonNull Error error) {
+          @Override public void onFailure(@NonNull com.hrules.imclean.domain.errors.Error error) {
             if (error instanceof NetworkUnauthorizedError) {
               showLoginFail = true;
             } else if (error instanceof NetworkIOError) {
@@ -106,7 +105,7 @@ public final class LoginActivityPresenter extends DRMVPPresenter<LoginActivityPr
         });
       }
 
-      @Override public void onFailure(@NonNull Error error) {
+      @Override public void onFailure(@NonNull com.hrules.imclean.domain.errors.Error error) {
         DebugLog.e(error.getMessage(), error.getException());
 
         getView().hideProgressDialog();

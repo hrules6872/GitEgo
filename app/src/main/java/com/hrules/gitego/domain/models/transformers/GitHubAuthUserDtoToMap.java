@@ -19,7 +19,7 @@ package com.hrules.gitego.domain.models.transformers;
 import android.support.annotation.NonNull;
 import com.hrules.gitego.data.persistence.database.DatabaseConstants;
 import com.hrules.gitego.domain.models.GitHubAuthUserDto;
-import com.hrules.gitego.domain.models.transformers.base.Transformer;
+import com.hrules.imclean.domain.models.transformers.Transformer;
 import java.util.HashMap;
 import java.util.Map;
 

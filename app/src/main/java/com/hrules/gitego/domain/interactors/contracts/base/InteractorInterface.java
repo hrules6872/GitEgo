@@ -17,14 +17,13 @@
 package com.hrules.gitego.domain.interactors.contracts.base;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.domain.errors.base.Error;
 import java.util.List;
 
 public interface InteractorInterface {
   interface QueryCallback<T> {
     void onSuccess(@NonNull List<T> response);
 
-    void onFailure(@NonNull Error error);
+    void onFailure(@NonNull com.hrules.imclean.domain.errors.Error error);
 
     void onFinish();
   }

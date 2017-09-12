@@ -18,7 +18,7 @@ package com.hrules.gitego.presentation.models;
 
 import android.support.annotation.Nullable;
 import com.google.auto.value.AutoValue;
-import com.hrules.gitego.presentation.models.base.Model;
+import com.hrules.imclean.presentation.models.Model;
 
 @AutoValue public abstract class GitHubAuthUser extends Model {
   public abstract String getDate();

@@ -17,19 +17,18 @@
 package com.hrules.gitego.domain.interactors;
 
 import android.support.annotation.NonNull;
-import com.hrules.gitego.data.repository.base.Repository;
-import com.hrules.gitego.data.repository.base.RepositoryInterface;
-import com.hrules.gitego.domain.errors.base.Error;
 import com.hrules.gitego.domain.errors.base.ErrorFactory;
-import com.hrules.gitego.domain.interactors.base.Interactor;
-import com.hrules.gitego.domain.interactors.base.base.BaseInteractorExecutor;
 import com.hrules.gitego.domain.interactors.contracts.GetAuthRepo;
 import com.hrules.gitego.domain.models.GitHubAuthRepoDto;
 import com.hrules.gitego.domain.models.mappers.GitHubAuthRepoDtoToGitHubAuthRepo;
-import com.hrules.gitego.domain.models.mappers.base.ListMapper;
 import com.hrules.gitego.domain.specifications.GetAuthRepoSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthRepoSpecificationParams;
 import com.hrules.gitego.presentation.models.GitHubAuthRepo;
+import com.hrules.imclean.data.repository.Repository;
+import com.hrules.imclean.data.repository.RepositoryInterface;
+import com.hrules.imclean.domain.interactors.Interactor;
+import com.hrules.imclean.domain.interactors.base.BaseInteractorExecutor;
+import com.hrules.imclean.domain.models.mappers.ListMapper;
 import java.util.List;
 
 public final class GetAuthRepoInteractor extends Interactor implements GetAuthRepo {
@@ -82,7 +81,7 @@ public final class GetAuthRepoInteractor extends Interactor implements GetAuthRe
     }
   }
 
-  private void notifyFail(@NonNull Error error) {
+  private void notifyFail(@NonNull com.hrules.imclean.domain.errors.Error error) {
     if (callback != null) {
       callback.onFailure(error);
     }

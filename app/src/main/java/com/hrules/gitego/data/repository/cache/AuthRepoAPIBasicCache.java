@@ -17,7 +17,7 @@
 package com.hrules.gitego.data.repository.cache;
 
 import com.hrules.gitego.BuildConfig;
-import com.hrules.gitego.data.repository.cache.base.BasicCache;
+import com.hrules.imclean.data.repository.cache.BasicCache;
 import java.util.concurrent.TimeUnit;
 
 public final class AuthRepoAPIBasicCache extends BasicCache {

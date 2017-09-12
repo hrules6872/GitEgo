@@ -16,7 +16,7 @@
 
 package com.hrules.gitego.data.repository.cache;
 
-import com.hrules.gitego.data.repository.cache.base.BasicCache;
+import com.hrules.imclean.data.repository.cache.BasicCache;
 
 public final class AuthRepoBddBasicCache extends BasicCache {
   private static final String CACHE_ID = "AuthRepoBddBasicCache";
