@@ -23,13 +23,12 @@ import com.hrules.gitego.data.repository.datasources.api.AuthRepoAPIDataSourceRe
 import com.hrules.gitego.domain.specifications.GetAuthRepoSubscribersSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthRepoSubscribersSpecificationParams;
 
-public final class AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification
-    extends GetAuthRepoSubscribersSpecification<RequestNetwork> {
-  @NonNull @Override public Class getParent() {
+public final class AuthRepoSubscribersAPIGetAuthRepoSubscribersSpecification extends GetAuthRepoSubscribersSpecification<RequestNetwork> {
+  @Override public @NonNull Class getParent() {
     return AuthRepoAPIDataSourceReadable.class;
   }
 
-  @Override public RequestNetwork get() {
+  @Override public @NonNull RequestNetwork get() {
     GetAuthRepoSubscribersSpecificationParams params = (GetAuthRepoSubscribersSpecificationParams) getParams();
 
     String access_token = params.getAccess_token();

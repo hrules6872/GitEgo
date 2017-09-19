@@ -26,13 +26,12 @@ import com.hrules.gitego.domain.specifications.params.DeleteAuthRepoSpecificatio
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("unused") public final class AuthRepoBddDeleteAuthRepoSpecification
-    extends DeleteAuthRepoSpecification<String[]> {
+@SuppressWarnings("unused") public final class AuthRepoBddDeleteAuthRepoSpecification extends DeleteAuthRepoSpecification<String[]> {
   @Override public @NonNull Class getParent() {
     return AuthRepoBddDataSourceWriteable.class;
   }
 
-  @Override public String[] get() {
+  @Override public @NonNull String[] get() {
     DeleteAuthRepoSpecificationParams params = (DeleteAuthRepoSpecificationParams) getParams();
 
     List<String> sqlList = new ArrayList<>();

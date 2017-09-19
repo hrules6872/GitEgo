@@ -40,7 +40,7 @@ public final class AuthRepoBddDataSourceReadable extends DataSourceReadable<GitH
     this.cache = cache;
   }
 
-  @SuppressWarnings("unchecked") @Override public Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
+  @SuppressWarnings("unchecked") @Override public @NonNull Collection<GitHubAuthRepoDto> query(@NonNull Specification specification)
       throws Exception {
     specification = new SpecificationFactory<String>().create(this, specification, Specifications.get());
     List<GitHubAuthRepoDto> list = new ArrayList<>();

@@ -22,15 +22,14 @@ import com.hrules.gitego.data.persistence.database.utils.SQLQueryBuilder;
 import com.hrules.gitego.data.repository.datasources.bdd.AuthRepoBddDataSourceReadable;
 import com.hrules.gitego.domain.specifications.GetAuthRepoSpecification;
 
-@SuppressWarnings("unused") public final class AuthRepoBddGetAuthRepoSpecification
-    extends GetAuthRepoSpecification<String> {
+@SuppressWarnings("unused") public final class AuthRepoBddGetAuthRepoSpecification extends GetAuthRepoSpecification<String> {
   private static final int REPO_LIMIT_PER_DAY = 500;
 
-  @NonNull @Override public Class getParent() {
+  @Override public @NonNull Class getParent() {
     return AuthRepoBddDataSourceReadable.class;
   }
 
-  @Override public String get() {
+  @Override public @NonNull String get() {
     return new SQLQueryBuilder().select()
         .from(DatabaseConstants.TABLE_REPO)
         .orderByDescending(DatabaseConstants.KEY_USER_DATE)

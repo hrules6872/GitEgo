@@ -25,15 +25,14 @@ import com.hrules.gitego.domain.specifications.GetAuthRepoSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthRepoSpecificationParams;
 
 public final class AuthRepoAPIGetAuthRepoSpecification extends GetAuthRepoSpecification<RequestNetwork> {
-  @NonNull @Override public Class getParent() {
+  @Override public @NonNull Class getParent() {
     return AuthRepoAPIDataSourceReadable.class;
   }
 
-  @Override public RequestNetwork get() {
+  @Override public @NonNull RequestNetwork get() {
     GetAuthRepoSpecificationParams params = (GetAuthRepoSpecificationParams) getParams();
 
     String access_token = params.getAccess_token();
-    return new RequestNetwork(GitHubAPI.GITHUB_GET_AUTHREPO_URL, NetworkHelper.makeAuthorizationHeader(access_token),
-        null);
+    return new RequestNetwork(GitHubAPI.GITHUB_GET_AUTHREPO_URL, NetworkHelper.makeAuthorizationHeader(access_token), null);
   }
 }

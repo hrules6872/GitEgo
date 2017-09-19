@@ -20,11 +20,11 @@ import android.support.annotation.NonNull;
 import com.hrules.imclean.domain.specifications.Specification;
 
 public class DeleteAuthRepoSpecification<T> extends Specification<T> {
-  @NonNull @Override public Class getParent() {
+  @Override public @NonNull Class getParent() {
     throw new UnsupportedOperationException();
   }
 
-  @Override public T get() {
+  @Override public @NonNull T get() {
     throw new UnsupportedOperationException();
   }
 }

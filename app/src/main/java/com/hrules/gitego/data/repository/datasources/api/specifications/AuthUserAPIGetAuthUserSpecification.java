@@ -24,17 +24,15 @@ import com.hrules.gitego.domain.api.GitHubAPI;
 import com.hrules.gitego.domain.specifications.GetAuthUserSpecification;
 import com.hrules.gitego.domain.specifications.params.GetAuthUserSpecificationParams;
 
-@SuppressWarnings("unused") public final class AuthUserAPIGetAuthUserSpecification
-    extends GetAuthUserSpecification<RequestNetwork> {
-  @NonNull @Override public Class getParent() {
+@SuppressWarnings("unused") public final class AuthUserAPIGetAuthUserSpecification extends GetAuthUserSpecification<RequestNetwork> {
+  @Override public @NonNull Class getParent() {
     return AuthUserAPIDataSourceReadable.class;
   }
 
-  @Override public RequestNetwork get() {
+  @Override public @NonNull RequestNetwork get() {
     GetAuthUserSpecificationParams params = (GetAuthUserSpecificationParams) getParams();
 
     String access_token = params.getAccess_token();
-    return new RequestNetwork(GitHubAPI.GITHUB_GET_AUTHUSER_URL, NetworkHelper.makeAuthorizationHeader(access_token),
-        null);
+    return new RequestNetwork(GitHubAPI.GITHUB_GET_AUTHUSER_URL, NetworkHelper.makeAuthorizationHeader(access_token), null);
   }
 }

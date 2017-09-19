@@ -41,12 +41,12 @@ ext {
   // project dependencies
   butterKnifeVersion = '8.8.+'
   daggerVersion = '2.11'
-  daRealMVPVersion = '0.20.0'
+  daRealMVPVersion = '1.0.0'
   gsonVersion = '2.8.1'
   okhttpVersion = '3.9.+'
   picassoViewVersion = '2.5.+'
   eventbusVersion = '3.0.+'
-  imCleanVersion = '0.1.+'
+  imCleanVersion = '1.0.0'
   projectDependencies = [butterKnife         : "com.jakewharton:butterknife:${butterKnifeVersion}",
                          daRealMVP           : "com.hrules:darealmvp:${daRealMVPVersion}",
                          gson                : "com.google.code.gson:gson:${gsonVersion}",
