@@ -17,17 +17,13 @@
 package com.hrules.gitego;
 
 import android.app.Application;
-import com.hrules.gitego.data.persistence.preferences.Preferences;
 import com.hrules.gitego.di.components.AppComponent;
 import com.hrules.gitego.di.components.DaggerAppComponent;
 import com.hrules.gitego.di.modules.AppModule;
-import javax.inject.Inject;
 
 public final class App extends Application {
   private static App application;
   private AppComponent appComponent;
-
-  @Inject Preferences preferences;
 
   @Override public void onCreate() {
     super.onCreate();
